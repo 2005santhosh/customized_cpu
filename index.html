@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPC | Build Your Beast</title>
+    
+    <!-- Fonts: Space Grotesk & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons: RemixIcon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        /* -----------------------------------------------------------
+           1. RESET & VARIABLES
+        ----------------------------------------------------------- */
+        :root {
+            /* Colors */
+            --bg-primary: #0B0B0B;
+            --bg-secondary: #111111;
+            --bg-light: #F5F5F5;
+            --accent: #FFD600;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A1A1A1;
+            --border-color: #2A2A2A;
+            
+            /* Typography */
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Spacing & Radius */
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --container-width: 1200px;
+            
+            /* Transitions */
+            --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { display: block; max-width: 100%; }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .text-accent { color: var(--accent); }
+        .text-secondary { color: var(--text-secondary); }
+        
+        /* Reveal Animation Class (Removed from specific sections as requested) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--ease-out);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 214, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* -----------------------------------------------------------
+           2. HEADER / NAV
+        ----------------------------------------------------------- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 24px 0;
+            transition: 0.3s;
+        }
+
+        header.scrolled {
+            background: rgba(11, 11, 11, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav ul {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        .nav-login {
+            color: var(--accent) !important;
+            font-weight: 700 !important;
+            border: 1px solid var(--accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+        .nav-login:hover {
+            background: var(--accent);
+            color: #000 !important;
+        }
+
+        .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+
+        /* -----------------------------------------------------------
+           3. HERO SECTION
+        ----------------------------------------------------------- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -2;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+        }
+
+        /* Radial Glow */
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translate(30%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 214, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-head);
+            font-size: 64px;
+            line-height: 1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 450px;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            height: 600px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* New GIF Styling */
+        .gif-wrapper {
+            width: 500px;
+            height: 500px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: #000;
+            position: relative;
+        }
+
+        .gif-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Enhances the GIF/Video look */
+            image-rendering: auto; 
+        }
+
+        /* -----------------------------------------------------------
+           4. SCROLLING STRAP (MARQUEE)
+        ----------------------------------------------------------- */
+        .scroll-strap-container {
+            position: relative;
+            z-index: 10;
+            margin-top: -60px; 
+            margin-bottom: 80px;
+            padding: 0 24px;
+        }
+
+        .scroll-strap {
+            background: var(--accent);
+            color: #000;
+            padding: 20px 0;
+            transform: rotate(-5deg);
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid #000;
+        }
+
+        .scroll-content {
+            display: inline-block;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 24px;
+            text-transform: uppercase;
+            animation: scroll 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* -----------------------------------------------------------
+           5. FEATURES SECTION (NO REVEAL ANIMATION)
+        ----------------------------------------------------------- */
+        .features {
+            background: linear-gradient(180deg, var(--bg-light) 0%, #EAEAEA 100%);
+            padding: 120px 0;
+            color: #111;
+        }
+
+        .features-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .features-text h2 {
+            font-family: var(--font-head);
+            font-size: 40px;
+            margin-bottom: 24px;
+            color: #000;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.4s var(--ease-out);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: #F5F5F5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .feature-info h3 {
+            font-family: var(--font-head);
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .feature-info p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .features-image img {
+            border-radius: var(--radius-md);
+            width: 100%;
+            height: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        /* -----------------------------------------------------------
+           6. MID-SECTION BREAK (NO SPINNING ANIMATION)
+        ----------------------------------------------------------- */
+        .visual-break {
+            height: 120px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ring {
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 214, 0, 0.3);
+            border-top: 2px solid var(--accent);
+            border-radius: 50%;
+            /* Animation removed as requested */
+        }
+        
+        .ring::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px; height: 80px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            /* Animation removed as requested */
+        }
+
+        /* -----------------------------------------------------------
+           7. PRODUCT SHOWCASE (NO ANIMATION)
+        ----------------------------------------------------------- */
+        .showcase {
+            background-color: var(--bg-primary);
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-family: var(--font-head);
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .product-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            transition: all 0.4s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(255, 214, 0, 0.1);
+        }
+
+        .card-image {
+            height: 220px;
+            background: #151515;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .product-card h3 {
+            font-family: var(--font-head);
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .specs-list {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .specs-list span i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .price {
+            font-family: var(--font-head);
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .btn-card {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .btn-card:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        /* -----------------------------------------------------------
+           8. BUILDER PREVIEW
+        ----------------------------------------------------------- */
+        .builder {
+            background: var(--bg-secondary);
+            padding: 120px 0;
+        }
+
+        .builder-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .builder-ui {
+            background: var(--bg-primary);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .custom-select {
+            width: 100%;
+            padding: 16px;
+            background: #1a1a1a;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD600%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px top 50%;
+            background-size: 12px auto;
+        }
+
+        .custom-select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255, 214, 0, 0.1);
+        }
+
+        .builder-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gpu-float {
+            width: 80%;
+            max-width: 600px;
+            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.5));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .total-price {
+            margin-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+        }
+
+        /* -----------------------------------------------------------
+           9. TESTIMONIALS
+        ----------------------------------------------------------- */
+        .testimonials {
+            background: var(--bg-primary);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 214, 0, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 214, 0, 0.05) 0%, transparent 40%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .test-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            transition: 0.3s;
+        }
+
+        .test-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 214, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .stars { color: var(--accent); margin-bottom: 16px; font-size: 14px; }
+        
+        .test-text {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: #333;
+            overflow: hidden;
+        }
+
+        /* -----------------------------------------------------------
+           10. FINAL CTA
+        ----------------------------------------------------------- */
+        .final-cta {
+            background: #000;
+            padding: 160px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: -50%;
+            width: 200%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: streak 4s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes streak {
+            0% { transform: translateX(-50%) rotate(15deg); }
+            100% { transform: translateX(50%) rotate(15deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-content h2 {
+            font-family: var(--font-head);
+            font-size: 48px;
+            margin-bottom: 32px;
+            background: linear-gradient(180deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-glow {
+            background-color: var(--accent);
+            color: #000;
+            font-size: 16px;
+            padding: 18px 48px;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 214, 0, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 214, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 214, 0, 0); }
+        }
+
+        /* -----------------------------------------------------------
+           11. FOOTER (AMAZON STYLE)
+        ----------------------------------------------------------- */
+        .footer-back-to-top {
+            background: #37475a;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .footer-back-to-top:hover { background: #485769; }
+
+        footer {
+            background-color: #0a0a0a;
+            border-top: 1px solid #222;
+            padding-bottom: 40px;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding: 60px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .footer-col h3 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            transition: 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            text-decoration: underline;
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 24px;
+            color: #fff;
+        }
+        .footer-logo span { color: var(--accent); }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* -----------------------------------------------------------
+           TOAST NOTIFICATION
+        ----------------------------------------------------------- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: all 0.5s var(--ease-out);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast i { color: var(--accent); }
+
+        /* -----------------------------------------------------------
+           RESPONSIVE
+        ----------------------------------------------------------- */
+        @media (max-width: 992px) {
+            .hero-inner, .features-inner, .builder-layout {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content h1 { font-size: 48px; }
+            .hero-actions { justify-content: center; }
+            .hero-visual { order: -1; margin-bottom: 40px; }
+            
+            .builder-layout { gap: 40px; }
+            .builder-ui { width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .menu-toggle { display: block; color: #fff; }
+            
+            .scroll-strap-container { margin-top: -30px; padding: 0; }
+            
+            .features { padding: 80px 0; }
+            .feature-list { gap: 16px; }
+            
+            .showcase, .builder, .testimonials { padding: 80px 0; }
+            
+            .cta-content h2 { font-size: 32px; }
+            
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .footer-bottom { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Noise Texture -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <header id="header">
+        <div class="container nav-inner">
+            <a href="#" class="logo">CPC<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#showcase">Systems</a></li>
+                    <li><a href="#builder">Builder</a></li>
+                    <li><a href="#" class="nav-login">Login</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="ri-menu-4-line"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-glow"></div>
+            <div class="container hero-inner">
+                <div class="hero-content reveal">
+                    <h1>BUILD YOUR<br><span class="text-accent">BEAST</span></h1>
+                    <p>Precision-engineered custom PCs for creators, gamers, and innovators. Experience performance without compromise.</p>
+                    <div class="hero-actions">
+                        <a href="#builder" class="btn btn-primary">Start Build</a>
+                        <a href="#showcase" class="btn btn-secondary">View Systems</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <!-- GIF Replacement -->
+                    <div class="gif-wrapper">
+                        <!-- Replace src with your local .gif file (e.g., "assets/pc-build.gif") -->
+                        <!-- Using a reliable tech-themed GIF for demo purposes -->
+                        <img src="https://d1q3zw97enxzq2.cloudfront.net/images/Untitled_design_1.width-1000_yzyihgn.gif" alt="PC Building Process">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scrolling Strap (Marquee) -->
+        <div class="scroll-strap-container">
+            <div class="scroll-strap">
+                <div class="scroll-content">
+                    CUSTOM BUILDS • HIGH PERFORMANCE • EXTREME POWER • CPC • BUILD YOUR DREAM PC • 
+                    CUSTOM BUILDS • HIGH PERFORMANCE • EXTREME POWER • CPC • BUILD YOUR DREAM PC • 
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section (No Animation) -->
+        <section id="features" class="features">
+            <div class="container features-inner">
+                <!-- .reveal class removed -->
+                <div class="features-text">
+                    <span class="text-secondary" style="text-transform: uppercase; letter-spacing: 1px; font-size: 12px; font-weight: 600;">Why CPC</span>
+                    <h2>Engineered for<br>Excellence</h2>
+                    <p class="text-secondary">We don't just assemble parts. We curate components using rigorous thermal testing and aesthetic precision to ensure your PC is a masterpiece.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="ri-cpu-line"></i></div>
+                            <div class="feature-info">
+                                <h3>Expert Cable Management</h3>
+                                <p>Clean, airflow-optimized routing for every build.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="ri-speed-mini-line"></i></div>
+                            <div class="feature-info">
+                                <h3>Overclock Ready</h3>
+                                <p>Pre-tuned for maximum stability and speed.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="ri-shield-check-line"></i></div>
+                            <div class="feature-info">
+                                <h3>3 Year Warranty</h3>
+                                <p>Comprehensive parts and labor coverage.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .reveal class removed -->
+                <div class="features-image">
+                    <img src="https://p.turbosquid.com/ts-thumb/5W/JfcG7H/IU/professional_ultrabook_with_hardware_modules_001/jpg/1758279173/300x300/sharp_fit_q85/2369238fcfe42e599da9aa8859b96a67065c7757/professional_ultrabook_with_hardware_modules_001.jpg" alt="Clean Setup">
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Break (Animation Removed) -->
+        <div class="visual-break">
+            <div class="ring"></div>
+        </div>
+
+        <!-- Product Showcase (No Animation) -->
+        <section id="showcase" class="showcase">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Signature Series</h2>
+                    <p class="text-secondary">Designed for performance. Built for the future.</p>
+                </div>
+
+                <div class="product-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="https://5.imimg.com/data5/RN/QW/GLADMIN-63454928/gt75-titan-8rf-gt-series-gaming-laptop.png" alt="Titan GT">
+                        </div>
+                        <h3>TITAN GT</h3>
+                        <div class="specs-list">
+                            <span><i class="ri-microscope-line"></i> i9-14900K</span>
+                            <span><i class="ri-broadcast-line"></i> RTX 4090</span>
+                            <span><i class="ri-database-2-line"></i> 64GB DDR5</span>
+                            <span><i class="ri-hard-drive-2-line"></i> 2TB NVMe</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price">₹4,299</span>
+                            <button class="btn-card" onclick="showToast('Added Titan GT to cart')">Configure</button>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCOrpD8KkYkLGLfmJmvXlATBDn_8xjFhJkng&s" alt="Stealth Pro">
+                        </div>
+                        <h3>STEALTH PRO</h3>
+                        <div class="specs-list">
+                            <span><i class="ri-microscope-line"></i> Ryzen 9 7950X</span>
+                            <span><i class="ri-broadcast-line"></i> RTX 4080 Super</span>
+                            <span><i class="ri-database-2-line"></i> 32GB DDR5</span>
+                            <span><i class="ri-hard-drive-2-line"></i> 1TB NVMe</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price">₹2,899</span>
+                            <button class="btn-card" onclick="showToast('Added Stealth Pro to cart')">Configure</button>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="https://m.media-amazon.com/images/I/81QRSfqYZ0L.jpg" alt="Core Air">
+                        </div>
+                        <h3>CORE AIR</h3>
+                        <div class="specs-list">
+                            <span><i class="ri-microscope-line"></i> i5-14600K</span>
+                            <span><i class="ri-broadcast-line"></i> RTX 4070 Ti</span>
+                            <span><i class="ri-database-2-line"></i> 32GB DDR5</span>
+                            <span><i class="ri-hard-drive-2-line"></i> 1TB Gen4</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price">₹1,899</span>
+                            <button class="btn-card" onclick="showToast('Added Core Air to cart')">Configure</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Builder Preview -->
+        <section id="builder" class="builder">
+            <div class="container builder-layout">
+                <div class="builder-ui reveal">
+                    <h3 style="margin-bottom: 24px; font-family: var(--font-head);">Customizer</h3>
+                    
+                    <div class="form-group">
+                        <label>Processor (CPU)</label>
+                        <select class="custom-select" id="cpuSelect">
+                            <option value="300">Intel Core i5-14600K (+₹300)</option>
+                            <option value="600" selected>Intel Core i9-14900K (+₹600)</option>
+                            <option value="550">AMD Ryzen 9 7950X (+₹550)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Graphics (GPU)</label>
+                        <select class="custom-select" id="gpuSelect">
+                            <option value="1000">NVIDIA RTX 4080 Super (+₹1000)</option>
+                            <option value="2000" selected>NVIDIA RTX 4090 (+₹2000)</option>
+                            <option value="600">NVIDIA RTX 4070 Ti (+₹600)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Memory (RAM)</label>
+                        <select class="custom-select" id="ramSelect">
+                            <option value="150">32GB DDR5 6000MHz (+₹150)</option>
+                            <option value="300" selected>64GB DDR5 6000MHz (+₹300)</option>
+                        </select>
+                    </div>
+
+                    <div class="total-price">
+                        <span style="color: var(--text-secondary); font-size: 14px;">Estimated Total</span>
+                        <span class="price text-accent" id="totalPrice">₹3,200</span>
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 24px;" onclick="showToast('Configuration saved!')">Save Build</button>
+                </div>
+
+                <div class="builder-visual reveal">
+                    <img src="https://themvp.in/catalog/view/assets/img/PC-S-Vimal-Kumar.webp" alt="GPU Component" class="gpu-float">
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Community Voices</h2>
+                </div>
+                <div class="test-grid">
+                    <div class="test-card reveal">
+                        <div class="stars">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                        </div>
+                        <p class="test-text">"The build quality is insane. It looks like a piece of art on my desk and absolutely destroys any game I throw at it."</p>
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <img src="https://picsum.photos/seed/user1/100/100.jpg" alt="User">
+                            </div>
+                            <div>
+                                <h4>Alex M.</h4>
+                                <span class="text-secondary" style="font-size: 12px;">Pro Gamer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-card reveal">
+                        <div class="stars">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                        </div>
+                        <p class="test-text">"Finally a company that understands cable management. The airflow is perfect for my 3D rendering workstations."</p>
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <img src="https://picsum.photos/seed/user2/100/100.jpg" alt="User">
+                            </div>
+                            <div>
+                                <h4>Sarah J.</h4>
+                                <span class="text-secondary" style="font-size: 12px;">3D Artist</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-card reveal">
+                        <div class="stars">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i>
+                        </div>
+                        <p class="test-text">"Premium feel from the unboxing to the boot up. The yellow accents are exactly what I wanted."</p>
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <img src="https://picsum.photos/seed/user3/100/100.jpg" alt="User">
+                            </div>
+                            <div>
+                                <h4>Mike T.</h4>
+                                <span class="text-secondary" style="font-size: 12px;">Tech Enthusiast</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container cta-content reveal">
+                <h2>YOUR DREAM PC<br>STARTS HERE.</h2>
+                <button class="btn btn-glow" onclick="showToast('Redirecting to full builder...')">Build Now</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Professional Amazon-Style Footer -->
+    <div class="footer-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        Back to top
+    </div>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Get to Know Us</h3>
+                    <ul>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">About CPC</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Make Money with Us</h3>
+                    <ul>
+                        <li><a href="#">Sell products on CPC</a></li>
+                        <li><a href="#">Sell on CPC Business</a></li>
+                        <li><a href="#">Become an Affiliate</a></li>
+                        <li><a href="#">Advertise Your Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>PC Payment Products</h3>
+                    <ul>
+                        <li><a href="#">Business Card</a></li>
+                        <li><a href="#">Shop with Points</a></li>
+                        <li><a href="#">Reload Your Balance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Let Us Help You</h3>
+                    <ul>
+                        <li><a href="#">Your Account</a></li>
+                        <li><a href="#">Your Orders</a></li>
+                        <li><a href="#">Shipping Rates & Policies</a></li>
+                        <li><a href="#">Returns & Replacements</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-logo">CPC<span>.</span></div>
+                <div class="footer-copyright">
+                    &copy; 2026-2030, CPC Custom Systems, Inc. or its affiliates
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Element -->
+    <div id="toast" class="toast">
+        <i class="ri-checkbox-circle-fill"></i>
+        <span id="toastMsg">Action Successful</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 1. Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Scroll Reveal Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15,
+            rootMargin: "0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3. Builder Price Calculator
+        const cpuSelect = document.getElementById('cpuSelect');
+        const gpuSelect = document.getElementById('gpuSelect');
+        const ramSelect = document.getElementById('ramSelect');
+        const totalPriceEl = document.getElementById('totalPrice');
+
+        const basePrice = 300; 
+
+        function updatePrice() {
+            const cpuCost = parseInt(cpuSelect.value);
+            const gpuCost = parseInt(gpuSelect.value);
+            const ramCost = parseInt(ramSelect.value);
+
+            const total = basePrice + cpuCost + gpuCost + ramCost;
+            totalPriceEl.textContent = '₹' + total.toLocaleString();
+            
+            totalPriceEl.style.transform = "scale(1.1)";
+            setTimeout(() => {
+                totalPriceEl.style.transform = "scale(1)";
+            }, 200);
+        }
+
+        [cpuSelect, gpuSelect, ramSelect].forEach(select => {
+            select.addEventListener('change', updatePrice);
+        });
+
+        // 4. Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMsg');
+            
+            msgEl.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 5. Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav ul');
+        
+        menuToggle.addEventListener('click', () => {
+            const currentDisplay = window.getComputedStyle(nav).display;
+            if (currentDisplay === 'none') {
+                nav.style.display = 'flex';
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '70px';
+                nav.style.right = '20px';
+                nav.style.background = '#111';
+                nav.style.padding = '20px';
+                nav.style.borderRadius = '12px';
+                nav.style.border = '1px solid #333';
+            } else {
+                nav.style.display = 'none';
+                nav.removeAttribute('style'); 
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                nav.removeAttribute('style');
+            }
+        });
+    </script>
+</body>
+</html>
