@@ -57,6 +57,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
         }
 
         /* Noise Texture Overlay */
@@ -74,7 +75,7 @@
 
         a { text-decoration: none; color: inherit; transition: 0.3s ease; }
         ul { list-style: none; }
-        img { display: block; max-width: 100%; }
+        img { display: block; max-width: 100%; height: auto; }
 
         /* Utility Classes */
         .container {
@@ -86,7 +87,7 @@
         .text-accent { color: var(--accent); }
         .text-secondary { color: var(--text-secondary); }
         
-        /* Reveal Animation Class (Removed from specific sections as requested) */
+        /* Reveal Animation Class */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -99,7 +100,9 @@
 
         /* Buttons */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 14px 32px;
             font-family: var(--font-head);
             font-weight: 700;
@@ -111,6 +114,7 @@
             transition: all 0.4s var(--ease-out);
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -146,7 +150,7 @@
             left: 0;
             width: 100%;
             z-index: 100;
-            padding: 24px 0;
+            padding: 20px 0;
             transition: 0.3s;
         }
 
@@ -168,6 +172,7 @@
             font-weight: 700;
             font-size: 24px;
             letter-spacing: -1px;
+            z-index: 102;
         }
 
         .logo span { color: var(--accent); }
@@ -199,7 +204,13 @@
             color: #000 !important;
         }
 
-        .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+        .menu-toggle { 
+            display: none; 
+            font-size: 24px; 
+            cursor: pointer; 
+            z-index: 102;
+            color: #fff;
+        }
 
         /* -----------------------------------------------------------
            3. HERO SECTION
@@ -209,7 +220,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            padding-top: 80px;
+            padding-top: 100px; /* Space for fixed header */
             overflow: hidden;
         }
 
@@ -249,17 +260,18 @@
 
         .hero-content h1 {
             font-family: var(--font-head);
-            font-size: 64px;
-            line-height: 1;
+            /* Fluid Typography: 2.5rem (mobile) to 4rem (desktop) */
+            font-size: clamp(2.5rem, 5vw, 4rem); 
+            line-height: 1.1;
             margin-bottom: 24px;
             letter-spacing: -1px;
             font-weight: 700;
         }
 
         .hero-content p {
-            font-size: 18px;
+            font-size: clamp(16px, 2vw, 18px);
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             max-width: 450px;
             line-height: 1.6;
         }
@@ -267,12 +279,14 @@
         .hero-actions {
             display: flex;
             gap: 16px;
+            flex-wrap: wrap;
         }
 
         .hero-visual {
             position: relative;
             width: 100%;
-            height: 600px; 
+            /* Allow height to adjust on mobile, fixed on desktop */
+            min-height: 300px; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -281,8 +295,9 @@
 
         /* New GIF Styling */
         .gif-wrapper {
-            width: 500px;
-            height: 500px;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1/1;
             border-radius: var(--radius-md);
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
@@ -294,7 +309,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Enhances the GIF/Video look */
             image-rendering: auto; 
         }
 
@@ -304,16 +318,16 @@
         .scroll-strap-container {
             position: relative;
             z-index: 10;
-            margin-top: -60px; 
-            margin-bottom: 80px;
-            padding: 0 24px;
+            margin-top: -40px; /* Pull up closer to hero */
+            margin-bottom: 60px;
+            padding: 0;
         }
 
         .scroll-strap {
             background: var(--accent);
             color: #000;
-            padding: 20px 0;
-            transform: rotate(-5deg);
+            padding: 16px 0;
+            transform: rotate(-2deg);
             overflow: hidden;
             white-space: nowrap;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -324,7 +338,7 @@
             display: inline-block;
             font-family: var(--font-head);
             font-weight: 700;
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
             text-transform: uppercase;
             animation: scroll 20s linear infinite;
         }
@@ -335,24 +349,25 @@
         }
 
         /* -----------------------------------------------------------
-           5. FEATURES SECTION (NO REVEAL ANIMATION)
+           5. FEATURES SECTION
         ----------------------------------------------------------- */
         .features {
             background: linear-gradient(180deg, var(--bg-light) 0%, #EAEAEA 100%);
-            padding: 120px 0;
+            padding: 100px 0;
             color: #111;
         }
 
         .features-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 60px;
             align-items: center;
         }
 
         .features-text h2 {
             font-family: var(--font-head);
-            font-size: 40px;
+            /* Fluid Typography */
+            font-size: clamp(2rem, 4vw, 2.5rem); 
             margin-bottom: 24px;
             color: #000;
         }
@@ -360,13 +375,13 @@
         .feature-list {
             display: flex;
             flex-direction: column;
-            gap: 24px;
-            margin-top: 40px;
+            gap: 20px;
+            margin-top: 32px;
         }
 
         .feature-card {
             background: #fff;
-            padding: 24px;
+            padding: 20px;
             border-radius: var(--radius-sm);
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             transition: all 0.4s var(--ease-out);
@@ -412,10 +427,10 @@
         }
 
         /* -----------------------------------------------------------
-           6. MID-SECTION BREAK (NO SPINNING ANIMATION)
+           6. MID-SECTION BREAK
         ----------------------------------------------------------- */
         .visual-break {
-            height: 120px;
+            height: 80px; /* Slightly smaller on mobile */
             background: var(--bg-secondary);
             display: flex;
             align-items: center;
@@ -427,31 +442,19 @@
         }
 
         .ring {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border: 2px solid rgba(255, 214, 0, 0.3);
             border-top: 2px solid var(--accent);
             border-radius: 50%;
-            /* Animation removed as requested */
-        }
-        
-        .ring::before {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px; height: 80px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50%;
-            /* Animation removed as requested */
         }
 
         /* -----------------------------------------------------------
-           7. PRODUCT SHOWCASE (NO ANIMATION)
+           7. PRODUCT SHOWCASE
         ----------------------------------------------------------- */
         .showcase {
             background-color: var(--bg-primary);
-            padding: 120px 0;
+            padding: 100px 0;
             position: relative;
         }
 
@@ -462,38 +465,41 @@
         
         .section-header h2 {
             font-family: var(--font-head);
-            font-size: 40px;
+            font-size: clamp(2rem, 4vw, 2.5rem);
             margin-bottom: 16px;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
+            /* Responsive Grid: Min 280px cards, auto-fit */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
         }
 
         .product-card {
             background: rgba(255,255,255,0.02);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            padding: 32px;
+            padding: 24px; /* Reduced padding for mobile */
             transition: all 0.4s var(--ease-out);
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
-            transform: scale(1.03);
+            transform: translateY(-5px); /* Subtle move instead of scale to avoid layout shift */
             border-color: var(--accent);
             box-shadow: 0 0 30px rgba(255, 214, 0, 0.1);
         }
 
         .card-image {
-            height: 220px;
+            height: 200px;
             background: #151515;
             border-radius: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -503,7 +509,7 @@
         .card-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Contain ensures whole product is visible */
             transition: transform 0.6s ease;
         }
 
@@ -513,30 +519,37 @@
 
         .product-card h3 {
             font-family: var(--font-head);
-            font-size: 24px;
+            font-size: 20px;
             margin-bottom: 8px;
         }
 
         .specs-list {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: auto; /* Pushes price to bottom */
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            /* Keep 2 columns inside card for better use of space */
+            grid-template-columns: 1fr 1fr; 
+            gap: 8px 12px;
+        }
+
+        .specs-list span {
+            display: flex;
+            align-items: center;
         }
 
         .specs-list span i {
             margin-right: 6px;
             color: var(--accent);
+            font-size: 14px;
         }
 
         .price-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 24px;
-            padding-top: 24px;
+            margin-top: 20px;
+            padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
 
@@ -555,6 +568,7 @@
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
+            flex-shrink: 0;
         }
 
         .btn-card:hover {
@@ -567,7 +581,7 @@
         ----------------------------------------------------------- */
         .builder {
             background: var(--bg-secondary);
-            padding: 120px 0;
+            padding: 100px 0;
         }
 
         .builder-layout {
@@ -579,13 +593,14 @@
 
         .builder-ui {
             background: var(--bg-primary);
-            padding: 40px;
+            padding: 32px;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
+            width: 100%; /* Ensure it fits container */
         }
 
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
@@ -599,13 +614,13 @@
 
         .custom-select {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: #1a1a1a;
             border: 1px solid var(--border-color);
             color: #fff;
             border-radius: 8px;
             font-family: var(--font-body);
-            font-size: 16px;
+            font-size: 15px;
             outline: none;
             transition: 0.3s;
             appearance: none;
@@ -617,36 +632,36 @@
 
         .custom-select:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(255, 214, 0, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 214, 0, 0.15);
         }
 
         .builder-visual {
             position: relative;
-            height: 500px;
+            height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .gpu-float {
-            width: 80%;
-            max-width: 600px;
+            width: 100%;
+            max-width: 500px;
             filter: drop-shadow(0 30px 50px rgba(0,0,0,0.5));
             animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
         }
 
         .total-price {
-            margin-top: 32px;
+            margin-top: 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid var(--border-color);
-            padding-top: 24px;
+            padding-top: 20px;
         }
 
         /* -----------------------------------------------------------
@@ -654,7 +669,7 @@
         ----------------------------------------------------------- */
         .testimonials {
             background: var(--bg-primary);
-            padding: 120px 0;
+            padding: 100px 0;
             position: relative;
             overflow: hidden;
         }
@@ -672,7 +687,7 @@
 
         .test-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
             position: relative;
             z-index: 1;
@@ -682,7 +697,7 @@
             background: rgba(255,255,255,0.03);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.1);
-            padding: 40px;
+            padding: 32px 24px;
             border-radius: var(--radius-md);
             transition: 0.3s;
         }
@@ -696,7 +711,7 @@
         .stars { color: var(--accent); margin-bottom: 16px; font-size: 14px; }
         
         .test-text {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.6;
             margin-bottom: 24px;
             font-style: italic;
@@ -720,7 +735,7 @@
         ----------------------------------------------------------- */
         .final-cta {
             background: #000;
-            padding: 160px 0;
+            padding: 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -749,7 +764,7 @@
 
         .cta-content h2 {
             font-family: var(--font-head);
-            font-size: 48px;
+            font-size: clamp(2rem, 5vw, 3rem);
             margin-bottom: 32px;
             background: linear-gradient(180deg, #fff, #888);
             -webkit-background-clip: text;
@@ -760,7 +775,9 @@
             background-color: var(--accent);
             color: #000;
             font-size: 16px;
-            padding: 18px 48px;
+            padding: 18px 40px;
+            width: 100%; /* Full width on mobile */
+            max-width: 300px; /* Max width constraint */
             animation: pulse-glow 2s infinite;
         }
 
@@ -794,7 +811,8 @@
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            /* Grid becomes 2 cols on mobile instead of 1 to save space */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 40px;
             padding: 60px 0;
             border-bottom: 1px solid #222;
@@ -841,6 +859,7 @@
         .footer-copyright {
             font-size: 12px;
             color: #999;
+            text-align: right;
         }
 
         /* -----------------------------------------------------------
@@ -863,6 +882,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            width: max-content;
+            max-width: 90%;
         }
 
         .toast.show {
@@ -873,37 +894,74 @@
         .toast i { color: var(--accent); }
 
         /* -----------------------------------------------------------
-           RESPONSIVE
+           RESPONSIVE MEDIA QUERIES
         ----------------------------------------------------------- */
         @media (max-width: 992px) {
             .hero-inner, .features-inner, .builder-layout {
                 grid-template-columns: 1fr;
-                text-align: center;
+                text-align: center; /* Center text on tablet/mobile for readability */
             }
             
-            .hero-content h1 { font-size: 48px; }
             .hero-actions { justify-content: center; }
-            .hero-visual { order: -1; margin-bottom: 40px; }
+            .hero-visual { margin-top: 20px; min-height: auto; }
             
             .builder-layout { gap: 40px; }
-            .builder-ui { width: 100%; }
+            /* Builder UI takes full width on mobile */
+            .builder-ui { 
+                width: 100%; 
+                order: 2; /* Put UI below visual on tablet if desired, or remove to keep above */
+            }
+            .builder-visual {
+                order: 1;
+                height: 300px;
+            }
         }
 
         @media (max-width: 768px) {
-            nav ul { display: none; }
-            .menu-toggle { display: block; color: #fff; }
+            /* Navigation */
+            nav ul {
+                display: none; /* Hidden by default on mobile */
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(11, 11, 11, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transition: opacity 0.3s ease;
+            }
+
+            nav ul.nav-active {
+                display: flex;
+                opacity: 1;
+            }
+
+            .menu-toggle { display: block; }
             
-            .scroll-strap-container { margin-top: -30px; padding: 0; }
+            /* Sections */
+            .scroll-strap-container { margin-top: -20px; margin-bottom: 40px; }
             
-            .features { padding: 80px 0; }
-            .feature-list { gap: 16px; }
+            .features, .showcase, .builder, .testimonials { padding: 60px 0; }
             
-            .showcase, .builder, .testimonials { padding: 80px 0; }
+            /* Specific Builder Mobile Adjustment */
+            .builder-ui { order: 1; } /* UI first on mobile for interaction */
+            .builder-visual { order: 2; height: 250px; margin-top: 20px; }
             
-            .cta-content h2 { font-size: 32px; }
-            
-            .footer-content { grid-template-columns: 1fr 1fr; }
-            .footer-bottom { justify-content: center; }
+            /* Footer Mobile */
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-copyright { text-align: center; }
+        }
+
+        /* Small Mobile Fixes (iPhone SE, etc) */
+        @media (max-width: 380px) {
+            .container { padding: 0 16px; }
+            .product-grid { grid-template-columns: 1fr; } /* Force 1 column on very small screens */
+            .footer-content { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -917,16 +975,16 @@
         <div class="container nav-inner">
             <a href="#" class="logo">CPC<span>.</span></a>
             <nav>
-                <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#showcase">Systems</a></li>
-                    <li><a href="#builder">Builder</a></li>
+                <ul id="nav-list">
+                    <li><a href="#hero" onclick="toggleMenu()">Home</a></li>
+                    <li><a href="#features" onclick="toggleMenu()">Features</a></li>
+                    <li><a href="#showcase" onclick="toggleMenu()">Systems</a></li>
+                    <li><a href="#builder" onclick="toggleMenu()">Builder</a></li>
                     <li><a href="#" class="nav-login">Login</a></li>
                 </ul>
             </nav>
-            <div class="menu-toggle">
-                <i class="ri-menu-4-line"></i>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="ri-menu-4-line" id="menu-icon"></i>
             </div>
         </div>
     </header>
@@ -945,10 +1003,8 @@
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <!-- GIF Replacement -->
+                    <!-- GIF Wrapper -->
                     <div class="gif-wrapper">
-                        <!-- Replace src with your local .gif file (e.g., "assets/pc-build.gif") -->
-                        <!-- Using a reliable tech-themed GIF for demo purposes -->
                         <img src="https://d1q3zw97enxzq2.cloudfront.net/images/Untitled_design_1.width-1000_yzyihgn.gif" alt="PC Building Process">
                     </div>
                 </div>
@@ -965,11 +1021,10 @@
             </div>
         </div>
 
-        <!-- Features Section (No Animation) -->
+        <!-- Features Section -->
         <section id="features" class="features">
             <div class="container features-inner">
-                <!-- .reveal class removed -->
-                <div class="features-text">
+                <div class="features-text reveal">
                     <span class="text-secondary" style="text-transform: uppercase; letter-spacing: 1px; font-size: 12px; font-weight: 600;">Why CPC</span>
                     <h2>Engineered for<br>Excellence</h2>
                     <p class="text-secondary">We don't just assemble parts. We curate components using rigorous thermal testing and aesthetic precision to ensure your PC is a masterpiece.</p>
@@ -998,29 +1053,28 @@
                         </div>
                     </div>
                 </div>
-                <!-- .reveal class removed -->
-                <div class="features-image">
+                <div class="features-image reveal">
                     <img src="https://p.turbosquid.com/ts-thumb/5W/JfcG7H/IU/professional_ultrabook_with_hardware_modules_001/jpg/1758279173/300x300/sharp_fit_q85/2369238fcfe42e599da9aa8859b96a67065c7757/professional_ultrabook_with_hardware_modules_001.jpg" alt="Clean Setup">
                 </div>
             </div>
         </section>
 
-        <!-- Visual Break (Animation Removed) -->
+        <!-- Visual Break -->
         <div class="visual-break">
             <div class="ring"></div>
         </div>
 
-        <!-- Product Showcase (No Animation) -->
+        <!-- Product Showcase -->
         <section id="showcase" class="showcase">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
                     <h2>Signature Series</h2>
                     <p class="text-secondary">Designed for performance. Built for the future.</p>
                 </div>
 
                 <div class="product-grid">
                     <!-- Product 1 -->
-                    <div class="product-card">
+                    <div class="product-card reveal">
                         <div class="card-image">
                             <img src="https://5.imimg.com/data5/RN/QW/GLADMIN-63454928/gt75-titan-8rf-gt-series-gaming-laptop.png" alt="Titan GT">
                         </div>
@@ -1038,7 +1092,7 @@
                     </div>
 
                     <!-- Product 2 -->
-                    <div class="product-card">
+                    <div class="product-card reveal">
                         <div class="card-image">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCOrpD8KkYkLGLfmJmvXlATBDn_8xjFhJkng&s" alt="Stealth Pro">
                         </div>
@@ -1056,7 +1110,7 @@
                     </div>
 
                     <!-- Product 3 -->
-                    <div class="product-card">
+                    <div class="product-card reveal">
                         <div class="card-image">
                             <img src="https://m.media-amazon.com/images/I/81QRSfqYZ0L.jpg" alt="Core Air">
                         </div>
@@ -1079,6 +1133,7 @@
         <!-- Builder Preview -->
         <section id="builder" class="builder">
             <div class="container builder-layout">
+                <!-- Builder UI moved to top for mobile via CSS order -->
                 <div class="builder-ui reveal">
                     <h3 style="margin-bottom: 24px; font-family: var(--font-head);">Customizer</h3>
                     
@@ -1266,6 +1321,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
                 }
             });
         }, {
@@ -1292,6 +1348,7 @@
             const total = basePrice + cpuCost + gpuCost + ramCost;
             totalPriceEl.textContent = '₹' + total.toLocaleString();
             
+            // Subtle pop animation
             totalPriceEl.style.transform = "scale(1.1)";
             setTimeout(() => {
                 totalPriceEl.style.transform = "scale(1)";
@@ -1315,31 +1372,34 @@
             }, 3000);
         }
 
-        // 5. Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav ul');
-        
-        menuToggle.addEventListener('click', () => {
-            const currentDisplay = window.getComputedStyle(nav).display;
-            if (currentDisplay === 'none') {
-                nav.style.display = 'flex';
-                nav.style.flexDirection = 'column';
-                nav.style.position = 'absolute';
-                nav.style.top = '70px';
-                nav.style.right = '20px';
-                nav.style.background = '#111';
-                nav.style.padding = '20px';
-                nav.style.borderRadius = '12px';
-                nav.style.border = '1px solid #333';
-            } else {
-                nav.style.display = 'none';
-                nav.removeAttribute('style'); 
+        // 5. Mobile Menu Toggle (Cleaner Implementation)
+        function toggleMenu() {
+            // Only toggle if we are in mobile view width
+            if (window.innerWidth <= 768) {
+                const navList = document.getElementById('nav-list');
+                const menuIcon = document.getElementById('menu-icon');
+                
+                navList.classList.toggle('nav-active');
+                
+                // Switch icon
+                if (navList.classList.contains('nav-active')) {
+                    menuIcon.classList.remove('ri-menu-4-line');
+                    menuIcon.classList.add('ri-close-line');
+                } else {
+                    menuIcon.classList.remove('ri-close-line');
+                    menuIcon.classList.add('ri-menu-4-line');
+                }
             }
-        });
+        }
 
+        // Reset menu on resize to desktop
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
-                nav.removeAttribute('style');
+                const navList = document.getElementById('nav-list');
+                const menuIcon = document.getElementById('menu-icon');
+                navList.classList.remove('nav-active');
+                menuIcon.classList.remove('ri-close-line');
+                menuIcon.classList.add('ri-menu-4-line');
             }
         });
     </script>
