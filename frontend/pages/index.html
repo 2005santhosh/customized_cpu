@@ -8,7 +8,7 @@
     <!-- Fonts: Space Grotesk & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
     
     <!-- Icons: RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -21,8 +21,9 @@
             /* Colors */
             --bg-primary: #0B0B0B;
             --bg-secondary: #111111;
-            --bg-light: #F5F5F5;
+            --bg-card: #161616;
             --accent: #FFD600;
+            --accent-dim: rgba(255, 214, 0, 0.1);
             --text-primary: #FFFFFF;
             --text-secondary: #A1A1A1;
             --border-color: #2A2A2A;
@@ -220,7 +221,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            padding-top: 100px; /* Space for fixed header */
+            padding-top: 100px; 
             overflow: hidden;
         }
 
@@ -260,7 +261,6 @@
 
         .hero-content h1 {
             font-family: var(--font-head);
-            /* Fluid Typography: 2.5rem (mobile) to 4rem (desktop) */
             font-size: clamp(2.5rem, 5vw, 4rem); 
             line-height: 1.1;
             margin-bottom: 24px;
@@ -285,7 +285,6 @@
         .hero-visual {
             position: relative;
             width: 100%;
-            /* Allow height to adjust on mobile, fixed on desktop */
             min-height: 300px; 
             display: flex;
             flex-direction: column;
@@ -293,7 +292,6 @@
             justify-content: center;
         }
 
-        /* New GIF Styling */
         .gif-wrapper {
             width: 100%;
             max-width: 500px;
@@ -303,6 +301,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             background: #000;
             position: relative;
+            border: 1px solid var(--border-color);
         }
 
         .gif-wrapper img {
@@ -318,8 +317,8 @@
         .scroll-strap-container {
             position: relative;
             z-index: 10;
-            margin-top: -40px; /* Pull up closer to hero */
-            margin-bottom: 60px;
+            margin-top: -40px;
+            margin-bottom: 80px;
             padding: 0;
         }
 
@@ -349,14 +348,17 @@
         }
 
         /* -----------------------------------------------------------
-           5. FEATURES SECTION
+           5. FEATURES SECTION (Why CPC Intro)
         ----------------------------------------------------------- */
         .features {
-            background: linear-gradient(180deg, var(--bg-light) 0%, #EAEAEA 100%);
+            background: linear-gradient(180deg, var(--bg-primary) 0%, #0F0F0F 100%);
             padding: 100px 0;
-            color: #111;
+            position: relative;
         }
-
+        
+        .features-text h2 { color: #fff; }
+        .features-text p { color: var(--text-secondary); }
+        
         .features-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -366,10 +368,8 @@
 
         .features-text h2 {
             font-family: var(--font-head);
-            /* Fluid Typography */
             font-size: clamp(2rem, 4vw, 2.5rem); 
             margin-bottom: 24px;
-            color: #000;
         }
 
         .feature-list {
@@ -380,10 +380,10 @@
         }
 
         .feature-card {
-            background: #fff;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
             padding: 20px;
             border-radius: var(--radius-sm);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             transition: all 0.4s var(--ease-out);
             display: flex;
             align-items: flex-start;
@@ -391,14 +391,15 @@
         }
 
         .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            transform: translateX(10px);
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.04);
         }
 
         .feature-icon {
             width: 40px;
             height: 40px;
-            background: #F5F5F5;
+            background: rgba(255, 214, 0, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -415,7 +416,7 @@
 
         .feature-info p {
             font-size: 14px;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.5;
         }
 
@@ -423,249 +424,419 @@
             border-radius: var(--radius-md);
             width: 100%;
             height: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+        .features-image:hover img {
+            filter: grayscale(0%);
         }
 
         /* -----------------------------------------------------------
-           6. MID-SECTION BREAK
+           6. NEW: IMMERSIVE VIDEO SECTION (Next Gen) - UPDATED STYLE
         ----------------------------------------------------------- */
-        .visual-break {
-            height: 80px; /* Slightly smaller on mobile */
-            background: var(--bg-secondary);
+        .video-section {
+            position: relative;
+            height: 85vh;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+
+        .video-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .video-title {
+            font-family: var(--font-head);
+            font-size: clamp(3.5rem, 9vw, 8rem);
+            font-weight: 800; /* Extra Bold */
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -4px;
+            
+            /* New Modern Look: Gradient + Skew + Shadow */
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFD600 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            transform: skewX(-12deg); /* Fast forward motion */
+            font-style: italic; /* Dynamic feel */
+            
+            /* Strong shadow to separate from video */
+            filter: drop-shadow(0px 10px 30px rgba(0,0,0,0.6));
+            
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: titleReveal 1.2s cubic-bezier(0.2, 1, 0.3, 1) forwards 0.5s;
+        }
+
+        @keyframes titleReveal {
+            0% { 
+                opacity: 0; 
+                transform: skewX(-12deg) translateY(50px) scale(0.9);
+                letter-spacing: -10px;
+            }
+            100% { 
+                opacity: 1; 
+                transform: skewX(-12deg) translateY(0) scale(1);
+                letter-spacing: -4px;
+            }
+        }
+
+        .video-subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(14px, 2vw, 18px);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+            padding: 10px 20px;
+            
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 1.2s;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* -----------------------------------------------------------
+           7. THE BLUEPRINT (Interactive Anatomy)
+        ----------------------------------------------------------- */
+        .blueprint {
+            background-color: #080808;
+            padding: 120px 0;
+            position: relative;
             border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        /* Grid Background Effect for Blueprint */
+        .blueprint::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .blueprint-inner {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* The Visual Side (PC Image + Hotspots) */
+        .blueprint-visual {
+            position: relative;
+            width: 100%;
+            border: 1px solid #222;
+            border-radius: 4px; /* Technical look */
+            padding: 10px;
+            background: #0f0f0f;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* Tech Corners */
+        .tech-corner {
+            position: absolute;
+            width: 20px; height: 20px;
+            border: 2px solid var(--accent);
+            transition: 0.3s;
+        }
+        .tc-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .tc-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+        .tc-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+        .tc-br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        .blueprint-img-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .blueprint-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.5s;
+        }
+        .blueprint-img-container:hover .blueprint-img {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        /* Hotspots */
+        .hotspot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hotspot Pulse Animation */
+        .hotspot::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 1px solid var(--accent);
+            animation: pulse-ring 2s infinite;
+        }
+
+        .hotspot:hover, .hotspot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        /* Hotspot positions (Percent based for responsiveness) */
+        .hs-1 { top: 30%; left: 60%; } /* GPU Area */
+        .hs-2 { top: 50%; left: 25%; } /* CPU Area */
+        .hs-3 { top: 70%; left: 80%; } /* Case/Front Area */
+
+        /* Connection Line (Decorative) */
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent);
+            opacity: 0.3;
+            box-shadow: 0 0 10px var(--accent);
+            animation: scan 4s linear infinite;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* The Content Side */
+        .blueprint-content h2 {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .blueprint-desc {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            border-left: 3px solid var(--accent);
+            padding-left: 20px;
+        }
+
+        .info-box {
+            display: none;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: var(--radius-sm);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .info-box.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-title {
+            font-family: var(--font-head);
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* -----------------------------------------------------------
+           8. NEW: METRICS (Animated Counters)
+        ----------------------------------------------------------- */
+        .metrics {
+            padding: 80px 0;
+            background: #111;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .ring {
-            width: 50px;
-            height: 50px;
-            border: 2px solid rgba(255, 214, 0, 0.3);
-            border-top: 2px solid var(--accent);
-            border-radius: 50%;
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .metric-item {
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Vertical Divider */
+        .metric-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 60%;
+            width: 1px;
+            background: var(--border-color);
+        }
+
+        .metric-number {
+            font-family: var(--font-head);
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .metric-label {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         /* -----------------------------------------------------------
-           7. PRODUCT SHOWCASE
+           9. HALL OF LEGENDS (Gallery)
         ----------------------------------------------------------- */
-        .showcase {
-            background-color: var(--bg-primary);
-            padding: 100px 0;
-            position: relative;
+        .gallery {
+            background-color: #000;
+            padding: 120px 0;
         }
 
-        .section-header {
-            text-align: center;
+        .gallery-header {
             margin-bottom: 60px;
         }
-        
-        .section-header h2 {
+
+        .gallery-title h2 {
             font-family: var(--font-head);
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            margin-bottom: 16px;
+            font-size: clamp(2rem, 4vw, 3rem);
         }
-
-        .product-grid {
+        
+        .gallery-grid {
             display: grid;
-            /* Responsive Grid: Min 280px cards, auto-fit */
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: 300px;
+            gap: 20px;
         }
 
-        .product-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 24px; /* Reduced padding for mobile */
-            transition: all 0.4s var(--ease-out);
+        .gallery-item {
             position: relative;
+            border-radius: var(--radius-sm);
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
+            cursor: pointer;
+            background: #111;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px); /* Subtle move instead of scale to avoid layout shift */
-            border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(255, 214, 0, 0.1);
-        }
+        .gallery-item.tall { grid-row: span 2; }
+        .gallery-item.wide { grid-column: span 2; }
 
-        .card-image {
-            height: 200px;
-            background: #151515;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card-image img {
+        .gallery-img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Contain ensures whole product is visible */
-            transition: transform 0.6s ease;
+            object-fit: cover;
+            transition: transform 0.7s ease;
         }
 
-        .product-card:hover .card-image img {
+        .gallery-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            transition: 0.4s;
+        }
+
+        .gallery-item:hover .gallery-img {
             transform: scale(1.1);
         }
 
-        .product-card h3 {
-            font-family: var(--font-head);
-            font-size: 20px;
-            margin-bottom: 8px;
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
         }
 
-        .specs-list {
+        .build-specs {
             font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: auto; /* Pushes price to bottom */
-            display: grid;
-            /* Keep 2 columns inside card for better use of space */
-            grid-template-columns: 1fr 1fr; 
-            gap: 8px 12px;
+            color: #ccc;
+            margin-top: 8px;
+            font-family: 'Inter', sans-serif;
         }
 
-        .specs-list span {
-            display: flex;
-            align-items: center;
-        }
-
-        .specs-list span i {
-            margin-right: 6px;
-            color: var(--accent);
-            font-size: 14px;
-        }
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .price {
+        .builder-name {
             font-family: var(--font-head);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-        }
-
-        .btn-card {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            flex-shrink: 0;
-        }
-
-        .btn-card:hover {
-            background: var(--accent);
-            color: #000;
-        }
-
-        /* -----------------------------------------------------------
-           8. BUILDER PREVIEW
-        ----------------------------------------------------------- */
-        .builder {
-            background: var(--bg-secondary);
-            padding: 100px 0;
-        }
-
-        .builder-layout {
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .builder-ui {
-            background: var(--bg-primary);
-            padding: 32px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            width: 100%; /* Ensure it fits container */
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .custom-select {
-            width: 100%;
-            padding: 14px;
-            background: #1a1a1a;
-            border: 1px solid var(--border-color);
             color: #fff;
-            border-radius: 8px;
-            font-family: var(--font-body);
-            font-size: 15px;
-            outline: none;
-            transition: 0.3s;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD600%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px top 50%;
-            background-size: 12px auto;
-        }
-
-        .custom-select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(255, 214, 0, 0.15);
-        }
-
-        .builder-visual {
-            position: relative;
-            height: 400px;
             display: flex;
             align-items: center;
-            justify-content: center;
-        }
-
-        .gpu-float {
-            width: 100%;
-            max-width: 500px;
-            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.5));
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(1deg); }
-        }
-
-        .total-price {
-            margin-top: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
+            gap: 8px;
         }
 
         /* -----------------------------------------------------------
-           9. TESTIMONIALS
+           10. TESTIMONIALS
         ----------------------------------------------------------- */
         .testimonials {
             background: var(--bg-primary);
@@ -679,7 +850,7 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 214, 0, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 20% 30%, rgba(255, 214, 0, 0.05) 0%, transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(255, 214, 0, 0.05) 0%, transparent 40%);
             z-index: 0;
             pointer-events: none;
@@ -694,9 +865,8 @@
         }
 
         .test-card {
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
             padding: 32px 24px;
             border-radius: var(--radius-md);
             transition: 0.3s;
@@ -705,7 +875,7 @@
         .test-card:hover {
             transform: translateY(-8px);
             border-color: rgba(255, 214, 0, 0.3);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            background: rgba(255,255,255,0.04);
         }
 
         .stars { color: var(--accent); margin-bottom: 16px; font-size: 14px; }
@@ -731,15 +901,15 @@
         }
 
         /* -----------------------------------------------------------
-           10. FINAL CTA
+           11. FINAL CTA
         ----------------------------------------------------------- */
         .final-cta {
             background: #000;
-            padding: 100px 0;
+            padding: 120px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-top: 1px solid var(--border-color);
+            border-top:1px solid var(--border-color);
         }
 
         .final-cta::before {
@@ -776,8 +946,8 @@
             color: #000;
             font-size: 16px;
             padding: 18px 40px;
-            width: 100%; /* Full width on mobile */
-            max-width: 300px; /* Max width constraint */
+            width: 100%;
+            max-width: 300px;
             animation: pulse-glow 2s infinite;
         }
 
@@ -788,7 +958,7 @@
         }
 
         /* -----------------------------------------------------------
-           11. FOOTER (AMAZON STYLE)
+           12. FOOTER
         ----------------------------------------------------------- */
         .footer-back-to-top {
             background: #37475a;
@@ -811,7 +981,6 @@
 
         .footer-content {
             display: grid;
-            /* Grid becomes 2 cols on mobile instead of 1 to save space */
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 40px;
             padding: 60px 0;
@@ -897,30 +1066,32 @@
            RESPONSIVE MEDIA QUERIES
         ----------------------------------------------------------- */
         @media (max-width: 992px) {
-            .hero-inner, .features-inner, .builder-layout {
+            .hero-inner, .features-inner, .blueprint-inner {
                 grid-template-columns: 1fr;
-                text-align: center; /* Center text on tablet/mobile for readability */
+                text-align: center;
             }
             
-            .hero-actions { justify-content: center; }
+            .hero-actions, .feature-list, .blueprint-desc { justify-content: center; text-align: center; border: none; padding: 0; }
+            
             .hero-visual { margin-top: 20px; min-height: auto; }
+            .blueprint-visual { margin-bottom: 40px; order: 2; }
+            .blueprint-content { order: 1; }
             
-            .builder-layout { gap: 40px; }
-            /* Builder UI takes full width on mobile */
-            .builder-ui { 
-                width: 100%; 
-                order: 2; /* Put UI below visual on tablet if desired, or remove to keep above */
-            }
-            .builder-visual {
-                order: 1;
-                height: 300px;
-            }
+            .gallery-item.wide { grid-column: auto; } 
+            
+            /* Hotspots Adjustments for Mobile */
+            .hs-1 { top: 30%; left: 70%; }
+            .hs-2 { top: 50%; left: 20%; }
+            .hs-3 { top: 70%; left: 75%; }
+            
+            .video-section { height: 60vh; }
+            .video-title { letter-spacing: -2px; transform: skewX(-12deg) scale(0.9); }
         }
 
         @media (max-width: 768px) {
             /* Navigation */
             nav ul {
-                display: none; /* Hidden by default on mobile */
+                display: none;
                 position: absolute;
                 top: 0;
                 right: 0;
@@ -943,25 +1114,29 @@
             .menu-toggle { display: block; }
             
             /* Sections */
-            .scroll-strap-container { margin-top: -20px; margin-bottom: 40px; }
+            .features, .blueprint, .gallery, .testimonials { padding: 60px 0; }
+            .metrics { padding: 40px 0; }
             
-            .features, .showcase, .builder, .testimonials { padding: 60px 0; }
-            
-            /* Specific Builder Mobile Adjustment */
-            .builder-ui { order: 1; } /* UI first on mobile for interaction */
-            .builder-visual { order: 2; height: 250px; margin-top: 20px; }
-            
+            /* Metrics Mobile */
+            .metrics-grid { grid-template-columns: 1fr; gap: 20px; }
+            .metric-item:not(:last-child)::after { display: none; }
+            .metric-number { font-size: 3rem; }
+
             /* Footer Mobile */
             .footer-content { grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .footer-copyright { text-align: center; }
         }
 
-        /* Small Mobile Fixes (iPhone SE, etc) */
-        @media (max-width: 380px) {
+        /* Small Mobile Fixes */
+        @media (max-width: 480px) {
             .container { padding: 0 16px; }
-            .product-grid { grid-template-columns: 1fr; } /* Force 1 column on very small screens */
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item.tall { grid-row: auto; } /* Force 1 col stack */
             .footer-content { grid-template-columns: 1fr; }
+            .scroll-strap-container { margin-top: -20px; }
+            .info-box { padding: 20px; }
+            .video-title { font-size: 3.5rem; transform: skewX(-8deg); }
         }
     </style>
 </head>
@@ -976,11 +1151,12 @@
             <a href="#" class="logo">CPC<span>.</span></a>
             <nav>
                 <ul id="nav-list">
-                    <li><a href="#hero" onclick="toggleMenu()">Home</a></li>
-                    <li><a href="#features" onclick="toggleMenu()">Features</a></li>
-                    <li><a href="#showcase" onclick="toggleMenu()">Systems</a></li>
-                    <li><a href="#builder" onclick="toggleMenu()">Builder</a></li>
-                    <li><a href="./login.html" class="nav-login">Login</a></li>
+                    <li><a href="#hero" onclick="closeMobileMenu()">Home</a></li>
+                    <li><a href="#features" onclick="closeMobileMenu()">Why CPC</a></li>
+                    <li><a href="#blueprint" onclick="closeMobileMenu()">Anatomy</a></li>
+                    <li><a href="#gallery" onclick="closeMobileMenu()">Legends</a></li>
+                    <!-- FIXED: Removed onclick toggleMenu to prevent JS interference with navigation legacy-->
+                    <li><a href="#" onclick="goToLogin(); return false;" class="nav-login">Login</a></li>
                 </ul>
             </nav>
             <div class="menu-toggle" onclick="toggleMenu()">
@@ -995,15 +1171,14 @@
             <div class="hero-glow"></div>
             <div class="container hero-inner">
                 <div class="hero-content reveal">
-                    <h1>BUILD YOUR<br><span class="text-accent">BEAST</span></h1>
-                    <p>Precision-engineered custom PCs for creators, gamers, and innovators. Experience performance without compromise.</p>
+                    <h1>BUILD YOUR<br><span class="text-accent">LEGEND</span></h1>
+                    <p>Merging precision engineering with artistic expression. We build masterpieces for creators who demand the extreme.</p>
                     <div class="hero-actions">
-                        <a href="#builder" class="btn btn-primary">Start Build</a>
-                        <a href="#showcase" class="btn btn-secondary">View Systems</a>
+                        <a href="#blueprint" class="btn btn-primary">Explore Anatomy</a>
+                        <a href="#gallery" class="btn btn-secondary">View Builds</a>
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <!-- GIF Wrapper -->
                     <div class="gif-wrapper">
                         <img src="https://d1q3zw97enxzq2.cloudfront.net/images/Untitled_design_1.width-1000_yzyihgn.gif" alt="PC Building Process">
                     </div>
@@ -1015,8 +1190,8 @@
         <div class="scroll-strap-container">
             <div class="scroll-strap">
                 <div class="scroll-content">
-                    CUSTOM BUILDS • HIGH PERFORMANCE • EXTREME POWER • CPC • BUILD YOUR DREAM PC • 
-                    CUSTOM BUILDS • HIGH PERFORMANCE • EXTREME POWER • CPC • BUILD YOUR DREAM PC • 
+                    CUSTOM BUILDS • HIGH PERFORMANCE • ARTISTIC EXPRESSION • CPC • BUILD YOUR DREAM PC • 
+                    CUSTOM BUILDS • HIGH PERFORMANCE • ARTISTIC EXPRESSION • CPC • BUILD YOUR DREAM PC • 
                 </div>
             </div>
         </div>
@@ -1026,7 +1201,7 @@
             <div class="container features-inner">
                 <div class="features-text reveal">
                     <span class="text-secondary" style="text-transform: uppercase; letter-spacing: 1px; font-size: 12px; font-weight: 600;">Why CPC</span>
-                    <h2>Engineered for<br>Excellence</h2>
+                    <h2>Engineered for<br>Immersion</h2>
                     <p class="text-secondary">We don't just assemble parts. We curate components using rigorous thermal testing and aesthetic precision to ensure your PC is a masterpiece.</p>
                     
                     <div class="feature-list">
@@ -1054,125 +1229,149 @@
                     </div>
                 </div>
                 <div class="features-image reveal">
-                    <img src="https://p.turbosquid.com/ts-thumb/5W/JfcG7H/IU/professional_ultrabook_with_hardware_modules_001/jpg/1758279173/300x300/sharp_fit_q85/2369238fcfe42e599da9aa8859b96a67065c7757/professional_ultrabook_with_hardware_modules_001.jpg" alt="Clean Setup">
+                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=1000&auto=format&fit=crop" alt="Clean Setup">
                 </div>
             </div>
         </section>
 
-        <!-- Visual Break -->
-        <div class="visual-break">
-            <div class="ring"></div>
-        </div>
-
-        <!-- Product Showcase -->
-        <section id="showcase" class="showcase">
-            <div class="container">
-                <div class="section-header reveal">
-                    <h2>Signature Series</h2>
-                    <p class="text-secondary">Designed for performance. Built for the future.</p>
-                </div>
-
-                <div class="product-grid">
-                    <!-- Product 1 -->
-                    <div class="product-card reveal">
-                        <div class="card-image">
-                            <img src="https://5.imimg.com/data5/RN/QW/GLADMIN-63454928/gt75-titan-8rf-gt-series-gaming-laptop.png" alt="Titan GT">
-                        </div>
-                        <h3>TITAN GT</h3>
-                        <div class="specs-list">
-                            <span><i class="ri-microscope-line"></i> i9-14900K</span>
-                            <span><i class="ri-broadcast-line"></i> RTX 4090</span>
-                            <span><i class="ri-database-2-line"></i> 64GB DDR5</span>
-                            <span><i class="ri-hard-drive-2-line"></i> 2TB NVMe</span>
-                        </div>
-                        <div class="price-row">
-                            <span class="price">₹4,299</span>
-                            <button class="btn-card" onclick="showToast('Added Titan GT to cart')">Configure</button>
-                        </div>
-                    </div>
-
-                    <!-- Product 2 -->
-                    <div class="product-card reveal">
-                        <div class="card-image">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCOrpD8KkYkLGLfmJmvXlATBDn_8xjFhJkng&s" alt="Stealth Pro">
-                        </div>
-                        <h3>STEALTH PRO</h3>
-                        <div class="specs-list">
-                            <span><i class="ri-microscope-line"></i> Ryzen 9 7950X</span>
-                            <span><i class="ri-broadcast-line"></i> RTX 4080 Super</span>
-                            <span><i class="ri-database-2-line"></i> 32GB DDR5</span>
-                            <span><i class="ri-hard-drive-2-line"></i> 1TB NVMe</span>
-                        </div>
-                        <div class="price-row">
-                            <span class="price">₹2,899</span>
-                            <button class="btn-card" onclick="showToast('Added Stealth Pro to cart')">Configure</button>
-                        </div>
-                    </div>
-
-                    <!-- Product 3 -->
-                    <div class="product-card reveal">
-                        <div class="card-image">
-                            <img src="https://m.media-amazon.com/images/I/81QRSfqYZ0L.jpg" alt="Core Air">
-                        </div>
-                        <h3>CORE AIR</h3>
-                        <div class="specs-list">
-                            <span><i class="ri-microscope-line"></i> i5-14600K</span>
-                            <span><i class="ri-broadcast-line"></i> RTX 4070 Ti</span>
-                            <span><i class="ri-database-2-line"></i> 32GB DDR5</span>
-                            <span><i class="ri-hard-drive-2-line"></i> 1TB Gen4</span>
-                        </div>
-                        <div class="price-row">
-                            <span class="price">₹1,899</span>
-                            <button class="btn-card" onclick="showToast('Added Core Air to cart')">Configure</button>
-                        </div>
-                    </div>
-                </div>
+        <!-- NEW: Immersive Video Section (Updated Design) -->
+        <section class="video-section">
+            <!-- Background Video (Looped, Muted, No Controls) -->
+            <!-- Using a tech-themed stock video -->
+            <video class="video-bg" autoplay muted loop playsinline poster="https://images.pexels.com/videos/852488/free-video-852488.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                <source src="./assets/images/bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            
+            <div class="video-overlay"></div>
+            
+            <div class="video-content reveal">
+                <!-- New Eye-catching Font Style: Heavy, Italic, Gradient, Skewed -->
+                <h2 class="video-title">FORGED FOR THE NEXT GEN</h2>
+                <p class="video-subtitle">Architecture built to redefine reality</p>
             </div>
         </section>
 
-        <!-- Builder Preview -->
-        <section id="builder" class="builder">
-            <div class="container builder-layout">
-                <!-- Builder UI moved to top for mobile via CSS order -->
-                <div class="builder-ui reveal">
-                    <h3 style="margin-bottom: 24px; font-family: var(--font-head);">Customizer</h3>
+        <!-- The Blueprint (Interactive Anatomy) -->
+        <section id="blueprint" class="blueprint">
+            <div class="container blueprint-inner">
+                <!-- Visual Side -->
+                <div class="blueprint-visual reveal">
+                    <div class="tech-corner tc-tl"></div>
+                    <div class="tech-corner tc-tr"></div>
+                    <div class="tech-corner tc-bl"></div>
+                    <div class="tech-corner tc-br"></div>
+
+                    <div class="blueprint-img-container">
+                        <div class="scan-line"></div>
+                        <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1000&auto=format&fit=crop" alt="PC Internal Anatomy" class="blueprint-img">
+                        
+                        <!-- Hotspots -->
+                        <div class="hotspot hs-1" data-id="gpu" onclick="showInfo('gpu')" tabindex="0"></div>
+                        <div class="hotspot hs-2" data-id="cpu" onclick="showInfo('cpu')" tabindex="0"></div>
+                        <div class="hotspot hs-3" data-id="case" onclick="showInfo('case')" tabindex="0"></div>
+                    </div>
+                </div>
+
+                <!-- Content Side -->
+                <div class="blueprint-content reveal">
+                    <h2>Blueprint of<br>Perfection</h2>
+                    <p class="blueprint-desc">Hover or tap on glowing nodes in the diagram to reveal how CPC customizes every inch of your system.</p>
                     
-                    <div class="form-group">
-                        <label>Processor (CPU)</label>
-                        <select class="custom-select" id="cpuSelect">
-                            <option value="300">Intel Core i5-14600K (+₹300)</option>
-                            <option value="600" selected>Intel Core i9-14900K (+₹600)</option>
-                            <option value="550">AMD Ryzen 9 7950X (+₹550)</option>
-                        </select>
+                    <!-- Info Box 1 -->
+                    <div id="info-gpu" class="info-box">
+                        <h3 class="info-title"><i class="ri-broadcast-line"></i> Graphics Engine</h3>
+                        <p>We source top-tier silicon for consistent overclocking headroom. Every card is tested for thermals before installation to ensure no coil whine and maximum frame rates.</p>
                     </div>
 
-                    <div class="form-group">
-                        <label>Graphics (GPU)</label>
-                        <select class="custom-select" id="gpuSelect">
-                            <option value="1000">NVIDIA RTX 4080 Super (+₹1000)</option>
-                            <option value="2000" selected>NVIDIA RTX 4090 (+₹2000)</option>
-                            <option value="600">NVIDIA RTX 4070 Ti (+₹600)</option>
-                        </select>
+                    <!-- Info Box 2 -->
+                    <div id="info-cpu" class="info-box active">
+                        <h3 class="info-title"><i class="ri-cpu-line"></i> Core Processing</h3>
+                        <p>The heart of your build. We utilize delidded CPUs and premium thermal paste application to lower temperatures by 10-15°C compared to stock builds.</p>
                     </div>
 
-                    <div class="form-group">
-                        <label>Memory (RAM)</label>
-                        <select class="custom-select" id="ramSelect">
-                            <option value="150">32GB DDR5 6000MHz (+₹150)</option>
-                            <option value="300" selected>64GB DDR5 6000MHz (+₹300)</option>
-                        </select>
+                    <!-- Info Box 3 -->
+                    <div id="info-case" class="info-box">
+                        <h3 class="info-title"><i class="ri-layout-masonry-line"></i> Chassis & Flow</h3>
+                        <p>We modify case airflow paths with custom 3D-printed brackets. The chassis isn't just a box; it's a wind tunnel designed specifically for your component layout.</p>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="total-price">
-                        <span style="color: var(--text-secondary); font-size: 14px;">Estimated Total</span>
-                        <span class="price text-accent" id="totalPrice">₹3,200</span>
+        <!-- Metrics (Stats) -->
+        <section id="metrics" class="metrics">
+            <div class="container">
+                <div class="metrics-grid">
+                    <div class="metric-item reveal">
+                        <div class="metric-number" data-target="50">0</div>
+                        <div class="metric-label">K+ Custom Builds</div>
                     </div>
+                    <div class="metric-item reveal">
+                        <div class="metric-number" data-target="100">0</div>
+                        <div class="metric-label">% Satisfaction</div>
+                    </div>
+                    <div class="metric-item reveal">
+                        <div class="metric-number" data-target="24">0</div>
+                        <div class="metric-label">Hr Stress Test</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 24px;" onclick="showToast('Configuration saved!')">Save Build</button>
+        <!-- Hall of Legends (Gallery) -->
+        <section id="gallery" class="gallery">
+            <div class="container">
+                <div class="gallery-header reveal">
+                    <div class="gallery-title">
+                        <span class="text-secondary" style="text-transform: uppercase; letter-spacing: 1px; font-size: 12px; font-weight: 600;">Community</span>
+                        <h2>Hall of Legends</h2>
+                    </div>
                 </div>
 
-                <div class="builder-visual reveal">
-                    <img src="https://themvp.in/catalog/view/assets/img/PC-S-Vimal-Kumar.webp" alt="GPU Component" class="gpu-float">
+                <div class="gallery-grid">
+                    <div class="gallery-item tall reveal">
+                        <img src="https://www.pcgamesn.com/wp-content/sites/pcgamesn/2024/05/cyberpunk-2077-neon-gaming-pc.jpg" class="gallery-img" alt="Build 1">
+                        <div class="gallery-overlay">
+                            <div class="builder-name">CyberPunk_2077 <i class="ri-verified-badge-fill text-accent"></i></div>
+                            <div class="build-specs">RTX 4090 • Custom Loop • White Edition</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item reveal">
+                        <img src="https://i.redd.it/fc75qvps3a051.jpg" class="gallery-img" alt="Build 2">
+                        <div class="gallery-overlay">
+                            <div class="builder-name">NeonRider</div>
+                            <div class="build-specs">Ryzen 9 • O11D Evo • Yellow Accent</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item reveal">
+                        <img src="https://www.stormcraftpc.com/cdn/shop/files/Stormcraft_Wizard_WI285K0CC-580W1_Core_Ultra_9_285K_GeForce_RTX_5080_Wizard_hero_Cyan.png?v=1752778391&width=1445" class="gallery-img" alt="Build 3">
+                        <div class="gallery-overlay">
+                            <div class="builder-name">TechWizard</div>
+                            <div class="build-specs">i9-14900K • Dark Base Pro 900</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item wide reveal">
+                        <img src="https://www.pcstudio.in/wp-content/uploads/2020/06/Cooler-Master-Elite-481-Wood-Micro-ATX-Mid-Tower-Cabinet-Black-3.webp" class="gallery-img" alt="Build 4">
+                        <div class="gallery-overlay">
+                            <div class="builder-name">Studio_Master</div>
+                            <div class="build-specs">Dual Xeon • 128GB RAM • Rendering Beast</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item reveal">
+                        <img src="https://gamemaxpc.com/static/upload/image/20240911/1726037753103490.jpg" class="gallery-img" alt="Build 5">
+                        <div class="gallery-overlay">
+                            <div class="builder-name">PixelArtist</div>
+                            <div class="build-specs">Mini ITX • Retro Style</div>
+                        </div>
+                    </div>
+                     <div class="gallery-item reveal">
+                        <img src="https://geekawhat.com/wp-content/uploads/2023/04/RTX-4070-Founders-Build-Feature.jpg" class="gallery-img" alt="Build 6">
+                        <div class="gallery-overlay">
+                            <div class="builder-name">GamerX</div>
+                            <div class="build-specs">RTX 4070 • Budget King</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1181,7 +1380,7 @@
         <section class="testimonials">
             <div class="container">
                 <div class="section-header reveal">
-                    <h2>Community Voices</h2>
+                    <h2>User Stories</h2>
                 </div>
                 <div class="test-grid">
                     <div class="test-card reveal">
@@ -1218,7 +1417,7 @@
                         <div class="stars">
                             <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i>
                         </div>
-                        <p class="test-text">"Premium feel from the unboxing to the boot up. The yellow accents are exactly what I wanted."</p>
+                        <p class="test-text">"Premium feel from unboxing to the boot up. The yellow accents are exactly what I wanted."</p>
                         <div class="user-info">
                             <div class="user-avatar">
                                 <img src="https://picsum.photos/seed/user3/100/100.jpg" alt="User">
@@ -1236,8 +1435,9 @@
         <!-- Final CTA -->
         <section class="final-cta">
             <div class="container cta-content reveal">
-                <h2>YOUR DREAM PC<br>STARTS HERE.</h2>
-                <button class="btn btn-glow" onclick="showToast('Redirecting to full builder...')">Build Now</button>
+                <h2>YOUR LEGACY<br>STARTS HERE.</h2>
+                <!-- FIXED: Added onclick to redirect to signup.html -->
+               <button class="btn btn-glow" onclick="goToSignup()">Start Building</button>
             </div>
         </section>
     </main>
@@ -1262,13 +1462,12 @@
                     <h3>Make Money with Us</h3>
                     <ul>
                         <li><a href="#">Sell products on CPC</a></li>
-                        <li><a href="#">Sell on CPC Business</a></li>
                         <li><a href="#">Become an Affiliate</a></li>
                         <li><a href="#">Advertise Your Products</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>PC Payment Products</h3>
+                    <h3>Payment Products</h3>
                     <ul>
                         <li><a href="#">Business Card</a></li>
                         <li><a href="#">Shop with Points</a></li>
@@ -1332,34 +1531,60 @@
 
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // 3. Builder Price Calculator
-        const cpuSelect = document.getElementById('cpuSelect');
-        const gpuSelect = document.getElementById('gpuSelect');
-        const ramSelect = document.getElementById('ramSelect');
-        const totalPriceEl = document.getElementById('totalPrice');
-
-        const basePrice = 300; 
-
-        function updatePrice() {
-            const cpuCost = parseInt(cpuSelect.value);
-            const gpuCost = parseInt(gpuSelect.value);
-            const ramCost = parseInt(ramSelect.value);
-
-            const total = basePrice + cpuCost + gpuCost + ramCost;
-            totalPriceEl.textContent = '₹' + total.toLocaleString();
+        // 3. Blueprint Hotspot Interaction
+        function showInfo(id) {
+            // Remove active class from all info boxes
+            document.querySelectorAll('.info-box').forEach(box => {
+                box.classList.remove('active');
+            });
             
-            // Subtle pop animation
-            totalPriceEl.style.transform = "scale(1.1)";
-            setTimeout(() => {
-                totalPriceEl.style.transform = "scale(1)";
-            }, 200);
+            // Remove active class from all hotspots
+            document.querySelectorAll('.hotspot').forEach(spot => {
+                spot.classList.remove('active');
+            });
+
+            // Activate selected
+            const selectedBox = document.getElementById('info-' + id);
+            if (selectedBox) selectedBox.classList.add('active');
+            
+            // Activate hotspot
+            const selectedSpot = document.querySelector(`.hotspot[data-id="${id}"]`);
+            if (selectedSpot) selectedSpot.classList.add('active');
         }
 
-        [cpuSelect, gpuSelect, ramSelect].forEach(select => {
-            select.addEventListener('change', updatePrice);
-        });
+        // 4. Stats Counter Animation
+        const statsSection = document.getElementById('metrics');
+        let statsAnimated = false;
 
-        // 4. Toast Notification System
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statsAnimated = true;
+                    const counters = document.querySelectorAll('.metric-number');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 2000; // 2 seconds
+                        const increment = target / (duration / 16); // 60fps
+                        
+                        let current = 0;
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCounter();
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if(statsSection) statsObserver.observe(statsSection);
+
+        // 5. Toast Notification System
         function showToast(message) {
             const toast = document.getElementById('toast');
             const msgEl = document.getElementById('toastMsg');
@@ -1372,16 +1597,27 @@
             }, 3000);
         }
 
-        // 5. Mobile Menu Toggle (Cleaner Implementation)
+               // --- REDIRECT FUNCTIONS ---
+        function goToLogin() {
+            console.log("Redirecting to Login..."); // Debugging line
+            window.location.href = '../pages/login.html';
+            return false; // Prevents default anchor behavior
+        }
+
+        function goToSignup() {
+            console.log("Redirecting to Signup..."); // Debugging line
+            window.location.href = './signup.html';
+            return false; 
+        }
+
+        // 6. Mobile Menu Logic
         function toggleMenu() {
-            // Only toggle if we are in mobile view width
             if (window.innerWidth <= 768) {
                 const navList = document.getElementById('nav-list');
                 const menuIcon = document.getElementById('menu-icon');
                 
                 navList.classList.toggle('nav-active');
                 
-                // Switch icon
                 if (navList.classList.contains('nav-active')) {
                     menuIcon.classList.remove('ri-menu-4-line');
                     menuIcon.classList.add('ri-close-line');
@@ -1392,7 +1628,19 @@
             }
         }
 
-        // Reset menu on resize to desktop
+        // --- NEW: Helper to close mobile menu when links are clicked ---
+        function closeMobileMenu() {
+            if (window.innerWidth <= 768) {
+                const navList = document.getElementById('nav-list');
+                const menuIcon = document.getElementById('menu-icon');
+                
+                navList.classList.remove('nav-active');
+                menuIcon.classList.remove('ri-close-line');
+                menuIcon.classList.add('ri-menu-4-line');
+            }
+        }
+
+        // Reset menu on resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 const navList = document.getElementById('nav-list');
