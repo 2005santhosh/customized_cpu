@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPC | Cart</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        :root { 
+            --bg-gradient: radial-gradient(circle at 50% -20%, #2e3244 0%, #111116 60%, #000000 100%); 
+            --card-bg: rgba(255,255,255,0.03); 
+            --card-border: rgba(255,255,255,0.08); 
+            --accent: #FFD600; 
+            --accent-hover: #E6C200; 
+            --text-main: #FFFFFF; 
+            --text-sec: #9CA3AF; 
+            --font-head: 'Space Grotesk', sans-serif; 
+            --font-body: 'Inter', sans-serif; 
+            --radius-md: 12px; 
+            --success: #10B981; 
+            --danger: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        body { background: var(--bg-gradient); color: var(--text-main); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; background-attachment: fixed; display: flex; flex-direction: column; }
+        
+        .bg-pattern { 
+            position: fixed; inset: 0; z-index: -1; 
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); 
+            background-size: 50px 50px; pointer-events: none; 
+        }
+        
+        a { text-decoration: none; color: inherit; transition: 0.2s; cursor: pointer; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+
+        /* Navbar */
+        .navbar { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,0.6); backdrop-filter: blur(16px); border-bottom:1px solid var(--card-border); padding: 12px 0; }
+        .nav-desktop { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: #fff; }
+        .nav-logo span { color: var(--accent); }
+        
+        .badge { position: absolute; top: -5px; right: -5px; background: var(--accent); color: #000; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #000; }
+        .nav-icons { display: flex; gap: 20px; align-items: center; position: relative; }
+        .icon-btn { background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; position: relative; }
+        
+        /* Profile Dropdown */
+        .profile-dropdown { position: absolute; top: 100%; right: 0; margin-top: 15px; background: #1a1a1a; border:1px solid var(--card-border); border-radius: 8px; width: 200px; padding: 10px; display: none; flex-direction: column; gap: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 200; transform-origin: top right; animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .profile-dropdown.active { display: flex; }
+        .profile-user { font-weight: 600; color: #fff; padding-bottom: 10px; border-bottom:1px solid var(--card-border); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .user-icon { color: var(--accent); }
+        .logout-btn { background: rgba(255,255,255,0.05); color: #fff; border: none; padding: 10px; border-radius: 6px; text-align: left; font-size: 13px; transition: 0.2s; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .logout-btn:hover { background: #ef4444; }
+
+        /* Mobile Nav */
+        .nav-mobile { display: none; } 
+        .mobile-nav-right { display: flex; gap: 15px; }
+        @media (max-width: 768px) { .nav-desktop { display: none; } .nav-mobile { display: flex; align-items: center; justify-content: space-between; width: 100%; } }
+
+        /* Cart Layout */
+        .cart-header { margin-top: 40px; margin-bottom: 30px; border-bottom:1px solid var(--card-border); padding-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h1 { font-family: var(--font-head); font-size: 32px; color: #fff; }
+        
+        .cart-items-wrapper { display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px; }
+        
+        .cart-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            transition: 0.2s;
+        }
+        .cart-item:hover { border-color: var(--accent); }
+
+        .cart-img-container { flex-shrink: 0; }
+        .cart-item-img { 
+            width: 80px; height: 80px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            background: #000;
+        }
+
+        .cart-item-details { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .cart-item-name { font-weight: 600; font-size: 16px; margin-bottom: 5px; color: #fff; }
+        .cart-item-price { font-family: var(--font-head); font-size: 18px; color: var(--accent); }
+
+        .cart-remove { 
+            color: var(--danger); font-size: 13px; 
+            cursor: pointer; text-decoration: underline; 
+            border: 1px solid var(--card-border);
+            padding: 6px 12px; border-radius: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: 0.2s;
+            margin-top: 10px; width: fit-content; align-self: flex-start;
+        }
+        .cart-remove:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+        /* Amazon-Style Mobile View */
+        @media (max-width: 600px) {
+            .cart-item {
+                flex-direction: column; /* Stack vertically */
+                text-align: center;
+                gap: 15px;
+            }
+            .cart-item-details { width: 100%; text-align: center; margin-top: 10px; }
+            .cart-remove { 
+                width: 100%; 
+                text-align: center;
+                align-self: center;
+                margin-top: 10px;
+            }
+            .cart-img-container { display: flex; justify-content: center; }
+        }
+
+        .cart-summary { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: var(--radius-md); 
+            border: 1px solid var(--card-border);
+            margin-top: auto;
+            align-self: flex-start; /* Align left like Amazon */
+        }
+
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 15px; color: var(--text-sec); }
+        .summary-total { border-top:1px solid var(--card-border); padding-top: 15px; margin-top: 15px; color: #fff; font-weight: 700; font-size: 20px; display: flex; justify-content: space-between; }
+        
+        .btn { padding: 12px 30px; border-radius: 6px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-cart { background: var(--accent); color: #000; width: 100%; margin-top: 20px; }
+        .btn-cart:hover { background: var(--accent-hover); }
+        .btn-view { background: rgba(255,255,255,0.05); color: #fff; border:1px solid var(--card-border); }
+        .btn-view:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+        
+        .empty-cart-msg { text-align: center; padding: 80px 20px; color: var(--text-sec); display: none; }
+        .empty-cart-msg i { font-size: 64px; display: block; margin-bottom: 20px; opacity: 0.3; }
+        
+        footer { margin-top: auto; border-top:1px solid var(--card-border); background: #050505; color: var(--text-sec); padding: 40px 0; text-align: center; }
+
+        /* Toast */
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background: #1a1a1a; color: #fff; padding: 12px 20px; border-radius: 8px; border-left: 4px solid var(--accent); box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px; animation: slideInRight 0.3s ease forwards; min-width: 250px; }
+        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { to { opacity: 0; transform: translateY(10px); } }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div id="toast-container"></div>
+
+    <nav class="navbar">
+        <div class="container">
+            <!-- Desktop Nav -->
+            <div class="nav-desktop">
+                <a href="shop.html" class="nav-logo">CPC<span>.</span></a>
+                <div class="nav-icons">
+                    <button class="icon-btn" onclick="toggleProfile()">
+                        <i class="ri-user-line"></i>
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <div class="profile-user"><i class="ri-user-smile-line user-icon"></i> <span id="userNameDisplay">User</span></div>
+                            <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
+                        </div>
+                    </button>
+                    <a href="cart.html" class="icon-btn">
+                        <i class="ri-shopping-cart-line"></i>
+                        <span class="badge" id="cartBadge">0</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Nav -->
+            <div class="nav-mobile">
+                <a href="shop.html" class="nav-logo">CPC<span>.</span></a>
+                <div class="mobile-nav-right">
+                    <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-line"></i></button>
+                    <a href="cart.html" class="icon-btn">
+                        <i class="ri-shopping-cart-line"></i>
+                        <span class="badge" id="cartBadgeMobile">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="cart-header">
+            <h1>Shopping Cart</h1>
+            <a href="shop.html" class="btn btn-view" style="padding: 8px 16px;">Continue Shopping</a>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyCart" class="empty-cart-msg">
+            <i class="ri-shopping-cart-line"></i>
+            <p>Your cart is empty.</p>
+            <a href="shop.html" class="btn btn-cart" style="width: auto; margin-top: 20px;">Start Shopping</a>
+        </div>
+
+        <!-- Cart Items List (Desktop: Row, Mobile: Stack) -->
+        <div id="cartContent" class="cart-items-wrapper">
+            <!-- Items injected here -->
+        </div>
+
+        <!-- Summary -->
+        <div id="cartSummary" class="cart-summary">
+            <div class="summary-row"><span>Subtotal</span><span id="subTotal">₹0</span></div>
+            <div class="summary-row"><span>Shipping</span><span>Free</span></div>
+            <div class="summary-total"><span>Total</span><span id="totalPrice">₹0</span></div>
+            <button class="btn btn-cart" onclick="handleCheckout()">Checkout</button>
+        </div>
+    </main>
+
+    <footer><p>&copy; 2023 CPC Systems. All rights reserved.</p></footer>
+
+    <script>
+        const API_URL = "http://localhost:3000";
+
+        const productsData = [
+            { id: 1, name: "Titan GT Ultra", desc: "Intel i9-14900K, RTX 4090.", price: "₹4,59,990", img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&q=80" },
+            { id: 2, name: "Stealth Pro Studio", desc: "Ryzen 9 7950X, RTX 4080.", price: "₹3,25,000", img: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&q=80" },
+            { id: 3, name: "Core Air Performance", desc: "i5-14600K, RTX 4070 Ti.", price: "₹1,54,990", img: "https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=600&q=80" },
+            { id: 4, name: "Obsidian Compact", desc: "Small form factor, i3-13100F.", price: "₹65,000", img: "https://cdn.mos.cms.futurecdn.net/SRJi8b38jiz7vFcr8YEpcn.jpg" },
+            { id: 5, name: "Nebula Creator", desc: "Ryzen 9 7900X, Liquid Cooling.", price: "₹2,89,000", img: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600&q=80" },
+            { id: 6, name: "Spectre White Edition", desc: "i5-13400F, White Aesthetic.", price: "₹1,89,000", img: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&q=80" },
+            { id: 7, name: "MechWarrior Keyboard", desc: "Custom Mechanical Switches.", price: "₹12,999", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfUv-qK99jp3mW_ytAfLpH01rItrED-uVZew&s" },
+            { id: 8, name: "Ultrawide Monitor", desc: "34 inch 144Hz, Curved Display.", price: "₹45,000", img: "https://japannext.fr/cdn/shop/articles/Content_lifestyle_40_03.jpg?v=1754643196" }
+        ];
+
+        // --- AUTH & PROFILE (FETCHES REAL NAME) ---
+        async function initAuth() {
+            const userSpan = document.getElementById('userNameDisplay');
+            if (!userSpan) return;
+
+            const token = localStorage.getItem('token');
+
+            if (token) {
+                try {
+                    const response = await fetch(`${API_URL}/api/auth/me`, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+                    });
+                    const data = await response.json();
+                    if (response.ok && data.success) {
+                        userSpan.innerText = data.user.name;
+                    } else {
+                        userSpan.innerText = "Login";
+                    }
+                } catch (error) {
+                    console.error(error);
+                    userSpan.innerText = "Guest";
+                }
+            } else {
+                userSpan.innerText = "Login";
+            }
+        }
+
+        function toggleProfile() { document.getElementById('profileDropdown').classList.toggle('active'); }
+
+        function handleLogout() { 
+            localStorage.clear(); 
+            showToast("Logging out...", "info");
+            setTimeout(() => window.location.href = 'index.html', 1000);
+        }
+
+        // --- TOAST SYSTEM ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            let icon = type === 'success' ? 'ri-checkbox-circle-fill' : 'ri-information-fill';
+            let color = type === 'success' ? 'var(--success)' : '#ef4444';
+            toast.style.borderLeftColor = color;
+            toast.innerHTML = `<i class="${icon}" style="color:${color}; font-size:18px;"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.style.animation = 'fadeOut 0.5s ease forwards'; setTimeout(() => toast.remove(), 500); }, 3000);
+        }
+
+        // --- CART LOGIC ---
+        function renderCartPage() {
+            const container = document.getElementById('cartContent');
+            const emptyMsg = document.getElementById('emptyCart');
+            const summary = document.getElementById('cartSummary');
+            
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Logic: If items exist, hide empty msg, show list & summary
+            if (cart.length > 0) {
+                emptyMsg.style.display = 'none';
+                container.style.display = 'flex';
+                summary.style.display = 'block';
+            } else {
+                // If empty, show empty msg, hide list & summary
+                emptyMsg.style.display = 'block';
+                container.style.display = 'none';
+                summary.style.display = 'none';
+                return;
+            }
+
+            // Render Items
+            container.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const priceVal = parseInt(item.price.replace(/[^0-9]/g, ''));
+                total += priceVal;
+                
+                const itemRow = document.createElement('div');
+                itemRow.className = 'cart-item';
+                
+                itemRow.innerHTML = `
+                    <div class="cart-img-container">
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                    </div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price}</div>
+                        <div class="cart-remove" onclick="removeFromCart(${index})">Remove</div>
+                    </div>
+                `;
+                container.appendChild(itemRow);
+            });
+
+            // Update Summary
+            document.getElementById('subTotal').innerText = "₹" + total.toLocaleString('en-IN');
+            document.getElementById('totalPrice').innerText = "₹" + total.toLocaleString('en-IN');
+        }
+
+        // Remove Item (Updates UI Instantly, No Reload)
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            showToast('Item removed from cart', 'info');
+            updateCartBadge(); // Update navbar count
+            renderCartPage(); // Re-render list
+        }
+
+        function handleCheckout() {
+            showToast('Proceeding to Checkout...', 'success');
+        }
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const badge = document.getElementById('cartBadge');
+            const badgeMobile = document.getElementById('cartBadgeMobile');
+            
+            if(badge) {
+                badge.innerText = cart.length;
+                badge.classList.remove('bump');
+                void badge.offsetWidth;
+                badge.classList.add('bump');
+            }
+            if(badgeMobile) badgeMobile.innerText = cart.length;
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.icon-btn')) document.getElementById('profileDropdown').classList.remove('active');
+        }
+
+        window.onload = function() {
+            initAuth(); // Fetch Real User
+            updateCartBadge();
+            renderCartPage();
+        };
+    </script>
+</body>
+</html>

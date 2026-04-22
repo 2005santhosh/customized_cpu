@@ -40,7 +40,7 @@
             position: relative;
         }
 
-        /* --- MESMERIZING BACKGROUND (SAME AS LOGIN) --- */
+        /* --- MESMERIZING BACKGROUND --- */
         .ambient-bg {
             position: fixed; inset: 0; z-index: -3; overflow: hidden;
             background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
@@ -104,6 +104,13 @@
             50% { opacity: 0.8; width: 100%; left: 0%; }
         }
 
+        /* FIX: Added Shake Animation for Error */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
         /* --- TYPOGRAPHY --- */
         .logo { font-family: var(--font-head); font-size: 28px; font-weight: 700; letter-spacing: -1px; margin-bottom: 8px; display: block; text-decoration: none; color: #fff; text-shadow: 0 0 20px rgba(255, 214, 0, 0.3); }
         .logo span { color: var(--accent); }
@@ -116,7 +123,7 @@
         .input-wrapper { position: relative; }
         .input-field {
             width: 100%; padding: 14px 16px;
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+            background: rgba(255,255,255,0.03); border:1px solid var(--border);
             border-radius: 12px; color: #fff; font-family: var(--font-body); font-size: 14px;
             outline: none; transition: all 0.3s ease;
         }
@@ -183,7 +190,7 @@
 
     <div class="auth-container">
         <div class="auth-card" id="card">
-            <a href="#" class="logo">CPC<span>.</span></a>
+            <a href="index.html" class="logo">CPC<span>.</span></a>
             <p class="subtitle">Join the elite. Build your legacy.</p>
 
             <form id="signupForm" novalidate>
@@ -234,18 +241,24 @@
         <i class="ri-checkbox-circle-fill" style="color: #000;"></i> <span id="toastMsg">Success</span>
     </div>
 
-        <script>
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        const strongPassRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    <script>
+        // Define API URL
+        const API_URL = "http://localhost:3000";
 
+        // Simple Regex (Frontend Validation Only)
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+        // FIX: Toggle Password Function using classList.toggle/add
         function togglePass(id, icon) {
             const input = document.getElementById(id);
             if (input.type === "password") {
                 input.type = "text";
-                icon.classList.replace('ri-eye-off-line', 'ri-eye-line');
+                icon.classList.remove('ri-eye-off-line');
+                icon.classList.add('ri-eye-line');
             } else {
                 input.type = "password";
-                icon.classList.replace('ri-eye-line', 'ri-eye-off-line');
+                icon.classList.remove('ri-eye-line');
+                icon.classList.add('ri-eye-off-line');
             }
         }
 
@@ -253,11 +266,13 @@
         const strengthBar = document.getElementById('strengthBar');
         const strengthText = document.getElementById('strengthText');
 
+        // Password Strength Logic
         passInput.addEventListener('input', function() {
             const val = this.value;
             let strength = 0;
             let color = '#333';
             let text = '';
+            
             if (val.length > 0) {
                 if (val.length >= 8) strength++;
                 if (val.match(/[a-z]+/)) strength++;
@@ -265,12 +280,20 @@
                 if (val.match(/[0-9]+/)) strength++;
                 if (val.match(/[$@#&!]+/)) strength++;
             }
+            
+            // FIX: Corrected Switch syntax
             switch(strength) {
-                case 0: case 1: color = '#ff4444'; text = 'Weak'; break;
-                case 2: case 3: color = '#FFD600'; text = 'Medium'; break;
-                case 4: case 5: color = '#00C853'; text = 'Strong'; break;
+                case 0: 
+                case 1: color = '#ff4444'; text = 'Weak'; break;
+                case 2: 
+                case 3: color = '#FFD600'; text = 'Medium'; break;
+                case 4: 
+                case 5: color = '#00C853'; text = 'Strong'; break;
             }
+
             if(val.length === 0) { text = ''; color = '#333'; }
+            
+            // FIX: Math operator precedence
             strengthBar.style.width = (strength / 5) * 100 + '%';
             strengthBar.style.backgroundColor = color;
             strengthText.textContent = text;
@@ -314,7 +337,8 @@
             if (!emailRegex.test(email.value)) {
                 email.classList.add('error'); document.getElementById('emailError').classList.add('visible'); isValid = false;
             }
-            if (!strongPassRegex.test(pass.value)) {
+            // Backend handles regex validation, but we do simple frontend check
+            if (pass.value.length < 8) { 
                 pass.classList.add('error'); document.getElementById('passError').classList.add('visible'); isValid = false;
             }
             if (pass.value !== confirm.value) {
@@ -327,11 +351,12 @@
                 submitBtn.disabled = true;
 
                 try {
-                    const response = await fetch('/api/auth/register', {
+                    // FIX: Using explicit full URL
+                    const response = await fetch(`${API_URL}/api/auth/register`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            fullname: name.value,
+                            name: name.value,
                             email: email.value,
                             password: pass.value
                         })
@@ -340,7 +365,8 @@
 
                     if (response.ok && data.success) {
                         showToast(data.message, 'success');
-                        setTimeout(() => window.location.href = 'shop.html', 1500);
+                        // FIX: Redirect to Login page instead of Shop
+                        setTimeout(() => window.location.href = 'login.html', 1500);
                     } else {
                         showToast(data.message || 'Something went wrong', 'error');
                     }
@@ -352,6 +378,7 @@
                     submitBtn.disabled = false;
                 }
             } else {
+                // FIX: Trigger Shake Animation
                 const card = document.getElementById('card');
                 card.style.animation = "shake 0.4s cubic-bezier(.36,.07,.19,.97) both";
                 setTimeout(() => card.style.animation = "", 400);

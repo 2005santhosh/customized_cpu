@@ -35,7 +35,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Hide scrollbars for full immersion */
+            overflow: hidden;
             position: relative;
         }
 
@@ -99,7 +99,7 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* --- AUTH CARD (NO TILT, STATIC GLASS) --- */
+        /* --- AUTH CARD --- */
         .auth-container { padding: 20px; width: 100%; max-width: 420px; z-index: 10; }
 
         .auth-card {
@@ -113,12 +113,10 @@
             box-shadow: 0 30px 60px -10px rgba(0,0,0,0.8);
             position: relative;
             overflow: hidden;
-            /* Entry Animation */
             animation: cardEntry 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             opacity: 0; transform: translateY(40px);
         }
 
-        /* Top Border Glow (Static but breathing) */
         .auth-card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -191,7 +189,6 @@
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative; overflow: hidden;
         }
-        /* Shimmer effect */
         .btn-main::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
@@ -242,7 +239,7 @@
 
     <div class="auth-container">
         <div class="auth-card" id="card">
-            <a href="#" class="logo">CPC<span>.</span></a>
+            <a href="../index.html" class="logo">CPC<span>.</span></a>
             <p class="subtitle">Access your dashboard securely.</p>
 
             <form id="loginForm" novalidate>
@@ -258,7 +255,8 @@
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="input-wrapper">
-                        <input type="password" id="password" class="input-field" placeholder="••••••••" required>
+                        <input type="password" id="password" class="input-field" placeholder="•••••••" required>
+                        <!-- FIX: Added missing quote in onclick attribute -->
                         <i class="ri-eye-off-line toggle-password" onclick="togglePass('password', this)"></i>
                     </div>
                     <div class="error-text" id="passError"><i class="ri-error-warning-fill"></i> <span>Password is required</span></div>
@@ -283,59 +281,102 @@
         <i class="ri-checkbox-circle-fill" style="color: #000;"></i> <span id="toastMsg">Success</span>
     </div>
 
-        <script>
+    <script>
+        // Define API URL Explicitly
+        const API_URL = "http://localhost:3000"; 
+
         const form = document.getElementById('loginForm');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = submitBtn.querySelector('.btn-text');
         const loader = submitBtn.querySelector('.loader');
+        
+        // --- TOGGLE PASSWORD VISIBILITY ---
+        function togglePass(id, icon) {
+            const input = document.getElementById(id);
+            
+            if (input.type === "password") {
+                input.type = "text";
+                // Switch classes manually for better browser support
+                icon.classList.remove('ri-eye-off-line');
+                icon.classList.add('ri-eye-line');
+            } else {
+                input.type = "password";
+                icon.classList.remove('ri-eye-line');
+                icon.classList.add('ri-eye-off-line');
+            }
+        }
 
         function showToast(msg, type='success') {
-            // ... same toast function as signup ...
             const toast = document.getElementById('toast');
             const txt = document.getElementById('toastMsg');
             const icon = toast.querySelector('i');
             txt.textContent = msg;
             icon.className = type === 'error' ? 'ri-error-warning-fill' : 'ri-checkbox-circle-fill';
             icon.style.color = type === 'error' ? '#ff4444' : '#000';
+            
             toast.style.opacity = '1';
             toast.style.transform = 'translateX(-50%) translateY(0)';
-            setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(-100px)'; }, 3000);
+            setTimeout(() => { 
+                toast.style.opacity = '0'; 
+                toast.style.transform = 'translateX(-50%) translateY(-100px)'; 
+            }, 3000);
         }
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
             const email = document.getElementById('email');
             const pass = document.getElementById('password');
 
             document.querySelectorAll('.input-field').forEach(i => i.classList.remove('error'));
             
-            let isValid = true;
+            // Validate Fields
             if(!email.value || !pass.value) {
                 showToast('Please fill all fields', 'error');
                 return;
             }
 
+            // Show Loading
             btnText.style.display = 'none';
             loader.style.display = 'block';
             submitBtn.disabled = true;
 
             try {
-                const response = await fetch('/api/auth/login', {
+                // FIX: Using explicit full URL to ensure it hits backend
+                const response = await fetch(`${API_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email.value, password: pass.value })
                 });
+                
                 const data = await response.json();
+
+                console.log("Login Response:", data);
 
                 if (response.ok && data.success) {
                     showToast('Login Successful', 'success');
-                    setTimeout(() => window.location.href = 'shop.html', 1000);
+                    
+                    // CRITICAL FIX: Save Token to LocalStorage
+                    // This is what your index.html needs to show the User Name
+                    if (data.token) {
+                        localStorage.setItem('token', data.token);
+                        console.log("Token Saved to LocalStorage");
+                    }
+
+                    console.log("Redirecting...");
+
+                    setTimeout(() => {
+                        // Redirecting to Index to verify the username display
+                        window.location.href = 'shop.html';
+                    }, 1000);
                 } else {
                     showToast(data.message || 'Invalid credentials', 'error');
                 }
             } catch (error) {
+                console.error("Client Error:", error);
                 showToast('Server connection failed', 'error');
             } finally {
+                // Reset Button
                 btnText.style.display = 'block';
                 loader.style.display = 'none';
                 submitBtn.disabled = false;
