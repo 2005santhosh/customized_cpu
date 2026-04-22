@@ -202,7 +202,7 @@ nav a:hover::after { width: 100%; }
     min-height: 100vh;
     display: flex; align-items: center;
     position: relative;
-    padding-top: 110px;
+    /* padding-top: 110px; */
     overflow: hidden;
     background: var(--bg-0);
 }
@@ -464,7 +464,7 @@ nav a:hover::after { width: 100%; }
 .video-overlay {
     position: absolute; inset: 0; z-index: 1;
     margin-top: 5rem;
-    background: linear-gradient(160deg, rgba(4,3,4,.85) 0%, rgba(30,0,4,.4) 50%, rgba(4,3,4,.7) 100%);
+    background: linear-gradient(160deg, rgba(4,3,4,.85) 0%, rgba(30,0,4,.4) 50%, rgba(4,3,4,) 100%);
 }
 
 /* CRT scanline */
