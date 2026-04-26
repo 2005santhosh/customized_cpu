@@ -1,0 +1,11 @@
+{
+  "routes": [
+    { "src": "^/$", "dest": "/pages/index.html" },
+    { "src": "^/all-products$", "dest": "/pages/all-products.html" },
+    { "src": "^/cart$", "dest": "/pages/cart.html" },
+    { "src": "^/shop$", "dest": "/pages/shop.html" },
+    { "src": "^/login$", "dest": "/pages/login.html" },
+    { "src": "^/product-details$", "dest": "/pages/product-details.html" },
+    { "src": "^/signup$", "dest": "/pages/signup.html" }
+  ]
+}
