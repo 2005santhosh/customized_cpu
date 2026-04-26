@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>CPC | Secure Login</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,25 +23,33 @@
             --error: #ff4444;
             --font-head: 'Space Grotesk', sans-serif;
             --font-body: 'Inter', sans-serif;
+            --card-radius: 24px;
+            --card-padding: 40px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100%; min-height: 100vh; min-height: 100dvh;
+            overflow-x: hidden;
+        }
 
         body {
             background-color: var(--bg-primary);
             color: var(--text-main);
             font-family: var(--font-body);
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
             position: relative;
+            padding: 20px;
+            padding-top: env(safe-area-inset-top, 20px);
+            padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
         /* --- MESMERIZING BACKGROUND --- */
         
-        /* 1. The Ambient Orbs (Glowing Blobs) */
+        /* 1. The Ambient Orbs */
         .ambient-bg {
             position: fixed; inset: 0; z-index: -3;
             overflow: hidden;
@@ -51,18 +59,22 @@
         .orb {
             position: absolute; border-radius: 50%; filter: blur(80px);
             opacity: 0.6; animation: floatOrb 20s infinite alternate ease-in-out;
+            will-change: transform;
         }
 
         .orb-1 {
-            width: 400px; height: 400px; background: var(--accent);
+            width: min(400px, 60vw); height: min(400px, 60vw);
+            background: var(--accent);
             top: -10%; left: -10%; animation-duration: 25s;
         }
         .orb-2 {
-            width: 500px; height: 500px; background: var(--purple-deep);
+            width: min(500px, 70vw); height: min(500px, 70vw);
+            background: var(--purple-deep);
             bottom: -20%; right: -10%; animation-duration: 30s; animation-delay: -5s;
         }
         .orb-3 {
-            width: 300px; height: 300px; background: #222;
+            width: min(300px, 50vw); height: min(300px, 50vw);
+            background: #222;
             top: 40%; left: 40%; filter: blur(100px); animation-duration: 20s;
         }
 
@@ -72,7 +84,7 @@
             100% { transform: translate(-20px, -30px) scale(0.9); }
         }
 
-        /* 2. The Infinite Grid (Retro Floor) */
+        /* 2. The Infinite Grid */
         .perspective-grid {
             position: absolute; bottom: -30%; left: -50%; width: 200%; height: 60%;
             background-image: 
@@ -92,7 +104,7 @@
             100% { transform: perspective(500px) rotateX(60deg) translateY(60px); }
         }
 
-        /* 3. Noise Texture (Film Grain) */
+        /* 3. Noise Texture */
         .noise-overlay {
             position: fixed; inset: 0; z-index: -1;
             pointer-events: none; opacity: 0.05;
@@ -100,7 +112,9 @@
         }
 
         /* --- AUTH CARD --- */
-        .auth-container { padding: 20px; width: 100%; max-width: 420px; z-index: 10; }
+        .auth-container {
+            width: 100%; max-width: 420px; z-index: 10;
+        }
 
         .auth-card {
             width: 100%;
@@ -108,8 +122,8 @@
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 40px;
+            border-radius: var(--card-radius);
+            padding: var(--card-padding);
             box-shadow: 0 30px 60px -10px rgba(0,0,0,0.8);
             position: relative;
             overflow: hidden;
@@ -137,7 +151,7 @@
         .logo {
             font-family: var(--font-head);
             font-size: 28px; font-weight: 700; letter-spacing: -1px;
-            margin-bottom: 8px; display: block; text-decoration: none; color: #fff;
+            margin-bottom: 8px; display: inline-block; text-decoration: none; color: #fff;
             text-shadow: 0 0 20px rgba(255, 214, 0, 0.3);
         }
         .logo span { color: var(--accent); }
@@ -155,9 +169,10 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--border);
             border-radius: 12px;
-            color: #fff; font-family: var(--font-body); font-size: 15px;
+            color: #fff; font-family: var(--font-body); font-size: 16px; /* 16px prevents iOS zoom */
             outline: none; transition: all 0.3s ease;
         }
+        .input-field::placeholder { font-size: 14px; color: rgba(255,255,255,0.25); }
         .input-field:focus {
             border-color: var(--accent);
             background: rgba(255,255,255,0.05);
@@ -176,6 +191,7 @@
         .toggle-password {
             position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
             color: var(--text-sec); cursor: pointer; transition: 0.2s;
+            font-size: 18px; padding: 4px;
         }
         .toggle-password:hover { color: #fff; }
 
@@ -188,6 +204,7 @@
             cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
         .btn-main::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
@@ -215,14 +232,88 @@
             border: 2px solid rgba(0,0,0,0.3);
             border-top: 2px solid #000;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite; display: none;
+            animation: spin 0.8s linear infinite; display: none; flex-shrink: 0;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 480px) {
-            .auth-card { padding: 30px 20px; margin: 20px; }
-            body { align-items: flex-start; padding-top: 40px; }
+        /* --- TOAST (MOBILE SAFE) --- */
+        #toast {
+            position: fixed; top: 20px;
+            top: calc(20px + env(safe-area-inset-top, 0px));
+            left: 50%; transform: translateX(-50%) translateY(-120px);
+            background: #fff; color: #000;
+            padding: 12px 24px; border-radius: 50px;
+            font-weight: 600; font-size: 14px;
+            opacity: 0; transition: 0.5s; z-index: 1000;
+            display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            max-width: calc(100vw - 40px);
+            max-width: calc(100vw - 40px - env(safe-area-inset-right, 0px) - env(safe-area-inset-left, 0px));
+            overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* ============================================
+           RESPONSIVE BREAKPOINTS
+           ============================================ */
+
+        /* Small phones (below 400px) */
+        @media (max-width: 400px) {
+            :root {
+                --card-radius: 20px;
+                --card-padding: 24px 20px;
+            }
+
+            .logo { font-size: 24px; }
+            .subtitle { font-size: 13px; margin-bottom: 24px; }
+            .form-group { margin-bottom: 20px; }
+            .input-field { padding: 14px 12px; border-radius: 10px; }
+            .toggle-password { right: 12px; font-size: 16px; }
+            .btn-main { padding: 14px; font-size: 15px; border-radius: 10px; }
+            .form-footer { font-size: 13px; margin-top: 20px; }
+            .forgot-link { font-size: 11px; }
+
+            /* Reduce blur for performance on weak devices */
+            .orb { filter: blur(60px); opacity: 0.4; }
+            .auth-card { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        }
+
+        /* Standard phones (400px - 480px) */
+        @media (min-width: 401px) and (max-width: 480px) {
+            :root {
+                --card-padding: 30px 24px;
+            }
+            .logo { font-size: 26px; }
+        }
+
+        /* Landscape phones (short height) */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body { align-items: flex-start; padding-top: 10px; padding-bottom: 10px; }
+            :root { --card-padding: 24px; --card-radius: 16px; }
+            .logo { font-size: 22px; margin-bottom: 4px; }
+            .subtitle { font-size: 12px; margin-bottom: 16px; }
+            .form-group { margin-bottom: 14px; }
+            .input-field { padding: 12px; }
+            .forgot-link { margin-top: -10px; margin-bottom: 14px; }
+            .form-footer { margin-top: 16px; }
+            .orb { opacity: 0.3; }
+            .perspective-grid { opacity: 0.15; height: 40%; }
+        }
+
+        /* Extra tall phones (like Samsung S Ultra) */
+        @media (min-height: 800px) and (max-width: 480px) {
+            body { align-items: center; }
+        }
+
+        /* Hover disabled on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .btn-main:hover { transform: none; box-shadow: none; }
+            .btn-main:hover::after { left: -100%; }
+            .btn-main:active { transform: scale(0.98); box-shadow: 0 10px 30px rgba(255, 214, 0, 0.3); }
+            .toggle-password:hover { color: var(--text-sec); }
+            .forgot-link:hover { color: var(--text-sec); }
+            .form-footer a:hover { text-decoration: none; text-shadow: none; }
         }
     </style>
 </head>
@@ -256,7 +347,6 @@
                     <label for="password">Password</label>
                     <div class="input-wrapper">
                         <input type="password" id="password" class="input-field" placeholder="•••••••" required>
-                        <!-- FIX: Added missing quote in onclick attribute -->
                         <i class="ri-eye-off-line toggle-password" onclick="togglePass('password', this)"></i>
                     </div>
                     <div class="error-text" id="passError"><i class="ri-error-warning-fill"></i> <span>Password is required</span></div>
@@ -277,12 +367,12 @@
     </div>
 
     <!-- Custom Toast -->
-    <div id="toast" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: #fff; color: #000; padding: 12px 24px; border-radius: 50px; font-weight: 600; opacity: 0; transition: 0.5s; z-index: 1000; display: flex; align-items: center; gap: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px);">
-        <i class="ri-checkbox-circle-fill" style="color: #000;"></i> <span id="toastMsg">Success</span>
+    <div id="toast">
+        <i class="ri-checkbox-circle-fill" style="color: #000; flex-shrink: 0;"></i>
+        <span id="toastMsg">Success</span>
     </div>
 
     <script>
-        // Define API URL Explicitly
         const API_URL = "http://localhost:3000"; 
 
         const form = document.getElementById('loginForm');
@@ -290,13 +380,10 @@
         const btnText = submitBtn.querySelector('.btn-text');
         const loader = submitBtn.querySelector('.loader');
         
-        // --- TOGGLE PASSWORD VISIBILITY ---
         function togglePass(id, icon) {
             const input = document.getElementById(id);
-            
             if (input.type === "password") {
                 input.type = "text";
-                // Switch classes manually for better browser support
                 icon.classList.remove('ri-eye-off-line');
                 icon.classList.add('ri-eye-line');
             } else {
@@ -318,7 +405,7 @@
             toast.style.transform = 'translateX(-50%) translateY(0)';
             setTimeout(() => { 
                 toast.style.opacity = '0'; 
-                toast.style.transform = 'translateX(-50%) translateY(-100px)'; 
+                toast.style.transform = 'translateX(-50%) translateY(-120px)'; 
             }, 3000);
         }
 
@@ -330,19 +417,18 @@
 
             document.querySelectorAll('.input-field').forEach(i => i.classList.remove('error'));
             
-            // Validate Fields
             if(!email.value || !pass.value) {
                 showToast('Please fill all fields', 'error');
+                if(!email.value) email.classList.add('error');
+                if(!pass.value) pass.classList.add('error');
                 return;
             }
 
-            // Show Loading
             btnText.style.display = 'none';
             loader.style.display = 'block';
             submitBtn.disabled = true;
 
             try {
-                // FIX: Using explicit full URL to ensure it hits backend
                 const response = await fetch(`${API_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -351,32 +437,22 @@
                 
                 const data = await response.json();
 
-                console.log("Login Response:", data);
-
                 if (response.ok && data.success) {
                     showToast('Login Successful', 'success');
                     
-                    // CRITICAL FIX: Save Token to LocalStorage
-                    // This is what your index.html needs to show the User Name
                     if (data.token) {
                         localStorage.setItem('token', data.token);
-                        console.log("Token Saved to LocalStorage");
                     }
 
-                    console.log("Redirecting...");
-
                     setTimeout(() => {
-                        // Redirecting to Index to verify the username display
                         window.location.href = 'shop.html';
                     }, 1000);
                 } else {
                     showToast(data.message || 'Invalid credentials', 'error');
                 }
             } catch (error) {
-                console.error("Client Error:", error);
                 showToast('Server connection failed', 'error');
             } finally {
-                // Reset Button
                 btnText.style.display = 'block';
                 loader.style.display = 'none';
                 submitBtn.disabled = false;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>CPC | Create Account</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,20 +24,29 @@
             --success: #00C853;
             --font-head: 'Space Grotesk', sans-serif;
             --font-body: 'Inter', sans-serif;
+            --card-radius: 24px;
+            --card-padding: 40px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100%; min-height: 100vh; min-height: 100dvh;
+            overflow-x: hidden;
+        }
 
         body {
             background-color: var(--bg-primary);
             color: var(--text-main);
             font-family: var(--font-body);
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow-y: auto;
             position: relative;
+            padding: 20px;
+            padding-top: env(safe-area-inset-top, 20px);
+            padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
         /* --- MESMERIZING BACKGROUND --- */
@@ -48,10 +57,21 @@
         .orb {
             position: absolute; border-radius: 50%; filter: blur(80px);
             opacity: 0.6; animation: floatOrb 20s infinite alternate ease-in-out;
+            will-change: transform;
         }
-        .orb-1 { width: 400px; height: 400px; background: var(--accent); top: -10%; left: -10%; animation-duration: 25s; }
-        .orb-2 { width: 500px; height: 500px; background: var(--purple-deep); bottom: -20%; right: -10%; animation-duration: 30s; animation-delay: -5s; }
-        .orb-3 { width: 300px; height: 300px; background: #222; top: 40%; left: 40%; filter: blur(100px); animation-duration: 20s; }
+        .orb-1 {
+            width: min(400px, 60vw); height: min(400px, 60vw);
+            background: var(--accent); top: -10%; left: -10%; animation-duration: 25s;
+        }
+        .orb-2 {
+            width: min(500px, 70vw); height: min(500px, 70vw);
+            background: var(--purple-deep); bottom: -20%; right: -10%;
+            animation-duration: 30s; animation-delay: -5s;
+        }
+        .orb-3 {
+            width: min(300px, 50vw); height: min(300px, 50vw);
+            background: #222; top: 40%; left: 40%; filter: blur(100px); animation-duration: 20s;
+        }
 
         @keyframes floatOrb {
             0% { transform: translate(0, 0) scale(1); }
@@ -82,12 +102,14 @@
         }
 
         /* --- CARD --- */
-        .auth-container { padding: 20px; width: 100%; max-width: 450px; margin: auto; z-index: 10; }
+        .auth-container { width: 100%; max-width: 450px; margin: auto; z-index: 10; }
         
         .auth-card {
             width: 100%; background: rgba(15, 15, 15, 0.65); backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--card-radius);
+            padding: var(--card-padding);
             box-shadow: 0 30px 60px -10px rgba(0,0,0,0.8);
             position: relative; overflow: hidden;
             animation: cardEntry 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
@@ -103,8 +125,6 @@
             0%, 100% { opacity: 0.3; width: 80%; left: 10%; }
             50% { opacity: 0.8; width: 100%; left: 0%; }
         }
-
-        /* FIX: Added Shake Animation for Error */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
@@ -112,22 +132,33 @@
         }
 
         /* --- TYPOGRAPHY --- */
-        .logo { font-family: var(--font-head); font-size: 28px; font-weight: 700; letter-spacing: -1px; margin-bottom: 8px; display: block; text-decoration: none; color: #fff; text-shadow: 0 0 20px rgba(255, 214, 0, 0.3); }
+        .logo {
+            font-family: var(--font-head); font-size: 28px; font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 8px; display: inline-block;
+            text-decoration: none; color: #fff; text-shadow: 0 0 20px rgba(255, 214, 0, 0.3);
+        }
         .logo span { color: var(--accent); }
-        .subtitle { color: var(--text-sec); font-size: 14px; margin-bottom: 32px; }
+        .subtitle { color: var(--text-sec); font-size: 14px; margin-bottom: 28px; }
 
         /* --- FORMS --- */
-        .form-group { margin-bottom: 20px; position: relative; }
-        label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sec); margin-bottom: 6px; font-weight: 600; }
-        
+        .form-group { margin-bottom: 18px; position: relative; }
+        label {
+            display: block; font-size: 11px; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-sec); margin-bottom: 6px; font-weight: 600;
+        }
         .input-wrapper { position: relative; }
         .input-field {
             width: 100%; padding: 14px 16px;
-            background: rgba(255,255,255,0.03); border:1px solid var(--border);
-            border-radius: 12px; color: #fff; font-family: var(--font-body); font-size: 14px;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+            border-radius: 12px; color: #fff; font-family: var(--font-body);
+            font-size: 16px; /* 16px prevents iOS zoom */
             outline: none; transition: all 0.3s ease;
         }
-        .input-field:focus { border-color: var(--accent); background: rgba(255,255,255,0.05); box-shadow: 0 0 20px rgba(255, 214, 0, 0.1); }
+        .input-field::placeholder { font-size: 13px; color: rgba(255,255,255,0.25); }
+        .input-field:focus {
+            border-color: var(--accent); background: rgba(255,255,255,0.05);
+            box-shadow: 0 0 20px rgba(255, 214, 0, 0.1);
+        }
         .input-field.error { border-color: var(--error); }
 
         .error-text {
@@ -137,7 +168,10 @@
         }
         .error-text.visible { opacity: 1; transform: translateY(0); }
 
-        .toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--text-sec); cursor: pointer; transition: 0.2s; }
+        .toggle-password {
+            position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+            color: var(--text-sec); cursor: pointer; transition: 0.2s; font-size: 18px; padding: 4px;
+        }
         .toggle-password:hover { color: #fff; }
 
         /* --- PASSWORD STRENGTH METER --- */
@@ -152,6 +186,7 @@
             cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative; overflow: hidden; margin-top: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
         .btn-main::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
@@ -162,7 +197,11 @@
         .btn-main:hover::after { left: 100%; }
         .btn-main:active { transform: translateY(0); }
 
-        .loader { width: 20px; height: 20px; border: 2px solid rgba(0,0,0,0.3); border-top: 2px solid #000; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
+        .loader {
+            width: 20px; height: 20px; border: 2px solid rgba(0,0,0,0.3);
+            border-top: 2px solid #000; border-radius: 50%;
+            animation: spin 0.8s linear infinite; display: none; flex-shrink: 0;
+        }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* --- LINKS --- */
@@ -170,10 +209,91 @@
         .form-footer a { color: var(--accent); text-decoration: none; font-weight: 600; transition: 0.3s; }
         .form-footer a:hover { text-decoration: underline; text-shadow: 0 0 10px rgba(255,214,0,0.5); }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 480px) {
-            .auth-card { padding: 30px 20px; margin: 20px; }
-            body { align-items: flex-start; padding-top: 20px; padding-bottom: 20px; }
+        /* --- TOAST (MOBILE SAFE) --- */
+        #toast {
+            position: fixed; top: 20px;
+            top: calc(20px + env(safe-area-inset-top, 0px));
+            left: 50%; transform: translateX(-50%) translateY(-120px);
+            background: #fff; color: #000;
+            padding: 12px 24px; border-radius: 50px;
+            font-weight: 600; font-size: 14px;
+            opacity: 0; transition: 0.5s; z-index: 1000;
+            display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            max-width: calc(100vw - 40px);
+            max-width: calc(100vw - 40px - env(safe-area-inset-right, 0px) - env(safe-area-inset-left, 0px));
+            overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* ============================================
+           RESPONSIVE BREAKPOINTS
+           ============================================ */
+
+        /* Small phones (below 400px) */
+        @media (max-width: 400px) {
+            :root {
+                --card-radius: 20px;
+                --card-padding: 24px 20px;
+            }
+
+            .logo { font-size: 24px; }
+            .subtitle { font-size: 13px; margin-bottom: 22px; }
+            .form-group { margin-bottom: 14px; }
+            .input-field { padding: 12px; border-radius: 10px; }
+            .input-field::placeholder { font-size: 12px; }
+            .toggle-password { right: 12px; font-size: 16px; }
+            .btn-main { padding: 14px; font-size: 15px; border-radius: 10px; }
+            .form-footer { font-size: 13px; margin-top: 20px; }
+            .error-text { font-size: 10px; }
+            .strength-text { font-size: 9px; }
+
+            /* Reduce blur for performance */
+            .orb { filter: blur(60px); opacity: 0.4; }
+            .auth-card { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        }
+
+        /* Standard phones (400px - 480px) */
+        @media (min-width: 401px) and (max-width: 480px) {
+            :root {
+                --card-padding: 28px 24px;
+            }
+            .logo { font-size: 26px; }
+            .form-group { margin-bottom: 16px; }
+        }
+
+        /* Landscape phones (short height) — signup has more fields so it needs scrolling */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body { align-items: flex-start; padding-top: 8px; padding-bottom: 8px; }
+            :root { --card-padding: 20px; --card-radius: 16px; }
+            .logo { font-size: 20px; margin-bottom: 2px; }
+            .subtitle { font-size: 11px; margin-bottom: 12px; }
+            .form-group { margin-bottom: 10px; }
+            label { font-size: 10px; margin-bottom: 3px; }
+            .input-field { padding: 10px 12px; }
+            .toggle-password { right: 10px; font-size: 15px; }
+            .strength-meter { margin-top: 4px; }
+            .strength-text { margin-top: 2px; height: 12px; }
+            .error-text { margin-top: 2px; font-size: 10px; }
+            .btn-main { padding: 10px; font-size: 14px; margin-top: 6px; }
+            .form-footer { margin-top: 12px; font-size: 12px; }
+            .orb { opacity: 0.25; }
+            .perspective-grid { opacity: 0.15; height: 40%; }
+        }
+
+        /* Extra tall phones */
+        @media (min-height: 800px) and (max-width: 480px) {
+            body { align-items: center; }
+        }
+
+        /* Hover disabled on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .btn-main:hover { transform: none; box-shadow: none; }
+            .btn-main:hover::after { left: -100%; }
+            .btn-main:active { transform: scale(0.98); box-shadow: 0 10px 30px rgba(255, 214, 0, 0.3); }
+            .toggle-password:hover { color: var(--text-sec); }
+            .form-footer a:hover { text-decoration: none; text-shadow: none; }
         }
     </style>
 </head>
@@ -237,18 +357,15 @@
         </div>
     </div>
 
-    <div id="toast" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: #fff; color: #000; padding: 12px 24px; border-radius: 50px; font-weight: 600; opacity: 0; transition: 0.5s; z-index: 1000; display: flex; align-items: center; gap: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px);">
-        <i class="ri-checkbox-circle-fill" style="color: #000;"></i> <span id="toastMsg">Success</span>
+    <div id="toast">
+        <i class="ri-checkbox-circle-fill" style="color: #000; flex-shrink: 0;"></i>
+        <span id="toastMsg">Success</span>
     </div>
 
     <script>
-        // Define API URL
         const API_URL = "http://localhost:3000";
-
-        // Simple Regex (Frontend Validation Only)
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-        // FIX: Toggle Password Function using classList.toggle/add
         function togglePass(id, icon) {
             const input = document.getElementById(id);
             if (input.type === "password") {
@@ -266,7 +383,6 @@
         const strengthBar = document.getElementById('strengthBar');
         const strengthText = document.getElementById('strengthText');
 
-        // Password Strength Logic
         passInput.addEventListener('input', function() {
             const val = this.value;
             let strength = 0;
@@ -281,19 +397,14 @@
                 if (val.match(/[$@#&!]+/)) strength++;
             }
             
-            // FIX: Corrected Switch syntax
             switch(strength) {
-                case 0: 
-                case 1: color = '#ff4444'; text = 'Weak'; break;
-                case 2: 
-                case 3: color = '#FFD600'; text = 'Medium'; break;
-                case 4: 
-                case 5: color = '#00C853'; text = 'Strong'; break;
+                case 0: case 1: color = '#ff4444'; text = 'Weak'; break;
+                case 2: case 3: color = '#FFD600'; text = 'Medium'; break;
+                case 4: case 5: color = '#00C853'; text = 'Strong'; break;
             }
 
             if(val.length === 0) { text = ''; color = '#333'; }
             
-            // FIX: Math operator precedence
             strengthBar.style.width = (strength / 5) * 100 + '%';
             strengthBar.style.backgroundColor = color;
             strengthText.textContent = text;
@@ -316,7 +427,7 @@
             toast.style.transform = 'translateX(-50%) translateY(0)';
             setTimeout(() => {
                 toast.style.opacity = '0';
-                toast.style.transform = 'translateX(-50%) translateY(-100px)';
+                toast.style.transform = 'translateX(-50%) translateY(-120px)';
             }, 3000);
         }
 
@@ -337,7 +448,6 @@
             if (!emailRegex.test(email.value)) {
                 email.classList.add('error'); document.getElementById('emailError').classList.add('visible'); isValid = false;
             }
-            // Backend handles regex validation, but we do simple frontend check
             if (pass.value.length < 8) { 
                 pass.classList.add('error'); document.getElementById('passError').classList.add('visible'); isValid = false;
             }
@@ -351,7 +461,6 @@
                 submitBtn.disabled = true;
 
                 try {
-                    // FIX: Using explicit full URL
                     const response = await fetch(`${API_URL}/api/auth/register`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -365,7 +474,6 @@
 
                     if (response.ok && data.success) {
                         showToast(data.message, 'success');
-                        // FIX: Redirect to Login page instead of Shop
                         setTimeout(() => window.location.href = 'login.html', 1500);
                     } else {
                         showToast(data.message || 'Something went wrong', 'error');
@@ -378,7 +486,6 @@
                     submitBtn.disabled = false;
                 }
             } else {
-                // FIX: Trigger Shake Animation
                 const card = document.getElementById('card');
                 card.style.animation = "shake 0.4s cubic-bezier(.36,.07,.19,.97) both";
                 setTimeout(() => card.style.animation = "", 400);
