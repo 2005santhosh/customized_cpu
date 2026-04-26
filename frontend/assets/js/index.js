@@ -101,7 +101,7 @@
 
         function goToSignup() {
             console.log("Redirecting to Signup..."); // Debugging line
-            window.location.href = './signup.html';
+            window.location.href = '../pages/signup.html';
             return false; 
         }
 
