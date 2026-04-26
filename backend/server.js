@@ -27,7 +27,7 @@ app.set('trust proxy', 1);
 
 // --- CORS ---
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow frontend origin
+    origin: 'https://customized-cpu.vercel.app', // Allow frontend origin
     credentials: true // Important for cookies
 }));
 
