@@ -44,9 +44,11 @@
         .nav-logo { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: #fff; }
         .nav-logo span { color: var(--accent); }
         
-        .badge { position: absolute; top: -5px; right: -5px; background: var(--accent); color: #000; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #000; }
+        .badge { position: absolute; top: -5px; right: -5px; background: var(--accent); color: #000; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #000; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .badge.bump { transform: scale(1.4); }
         .nav-icons { display: flex; gap: 20px; align-items: center; position: relative; }
-        .icon-btn { background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; position: relative; }
+        .icon-btn { background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; position: relative; transition: 0.2s; display: flex; align-items: center; }
+        .icon-btn:hover { color: var(--accent); transform: translateY(-2px); }
         
         /* Profile Dropdown */
         .profile-dropdown { position: absolute; top: 100%; right: 0; margin-top: 15px; background: #1a1a1a; border:1px solid var(--card-border); border-radius: 8px; width: 200px; padding: 10px; display: none; flex-direction: column; gap: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 200; transform-origin: top right; animation: fadeIn 0.2s ease; }
@@ -55,7 +57,7 @@
         .profile-user { font-weight: 600; color: #fff; padding-bottom: 10px; border-bottom:1px solid var(--card-border); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
         .user-icon { color: var(--accent); }
         .logout-btn { background: rgba(255,255,255,0.05); color: #fff; border: none; padding: 10px; border-radius: 6px; text-align: left; font-size: 13px; transition: 0.2s; display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .logout-btn:hover { background: #ef4444; }
+        .logout-btn:hover { background: #ef4444; color: white; }
 
         /* Mobile Nav */
         .nav-mobile { display: none; } 
@@ -90,6 +92,7 @@
 
         .cart-item-details { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .cart-item-name { font-weight: 600; font-size: 16px; margin-bottom: 5px; color: #fff; }
+        .cart-item-desc { font-size: 13px; color: var(--text-sec); margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .cart-item-price { font-family: var(--font-head); font-size: 18px; color: var(--accent); }
 
         .cart-remove { 
@@ -220,16 +223,66 @@
     <script>
         const API_URL = "https://customizedcpu-production.up.railway.app";
 
+        // --- FULL PRODUCT DATABASE (SYNCED WITH SHOP) ---
         const productsData = [
-            { id: 1, name: "Titan GT Ultra", desc: "Intel i9-14900K, RTX 4090.", price: "₹4,59,990", img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&q=80" },
-            { id: 2, name: "Stealth Pro Studio", desc: "Ryzen 9 7950X, RTX 4080.", price: "₹3,25,000", img: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&q=80" },
-            { id: 3, name: "Core Air Performance", desc: "i5-14600K, RTX 4070 Ti.", price: "₹1,54,990", img: "https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=600&q=80" },
-            { id: 4, name: "Obsidian Compact", desc: "Small form factor, i3-13100F.", price: "₹65,000", img: "https://cdn.mos.cms.futurecdn.net/SRJi8b38jiz7vFcr8YEpcn.jpg" },
-            { id: 5, name: "Nebula Creator", desc: "Ryzen 9 7900X, Liquid Cooling.", price: "₹2,89,000", img: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600&q=80" },
-            { id: 6, name: "Spectre White Edition", desc: "i5-13400F, White Aesthetic.", price: "₹1,89,000", img: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&q=80" },
-            { id: 7, name: "MechWarrior Keyboard", desc: "Custom Mechanical Switches.", price: "₹12,999", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfUv-qK99jp3mW_ytAfLpH01rItrED-uVZew&s" },
-            { id: 8, name: "Ultrawide Monitor", desc: "34 inch 144Hz, Curved Display.", price: "₹45,000", img: "https://japannext.fr/cdn/shop/articles/Content_lifestyle_40_03.jpg?v=1754643196" }
-        ];
+    // --- INTEL GAMING PCS (15) ---
+    { id: 1, name: "Starter Gaming PC", desc: "Intel 10th Gen Core i5 10400F, NVIDIA GeForce RTX 3060 12GB Graphics, 16GB RAM, 480GB SSD, WiFi", price: "₹1,24,777", img: "https://m.media-amazon.com/images/I/71bJ6pk+t0L._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 2, name: "Performance Gaming PC", desc: "Intel 14th Gen Core i7 14700K [20C 8 P-cores + 12 E-cores) and 28 threads, 33M Cache, up to 5.60 GHz], Nvidia GeForce RTX 4060 8GB Graphics, 32GB DDR5 RAM, 1TB Gen4 NVMe SSD (~4100 Mbps), AC WiFi", price: "₹1,92,148", img: "https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg", category: "gaming" },
+    { id: 3, name: "Intel Core i5-13400F RTX 4060 Edition", desc: "13th Gen Intel Core i5-13400F, NVIDIA GeForce RTX 4060 8GB, 16GB DDR4 RAM, 512GB NVMe SSD, Windows 11 Home", price: "₹1,35,000", img: "https://5.imimg.com/data5/SELLER/Default/2024/2/387712115/ZC/SR/GW/80125604/gear-g3-gaming-pc-intel-core-i5-13th-gen-13400f-rtx-4060-16gb-ram-1tb-nvme-ssd.jpg", category: "gaming" },
+    { id: 4, name: "Intel i5-13600KF RTX 4060 Ti Build", desc: "Unlocked 14th Gen Core i5-13600KF, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 6000MHz RAM, 1TB Samsung 980 Pro SSD, Air Cooling", price: "₹1,65,000", img: "https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 5, name: "Core Air i5 Edition", desc: "Intel Core i5-14600K, RTX 4070 Ti, Air Cooled, White Aesthetic. Great value for 1440p gaming.", price: "₹1,54,990", img: "https://m.media-amazon.com/images/X/bxt1/M/gbxt1BUnh4jLjZ2.png", category: "gaming" },
+    { id: 6, name: "Intel i7-13700K RTX 3070 Battlestation", desc: "Intel Core i7-13700K (16 Cores), NVIDIA GeForce RTX 3070 8GB, 32GB DDR5 RAM, 2TB NVMe SSD, RGB Case", price: "₹1,85,000", img: "https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg", category: "gaming" },
+    { id: 7, name: "Intel i7-14700K RTX 4070 Ultimate", desc: "20 Cores i7-14700K with RTX 4070 12GB GDDR6X, 32GB DDR5 RAM, 2TB Gen5 SSD, Liquid Cooled", price: "₹2,15,000", img: "https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 8, name: "Intel i7-14700KF RTX 4070 Ti Super", desc: "Intel Core i7-14700KF Unlocked, RTX 4070 Ti Super 16GB, 64GB DDR5 RAM, 2TB Storage, 360mm AIO", price: "₹2,45,000", img: "https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458", category: "gaming" },
+    { id: 9, name: "Intel i7-14700KS RTX 4080 Beast", desc: "Special Edition i7-14700KS (6.0 GHz Turbo), NVIDIA RTX 4080 16GB, 64GB DDR5 RAM, 4TB NVMe, Hardline Liquid Cooling", price: "₹3,10,000", img: "https://m.media-amazon.com/images/I/61G0BM0HPRL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 10, name: "Intel i7-14900K RTX 4070 Ti", desc: "Latest Gen Core i7-14900K, RTX 4070 Ti, 32GB DDR5, 2TB SSD, Premium Air Cooling Build", price: "₹2,35,000", img: "https://m.media-amazon.com/images/I/81pDvAwecpL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 11, name: "Intel i9-12900K RTX 3080 Ti", desc: "12th Gen Core i9-12900K, NVIDIA RTX 3080 Ti 12GB, 64GB DDR5 RAM, 4TB Gen4 SSD, Custom Loop", price: "₹2,80,000", img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 12, name: "Intel i9-13900K RTX 4080 Super", desc: "24 Cores i9-13900K, RTX 4080 Super 16GB, 64GB DDR5 RAM, 4TB SSD, Dark Base Pro 700 Case", price: "₹3,55,000", img: "https://microless.com/cdn/products/e8830fb6dec828cae55d3e493fe40e3-hi.jpg", category: "gaming" },
+    { id: 13, name: "Intel i9-13900KS RTX 4090 Flagship", desc: "World's Fastest CPU i9-13900KS, NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 4TB Gen4 SSD, Hardline Cooling", price: "₹4,50,000", img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", category: "gaming" },
+    { id: 14, name: "Titan i9-14900K RTX 4090", desc: "14th Gen Intel Core i9-14900K, NVIDIA GeForce RTX 4090 24GB, 64GB DDR5 RAM, 2TB Gen5 NVMe, Custom Hardline Loop", price: "₹4,85,000", img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 15, name: "Intel i9-14900KF OC Edition RTX 4090", desc: "Unlocked i9-14900KF for Overclocking, Dual RTX 4090 Configuration (48GB VRAM), 128GB DDR5 RAM, 8TB RAID Storage, Industrial Watercooling", price: "₹4,99,999", img: "https://m.media-amazon.com/images/I/81a1Ejl1y6L.jpg", category: "gaming" },
+
+    // --- AMD GAMING PCS (15) ---
+    { id: 16, name: "AMD Ryzen 5 5600X RTX 3060", desc: "AMD Ryzen 5 5600X, NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB SSD, Affordable Gaming", price: "₹1,15,000", img: "https://computechstore.in/_next/image?url=https%3A%2F%2Fcdn.computechstore.in%2Fuploads%2Fwp%2F2024%2F10%2FElite_1120-1-1-Custom-2.jpg&w=2048&q=75", category: "gaming" },
+    { id: 17, name: "AMD Ryzen 5 7500F RX 7600", desc: "AMD Ryzen 5 7500F, Radeon RX 7600 8GB, 32GB DDR5 RAM, 1TB SSD, All-AMD Build", price: "₹1,25,000", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWffPdTvrRsrFQ-z_5jzU7RuCKmaxFYPgqEw&s", category: "gaming" },
+    { id: 18, name: "AMD Ryzen 5 7600 RTX 4060", desc: "AMD Ryzen 5 7600, NVIDIA GeForce RTX 4060 8GB, 32GB DDR5 RAM, 1TB SSD, Compact Form Factor", price: "₹1,45,000", img: "https://m.media-amazon.com/images/I/71+703kqOfL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 19, name: "AMD Ryzen 5 7600X RTX 4060 Ti", desc: "AMD Ryzen 5 7600X 3D V-Cache, RTX 4060 Ti 16GB, 32GB DDR5 RAM, 1TB NVMe, High Airflow Case", price: "₹1,65,000", img: "https://microless.com/cdn/products/bcee72a2b2b2bafedce35b335be224d6-hi.jpg", category: "gaming" },
+    { id: 20, name: "AMD Ryzen 5 5500 RTX 2060 Super", desc: "AMD Ryzen 5 5500, NVIDIA RTX 2060 Super 8GB, 16GB RAM, 512GB SSD, Entry Level High Performance", price: "₹1,10,000", img: "https://m.media-amazon.com/images/I/71BTYqWRjYL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+    { id: 21, name: "AMD Ryzen 7 5800X3D RTX 4070", desc: "AMD Ryzen 7 5800X3D V-Cache, NVIDIA GeForce RTX 4070 12GB, 64GB DDR5 RAM, 2TB SSD, Watercooled", price: "₹2,10,000", img: "https://cdna.pcpartpicker.com/static/forever/images/userbuild/460809.0c4ec328ca43e5e354acf0753250d7bb.512.jpg", category: "gaming" },
+    { id: 22, name: "AMD Ryzen 7 7800X3D RTX 4070 Ti", desc: "AMD Ryzen 7 7800X3D, RTX 4070 Ti Super 16GB, 32GB DDR5 RAM, 2TB Gen5 SSD, White Aesthetic", price: "₹2,40,000", img: "https://microless.com/cdn/products/ae16e6bc7a92084160557d9a84ab1629-hi.jpg", category: "gaming" },
+    { id: 23, name: "AMD Ryzen 7 7700XT RTX 4070", desc: "AMD Ryzen 7 7700XT, NVIDIA RTX 4070, 64GB DDR5 RAM, 4TB SSD, Mixed Configuration", price: "₹2,25,000", img: "https://microless.com/cdn/products/6c3cda7f4aa70cd64d55d6acbeaeb628-hi.jpg", category: "gaming" },
+    { id: 24, name: "AMD Ryzen 7 5700X RTX 3080", desc: "AMD Ryzen 7 5700X, NVIDIA RTX 3080 10GB, 32GB DDR4 RAM, 2TB NVMe, Air Cooler", price: "₹1,75,000", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqlNUWXMJiBYi6wKXANjElgtpcpDnQJfTXxA&s", category: "gaming" },
+    { id: 25, name: "AMD Ryzen 7 7800X3D RTX 4080", desc: "AMD Ryzen 7 7800X3D, NVIDIA RTX 4080 16GB, 64GB DDR5 RAM, 4TB SSD, 360mm Liquid Cooler", price: "₹3,00,000", img: "https://assets.umart.com.au/newsite/images/202410/source_img/Gaming-PCs-Ready2Go-TitanElite-G7-Ryzen-7-7800X3D-GeForce-RTX-4080-Super-Gaming-PC-57448-16.webp", category: "gaming" },
+    { id: 26, name: "AMD Ryzen 9 5900X RTX 3080 Ti", desc: "AMD Ryzen 9 5900X, NVIDIA RTX 3080 Ti 12GB, 64GB DDR4 RAM, 2TB SSD, High End Build", price: "₹2,65,000", img: "https://gameloot.in/wp-content/uploads/2025/08/NEW.jpg", category: "gaming" },
+    { id: 27, name: "AMD Ryzen 9 6950X RTX 3090 Ti", desc: "AMD Ryzen 9 6950X, NVIDIA RTX 3090 Ti 24GB, 64GB DDR5 RAM, 4TB SSD, Custom Loop", price: "₹3,20,000", img: "https://i.redd.it/6k0823y9f8z51.jpg", category: "gaming" },
+    { id: 28, name: "AMD Ryzen 9 7900X RX 7900XTX", desc: "AMD Ryzen 9 7900X, Radeon RX 7900XTX 24GB, 64GB DDR5 RAM, 4TB SSD, Pure AMD Build", price: "₹3,50,000", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Q1nS25K0O2yTWhCLhfk7k5YOjULYFfCkMA&s", category: "gaming" },
+    { id: 29, name: "AMD Ryzen 9 7950X3D RTX 4090", desc: "AMD Ryzen 9 7950X3D, NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD, Ultimate Creator", price: "₹4,75,000", img: "https://i.redd.it/just-finished-my-first-amd-build-7950x3d-rtx-4090-v0-iy7rkl6tgpoa1.jpg?width=4032&format=pjpg&auto=webp&s=0be7d2c8b79d8e5d885dca5027c37a7d91dab270", category: "gaming" },
+    { id: 30, name: "AMD Ryzen 9 9000X3D RTX 4090 Titan", desc: "Next Gen AMD Ryzen 9 9000X3D (Simulated), NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD, Industrial Cooling", price: "₹4,95,000", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSciUb1yrqCBmjnU58l0H80su46-TDBJltvxA&s", category: "gaming" },
+
+    // --- WORKSTATIONS (10) ---
+    { id: 31, name: "Threadripper Pro 5995WX Ultimate", desc: "AMD Ryzen Threadripper Pro 5995WX (64 Cores), 256GB ECC RAM, 4TB NVMe RAID, NVIDIA RTX A6000 48GB, Watercooled", price: "₹4,99,999", img: "https://microless.com/cdn/products/5cf4b47f4108a229e39aef233093efc7-hi.jpg", category: "workstation" },
+    { id: 32, name: "Threadripper 7960X Studio", desc: "AMD Ryzen Threadripper 7960X (24 Cores), 128GB DDR5 RAM, 8TB SSD, NVIDIA RTX 4090 24GB, Airflow Optimized", price: "₹4,25,000", img: "https://microless.com/cdn/products/2aad3ef6b5e9eb00ed1e7ad71324a8b2-hi.jpg", category: "workstation" },
+    { id: 33, name: "Intel Xeon w9-3495X Server", desc: "Intel Xeon w9-3495X (56 Cores), 512GB DDR5 RAM, 10TB NVMe, NVIDIA RTX 6000 Ada, Rackmount Style", price: "₹4,85,000", img: "https://www.hpshowroominchennai.in/upload/big/1716208092.jpg", category: "workstation" },
+    { id: 34, name: "Intel i9-14900KS Quadro Station", desc: "Intel Core i9-14900KS, 128GB DDR5 RAM, 4TB SSD, NVIDIA Quadro RTX 5000 Ada 32GB, Silent Tower", price: "₹3,95,000", img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", category: "workstation" },
+    { id: 35, name: "Ryzen 9 7950X3D RenderBox", desc: "AMD Ryzen 9 7950X3D, 256GB DDR5 RAM, 8TB SSD, Dual ProArt RX 7900XTX (48GB Total VRAM), Case Labs Case", price: "₹4,60,000", img: "https://assetsio.gnwcdn.com/ryzen-9-7950x3d.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp", category: "workstation" },
+    { id: 36, name: "EPYC 9004 Pro Data", desc: "AMD EPYC 9004 Processor, 512GB ECC RAM, 20TB Server Storage, NVIDIA A100 GPU, 4U Chassis", price: "₹4,50,000", img: "https://bizon-tech.com/media/resized/340_340_/catalog/product/cache/1/small_image/9df78eab33525d08d6e5fb8d27136e95/b/a/banner-zx6000-mobile1.jpg.webp", category: "workstation" },
+    { id: 37, name: "Intel Core i9-14900K Pro Edit", desc: "Intel i9-14900K, 128GB DDR5 6000MHz, 8TB SSD, NVIDIA RTX A5000 24GB, Designed for Adobe CC", price: "₹3,50,000", img: "https://m.media-amazon.com/images/I/71ORaFi++pL._AC_UF1000,1000_QL80_.jpg", category: "workstation" },
+    { id: 38, name: "Dual Threadripper Compute Node", desc: "Dual AMD Threadripper Pro 5975WX, 1TB RAM, 40TB Storage, Quad NVIDIA A40 GPUs, Liquid Cooled Rack", price: "₹4,99,999", img: "https://www.storagereview.com/wp-content/uploads/2026/03/StorageReview-Dell-Precision-7875-8-2.jpg", category: "workstation" },
+    { id: 39, name: "Ryzen Threadripper 7000 Series AI", desc: "Ryzen Threadripper 7980X, 256GB DDR5 RAM, 4TB Gen5 SSD, NVIDIA RTX 6000 Ada, AI Optimized", price: "₹4,30,000", img: "https://www.amd.com/content/dam/amd/en/images/products/desktops/3331750-supermicro-5014a-tt-desktops.jpg", category: "workstation" },
+    { id: 40, name: "Mac Pro Equivalent Intel", desc: "Intel Xeon w7-2495X, 192GB RAM, 8TB SSD, NVIDIA RTX 4090 (Mac Pro Modded), Industrial Design", price: "₹4,75,000", img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Apple_Mac_Pro_Intel_Xenon.jpg", category: "workstation" },
+
+    // --- PC COMPONENTS (10) ---
+    { id: 41, name: "NVIDIA RTX 4090 Founder's Edition", desc: "NVIDIA GeForce RTX 4090 24GB GDDR6X, Triple Fan Cooler, DLSS 3, Ray Tracing, 16K Ready. Standalone GPU.", price: "₹1,65,000", img: "https://m.media-amazon.com/images/I/51A0J6nnksL._AC_UF1000,1000_QL80_.jpg", category: "components" },
+    { id: 42, name: "LG UltraGear 48\" OLED Monitor", desc: "48 inch OLED Gaming Monitor, 4K Resolution, 120Hz, 0.1ms Response, HDMI 2.1, Perfect for RTX 4090", price: "₹2,99,000", img: "https://vishalperipherals.com/cdn/shop/files/5_25b24312-0b04-4715-a530-0886143ad4ec.jpg?v=1729772922&width=1445", category: "components" },
+    { id: 43, name: "ASUS ROG Crosshair X670E Extreme", desc: "E-ATX Motherboard, AMD AM5 Socket, DDR5 7200+ Support, WiFi 6E, 18+1 Power Stages", price: "₹1,25,000", img: "https://dlcdnwebimgs.asus.com/files/media/C9A82328-9130-467A-AEAC-A57B1FC2A6C4/v2/img/spec/immersion-m.jpg", category: "components" },
+    { id: 44, name: "Custom Hardline Watercooling Kit", desc: "Complete Hardline Watercooling Kit, D5 Pump, Radiator, CPU/GPU Blocks, Clear PETG Tubing, Red Coolant", price: "₹1,15,000", img: "https://m.media-amazon.com/images/I/61TZ9cPs1cL.jpg", category: "components" },
+    { id: 45, name: "Samsung 990 Pro 4TB x2 RAID", desc: "2x Samsung 990 Pro 4TB NVMe SSDs, Gen 5.0, Read Speed 12,000 MB/s, Perfect for OS + Games RAID", price: "₹1,85,000", img: "https://www.pcstudio.in/wp-content/uploads/2025/01/Samsung-990-Pro-4Tb-Nvme-M2-Gen-40-Internal-Ssd-1-1-1.webp", category: "components" },
+    { id: 46, name: "LG 32GQ950 4K 144Hz Monitor", desc: "32 inch Nano-IPS Gaming Monitor, 4K 144Hz, 1ms, G-Sync Compatible, HDR 1000, Ideal for High End PC", price: "₹1,45,000", img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/global_ces2022_product7_02_thumbnail2.jpg", category: "components" },
+    { id: 47, name: "Keychron Q1 Pro Mechanical Keyboard", desc: "75% Wireless Mechanical Keyboard, Aluminum Case, Gateron Oil King Switches, Hot-swappable, RGB", price: "₹1,10,000", img: "https://media.mmorpg.com/images/heroes/posts/127202.jpg", category: "components" },
+    { id: 48, name: "Corsair RM1000x PSU Titanium", desc: "1000W Fully Modular Power Supply, 80 Plus Titanium Rated, ATX 3.0, 135mm Fan Zero RPM Mode", price: "₹1,30,000", img: "https://www.bhphotovideo.com/images/fb/corsair_cp_9020271_na_rm1000x_1000w_cybenetics_gold_1859546.jpg", category: "components" },
+    { id: 49, name: "Razer Kraken V3 Pro Cooler", desc: "360mm LCD AIO Liquid Cooler, 2.36\" LCD Screen, RGB Infinity Mirror Plate, Compatible with Intel & AMD", price: "₹1,05,000", img: "https://os-wordpress-media.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2021/10/26004512/Razer_Pc_Components_1.jpg", category: "components" },
+    { id: 50, name: "DAS Keyboard 4 Pro + Monitor Bundle", desc: "DAS 4 Pro Custom Mechanical Keyboard + 27\" 144Hz IPS Monitor Bundle. Premium typing experience.", price: "₹1,75,000", img: "https://cdn.mos.cms.futurecdn.net/xfpayTwmjHyeCEpwXt4Kzj-2048-80.jpg", category: "components" }
+];
 
         // --- AUTH & PROFILE (FETCHES REAL NAME) ---
         async function initAuth() {
@@ -306,6 +359,7 @@
             let total = 0;
 
             cart.forEach((item, index) => {
+                // FIX: Regex fix to ensure numbers are parsed correctly even with commas
                 const priceVal = parseInt(item.price.replace(/[^0-9]/g, ''));
                 total += priceVal;
                 
@@ -318,6 +372,7 @@
                     </div>
                     <div class="cart-item-details">
                         <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-desc">${item.desc}</div>
                         <div class="cart-item-price">${item.price}</div>
                         <div class="cart-remove" onclick="removeFromCart(${index})">Remove</div>
                     </div>
@@ -349,6 +404,12 @@
         return;
     }
 
+    // --- CALCULATE TOTAL FOR MODAL DISPLAY ---
+    let total = 0;
+    cart.forEach(item => {
+        total += parseInt(item.price.replace(/[^0-9]/g, ''));
+    });
+
     // --- Build Confirmation Modal ---
     const overlay = document.createElement('div');
     overlay.id = 'checkoutModal';
@@ -358,11 +419,6 @@
         display: flex; align-items: center; justify-content: center;
         padding: 20px; animation: fadeIn 0.25s ease;
     `;
-
-    let total = 0;
-    cart.forEach(item => {
-        total += parseInt(item.price.replace(/[^0-9]/g, ''));
-    });
 
     overlay.innerHTML = `
         <div style="
@@ -442,17 +498,23 @@
         message += "*Ordered Items:*\n";
         message += "━━━━━━━━━━━━━━━━━━\n";
 
+        let checkoutTotal = 0;
+
         cart.forEach((item, i) => {
+            // FIXED: Correct Regex for parsing price
             const priceVal = parseInt(item.price.replace(/[^0-9]/g, ''));
-            total += priceVal;
+            checkoutTotal += priceVal;
+            
             message += `${i + 1}. *${item.name}*\n`;
+            // ADDED: Include full description/specifications as requested
+            message += `   📝 ${item.desc}\n`; 
             message += `   💰 ${item.price}\n\n`;
         });
 
         message += "━━━━━━━━━━━━━━━━━━\n";
-        message += `*Subtotal:* ₹${total.toLocaleString('en-IN')}\n`;
+        message += `*Subtotal:* ₹${checkoutTotal.toLocaleString('en-IN')}\n`;
         message += `*Shipping:* Free\n`;
-        message += `*Total:* ₹${total.toLocaleString('en-IN')}\n\n`;
+        message += `*Total:* ₹${checkoutTotal.toLocaleString('en-IN')}\n\n`;
 
         const userName = document.getElementById('userNameDisplay')?.innerText || 'Guest';
         message += "━━━━━━━━━━━━━━━━━━\n";
@@ -460,7 +522,8 @@
         message += `📅 *Date:* ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}\n\n`;
         message += "_Please confirm my order and share payment details. Thank you!_ 🙏";
 
-        const phoneNumber = "916300865661";
+        // const phoneNumber = "916300865661";
+        const phoneNumber = "917330985017";
         const encodedMessage = encodeURIComponent(message);
         const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
