@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPC | Cart</title>
+    <title>COREX | Cart</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,8 +41,39 @@
         /* Navbar */
         .navbar { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,0.6); backdrop-filter: blur(16px); border-bottom:1px solid var(--card-border); padding: 12px 0; }
         .nav-desktop { display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: #fff; }
-        .nav-logo span { color: var(--accent); }
+        
+        /* --- UPDATED LOGO STYLES --- */
+        .nav-logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            font-family: var(--font-head); 
+            text-decoration: none; 
+        }
+        
+        /* Force White text for CORE */
+        .nav-logo .core-text { 
+            color: #FFFFFF !important; 
+            font-weight: 700; 
+            font-size: 24px; 
+            line-height: 1; 
+        }
+
+        /* Hide the yellow dot if it exists from old code */
+        .nav-logo span:not(.core-text) { display: none; }
+
+        /* SVG Icon Styling */
+        .x-icon {
+            height: 26px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3));
+        }
+
+        @media (max-width: 768px) {
+            .nav-logo .core-text { font-size: 20px; }
+            .x-icon { height: 22px; }
+        }
         
         .badge { position: absolute; top: -5px; right: -5px; background: var(--accent); color: #000; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #000; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .badge.bump { transform: scale(1.4); }
@@ -161,7 +192,25 @@
         <div class="container">
             <!-- Desktop Nav -->
             <div class="nav-desktop">
-                <a href="shop.html" class="nav-logo">CPC<span>.</span></a>
+                <a href="shop.html" class="nav-logo">
+                    <span class="core-text">CORE</span>
+                    
+                    <!-- Custom Asymmetric X Icon with Gradient -->
+                    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
+                                <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Big Line (Long diagonal) -->
+                        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
+                        
+                        <!-- Small Line (Short diagonal, offset for effect) -->
+                        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
+                    </svg>
+                </a>
                 <div class="nav-icons">
                     <button class="icon-btn" onclick="toggleProfile()">
                         <i class="ri-user-line"></i>
@@ -179,7 +228,21 @@
             
             <!-- Mobile Nav -->
             <div class="nav-mobile">
-                <a href="shop.html" class="nav-logo">CPC<span>.</span></a>
+                <a href="shop.html" class="nav-logo">
+                    <span class="core-text">CORE</span>
+                    
+                    <!-- Copy of Icon with Unique Gradient ID for Mobile -->
+                    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="redGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff3333" />
+                                <stop offset="100%" stop-color="#990000" />
+                            </linearGradient>
+                        </defs>
+                        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
+                        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
+                    </svg>
+                </a>
                 <div class="mobile-nav-right">
                     <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-line"></i></button>
                     <a href="cart.html" class="icon-btn">
@@ -218,7 +281,7 @@
         </div>
     </main>
 
-    <footer><p>&copy; 2026 CPC Systems. All rights reserved.</p></footer>
+    <footer><p>&copy; 2026 COREX Systems. All rights reserved.</p></footer>
 
     <script>
         const API_URL = "https://customizedcpu-production.up.railway.app";
@@ -494,7 +557,7 @@
 
     // Confirm: build message & redirect
     document.getElementById('confirmBtn').addEventListener('click', () => {
-        let message = "🛒 *New Order from CPC Systems*\n\n";
+        let message = "🛒 *New Order from COREX Systems*\n\n";
         message += "*Ordered Items:*\n";
         message += "━━━━━━━━━━━━━━━━━━\n";
 

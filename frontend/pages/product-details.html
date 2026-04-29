@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPC | Product Details</title>
+    <title>COREX | Product Details</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,8 +38,39 @@
         /* --- NAVBAR --- */
         .navbar { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,0.6); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); padding: 12px 0; }
         .nav-desktop { display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: #fff; }
-        .nav-logo span { color: var(--accent); }
+        
+        /* --- CORE X LOGO STYLES --- */
+        .nav-logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            font-family: var(--font-head); 
+            text-decoration: none; 
+            transition: transform 0.3s ease;
+        }
+        .nav-logo:hover { transform: scale(1.02); }
+
+        .nav-logo .core-text { 
+            color: #FFFFFF !important; 
+            font-weight: 700; 
+            font-size: 24px; 
+            line-height: 1; 
+        }
+
+        /* Hide the old yellow dot if it exists */
+        .nav-logo span:not(.core-text) { display: none; }
+
+        .x-icon {
+            height: 26px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3));
+        }
+
+        @media (max-width: 768px) {
+            .nav-logo .core-text { font-size: 20px; }
+            .x-icon { height: 22px; }
+        }
         
         .badge { position: absolute; top: -5px; right: -5px; background: var(--accent); color: #000; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #000; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .badge.bump { transform: scale(1.4); }
@@ -287,7 +318,26 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-desktop">
-                <a href="index.html" class="nav-logo">CPC<span>.</span></a>
+                <!-- REPLACED: CORE X Logo -->
+                <a href="shop.html" class="nav-logo">
+                    <span class="core-text">CORE</span>
+                    
+                    <!-- Custom Asymmetric X Icon with Gradient -->
+                    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
+                                <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Big Line (Long diagonal) -->
+                        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
+                        
+                        <!-- Small Line (Short diagonal, offset for effect) -->
+                        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
+                    </svg>
+                </a>
                 <div class="nav-icons">
                     <button class="icon-btn" onclick="toggleProfile()" aria-label="Profile">
                         <i class="ri-user-line"></i>
@@ -303,7 +353,22 @@
                 </div>
             </div>
             <div class="nav-mobile">
-                <a href="index.html" class="nav-logo">CPC<span>.</span></a>
+                <!-- REPLACED: CORE X Logo Mobile -->
+                <a href="shop.html" class="nav-logo">
+                    <span class="core-text">CORE</span>
+                    
+                    <!-- Copy of Icon with Unique Gradient ID for Mobile -->
+                    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="redGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff3333" />
+                                <stop offset="100%" stop-color="#990000" />
+                            </linearGradient>
+                        </defs>
+                        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
+                        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
+                    </svg>
+                </a>
                 <div class="mobile-nav-right">
                     <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-line"></i></button>
                     <a href="cart.html" class="icon-btn"><i class="ri-shopping-cart-line"></i><span class="badge" id="cartBadgeMobile">0</span></a>
@@ -376,8 +441,23 @@
             <div class="footer-grid">
                 <!-- Brand -->
                 <div class="footer-col">
-                    <a href="index.html" class="nav-logo" style="margin-bottom: 20px; display:inline-block;">CPC<span>.</span></a>
-                    <p>CPC Systems delivers high-performance computing solutions for professionals, gamers, and creators. Engineered for excellence.</p>
+                    <!-- REPLACED: CORE X Logo Footer -->
+                    <a href="index.html" class="nav-logo" style="margin-bottom: 20px; display:inline-block;">
+                        <span class="core-text">CORE</span>
+                        
+                        <!-- Copy of Icon with Unique Gradient ID for Footer -->
+                        <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="redGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#ff3333" />
+                                    <stop offset="100%" stop-color="#990000" />
+                                </linearGradient>
+                            </defs>
+                            <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientFooter)" stroke-width="6" stroke-linecap="round" />
+                            <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientFooter)" stroke-width="6" stroke-linecap="round" />
+                        </svg>
+                    </a>
+                    <p>COREX Systems delivers high-performance computing solutions for professionals, gamers, and creators. Engineered for excellence.</p>
                     <div class="newsletter-form">
                         <input type="email" placeholder="Enter email">
                         <button><i class="ri-send-plane-fill"></i></button>
@@ -422,7 +502,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2026 CPC Systems. All rights reserved.</p>
+                <p>&copy; 2026 COREX Systems. All rights reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="ri-twitter-x-line"></i></a>
                     <a href="#"><i class="ri-facebook-fill"></i></a>
@@ -467,7 +547,7 @@
             { label: "Cooling", value: "Air Cooler with Heat Pipes" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -499,7 +579,7 @@
             { label: "Cooling", value: "240mm ARGB Liquid Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -527,7 +607,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -553,7 +633,7 @@
             { label: "Cooling", value: "Stock Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -579,7 +659,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -607,7 +687,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -633,7 +713,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -659,7 +739,7 @@
             { label: "Cooling", value: "240mm Liquid Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -685,7 +765,7 @@
             { label: "Cooling", value: "360mm AIO Liquid Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -713,7 +793,7 @@
             { label: "Cooling", value: "360mm AIO Liquid Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -739,7 +819,7 @@
             { label: "Cooling", value: "Custom Hardline Cooling" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -765,7 +845,7 @@
             { label: "Cooling", value: "Custom Hardline Loop" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -791,7 +871,7 @@
             { label: "Cooling", value: "Industrial Water Cooling" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -817,7 +897,7 @@
             { label: "Cooling", value: "DeepCool Assassin III" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -843,7 +923,7 @@
             { label: "Cooling", value: "Custom Liquid Loop" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -873,7 +953,7 @@
             { label: "Cooling", value: "Stock Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -899,7 +979,7 @@
             { label: "Cooling", value: "Stock Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -925,7 +1005,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -951,7 +1031,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -977,7 +1057,7 @@
             { label: "Cooling", value: "Stock Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1005,7 +1085,7 @@
             { label: "Cooling", value: "360mm AIO Liquid Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1031,7 +1111,7 @@
             { label: "Cooling", value: "360mm AIO Liquid Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1057,7 +1137,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1083,7 +1163,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1109,13 +1189,13 @@
             { label: "Cooling", value: "360mm AIO Liquid Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
 
-    // Ryzen 9 Series
-    { 
+    // Ryzen 9 Series 
+       { 
         id: 26, 
         name: "AMD Ryzen 9 5900X RTX 3080 Ti", 
         category: "gaming",
@@ -1137,7 +1217,7 @@
             { label: "Cooling", value: "Custom Air Cooling" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1163,7 +1243,7 @@
             { label: "Cooling", value: "Custom Loop" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1189,7 +1269,7 @@
             { label: "Cooling", value: "Custom Loop" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1215,7 +1295,7 @@
             { label: "Cooling", value: "Industrial Loop" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1241,7 +1321,7 @@
             { label: "Cooling", value: "Industrial Water Cooling" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1270,7 +1350,7 @@
             { label: "Cooling", value: "SATA Loop Cooling" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1296,7 +1376,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1305,7 +1385,7 @@
         name: "Intel Xeon w9-3495X Server", 
         category: "workstation",
         img: "https://www.hpshowroominchennai.in/upload/big/1716208092.jpg", 
-        desc: "Intel Xeon w9-3495X (56 Cores), 512GB DDR5 RAM, 10TB NVMe, NVIDIA RTX 6000 Ada 48GB. Rackmount.",
+        desc: "Intel Xeon w9-3495X (56 Cores),512GB DDR5 RAM, 10TB NVMe, NVIDIA RTX 6000 Ada 48GB. Rackmount.",
         price: "₹4,95,000",
         highlights: [
             "Intel Xeon w9-3495X (56 Cores)",
@@ -1322,7 +1402,7 @@
             { label: "Cooling", value: "Server Airflow" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1348,7 +1428,7 @@
             { label: "Cooling", value: "Silent Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1374,7 +1454,7 @@
             { label: "Cooling", value: "Case Labs Water Cooling" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1400,7 +1480,7 @@
             { label: "Cooling", value: "Server Fans" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1426,7 +1506,7 @@
             { label: "Cooling", value: "Air Cooler" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1452,7 +1532,7 @@
             { label: "Cooling", value: "Industrial Water Loop" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1478,7 +1558,7 @@
             { label: "Cooling", value: "Water Cooling" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1504,7 +1584,7 @@
             { label: "Cooling", value: "Thermal Tower" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1533,7 +1613,7 @@
             { label: "Power Draw", value: "450W" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1559,7 +1639,7 @@
             { label: "HDR", value: "True Black 1000" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1585,7 +1665,7 @@
             { label: "Form Factor", value: "E-ATX" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1611,7 +1691,7 @@
             { label: "Reservoir", value: "Cylinder Tube" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1637,7 +1717,7 @@
             { label: "NAND Flash", value: "TLC 3-bit" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1663,7 +1743,7 @@
             { label: "Color Accuracy", value: "DCI-P3 98%" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1689,7 +1769,7 @@
             { label: "Case Material", value: "6063 Aluminum" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1715,7 +1795,7 @@
             { label: "Fan", value: "135mm Magnetic Levitation" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1741,7 +1821,7 @@
             { label: "LCD Resolution", value: "480x480 px" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     },
@@ -1767,7 +1847,7 @@
             { label: "Cable Management", value: "Included" },
             { label: "Transit Insurance", value: "Your Scope" },
             { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in the package to avoid damage in transit." },
+            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
             { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
         ]
     }
@@ -1902,7 +1982,7 @@
 
             // --- MOUSE ENTER ---
             imageContainer.addEventListener('mouseenter', () => {
-                if (window.matchMedia("(min-width: 769px)").matches) {
+                if (window.matchMedia("(min-width:769px)").matches) {
                     zoomLayer.style.opacity = '1';
                     cursor.style.display = 'flex';
                 }

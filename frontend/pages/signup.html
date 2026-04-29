@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>CPC | Create Account</title>
+    <title>COREX | Create Account</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,12 +132,50 @@
         }
 
         /* --- TYPOGRAPHY --- */
-        .logo {
-            font-family: var(--font-head); font-size: 28px; font-weight: 700;
-            letter-spacing: -1px; margin-bottom: 8px; display: inline-block;
-            text-decoration: none; color: #fff; text-shadow: 0 0 20px rgba(255, 214, 0, 0.3);
-        }
-        .logo span { color: var(--accent); }
+       /* --- CORE X LOGO STYLES --- */
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 5px; /* Spacing between text and X */
+    font-family: 'Space Grotesk', sans-serif; /* Or your preferred font */
+    font-weight: 800; /* Heavy font weight */
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.core-text {
+    color: #ffffff; /* White color for 'CORE' */
+    letter-spacing: 1px;
+}
+
+.x-icon {
+    height: 28px; /* Adjust size of the X */
+    width: auto;
+    display: block;
+    margin-top: -0.5rem
+}
+
+/* Subtle hover effect for the whole logo */
+.logo:hover .core-text {
+    color: #ffcccc; /* Slight reddish tint on text hover */
+}
+
+.logo:hover .x-icon {
+    transform: scale(1.1); /* Slight zoom on X hover */
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.5)); /* Red Glow */
+    transition: all 0.3s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 20px;
+    }
+    .x-icon {
+        height: 24px;
+    }
+}
         .subtitle { color: var(--text-sec); font-size: 14px; margin-bottom: 28px; }
 
         /* --- FORMS --- */
@@ -310,7 +348,25 @@
 
     <div class="auth-container">
         <div class="auth-card" id="card">
-            <a href="index.html" class="logo">CPC<span>.</span></a>
+             <a href="./index.html" class="logo">
+    <span class="core-text">CORE</span>
+    
+    <!-- Custom Asymmetric X Icon with Gradient -->
+    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
+                <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
+            </linearGradient>
+        </defs>
+        
+        <!-- Big Line (Long diagonal) -->
+        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
+        
+        <!-- Small Line (Short diagonal, offset for effect) -->
+        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
+    </svg>
+</a>
             <p class="subtitle">Join the elite. Build your legacy.</p>
 
             <form id="signupForm" novalidate>

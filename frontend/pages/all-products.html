@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPC | All Products</title>
+    <title>COREX | All Products</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,8 +70,47 @@
             display: none; /* FIX: Explicitly hide on desktop */
         }
 
-        .nav-logo { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 5px;}
-        .nav-logo span { color: var(--accent); }
+        /* --- CORE X LOGO STYLES --- */
+/* Apply to both Desktop and Mobile Nav */
+.logo, .nav-logo {
+    display: flex !important;
+    align-items: center;
+    gap: 4px; /* Tight gap between text and icon */
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif; /* Using your existing font-head */
+    transition: transform 0.3s ease;
+}
+
+.logo:hover, .nav-logo:hover {
+    transform: scale(1.02);
+}
+
+/* Text Styling - Overrides yellow accent in CSS */
+.core-text {
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: -0.5px;
+}
+
+/* SVG Icon Styling */
+.x-icon {
+    height: 26px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3)); /* Subtle red glow */
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    .core-text {
+        font-size: 20px;
+    }
+    .x-icon {
+        height: 22px;
+    }
+}
         
         .badge { 
             position: absolute; top: -5px; right: -5px; 
@@ -204,7 +243,25 @@
         <div class="container">
             <!-- Desktop Nav -->
             <div class="nav-desktop">
-                <a href="shop.html" class="nav-logo">CPC<span>.</span></a>
+                 <a href="./shop.html" class="logo">
+        <span class="core-text">CORE</span>
+        
+        <!-- Custom Asymmetric X Icon with Gradient -->
+        <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
+                    <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
+                </linearGradient>
+            </defs>
+            
+            <!-- Big Line (Long diagonal) -->
+            <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
+            
+            <!-- Small Line (Short diagonal, offset for effect) -->
+            <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
+        </svg>
+    </a>
                 <div class="nav-icons">
                     <button class="icon-btn" onclick="toggleProfile()" aria-label="Profile">
                         <i class="ri-user-line"></i>
@@ -222,7 +279,21 @@
 
             <!-- Mobile Nav -->
             <div class="nav-mobile">
-                <a href="shop.html" class="nav-logo">CPC<span>.</span></a>
+                  <a href="./shop.html" class="nav-logo">
+        <span class="core-text">CORE</span>
+        
+        <!-- Copy of Icon with Unique Gradient ID for Mobile -->
+        <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="redGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff3333" />
+                    <stop offset="100%" stop-color="#990000" />
+                </linearGradient>
+            </defs>
+            <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
+            <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
+        </svg>
+    </a>
                 <div class="mobile-nav-right" style="display:flex; gap:15px;">
                     <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-line"></i></button>
                     <a href="cart.html" class="icon-btn">
@@ -250,7 +321,7 @@
         </div>
     </main>
 
-    <footer><p>&copy; 2026 CPC Systems. All rights reserved.</p></footer>
+    <footer><p>&copy; 2026 COREX Systems. All rights reserved.</p></footer>
 
     <script>
         // --- BACKEND API URL ---
