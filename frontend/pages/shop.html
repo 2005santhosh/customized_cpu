@@ -702,14 +702,72 @@
         const API_URL = "https://api.core-x.in";
 
         const productsData = [
-            { id: 1, name: "Titan GT Ultra", desc: "Intel i9-14900K, RTX 4090, 64GB DDR5, 2TB NVMe.", price: "₹4,59,990", img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&q=80", category: "gaming" },
-            { id: 2, name: "Stealth Pro Studio", desc: "Ryzen 9 7950X, RTX 4080, 128GB RAM.", price: "₹3,25,000", img: "https://images.unsplash.com/photo-1591488320490-11701bb6704?w=600&q=80", category: "gaming" },
-            { id: 3, name: "Core Air Performance", desc: "i5-14600K, RTX 4070 Ti, 32GB RAM, Air Cooled.", price: "₹1,54,990", img: "https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=600&q=80", category: "gaming" },
-            { id: 4, name: "Obsidian Compact", desc: "i3-13100F, RTX 3060, 16GB.", price: "₹65,000", img: "https://cdn.mos.cms.futurecdn.net/SRJi8b38jiz7vFcr8YEpcn.jpg", category: "gaming" },
-            { id: 5, name: "Nebula Creator", desc: "Ryzen 9 7900X, RTX 4080, Liquid Cooling.", price: "₹2,89,000", img: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600&q=80", category: "workstation" },
-            { id: 6, name: "Spectre White Edition", desc: "i5-13400F, RTX 4060 Ti, White Aesthetic.", price: "₹1,89,000", img: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&q=80", category: "gaming" },
-            { id: 7, name: "MechWarrior Keyboard", desc: "Custom Mechanical Switches, RGB Backlit.", price: "₹12,999", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfUv-qK99jp3mW_ytAfLpH01rItrED-uVZew&s", category: "components" },
-            { id: 8, name: "Ultrawide Monitor", desc: "34 inch 144Hz, 1ms Response, Curved Display.", price: "₹45,000", img: "https://japannext.fr/cdn/shop/articles/Content_lifestyle_40_03.jpg?v=1754643196", category: "components" }
+            { 
+        id: 1, 
+        name: "Starter Gaming PC", 
+        desc: "Intel 10th Gen Core i5 10400F, NVIDIA GeForce RTX 3060 12GB Graphics, 16GB RAM, 480GB SSD, WiFi", 
+        price: "₹1,24,777", 
+        img: "https://m.media-amazon.com/images/I/71bJ6pk+t0L._AC_UF1000,1000_QL80_.jpg", 
+        category: "gaming" 
+    },
+    { 
+        id: 2, 
+        name: "Performance Gaming PC", 
+        desc: "Intel 14th Gen Core i7 14700K [20C 8 P-cores + 12 E-cores) and 28 threads, 33M Cache, up to 5.60 GHz], Nvidia GeForce RTX 4060 8GB Graphics, 32GB DDR5 RAM, 1TB Gen4 NVMe SSD (~4100 Mbps), AC WiFi", 
+        price: "₹1,92,148", 
+        img: "https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg", 
+        category: "gaming" 
+    },
+    { 
+        id: 3, 
+        name: "Intel Core i5-13400F RTX 4060 Edition", 
+        desc: "13th Gen Intel Core i5-13400F, NVIDIA GeForce RTX 4060 8GB, 16GB DDR4 RAM, 512GB NVMe SSD, Windows 11 Home", 
+        price: "₹1,35,000", 
+        img: "https://5.imimg.com/data5/SELLER/Default/2024/2/387712115/ZC/SR/GW/80125604/gear-g3-gaming-pc-intel-core-i5-13th-gen-13400f-rtx-4060-16gb-ram-1tb-nvme-ssd.jpg", 
+        category: "gaming" 
+    },
+    { 
+        id: 4, 
+        name: "Intel i5-13600KF RTX 4060 Ti Build", 
+        desc: "Unlocked 14th Gen Core i5-13600KF, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 6000MHz RAM, 1TB Samsung 980 Pro SSD, Air Cooling", 
+        price: "₹1,65,000", 
+        img: "https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg", 
+        category: "gaming" 
+    },
+    { 
+        id: 5, 
+        name: "Core Air i5 Edition", 
+        desc: "Intel Core i5-14600K, RTX 4070 Ti, Air Cooled, White Aesthetic. Great value for 1440p gaming.", 
+        price: "₹1,54,990", 
+        img: "https://m.media-amazon.com/images/X/bxt1/M/gbxt1BUnh4jLjZ2.png", 
+        category: "gaming" 
+    },
+
+    // i7 Series (5)
+    { 
+        id: 6, 
+        name: "Intel i7-13700K RTX 3070 Battlestation", 
+        desc: "Intel Core i7-13700K (16 Cores), NVIDIA GeForce RTX 3070 8GB, 32GB DDR5 RAM, 2TB NVMe SSD, RGB Case", 
+        price: "₹1,85,000", 
+        img: "https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg", 
+        category: "gaming" 
+    },
+    { 
+        id: 7, 
+        name: "Intel i7-14700K RTX 4070 Ultimate", 
+        desc: "20 Cores i7-14700K with RTX 4070 12GB GDDR6X, 32GB DDR5 RAM, 2TB Gen5 SSD, Liquid Cooled", 
+        price: "₹2,15,000", 
+        img: "https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg", 
+        category: "gaming" 
+    },
+    { 
+        id: 8, 
+        name: "Intel i7-14700KF RTX 4070 Ti Super", 
+        desc: "Intel Core i7-14700KF Unlocked, RTX 4070 Ti Super 16GB, 64GB DDR5 RAM, 2TB Storage, 360mm AIO", 
+        price: "₹2,45,000", 
+        img: "https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458", 
+        category: "gaming" 
+    }
         ];
 
         function renderProducts(data, containerId) {
