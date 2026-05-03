@@ -3,295 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../assets/images/logo.jpeg">
     <title>COREX | Product Details</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
-        /* --- VARIABLES --- */
-        :root { 
-            --bg-gradient: radial-gradient(circle at 50% -20%, #2e3244 0%, #111116 60%, #000000 100%); 
-            --card-bg: rgba(255,255,255,0.03); 
-            --card-border: rgba(255,255,255,0.08); 
-            --accent: #FFD600; 
-            --accent-hover: #E6C200; 
-            --text-main: #FFFFFF; 
-            --text-sec: #9CA3AF; 
-            --font-head: 'Space Grotesk', sans-serif; 
-            --font-body: 'Inter', sans-serif; 
-            --radius-md: 12px; 
-            --radius-lg: 16px; 
-            --success: #10B981; 
+        /* --- VARIABLES (MATCHING SHOP THEME) --- */
+        :root {
+            --ink: #0a0b0e;
+            --ink-2: #111318;
+            --ink-3: #181b22;
+            --ink-4: #1f232d;
+            --ink-5: #252a36;
+            --panel: #1c1f28;
+            --panel-2: #232733;
+            --amber: #f59e0b;
+            --amber-bright: #fbbf24;
+            --amber-dim: #92400e;
+            --amber-glow: rgba(245,158,11,0.18);
+            --cyan: #22d3ee;
+            --cyan-dim: #0e7490;
+            --cyan-glow: rgba(34,211,238,0.15);
+            --red: #ef4444;
+            --white: #f1f3f9;
+            --white-dim: #8892a4;
+            --white-faint: #3d4457;
+            --border: rgba(255,255,255,0.07);
+            --border-amber: rgba(245,158,11,0.25);
+            --border-cyan: rgba(34,211,238,0.2);
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-ui: 'Barlow Condensed', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --r: 6px;
+            --r-md: 10px;
+            --r-lg: 16px;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        body { background: var(--bg-gradient); color: var(--text-main); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; background-attachment: fixed; display: flex; flex-direction: column; }
-        
-        .bg-pattern { position: fixed; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; }
-        
+        html { scroll-behavior: smooth; }
+        body { background: var(--ink); color: var(--white); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; }
+        body::before { content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.6; }
         a { text-decoration: none; color: inherit; transition: 0.2s; cursor: pointer; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        .container { max-width: 1360px; margin: 0 auto; padding: 0 24px; width: 100%; position: relative; z-index: 2; }
+        .hidden { display: none !important; }
 
-        /* --- NAVBAR --- */
-        .navbar { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,0.6); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); padding: 12px 0; }
-        .nav-desktop { display: flex; align-items: center; justify-content: space-between; }
+        /* ─── NAVBAR ─── */
+        .navbar { position: sticky; top: 0; z-index: 100; background: rgba(10,11,14,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-inner { display: flex; align-items: center; gap: 16px; padding: 14px 0; }
+        .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; text-decoration: none; transition: transform 0.3s ease;}
+        .logo:hover { transform: scale(1.02); }
+        .logo-mark { width: 38px; height: 38px; border-radius: var(--r); background: var(--amber); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 20px; color: var(--ink); letter-spacing: 0; flex-shrink: 0; position: relative; overflow: hidden; }
+        .logo-mark::after { content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.25) 0%,transparent 60%); }
+        .logo-name { font-family: var(--font-display); font-size: 26px; letter-spacing: 2px; color: var(--white); line-height: 1; }
+        .logo-name span { color: var(--amber); }
         
-        /* --- CORE X LOGO STYLES --- */
-        .nav-logo { 
-            display: flex; 
-            align-items: center; 
-            gap: 4px; 
-            font-family: var(--font-head); 
-            text-decoration: none; 
-            transition: transform 0.3s ease;
-        }
-        .nav-logo:hover { transform: scale(1.02); }
-
-        .nav-logo .core-text { 
-            color: #FFFFFF !important; 
-            font-weight: 700; 
-            font-size: 24px; 
-            line-height: 1; 
-        }
-
-        /* Hide the old yellow dot if it exists */
-        .nav-logo span:not(.core-text) { display: none; }
-
-        .x-icon {
-            height: 26px;
-            width: auto;
-            display: block;
-            filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3));
-        }
-
-        @media (max-width: 768px) {
-            .nav-logo .core-text { font-size: 20px; }
-            .x-icon { height: 22px; }
-        }
-        
-        .badge { position: absolute; top: -5px; right: -5px; background: var(--accent); color: #000; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #000; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .badge.bump { transform: scale(1.4); }
-
-        .nav-icons { display: flex; gap: 20px; align-items: center; position: relative; }
-        .icon-btn { background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; position: relative; transition: 0.2s; display: flex; align-items: center;}
-        .icon-btn:hover { color: var(--accent); transform: translateY(-2px); }
-        
-        /* Profile Dropdown */
-        .profile-dropdown { position: absolute; top: 100%; right: 0; margin-top: 15px; background: #1a1a1a; border: 1px solid var(--card-border); border-radius: 8px; width: 200px; padding: 10px; display: none; flex-direction: column; gap: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 200; transform-origin: top right; animation: fadeIn 0.2s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .nav-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+        .icon-btn { width: 40px; height: 40px; border-radius: var(--r); background: var(--ink-3); border: 1px solid var(--border); color: var(--white-dim); font-size: 18px; display: flex; align-items: center; justify-content: center; transition: 0.2s; position: relative; cursor: pointer; }
+        .icon-btn:hover { background: var(--amber); color: var(--ink); border-color: var(--amber); }
+        .badge { position: absolute; top: -5px; right: -5px; background: var(--red); color: #fff; font-size: 9px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--ink); transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.5); }
+        .badge.bump { transform: scale(1.5); }
+        .profile-rel { position: relative; }
+        .profile-dropdown { position: absolute; top: calc(100% + 10px); right: 0; background: var(--panel-2); border: 1px solid var(--border-amber); border-radius: var(--r-md); width: 190px; padding: 12px; display: none; flex-direction: column; gap: 6px; box-shadow: 0 16px 48px rgba(0,0,0,0.5); animation: dropIn 0.15s ease; }
+        @keyframes dropIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
         .profile-dropdown.active { display: flex; }
-        .profile-user { font-weight: 600; color: #fff; padding-bottom: 10px; border-bottom: 1px solid var(--card-border); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .user-icon { color: var(--accent); }
-        .logout-btn { background: rgba(255,255,255,0.05); color: #fff; border: none; padding: 10px; border-radius: 6px; text-align: left; font-size: 13px; transition: 0.2s; display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .logout-btn:hover { background: #ef4444; color: white; }
+        .profile-user { font-family: var(--font-ui); font-weight: 600; font-size: 14px; color: var(--white); padding-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+        .profile-user i { color: var(--amber); }
+        .logout-btn { background: transparent; color: var(--white-dim); padding: 8px 10px; border-radius: var(--r); text-align: left; font-size: 12px; font-family: var(--font-body); transition: 0.2s; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .logout-btn:hover { background: #2d1515; color: #f87171; }
+        .nav-mobile { display: none; align-items: center; justify-content: space-between; padding: 12px 0; }
 
-        /* Mobile Nav */
-        .nav-mobile { display: none; } 
-        .mobile-nav-right { display: flex; gap: 15px; }
-        @media (max-width: 768px) { .nav-desktop { display: none; } .nav-mobile { display: flex; align-items: center; justify-content: space-between; } }
-
-        /* Product Details Layout */
-        .product-detail-container { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; /* Equal Split */
-            gap: 60px; 
-            margin-bottom: 80px; 
-            margin-top: 40px; 
-            align-items: start;
-        }
-
-        /* --- LEFT COLUMN: IMAGE ONLY --- */
+        /* ─── PRODUCT DETAILS LAYOUT ─── */
+        .product-detail-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; margin-top: 40px; align-items: start; }
         .detail-left-col { position: sticky; top: 100px; }
-        
-        /* IMAGE CONTAINER */
-        .pd-image { 
-            position: relative; 
-            overflow: hidden; 
-            border: 1px solid var(--card-border); 
-            border-radius: var(--radius-lg); 
-            background: #000; 
-            aspect-ratio: 1/1; 
-            cursor: none; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-        
-        #staticProductImg { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            display: block; 
-        }
+        .pd-image { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: var(--r-lg); background: #000; aspect-ratio: 1/1; box-shadow: 0 20px 40px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        #staticProductImg { width: 100%; height: 100%; object-fit: contain; display: block; padding: 20px; }
+        .detail-right-col { display: flex; flex-direction: column; gap: 24px; }
+        .pd-header { border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        .pd-category { color: var(--cyan); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; display: block; font-family: var(--font-mono); }
+        .pd-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); line-height: 1; margin-bottom: 12px; color: #fff; letter-spacing: 0.5px; }
+        .pd-price { font-size: 36px; color: var(--amber); font-family: var(--font-display); font-weight: 700; }
+        .pd-price span { font-size: 16px; font-weight: 400; color: var(--white-dim); margin-left: 10px; font-family: var(--font-ui); }
+        .pd-desc { color: var(--white-dim); line-height: 1.7; margin-bottom: 10px; font-size: 15px; }
 
-        /* --- RIGHT COLUMN: INFO, SPECS, ACTIONS --- */
-        .detail-right-col { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 30px;
-        }
-
-        /* Product Header */
-        .pd-header { border-bottom: 1px solid var(--card-border); padding-bottom: 20px; }
-        .pd-category { color: var(--accent); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
-        .pd-title { font-family: var(--font-head); font-size: 42px; line-height: 1.1; margin-bottom: 10px; color: #fff; }
-        .pd-price { font-size: 32px; color: var(--text-main); font-family: var(--font-head); font-weight: 700; }
-        .pd-price span { font-size: 18px; font-weight: 400; color: var(--text-sec); margin-left: 10px; }
-
-        /* Description */
-        .pd-desc { color: var(--text-sec); line-height: 1.8; margin-bottom: 10px; font-size: 16px; }
-
-        /* Amazon Style Overview/Highlights */
-        .overview-section {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-md);
-            padding: 25px;
-        }
-        .section-title { font-family: var(--font-head); font-size: 20px; margin-bottom: 15px; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
-        
+        /* Highlights */
+        .overview-section { background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+        .section-title { font-family: var(--font-ui); font-size: 18px; margin-bottom: 15px; color: var(--white); display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
         .highlights-list { list-style: none; }
-        .highlights-list li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 12px;
-            color: var(--text-sec);
-            font-size: 15px;
-        }
-        .highlights-list li::before {
-            content: '\eb4b'; /* Remixicon check */
-            font-family: 'remixicon';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            color: var(--accent);
-        }
+        .highlights-list li { position: relative; padding-left: 24px; margin-bottom: 10px; color: var(--white-dim); font-size: 14px; line-height: 1.5; }
+        .highlights-list li::before { content: '•'; position: absolute; left: 0; top: 0; color: var(--amber); font-weight: bold; }
 
-        /* Amazon Style Specs (Table-like) */
-        .specs-container {
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-        .spec-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 16px 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            background: rgba(0,0,0,0.2);
-        }
+        /* Specs Table */
+        .specs-container { border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; background: var(--panel); }
+        .spec-row { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid var(--border); background: var(--ink-3); }
         .spec-row:last-child { border-bottom: none; }
         .spec-row:nth-child(even) { background: rgba(255,255,255,0.02); }
-        
-        .spec-label { font-weight: 600; color: #fff; width: 30%; }
-        .spec-value { color: var(--text-sec); width: 65%; text-align: right; }
+        .spec-label { font-weight: 600; color: var(--white); width: 40%; font-size: 13px; }
+        .spec-value { color: var(--white-dim); width: 60%; text-align: right; font-size: 13px; }
 
-        /* Actions */
+        /* Buttons */
         .pd-actions { display: flex; gap: 15px; margin-top: 10px; }
-        .btn { padding: 16px 32px; border-radius: 8px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .btn-lg { padding: 16px 48px; }
-        .btn-view { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--card-border); }
-        .btn-view:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
-        .btn-cart { background: var(--accent); color: #000; }
-        .btn-cart:hover { background: var(--accent-hover); }
-        .btn-cart.added { background: var(--success); color: #fff; border-color: var(--success); pointer-events: none; }
-        
-        /* --- ZOOM LENS (FIXED SIZING) --- */
-        /* Layer covering screen to hold lens */
-        #zoom-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none; /* Let clicks pass through */
-            z-index: 500; 
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            overflow: hidden;
-        }
+        .btn { padding: 14px 28px; border-radius: var(--r); border: none; font-family: var(--font-ui); font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-lg { padding: 16px 48px; flex: 1; }
+        .btn-view { background: var(--ink-4); color: var(--white-dim); border: 1px solid var(--border); }
+        .btn-view:hover { background: var(--ink-5); border-color: var(--white); color: var(--white); }
+        .btn-cart { background: var(--amber); color: var(--ink); box-shadow: 0 4px 15px rgba(245,158,11,0.3); }
+        .btn-cart:hover { background: var(--amber-bright); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,158,11,0.5); }
+        .btn-cart.added { background: #064e3b; color: #6ee7b7; pointer-events: none; box-shadow: none; }
 
-        /* The actual Glass Circle */
-        #magnifier {
-            position: absolute;
-            width: 160px; /* Size of glass */
-            height: 160px;
-            border: 2px solid rgba(255,255,255,0.4);
-            border-radius: 50%;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
-            box-shadow: 0 0 0 4px rgba(0,0,0,0.5); 
-            backdrop-filter: blur(2px);
-        }
+        /* ─── ZOOM LENS ─── */
+        #zoom-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 500; opacity: 0; transition: opacity 0.2s ease; overflow: hidden; }
+        #magnifier { position: absolute; width: 160px; height: 160px; border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; overflow: hidden; background: rgba(0, 0, 0, 0.3); box-shadow: 0 0 0 4px rgba(0,0,0,0.5); backdrop-filter: blur(2px); }
+        #magnifier-img { object-fit: contain; transform-origin: 0 0; will-change: transform; max-width: none; }
+        #custom-cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 600; width: 32px; height: 32px; display: none; align-items: center; justify-content: center; transform: translate(-50%, -50%); }
+        #custom-cursor::after { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid rgba(255,255,255,0.5); border-radius: 50%; width: 12px; height: 12px; }
+        #custom-cursor::before { content: '+'; color: rgba(255,255,255,0.5); font-size: 30px; font-weight: 300; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-        /* Image inside glass */
-        /* CRITICAL: Width/Height will be set by JS to match main image */
-        #magnifier-img {
-            object-fit: cover; /* Match main image crop */
-            transform-origin: 0 0; /* Critical for panning math */
-            will-change: transform;
-            max-width: none; /* Prevent constraints */
-        }
-
-        /* Custom Cursor (Centered) */
-        #custom-cursor {
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 600; 
-            width: 32px; height: 32px;
-            display: none;
-            align-items: center; justify-content: center;
-            transform: translate(-50%, -50%); 
-        }
-        #custom-cursor::after {
-            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
-            border: 1px solid rgba(255,255,255,0.5); border-radius: 50%; width: 12px; height: 12px;
-        }
-        #custom-cursor::before {
-            content: '+'; color: rgba(255,255,255,0.5); font-size: 30px; font-weight: 300;
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        }
-
-        /* --- PROFESSIONAL FOOTER --- */
-        .site-footer { background: #0a0a0c; padding: 80px 0 30px; margin-top: auto; border-top: 1px solid var(--card-border); }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 60px; }
-        
-        .footer-col h4 { color: #fff; font-size: 16px; font-weight: 600; margin-bottom: 20px; font-family: var(--font-head); }
-        .footer-col p { color: var(--text-sec); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
-        
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: var(--text-sec); font-size: 14px; transition: 0.2s; }
-        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
-        
-        .newsletter-form { display: flex; gap: 10px; margin-top: 15px; }
-        .newsletter-form input { background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); padding: 10px; border-radius: 6px; color: #fff; width: 100%; outline: none; }
-        .newsletter-form button { background: var(--accent); border: none; width: 40px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #000; }
-        .newsletter-form button:hover { background: var(--accent-hover); }
-
-        .footer-bottom { border-top: 1px solid var(--card-border); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; color: var(--text-sec); font-size: 13px; }
-        .social-links { display: flex; gap: 15px; }
-        .social-links a { color: var(--text-sec); font-size: 18px; transition: 0.2s; }
-        .social-links a:hover { color: var(--accent); transform: translateY(-3px); }
-
-        /* Recommendations */
+        /* ─── RECOMMENDATIONS ─── */
         .recommendation-section { margin-bottom: 60px; }
-        .rec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 30px; }
-        .rec-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
-        .rec-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .rec-top { height: 180px; background: #000; overflow: hidden; }
-        .rec-top img { width: 100%; height: 100%; object-fit: cover; }
-        .rec-bottom { padding: 15px; flex: 1; display: flex; flex-direction: column; }
-        .rec-name { font-weight: 600; font-size: 14px; margin-bottom: 5px; }
-        .rec-price { font-family: var(--font-head); font-size: 16px; color: var(--accent); margin-top: auto; }
+        .rec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 30px; }
+        .rec-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+        .rec-card:hover { border-color: var(--amber); transform: translateY(-5px); }
+        .rec-top { height: 160px; background: #000; overflow: hidden; padding: 15px; display: flex; align-items: center; justify-content: center; }
+        .rec-top img { width: 100%; height: 100%; object-fit: contain; }
+        .rec-bottom { padding: 15px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .rec-name { font-family: var(--font-ui); font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; line-height: 1.3; }
+        .rec-price { font-family: var(--font-display); font-size: 20px; color: var(--amber); }
 
-        /* --- RESPONSIVE --- */
+        /* ─── FOOTER ─── */
+        footer { background: var(--ink-2); border-top: 1px solid var(--border); padding: 60px 0 30px; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: #fff; font-size: 14px; font-weight: 600; margin-bottom: 20px; font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col p { color: var(--white-dim); font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: var(--white-dim); font-size: 13px; transition: 0.2s; }
+        .footer-links a:hover { color: var(--amber); padding-left: 5px; }
+        .newsletter-form { display: flex; gap: 10px; margin-top: 15px; }
+        .newsletter-form input { background: var(--ink-3); border: 1px solid var(--border); padding: 10px; border-radius: var(--r); color: #fff; width: 100%; outline: none; }
+        .newsletter-form button { background: var(--amber); border: none; width: 40px; border-radius: var(--r); cursor: pointer; display: flex; align-items: center; justify-content: center; color: #000; }
+        .newsletter-form button:hover { background: var(--amber-bright); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; color: var(--white-dim); font-size: 12px; font-family: var(--font-mono); }
+        .social-links { display: flex; gap: 15px; }
+        .social-links a { color: var(--white-dim); font-size: 16px; transition: 0.2s; }
+        .social-links a:hover { color: var(--amber); transform: translateY(-3px); }
+
+        /* Toast */
+        #toast-container { position: fixed; bottom: 28px; right: 28px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background: var(--panel-2); border: 1px solid var(--border-amber); color: var(--white); padding: 12px 20px; border-radius: var(--r-md); box-shadow: 0 12px 36px rgba(0,0,0,0.5); font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 12px; animation: toastIn 0.3s ease; min-width: 260px; }
+        @keyframes toastIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes toastOut { to { opacity: 0; transform: translateY(8px); } }
+
+        /* Back Button */
+        .btn-back { display: inline-flex; align-items: center; gap: 6px; color: var(--amber); font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+        .btn-back:hover { color: #fff; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--ink-2); } ::-webkit-scrollbar-thumb { background: var(--amber-dim); border-radius: 4px; }
+
+        /* Responsive */
         @media (max-width: 992px) {
             .product-detail-container { grid-template-columns: 1fr; }
             .detail-left-col { position: static; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
+            .nav-inner { display: none; } .nav-mobile { display: flex; }
             .pd-title { font-size: 28px; }
             .rec-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -302,13 +182,10 @@
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
     <div id="toast-container"></div>
 
     <!-- Custom Cursor & Zoom Elements -->
     <div id="custom-cursor"></div>
-
-    <!-- ZOOM LAYER (Fixed full screen, high z-index) -->
     <div id="zoom-layer">
         <div id="magnifier">
             <img id="magnifier-img" src="" alt="Zoomed View">
@@ -317,69 +194,48 @@
 
     <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-desktop">
-                <!-- REPLACED: CORE X Logo -->
-                <a href="shop.html" class="nav-logo">
-                    <span class="core-text">CORE</span>
-                    
-                    <!-- Custom Asymmetric X Icon with Gradient -->
-                    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
-                                <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
-                            </linearGradient>
-                        </defs>
-                        
-                        <!-- Big Line (Long diagonal) -->
-                        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-                        
-                        <!-- Small Line (Short diagonal, offset for effect) -->
-                        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-                    </svg>
-                </a>
-                <div class="nav-icons">
-                    <button class="icon-btn" onclick="toggleProfile()" aria-label="Profile">
-                        <i class="ri-user-line"></i>
-                        <div class="profile-dropdown" id="profileDropdown">
-                            <div class="profile-user"><i class="ri-user-smile-line user-icon"></i> <span id="userNameDisplay">User</span></div>
-                            <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
-                        </div>
-                    </button>
-                    <a href="cart.html" class="icon-btn" aria-label="Cart">
-                        <i class="ri-shopping-cart-line"></i>
-                        <span class="badge" id="cartBadge">0</span>
-                    </a>
-                </div>
+      <div class="container">
+        <div class="nav-inner">
+          <a href="shop.html" class="logo">
+           <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
+            <span class="logo-name">CORE<span>X</span></span>
+          </a>
+    
+          <div style="flex:1"></div>
+    
+          <div class="nav-actions">
+            <div class="profile-rel">
+              <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
+              <div class="profile-dropdown" id="profileDropdown">
+                <div class="profile-user"><i class="ri-cpu-line"></i><span id="userNameDisplay">Guest</span></div>
+                <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
+              </div>
             </div>
-            <div class="nav-mobile">
-                <!-- REPLACED: CORE X Logo Mobile -->
-                <a href="shop.html" class="nav-logo">
-                    <span class="core-text">CORE</span>
-                    
-                    <!-- Copy of Icon with Unique Gradient ID for Mobile -->
-                    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="redGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#ff3333" />
-                                <stop offset="100%" stop-color="#990000" />
-                            </linearGradient>
-                        </defs>
-                        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
-                        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
-                    </svg>
-                </a>
-                <div class="mobile-nav-right">
-                    <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-line"></i></button>
-                    <a href="cart.html" class="icon-btn"><i class="ri-shopping-cart-line"></i><span class="badge" id="cartBadgeMobile">0</span></a>
-                </div>
-            </div>
+            <a href="cart.html" class="icon-btn" style="position:relative;">
+              <i class="ri-shopping-bag-3-line"></i>
+              <span class="badge" id="cartBadge">0</span>
+            </a>
+          </div>
         </div>
+    
+        <div class="nav-mobile">
+          <a href="shop.html" class="logo">
+            <div class="logo-mark" style="width:32px;height:32px;font-size:17px;">CX</div>
+            <span class="logo-name" style="font-size:22px;">CORE<span>X</span></span>
+          </a>
+          <div style="display:flex;gap:8px;">
+            <button class="icon-btn" style="width:38px;height:38px;" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
+            <a href="cart.html" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
+              <i class="ri-shopping-bag-3-line"></i>
+              <span class="badge" id="cartBadgeMobile">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </nav>
 
     <main class="container">
-        <a href="all-products.html" class="btn-back" style="display:inline-flex; align-items:center; gap:5px; color:var(--text-sec); margin-bottom:20px; font-size:14px;"><i class="ri-arrow-left-line"></i> Back to Products</a>
+        <a href="all-products.html" class="btn-back"><i class="ri-arrow-left-line"></i> Back to Catalog</a>
         
         <div class="product-detail-container">
             <!-- LEFT COLUMN: IMAGE ONLY -->
@@ -392,32 +248,28 @@
             <!-- RIGHT COLUMN: DETAILS, SPECS, ACTIONS -->
             <div class="detail-right-col">
                 
-                <!-- Header: Title, Price, Rating -->
+                <!-- Header -->
                 <div class="pd-header">
-                    <span class="pd-category">High-End Workstation</span>
+                    <span class="pd-category" id="pdCategory">High-End Workstation</span>
                     <h1 class="pd-title" id="detailTitle"></h1>
                     <div class="pd-price" id="detailPrice"></div>
-                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px; color:#FFD600;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px; color:var(--amber);">
                         <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i>
-                        <span style="color:var(--text-sec); font-size:14px; font-weight:400;">(124 Reviews)</span>
+                        <span style="color:var(--white-dim); font-size:13px; font-weight:400; font-family: var(--font-body);">(124 Reviews)</span>
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div class="pd-desc" id="detailDesc"></div>
 
-                <!-- Product Overview / Highlights -->
+                <!-- Highlights -->
                 <div class="overview-section">
-                    <div class="section-title"><i class="ri-flashlight-line" style="color:var(--accent)"></i> Product Highlights</div>
-                    <ul class="highlights-list" id="highlightsList">
-                        <!-- Populated by JS -->
-                    </ul>
+                    <div class="section-title"><i class="ri-flashlight-line" style="color:var(--cyan)"></i> Key Features</div>
+                    <ul class="highlights-list" id="highlightsList"></ul>
                 </div>
 
-                <!-- Technical Specifications (Amazon Style) -->
-                <div class="specs-container" id="specsContainer">
-                    <!-- Populated by JS -->
-                </div>
+                <!-- Specs -->
+                <div class="specs-container" id="specsContainer"></div>
 
                 <!-- Actions -->
                 <div class="pd-actions">
@@ -431,32 +283,20 @@
 
         <!-- Recommendations -->
         <div class="recommendation-section">
-            <h2 style="font-family: var(--font-head); font-size: 24px; color: #fff;">You may also like</h2>
+            <div class="sec-label">// Suggested</div>
+            <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--white);">You may also like</h2>
             <div class="rec-grid" id="recommendedGrid"></div>
         </div>
     </main>
 
-    <!-- PROFESSIONAL FOOTER -->
-    <footer class="site-footer">
+    <!-- FOOTER -->
+    <footer>
         <div class="container">
             <div class="footer-grid">
-                <!-- Brand -->
                 <div class="footer-col">
-                    <!-- REPLACED: CORE X Logo Footer -->
-                    <a href="index.html" class="nav-logo" style="margin-bottom: 20px; display:inline-block;">
-                        <span class="core-text">CORE</span>
-                        
-                        <!-- Copy of Icon with Unique Gradient ID for Footer -->
-                        <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="redGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#ff3333" />
-                                    <stop offset="100%" stop-color="#990000" />
-                                </linearGradient>
-                            </defs>
-                            <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientFooter)" stroke-width="6" stroke-linecap="round" />
-                            <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientFooter)" stroke-width="6" stroke-linecap="round" />
-                        </svg>
+                    <a href="shop.html" class="logo" style="margin-bottom: 20px; display:inline-block;">
+                        <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
+                        <span class="logo-name">CORE<span>X</span></span>
                     </a>
                     <p>COREX Systems delivers high-performance computing solutions for professionals, gamers, and creators. Engineered for excellence.</p>
                     <div class="newsletter-form">
@@ -464,8 +304,6 @@
                         <button><i class="ri-send-plane-fill"></i></button>
                     </div>
                 </div>
-                
-                <!-- Shop -->
                 <div class="footer-col">
                     <h4>Shop</h4>
                     <ul class="footer-links">
@@ -473,35 +311,27 @@
                         <li><a href="#">Workstations</a></li>
                         <li><a href="#">Gaming PCs</a></li>
                         <li><a href="#">Components</a></li>
-                        <li><a href="#">Accessories</a></li>
                     </ul>
                 </div>
-                
-                <!-- Support -->
                 <div class="footer-col">
                     <h4>Support</h4>
                     <ul class="footer-links">
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Returns & Warranty</a></li>
+                        <li><a href="#">Returns</a></li>
                         <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">FAQs</a></li>
                     </ul>
                 </div>
-
-                <!-- Company -->
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul class="footer-links">
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Terms</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2026 COREX Systems. All rights reserved.</p>
                 <div class="social-links">
@@ -517,1342 +347,111 @@
     <script>
     const API_URL = "https://api.core-x.in";
 
-        // --- MOCK DATA WITH SPECS ---
-        const productsData = [
-    // --- INTEL GAMING PCS (15) ---
+    /* 
+       DETAILED PRODUCT DATA (50 Items)
+       Specs include: CPU, Motherboard, RAM, GPU, Storage, PSU, Cooling, Processor Model, Graphics, SSD Speed, Tower Type, Brand, Warranty, Note
+    */
+    const productsData = [
+        // --- INTEL GAMING PCS (15) ---
+        { 
+            id: 1, name: "Starter Gaming PC", category: "gaming", img: "https://m.media-amazon.com/images/I/71bJ6pk+t0L._AC_UF1000,1000_QL80_.jpg", 
+            desc: "Intel 10th Gen Core i5 10400F, NVIDIA GeForce RTX 3060 12GB Graphics, 16GB RAM, 480GB SSD, WiFi. Budget champion.", 
+            price: "₹1,24,777",
+            highlights: ["Intel 10th Gen Core i5 10400F", "NVIDIA GeForce RTX 3060 12GB", "H410 Chipset", "16GB DDR4 RAM", "Windows 10 Trial", "480GB SSD"],
+            specs: [
+                { label: "CPU", value: "Intel Core i5-10400F" },
+                { label: "Motherboard", value: "Gigabyte H410M S2H V3" },
+                { label: "RAM", value: "8GB x 2 DDR4 3200MHz" },
+                { label: "GPU", value: "NVIDIA GeForce RTX 3060 12GB" },
+                { label: "Storage", value: "480GB M.2 NVMe SSD" },
+                { label: "PSU", value: "DeepCool PF450W 80+ Bronze" },
+                { label: "Cooling", value: "Intel Stock Cooler" },
+                { label: "Processor Model", value: "Comet Lake-S Refresh" },
+                { label: "Graphics", value: "GeForce RTX 3060" },
+                { label: "SSD Speed", value: "500 MB/s Read" },
+                { label: "Tower Type", value: "Antec VSK4000" },
+                { label: "Brand", value: "COREX" },
+                { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" },
+                { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }
+            ]
+        },
+        { 
+            id: 2, name: "Performance Gaming PC", category: "gaming", img: "https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg", 
+            desc: "Intel 14th Gen Core i7 14700K, Nvidia GeForce RTX 4060 8GB Graphics, 32GB DDR5 RAM, 1TB Gen4 NVMe SSD. Multitasking beast.", 
+            price: "₹1,92,148",
+            highlights: ["Intel 14th Gen Core i7 14700K", "Nvidia GeForce RTX 4060 8GB", "Z790 Chipset", "32GB DDR5 RAM", "1TB Gen4 NVMe SSD", "Windows 11 Trial"],
+            specs: [
+                { label: "CPU", value: "Intel Core i7-14700K" },
+                { label: "Motherboard", value: "MSI PRO Z790-A WIFI" },
+                { label: "RAM", value: "32GB (16x2) DDR5 5600MHz" },
+                { label: "GPU", value: "NVIDIA GeForce RTX 4060 8GB" },
+                { label: "Storage", value: "1TB Gen4 NVMe SSD" },
+                { label: "PSU", value: "MSI MAG A650BN 650W" },
+                { label: "Cooling", value: "Cooler Master Hyper 212 Spectrum" },
+                { label: "Processor Model", value: "Raptor Lake Refresh" },
+                { label: "Graphics", value: "GeForce RTX 4060" },
+                { label: "SSD Speed", value: "7000 MB/s Read" },
+                { label: "Tower Type", value: "MSI MAG Vampiric 100C" },
+                { label: "Brand", value: "COREX" },
+                { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" },
+                { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }
+            ]
+        },
+        { id: 3, name: "Intel i5-13600KF Gaming Build", category: "gaming", img: "https://5.imimg.com/data5/SELLER/Default/2024/2/387712115/ZC/SR/GW/80125604/gear-g3-gaming-pc-intel-core-i5-13th-gen-13400f-rtx-4060-16gb-ram-1tb-nvme-ssd.jpg", desc: "13th Gen Intel Core i5-13600KF Unlocked, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 RAM, 1TB Gen4 SSD.", price: "₹1,35,000", highlights: ["Intel Core i5-13600KF Unlocked", "NVIDIA GeForce RTX 4060 Ti 16GB", "Z790 Chipset", "32GB DDR5 RAM", "1TB Gen4 SSD"], specs: [{ label: "CPU", value: "Intel Core i5-13600KF" }, { label: "Motherboard", value: "ASUS TUF Gaming Z790-Plus WiFi" }, { label: "RAM", value: "32GB (16x2) DDR5 6000MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4060 Ti 16GB" }, { label: "Storage", value: "1TB Gen4 NVMe SSD" }, { label: "PSU", value: "Cooler Master MWE 750W Gold V2" }, { label: "Cooling", value: "DeepCool AK620 Digital" }, { label: "Processor Model", value: "Alder Lake Refresh" }, { label: "Graphics", value: "GeForce RTX 4060 Ti" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "Lian Li Lancool 205 Mesh" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 4, name: "Intel i5-13400F Entry Build", category: "gaming", img: "https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg", desc: "12th Gen Intel Core i5-13400F, NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB NVMe SSD.", price: "₹1,65,000", highlights: ["Intel Core i5-13400F", "NVIDIA GeForce RTX 3060 12GB", "B660 Chipset", "16GB DDR4 RAM", "512GB SSD"], specs: [{ label: "CPU", value: "Intel Core i5-13400F" }, { label: "Motherboard", value: "ASUS PRIME B660M-A D4" }, { label: "RAM", value: "16GB (8x2) DDR4 3200MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3060 12GB" }, { label: "Storage", value: "512GB NVMe SSD" }, { label: "PSU", value: "Antec HCG 650W Gold" }, { label: "Cooling", value: "ID-COOLING SE-214-XT" }, { label: "Processor Model", value: "Alder Lake Refresh" }, { label: "Graphics", value: "GeForce RTX 3060" }, { label: "SSD Speed", value: "3500 MB/s Read" }, { label: "Tower Type", value: "Zalman S2" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 5, name: "Intel i5-12600K Value Build", category: "gaming", img: "https://m.media-amazon.com/images/X/bxt1/M/gbxt1BUnh4jLjZ2.png", desc: "12th Gen Intel Core i5-12600K, NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB SSD.", price: "₹1,54,990", highlights: ["Intel Core i5-12600K", "NVIDIA GeForce RTX 3060 12GB", "H670 Motherboard", "16GB DDR4 RAM", "WiFi 6 Built-in"], specs: [{ label: "CPU", value: "Intel Core i5-12600K" }, { label: "Motherboard", value: "MSI MAG H670M Mortar WiFi" }, { label: "RAM", value: "16GB (8x2) DDR4 3200MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3060 12GB" }, { label: "Storage", value: "512GB NVMe SSD" }, { label: "PSU", value: "Gigabyte P750GM 750W" }, { label: "Cooling", value: "Thermalright Peerless Assassin 120 Mini" }, { label: "Processor Model", value: "Alder Lake" }, { label: "Graphics", value: "GeForce RTX 3060" }, { label: "SSD Speed", value: "3500 MB/s Read" }, { label: "Tower Type", value: "Cooler Master MasterBox Q300L" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 6, name: "Intel i7-12700K Battlestation", category: "gaming", img: "https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg", desc: "12th Gen Intel Core i7-12700K, NVIDIA GeForce RTX 3070 8GB, 32GB DDR4 RAM, 2TB NVMe SSD.", price: "₹1,85,000", highlights: ["Intel Core i7-12700K", "NVIDIA GeForce RTX 3070 8GB", "Z690 Chipset", "32GB DDR4 RAM", "RGB Case"], specs: [{ label: "CPU", value: "Intel Core i7-12700K" }, { label: "Motherboard", value: "ASUS ROG Strix Z690-E Gaming WiFi" }, { label: "RAM", value: "32GB (16x2) DDR4 3600MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3070 8GB" }, { label: "Storage", value: "2TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair RM750e 750W 80+ Gold" }, { label: "Cooling", value: "Lian Li Galahad 360 RGB" }, { label: "Processor Model", value: "Alder Lake" }, { label: "Graphics", value: "GeForce RTX 3070" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "Lian Li Lancool 216" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 7, name: "Intel i7-13700K Performance", category: "gaming", img: "https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg", desc: "13th Gen Intel Core i7-13700K, NVIDIA GeForce RTX 3070 Ti 8GB, 32GB DDR5 RAM, 2TB SSD.", price: "₹2,15,000", highlights: ["Intel Core i7-13700K", "NVIDIA GeForce RTX 3070 Ti 8GB", "Z790 Chipset", "32GB DDR5 RAM", "2TB Gen4 SSD"], specs: [{ label: "CPU", value: "Intel Core i7-13700K" }, { label: "Motherboard", value: "MSI MPG Z790 Edge WiFi" }, { label: "RAM", value: "32GB (16x2) DDR5 5200MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3070 Ti 8GB" }, { label: "Storage", value: "2TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair RM850e 850W Gold" }, { label: "Cooling", value: "NZXT Kraken 240 RGB" }, { label: "Processor Model", value: "Raptor Lake" }, { label: "Graphics", value: "GeForce RTX 3070 Ti" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Fractal Design Meshify C2" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 8, name: "Intel i7-14700K RTX 4070 Build", category: "gaming", img: "https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458", desc: "14th Gen Intel Core i7-14700K, NVIDIA GeForce RTX 4070 12GB, 32GB DDR5 RAM, 2TB Gen5 SSD.", price: "₹2,45,000", highlights: ["Intel Core i7-14700K", "NVIDIA GeForce RTX 4070 12GB", "Z790 Chipset", "32GB DDR5 RAM", "2TB Gen5 SSD"], specs: [{ label: "CPU", value: "Intel Core i7-14700K" }, { label: "Motherboard", value: "Gigabyte Z790 AORUS Elite WiFi" }, { label: "RAM", value: "32GB (16x2) DDR5 6000MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4070 12GB" }, { label: "Storage", value: "2TB Gen5 NVMe SSD" }, { label: "PSU", value: "ASUS ROG Strix 850W Gold" }, { label: "Cooling", value: "Corsair iCUE H150i Elite LCD" }, { label: "Processor Model", value: "Raptor Lake Refresh" }, { label: "Graphics", value: "GeForce RTX 4070" }, { label: "SSD Speed", value: "12000 MB/s Read" }, { label: "Tower Type", value: "Lian Li O11 Dynamic Evo" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 9, name: "Intel i7-14700KF OC Edition", category: "gaming", img: "https://m.media-amazon.com/images/I/61G0BM0HPRL._AC_UF1000,1000_QL80_.jpg", desc: "Unlocked 14th Gen Intel Core i7-14700KF, NVIDIA GeForce RTX 4070 Ti 16GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹3,10,000", highlights: ["Intel Core i7-14700KF Unlocked", "NVIDIA GeForce RTX 4070 Ti 16GB", "Z790 Chipset", "64GB DDR5 RAM", "4TB Gen4 SSD"], specs: [{ label: "CPU", value: "Intel Core i7-14700KF" }, { label: "Motherboard", value: "MSI MEG Z790 ACE" }, { label: "RAM", value: "64GB (32x2) DDR5 6400MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4070 Ti 16GB" }, { label: "Storage", value: "4TB Gen4 NVMe SSD" }, { label: "PSU", value: "Seasonic Focus GX-1000 80+ Gold" }, { label: "Cooling", value: "NZXT Kraken Elite 360 RGB" }, { label: "Processor Model", value: "Raptor Lake Refresh" }, { label: "Graphics", value: "GeForce RTX 4070 Ti" }, { label: "SSD Speed", value: "7450 MB/s Read" }, { label: "Tower Type", value: "Corsair 4000D Airflow" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 10, name: "Intel i9-12900K RTX 3080 Ti", category: "gaming", img: "https://m.media-amazon.com/images/I/81pDvAwecpL._AC_UF1000,1000_QL80_.jpg", desc: "12th Gen Intel Core i9-12900K, NVIDIA GeForce RTX 3080 Ti 12GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹2,35,000", highlights: ["Intel Core i9-12900K", "NVIDIA GeForce RTX 3080 Ti 12GB", "Z690 Chipset", "64GB DDR5 RAM", "4TB NVMe SSD"], specs: [{ label: "CPU", value: "Intel Core i9-12900K" }, { label: "Motherboard", value: "ASUS ROG Maximus Z690 Hero" }, { label: "RAM", value: "64GB (32x2) DDR5 6000MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3080 Ti 12GB" }, { label: "Storage", value: "4TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair RM1000e 1000W Gold" }, { label: "Cooling", value: "Corsair iCUE H150i Elite Capellix" }, { label: "Processor Model", value: "Alder Lake" }, { label: "Graphics", value: "GeForce RTX 3080 Ti" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "Fractal Define 7 XL" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 11, name: "Intel i9-13900K RTX 4080", category: "gaming", img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", desc: "13th Gen Intel Core i9-13900K, NVIDIA GeForce RTX 4080 16GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹2,80,000", highlights: ["Intel Core i9-13900K", "NVIDIA GeForce RTX 4080 16GB", "Z790 Chipset", "64GB DDR5 RAM", "4TB Gen4 SSD"], specs: [{ label: "CPU", value: "Intel Core i9-13900K" }, { label: "Motherboard", value: "MSI MEG Z790 Godlike" }, { label: "RAM", value: "64GB (32x2) DDR5 6600MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4080 16GB" }, { label: "Storage", value: "4TB Gen4 NVMe SSD" }, { label: "PSU", value: "be quiet! Straight Power 1200W" }, { label: "Cooling", value: "EKWB Custom Loop" }, { label: "Processor Model", value: "Raptor Lake" }, { label: "Graphics", value: "GeForce RTX 4080" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Hyte Y70 Touch" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 12, name: "Intel i9-14900K RTX 4090 Titan", category: "gaming", img: "https://microless.com/cdn/products/e8830fb6dec828ca8e55d3e493fe40e3-hi.jpg", desc: "14th Gen Intel Core i9-14900K, NVIDIA GeForce RTX 4090 24GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹3,55,000", highlights: ["Intel Core i9-14900K", "NVIDIA GeForce RTX 4090 24GB", "Z790 Chipset", "64GB DDR5 RAM", "4TB Gen5 SSD"], specs: [{ label: "CPU", value: "Intel Core i9-14900K" }, { label: "Motherboard", value: "ASUS ROG Maximus Z790 Apex Encore" }, { label: "RAM", value: "64GB (32x2) DDR5 7200MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4090 24GB" }, { label: "Storage", value: "4TB Gen5 NVMe SSD" }, { label: "PSU", value: "Corsair RM1000x Shift 850W Titanium" }, { label: "Cooling", value: "Alphacool Eisbaer Aurora 360" }, { label: "Processor Model", value: "Raptor Lake Refresh" }, { label: "Graphics", value: "GeForce RTX 4090" }, { label: "SSD Speed", value: "14000 MB/s Read" }, { label: "Tower Type", value: "Lian Li O11 Vision" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 13, name: "Intel i9-14900KF RTX 4090 OC", category: "gaming", img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", desc: "Unlocked 14th Gen Intel Core i9-14900KF, Dual NVIDIA RTX 4090 48GB SLI, 128GB DDR5 RAM, 8TB SSD.", price: "₹4,50,000", highlights: ["Intel Core i9-14900KF Unlocked", "Dual NVIDIA RTX 4090 (48GB Total)", "Z790 Chipset", "128GB DDR5 RAM", "8TB SSD RAID"], specs: [{ label: "CPU", value: "Intel Core i9-14900KF" }, { label: "Motherboard", value: "ASUS ROG Maximus Z790 Extreme" }, { label: "RAM", value: "128GB (32x4) DDR5 6400MHz" }, { label: "GPU", value: "Dual NVIDIA RTX 4090 24GB" }, { label: "Storage", value: "8TB Gen4 NVMe RAID 0" }, { label: "PSU", value: "Corsair AX1600i 1600W Titanium" }, { label: "Cooling", value: "Custom Watercooled Loop" }, { label: "Processor Model", value: "Raptor Lake Refresh" }, { label: "Graphics", value: "GeForce RTX 4090 SLI" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "Corsair 9000D Super Tower" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 14, name: "Intel i9-13900KS Speed Demon", category: "gaming", img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", desc: "Special Edition Intel Core i9-13900KS (6.0 GHz), NVIDIA GeForce RTX 4090 24GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹4,85,000", highlights: ["Intel Core i9-13900KS (6.0 GHz)", "NVIDIA GeForce RTX 4090 24GB", "Z790 Chipset", "64GB DDR5 RAM", "4TB Gen4 SSD"], specs: [{ label: "CPU", value: "Intel Core i9-13900KS" }, { label: "Motherboard", value: "MSI MEG Z790 Godlike" }, { label: "RAM", value: "64GB (32x2) DDR5 6600MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4090 24GB" }, { label: "Storage", value: "4TB Gen4 NVMe SSD" }, { label: "PSU", value: "be quiet! Dark Power Pro 1500W" }, { label: "Cooling", value: "DeepCool LS720 SE" }, { label: "Processor Model", value: "Raptor Lake" }, { label: "Graphics", value: "GeForce RTX 4090" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Hyte Y60 Black" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 15, name: "Intel i9-14900KS Dual 4090", category: "gaming", img: "https://m.media-amazon.com/images/I/81a1Ejl1y6L.jpg", desc: "Special Edition Intel Core i9-14900KS, Dual NVIDIA RTX 4090 48GB, 128GB DDR5 RAM, 8TB SSD.", price: "₹4,99,999", highlights: ["Intel Core i9-14900KS (6.2 GHz)", "Dual NVIDIA RTX 4090 48GB", "Z790 Chipset", "128GB DDR5 RAM", "8TB Gen5 SSD"], specs: [{ label: "CPU", value: "Intel Core i9-14900KS" }, { label: "Motherboard", value: "Gigabyte Z790 AORUS Xtreme" }, { label: "RAM", value: "128GB (32x4) DDR5 7200MHz" }, { label: "GPU", value: "Dual NVIDIA RTX 4090 24GB" }, { label: "Storage", value: "8TB Gen5 NVMe RAID 0" }, { label: "PSU", value: "Seasonic Prime TX-1600 1600W" }, { label: "Cooling", value: "Custom Watercooled Loop" }, { label: "Processor Model", value: "Raptor Lake Refresh" }, { label: "Graphics", value: "GeForce RTX 4090 SLI" }, { label: "SSD Speed", value: "14000 MB/s Read" }, { label: "Tower Type", value: "Thermaltake Core W200" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        
+        // --- AMD GAMING PCS (15) ---
+        { id: 16, name: "AMD Ryzen 5 5600X RTX 3060", category: "gaming", img: "https://computechstore.in/_next/image?url=https%3A%2F%2Fcdn.computechstore.in%2Fuploads%2Fwp%2F2024%2F10%2FElite_1120-1-1-Custom-2.jpg&w=2048&q=75", desc: "AMD Ryzen 5 5600X (6 Cores), NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB SSD.", price: "₹1,15,000", highlights: ["AMD Ryzen 5 5600X (6 Cores)", "NVIDIA GeForce RTX 3060 12GB", "B550 Motherboard", "16GB DDR4 RAM", "512GB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 5 5600X" }, { label: "Motherboard", value: "MSI B550M-A PRO" }, { label: "RAM", value: "16GB (8x2) DDR4 3600MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3060 12GB" }, { label: "Storage", value: "512GB NVMe SSD" }, { label: "PSU", value: "DeepCool PK550D 550W" }, { label: "Cooling", value: "AMD Wraith Spire" }, { label: "Processor Model", value: "Vermeer" }, { label: "Graphics", value: "GeForce RTX 3060" }, { label: "SSD Speed", value: "3500 MB/s Read" }, { label: "Tower Type", value: "Antec NX200" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 17, name: "AMD Ryzen 5 7500F RX 7600", category: "gaming", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWffPdTvrRsrFQ-z_5jzU7RuCKmaxFYPgqEw&s", desc: "AMD Ryzen 5 7500F, AMD Radeon RX 7600 8GB, 32GB DDR5 RAM, 1TB SSD.", price: "₹1,25,000", highlights: ["AMD Ryzen 5 7500F (6 Cores)", "AMD Radeon RX 7600 8GB", "A620 Motherboard", "32GB DDR5 RAM", "1TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 5 7500F" }, { label: "Motherboard", value: "Gigabyte A620M DS3H" }, { label: "RAM", value: "32GB (16x2) DDR5 5200MHz" }, { label: "GPU", value: "AMD Radeon RX 7600 8GB" }, { label: "Storage", value: "1TB Gen4 NVMe SSD" }, { label: "PSU", value: "Cooler Master MWE 650W Gold" }, { label: "Cooling", value: "AMD Wraith Stealth" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "Radeon RX 7600" }, { label: "SSD Speed", value: "5000 MB/s Read" }, { label: "Tower Type", value: "Cooler Master MasterBox Q300L" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 18, name: "AMD Ryzen 5 7600 RTX 4060", category: "gaming", img: "https://m.media-amazon.com/images/I/71+703kqOfL._AC_UF1000,1000_QL80_.jpg", desc: "AMD Ryzen 5 7600, NVIDIA GeForce RTX 4060 8GB, 32GB DDR5 RAM, 1TB SSD.", price: "₹1,45,000", highlights: ["AMD Ryzen 5 7600 (6 Cores)", "NVIDIA GeForce RTX 4060 8GB", "B650 Motherboard", "32GB DDR5 RAM", "1TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 5 7600" }, { label: "Motherboard", value: "MSI B650M-A WiFi" }, { label: "RAM", value: "32GB (16x2) DDR5 5600MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4060 8GB" }, { label: "Storage", value: "1TB Gen4 NVMe SSD" }, { label: "PSU", value: "Antec HCG 650W Gold" }, { label: "Cooling", value: "ID-COOLING SE-224-XTS" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "GeForce RTX 4060" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "NZXT H5 Flow" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 19, name: "AMD Ryzen 5 7600X RTX 4060 Ti", category: "gaming", img: "https://microless.com/cdn/products/bcee72a2b2b2bafedce35b335be224d6-hi.jpg", desc: "AMD Ryzen 5 7600X 3D V-Cache, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 RAM, 1TB SSD.", price: "₹1,65,000", highlights: ["AMD Ryzen 5 7600X (6 Cores + 3D V-Cache)", "NVIDIA GeForce RTX 4060 Ti 16GB", "B650E Motherboard", "32GB DDR5 RAM", "1TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 5 7600X" }, { label: "Motherboard", value: "ASUS TUF Gaming B650E-Plus WiFi" }, { label: "RAM", value: "32GB (16x2) DDR5 6000MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4060 Ti 16GB" }, { label: "Storage", value: "1TB Gen4 NVMe SSD" }, { label: "PSU", value: "Cooler Master MWE 750W Gold V2" }, { label: "Cooling", value: "Thermalright Peerless Assassin 120 SE" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "GeForce RTX 4060 Ti" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "Lian Li Lancool 205 Mesh" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 20, name: "AMD Ryzen 5 5500 GT 1030", category: "gaming", img: "https://m.media-amazon.com/images/I/71BTYqWRjYL._AC_UF1000,1000_QL80_.jpg", desc: "AMD Ryzen 5 5500, NVIDIA GeForce GT 1030 2GB, 16GB DDR4 RAM, 480GB SSD. Entry level.", price: "₹1,10,000", highlights: ["AMD Ryzen 5 5500 (6 Cores)", "NVIDIA GeForce GT 1030 2GB", "B450 Motherboard", "16GB DDR4 RAM", "480GB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 5 5500" }, { label: "Motherboard", value: "Gigabyte B450M DS3H" }, { label: "RAM", value: "16GB (8x2) DDR4 3200MHz" }, { label: "GPU", value: "NVIDIA GeForce GT 1030 2GB" }, { label: "Storage", value: "480GB SATA SSD" }, { label: "PSU", value: "DeepCool PF450W 80+ Bronze" }, { label: "Cooling", value: "AMD Wraith Stealth" }, { label: "Processor Model", value: "Cezanne" }, { label: "Graphics", value: "GeForce GT 1030" }, { label: "SSD Speed", value: "500 MB/s Read" }, { label: "Tower Type", value: "Thermaltake Versa H18" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 21, name: "AMD Ryzen 7 5800X3D RTX 4070", category: "gaming", img: "https://cdna.pcpartpicker.com/static/forever/images/userbuild/460809.0c4ec328ca43e5e354acf0753250d7bb.512.jpg", desc: "AMD Ryzen 7 5800X3D V-Cache, NVIDIA GeForce RTX 4070 12GB, 64GB DDR5 RAM, 2TB SSD.", price: "₹2,10,000", highlights: ["AMD Ryzen 7 5800X3D (8 Cores)", "NVIDIA GeForce RTX 4070 12GB", "X670E Motherboard", "64GB DDR5 RAM", "2TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 7 5800X3D" }, { label: "Motherboard", value: "ASUS ROG Strix B550-E Gaming WiFi" }, { label: "RAM", value: "64GB (32x2) DDR5 5200MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4070 12GB" }, { label: "Storage", value: "2TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair RM850e 850W Gold" }, { label: "Cooling", value: "Noctua NH-D15" }, { label: "Processor Model", value: "Vermeer" }, { label: "Graphics", value: "GeForce RTX 4070" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Fractal Design Meshify 2 Compact" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 22, name: "AMD Ryzen 7 7800X3D RTX 4070 Ti", category: "gaming", img: "https://microless.com/cdn/products/ae16e6bc7a92084160557d9a84ab1629-hi.jpg", desc: "AMD Ryzen 7 7800X3D V-Cache, NVIDIA GeForce RTX 4070 Ti 16GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹2,40,000", highlights: ["AMD Ryzen 7 7800X3D (16 Cores)", "NVIDIA GeForce RTX 4070 Ti 16GB", "X670E Motherboard", "64GB DDR5 RAM", "4TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 7 7800X3D" }, { label: "Motherboard", value: "MSI MEG X670E ACE" }, { label: "RAM", value: "64GB (32x2) DDR5 6000MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4070 Ti 16GB" }, { label: "Storage", value: "4TB Gen5 NVMe SSD" }, { label: "PSU", value: "ASUS ROG Strix 1000W Gold" }, { label: "Cooling", value: "EKWB Custom Loop" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "GeForce RTX 4070 Ti" }, { label: "SSD Speed", value: "12000 MB/s Read" }, { label: "Tower Type", value: "Corsair 7000D Airflow" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 23, name: "AMD Ryzen 7 7700XT RTX 4070", category: "gaming", img: "https://microless.com/cdn/products/6c3cda7f4aa70cd64d55d6acbeaeb628-hi.jpg", desc: "AMD Ryzen 7 7700XT, NVIDIA GeForce RTX 4070 12GB, 64GB DDR5 RAM, 4TB SSD. Mixed config.", price: "₹2,25,000", highlights: ["AMD Ryzen 7 7700XT (8 Cores)", "NVIDIA GeForce RTX 4070 12GB", "X670 Motherboard", "64GB DDR5 RAM", "4TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 7 7700XT" }, { label: "Motherboard", value: "Gigabyte X670E AORUS Elite" }, { label: "RAM", value: "64GB (32x2) DDR5 5200MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4070 12GB" }, { label: "Storage", value: "4TB Gen4 NVMe SSD" }, { label: "PSU", value: "Seasonic Focus GX-1000 80+ Gold" }, { label: "Cooling", value: "Corsair iCUE H150i Elite LCD" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "GeForce RTX 4070" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Lian Li O11 Dynamic Evo" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 24, name: "AMD Ryzen 7 5700X RTX 3080", category: "gaming", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqlNUWXMJiBYi6wKXANjElgtpcpDnQJfTXxA&s", desc: "AMD Ryzen 7 5700X, NVIDIA GeForce RTX 3080 10GB, 32GB DDR4 RAM, 2TB SSD.", price: "₹1,75,000", highlights: ["AMD Ryzen 7 5700X (8 Cores)", "NVIDIA GeForce RTX 3080 10GB", "B550 Motherboard", "32GB DDR4 RAM", "2TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 7 5700X" }, { label: "Motherboard", value: "MSI MAG B550 Tomahawk WiFi" }, { label: "RAM", value: "32GB (16x2) DDR4 3600MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3080 10GB" }, { label: "Storage", value: "2TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair RM750x 750W Gold" }, { label: "Cooling", value: "Cooler Master Hyper 212 Spectrum" }, { label: "Processor Model", value: "Vermeer" }, { label: "Graphics", value: "GeForce RTX 3080" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "Lian Li Lancool 205 Mesh" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 25, name: "AMD Ryzen 7 7800X RTX 4080", category: "gaming", img: "https://assets.umart.com.au/newsite/images/202410/source_img/Gaming-PCs-Ready2Go-TitanElite-G7-Ryzen-7-7800X3D-GeForce-RTX-4080-Super-Gaming-PC-57448-16.webp", desc: "AMD Ryzen 7 7800X (16 Cores), NVIDIA GeForce RTX 4080 16GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹3,00,000", highlights: ["AMD Ryzen 7 7800X (16 Cores)", "NVIDIA GeForce RTX 4080 16GB", "X670E Motherboard", "64GB DDR5 RAM", "4TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 7 7800X3D" }, { label: "Motherboard", value: "ASUS ROG Crosshair X670E Extreme" }, { label: "RAM", value: "64GB (32x2) DDR5 6400MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4080 16GB" }, { label: "Storage", value: "4TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair RM1000e 1000W Gold" }, { label: "Cooling", value: "Custom Watercooled Loop" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "GeForce RTX 4080" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Hyte Y60 White" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 26, name: "AMD Ryzen 9 5900X RTX 3080 Ti", category: "gaming", img: "https://gameloot.in/wp-content/uploads/2025/08/NEW.jpg", desc: "AMD Ryzen 9 5900X (12 Cores), NVIDIA GeForce RTX 3080 Ti 12GB, 64GB DDR5 RAM, 2TB SSD.", price: "₹2,65,000", highlights: ["AMD Ryzen 9 5900X (12 Cores)", "NVIDIA GeForce RTX 3080 Ti 12GB", "X570 Motherboard", "64GB DDR5 RAM", "2TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 9 5900X" }, { label: "Motherboard", value: "ASUS ROG Crosshair X570 Extreme" }, { label: "RAM", value: "64GB (32x2) DDR5 5200MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3080 Ti 12GB" }, { label: "Storage", value: "2TB Gen4 NVMe SSD" }, { label: "PSU", value: "be quiet! Straight Power 1000W" }, { label: "Cooling", value: "EKWB Custom Loop" }, { label: "Processor Model", value: "Vermeer" }, { label: "Graphics", value: "GeForce RTX 3080 Ti" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "Fractal Torrent Compact" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 27, name: "AMD Ryzen 9 6950X RTX 3090 Ti", category: "gaming", img: "https://i.redd.it/6k0823y9f8z51.jpg", desc: "AMD Ryzen 9 6950X (16 Cores), NVIDIA GeForce RTX 3090 Ti 24GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹3,20,000", highlights: ["AMD Ryzen 9 6950X (16 Cores)", "NVIDIA GeForce RTX 3090 Ti 24GB", "X570 Motherboard", "64GB DDR5 RAM", "4TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 9 6950X" }, { label: "Motherboard", value: "MSI MEG X570S ACE MAX" }, { label: "RAM", value: "64GB (32x2) DDR5 6000MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 3090 Ti 24GB" }, { label: "Storage", value: "4TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair AX1600i 1600W Titanium" }, { label: "Cooling", value: "Custom Watercooled Loop" }, { label: "Processor Model", value: "Vermeer" }, { label: "Graphics", value: "GeForce RTX 3090 Ti" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "Corsair 7000D Airflow" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 28, name: "AMD Ryzen 9 7900X RX 7900XTX", category: "gaming", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Q1nS25K0O2yTWhCLhfk7k5YOjULYFfCkMA&s", desc: "AMD Ryzen 9 7900X, Dual AMD Radeon RX 7900XTX 24GB, 64GB DDR5 RAM, 4TB SSD.", price: "₹3,50,000", highlights: ["AMD Ryzen 9 7900X (12 Cores)", "Dual AMD Radeon RX 7900XTX 24GB", "X670E Motherboard", "64GB DDR5 RAM", "4TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 9 7900X" }, { label: "Motherboard", value: "ASUS ROG Crosshair X670E Extreme" }, { label: "RAM", value: "64GB (32x2) DDR5 6000MHz" }, { label: "GPU", value: "Dual AMD Radeon RX 7900XTX 24GB" }, { label: "Storage", value: "4TB Gen5 NVMe SSD" }, { label: "PSU", value: "Seasonic Prime TX-1300 1300W" }, { label: "Cooling", value: "EKWB Custom Loop" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "Radeon RX 7900XTX Crossfire" }, { label: "SSD Speed", value: "12000 MB/s Read" }, { label: "Tower Type", value: "Corsair 9000D Super Tower" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 29, name: "AMD Ryzen 9 7950X3D RTX 4090", category: "gaming", img: "https://i.redd.it/just-finished-my-first-amd-build-7950x3d-rtx-4090-v0-iy7rkl6tgpoa1.jpg?width=4032&format=pjpg&auto=webp&s=0be7d2c8b79d8e5d885dca5027c37a7d91dab270", desc: "AMD Ryzen 9 7950X3D V-Cache, NVIDIA GeForce RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD.", price: "₹4,75,000", highlights: ["AMD Ryzen 9 7950X3D (16 Cores)", "NVIDIA GeForce RTX 4090 24GB", "X670E Motherboard", "128GB DDR5 RAM", "8TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 9 7950X3D" }, { label: "Motherboard", value: "MSI MEG X670E ACE" }, { label: "RAM", value: "128GB (32x4) DDR5 6000MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4090 24GB" }, { label: "Storage", value: "8TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair AX1600i 1600W Titanium" }, { label: "Cooling", value: "Industrial Watercooled Loop" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "GeForce RTX 4090" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Thermaltake Core W200" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 30, name: "AMD Ryzen 9 9000X RTX 4090", category: "gaming", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSciUb1yrqCBmjnU58l0H80su46-TDBJltvxA&s", desc: "AMD Ryzen 9 9000X (Simulated), NVIDIA GeForce RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD.", price: "₹4,95,000", highlights: ["AMD Ryzen 9 9000X (Simulated 16 Cores)", "NVIDIA GeForce RTX 4090 24GB", "X670E Motherboard", "128GB DDR5 RAM", "8TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 9 9000X" }, { label: "Motherboard", value: "ASUS ROG Crosshair X670E Extreme" }, { label: "RAM", value: "128GB (32x4) DDR5 6400MHz" }, { label: "GPU", value: "NVIDIA GeForce RTX 4090 24GB" }, { label: "Storage", value: "8TB Gen5 NVMe SSD" }, { label: "PSU", value: "Seasonic Prime TX-1600 1600W" }, { label: "Cooling", value: "Industrial Watercooled Loop" }, { label: "Processor Model", value: "Granite Ridge (Simulated)" }, { label: "Graphics", value: "GeForce RTX 4090" }, { label: "SSD Speed", value: "14000 MB/s Read" }, { label: "Tower Type", value: "Cooler Master CMaster Case 600" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
 
-    // ID 1 (User Provided)
-    { 
-        id: 1, 
-        name: "Starter Gaming PC", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/71bJ6pk+t0L._AC_UF1000,1000_QL80_.jpg", 
-        desc: "Intel 10th Gen Core i5 10400F, NVIDIA GeForce RTX 5070 12GB Graphics, 16GB RAM, 480GB SSD, WiFi",
-        price: "₹1,24,777",
-        highlights: [
-            "Intel 10th Gen Core i5 10400F (6-Core, 12-Thread, up to 4.3 GHz)",
-            "NVIDIA GeForce RTX 5070 12GB Graphics",
-            "H410 Chipset",
-            "16GB RAM",
-            "Windows 10 Trial",
-            "480GB SSD"
-        ],
-        specs: [
-            { label: "SKU", value: "KGPBGGST21IN0002/AAAA" },
-            { label: "Processor Model", value: "Intel i5 10400F" },
-            { label: "Motherboard", value: "H410 Chipset" },
-            { label: "Total RAM Slots", value: "2" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 5070 12GB Graphics" },
-            { label: "Power Supply", value: "450W Power Supply" },
-            { label: "Tower Type", value: "Mid Tower" },
-            { label: "Cooling", value: "Air Cooler with Heat Pipes" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
+        // --- WORKSTATIONS (10) ---
+        { id: 31, name: "Threadripper Pro 5995WX", category: "workstation", img: "https://microless.com/cdn/products/5cf4b47f4108a229e39aef233093efc7-hi.jpg", desc: "AMD Ryzen Threadripper Pro 5995WX (64 Cores), 256GB ECC RAM, 4TB NVMe RAID, NVIDIA RTX A6000 48GB.", price: "₹4,99,999", highlights: ["AMD Threadripper Pro 5995WX (64 Cores)", "NVIDIA RTX A6000 48GB", "WRX90 Chipset", "256GB ECC RAM", "4TB SSD RAID"], specs: [{ label: "CPU", value: "AMD Threadripper Pro 5995WX" }, { label: "Motherboard", value: "Supermicro H13SSL-SYS" }, { label: "RAM", value: "256GB DDR4 3200MHz ECC RDIMM" }, { label: "GPU", value: "NVIDIA RTX A6000 48GB" }, { label: "Storage", value: "4TB NVMe RAID 0" }, { label: "PSU", value: "2000W Server PSU Redundant" }, { label: "Cooling", value: "Custom Server Watercooling" }, { label: "Processor Model", value: "Chagall" }, { label: "Graphics", value: "NVIDIA RTX A6000" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "4U Rackmount Chassis" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 32, name: "Threadripper 7960X Studio", category: "workstation", img: "https://microless.com/cdn/products/2aad3ef6b5e9eb00ed1e7ad71324a8b2-hi.jpg", desc: "AMD Ryzen Threadripper 7960X (24 Cores), 128GB DDR5 RAM, 8TB SSD, NVIDIA RTX 4090 24GB.", price: "₹4,25,000", highlights: ["AMD Ryzen Threadripper 7960X (24 Cores)", "NVIDIA GeForce RTX 4090 24GB", "TRX50 Chipset", "128GB DDR5 RAM", "8TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen Threadripper 7960X" }, { label: "Motherboard", value: "ASUS Pro WS TRX50-SAGE WIFI" }, { label: "RAM", value: "128GB (32x4) DDR5 4800MHz ECC RDIMM" }, { label: "GPU", value: "NVIDIA GeForce RTX 4090 24GB" }, { label: "Storage", value: "8TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair RM1200x 1200W Gold" }, { label: "Cooling", value: "Noctua NH-U14S TR5-SP6" }, { label: "Processor Model", value: "Storm Peak" }, { label: "Graphics", value: "GeForce RTX 4090" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Fractal Design Torrent" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 33, name: "Intel Xeon w9-3495X Server", category: "workstation", img: "https://www.hpshowroominchennai.in/upload/big/1716208092.jpg", desc: "Intel Xeon w9-3495X (56 Cores), 512GB DDR5 RAM, 10TB NVMe, NVIDIA RTX 6000 Ada 48GB.", price: "₹4,85,000", highlights: ["Intel Xeon w9-3495X (56 Cores)", "NVIDIA RTX 6000 Ada 48GB", "W790 Chipset", "512GB DDR5 RAM", "10TB NVMe"], specs: [{ label: "CPU", value: "Intel Xeon w9-3495X" }, { label: "Motherboard", value: "Supermicro X13SWA-TF" }, { label: "RAM", value: "512GB DDR5 4400MHz ECC RDIMM" }, { label: "GPU", value: "NVIDIA RTX 6000 Ada 48GB" }, { label: "Storage", value: "10TB NVMe SSD" }, { label: "PSU", value: "2600W Redundant Server PSU" }, { label: "Cooling", value: "Custom Server Airflow" }, { label: "Processor Model", value: "Sapphire Rapids" }, { label: "Graphics", value: "NVIDIA RTX 6000 Ada" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "5U Rackmount Chassis" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 34, name: "Intel i9-14900KS Quadro", category: "workstation", img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", desc: "Special Edition Intel Core i9-14900KS, 128GB DDR5 RAM, 4TB SSD, NVIDIA Quadro RTX 5000 Ada 32GB.", price: "₹3,95,000", highlights: ["Intel Core i9-14900KS (6.2 GHz)", "NVIDIA Quadro RTX 5000 Ada 32GB", "Z790 Chipset", "128GB DDR5 RAM", "4TB SSD"], specs: [{ label: "CPU", value: "Intel Core i9-14900KS" }, { label: "Motherboard", value: "ASUS ProArt Z790-Creator WiFi" }, { label: "RAM", value: "128GB (32x4) DDR5 6400MHz ECC" }, { label: "GPU", value: "NVIDIA Quadro RTX 5000 Ada 32GB" }, { label: "Storage", value: "4TB Gen5 NVMe SSD" }, { label: "PSU", value: "be quiet! Straight Power 1200W" }, { label: "Cooling", value: "DeepCool LS720 SE" }, { label: "Processor Model", value: "Raptor Lake Refresh" }, { label: "Graphics", value: "NVIDIA RTX 5000 Ada" }, { label: "SSD Speed", value: "14000 MB/s Read" }, { label: "Tower Type", value: "Fractal Design Define 7" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 35, name: "Ryzen 9 7950X3D RenderBox", category: "workstation", img: "https://assetsio.gnwcdn.com/ryzen-9-7950x3d.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp", desc: "AMD Ryzen 9 7950X3D, 256GB DDR5 RAM, 8TB SSD, Dual ProArt RX 7900XTX (48GB Total VRAM).", price: "₹4,60,000", highlights: ["AMD Ryzen 9 7950X3D (16 Cores)", "Dual AMD Radeon RX 7900XTX 48GB", "X670E Motherboard", "256GB DDR5 RAM", "8TB SSD"], specs: [{ label: "CPU", value: "AMD Ryzen 9 7950X3D" }, { label: "Motherboard", value: "ASUS ROG Crosshair X670E Extreme" }, { label: "RAM", value: "256GB (32x8) DDR5 6000MHz ECC RDIMM" }, { label: "GPU", value: "Dual ProArt RX 7900XTX 24GB" }, { label: "Storage", value: "8TB Gen4 NVMe RAID 0" }, { label: "PSU", value: "Seasonic Prime TX-1600 1600W" }, { label: "Cooling", value: "Industrial Watercooled Loop" }, { label: "Processor Model", value: "Raphael" }, { label: "Graphics", value: "Dual ProArt RX 7900XTX" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Corsair 9000D Super Tower" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 36, name: "EPYC 9004 Pro Data", category: "workstation", img: "https://bizon-tech.com/media/resized/340_340_/catalog/product/cache/1/small_image/9df78eab33525d08d6e5fb8d27136e95/b/a/banner-zx6000-mobile1.jpg.webp", desc: "AMD EPYC 9004 Processor, 512GB ECC RAM, 20TB Server Storage, NVIDIA A100 80GB. AI Ready.", price: "₹4,50,000", highlights: ["AMD EPYC 9004 (64 Cores)", "NVIDIA A100 80GB", "SP5 Motherboard", "512GB ECC RAM", "20TB Storage"], specs: [{ label: "CPU", value: "AMD EPYC 9004" }, { label: "Motherboard", value: "Supermicro H13SSL-NT" }, { label: "RAM", value: "512GB DDR5 4800MHz ECC RDIMM" }, { label: "GPU", value: "NVIDIA A100 80GB PCIe" }, { label: "Storage", value: "20TB SAS HDD / NVMe" }, { label: "PSU", value: "3000W Redundant Server PSU" }, { label: "Cooling", value: "Server Hot-Swap Fans" }, { label: "Processor Model", value: "Bergamo" }, { label: "Graphics", value: "NVIDIA A100 80GB" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "4U Rackmount Chassis" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 37, name: "Intel i9-14900K Pro Edit", category: "workstation", img: "https://m.media-amazon.com/images/I/71ORaFi++pL._AC_UF1000,1000_QL80_.jpg", desc: "14th Gen Intel Core i9-14900K, 128GB DDR5 RAM, 8TB SSD, NVIDIA RTX A5000 24GB.", price: "₹3,50,000", highlights: ["Intel Core i9-14900K (24 Cores)", "NVIDIA RTX A5000 24GB", "Z790 Chipset", "128GB DDR5 RAM", "8TB SSD"], specs: [{ label: "CPU", value: "Intel Core i9-14900K" }, { label: "Motherboard", value: "Gigabyte Z790 AORUS Xtreme" }, { label: "RAM", value: "128GB (32x4) DDR5 5600MHz ECC" }, { label: "GPU", value: "NVIDIA RTX A5000 24GB" }, { label: "Storage", value: "8TB Gen4 NVMe SSD" }, { label: "PSU", value: "be quiet! Straight Power 1000W" }, { label: "Cooling", value: "Corsair iCUE H150i Elite LCD" }, { label: "Processor Model", value: "Raptor Lake Refresh" }, { label: "Graphics", value: "NVIDIA RTX A5000" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Fractal Design Meshify 2 XL" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 38, name: "Dual Threadripper Compute Node", category: "workstation", img: "https://www.storagereview.com/wp-content/uploads/2026/03/StorageReview-Dell-Precision-7875-8-2.jpg", desc: "Dual AMD Threadripper Pro 5975WX, 1TB RAM, 40TB Storage, Quad NVIDIA A40 GPUs.", price: "₹4,99,999", highlights: ["Dual AMD Threadripper Pro 5975WX (128 Cores)", "Quad NVIDIA A40 96GB VRAM", "WRX90 Chipset", "1TB ECC RAM", "40TB Storage"], specs: [{ label: "CPU", value: "Dual AMD Threadripper Pro 5975WX" }, { label: "Motherboard", value: "Supermicro H13SSL-SYS" }, { label: "RAM", value: "1TB DDR4 3200MHz ECC RDIMM" }, { label: "GPU", value: "Quad NVIDIA A40 96GB" }, { label: "Storage", value: "40TB Server HDD / NVMe" }, { label: "PSU", value: "4400W Redundant Server PSU" }, { label: "Cooling", value: "Server Liquid Cooling" }, { label: "Processor Model", value: "Chagall" }, { label: "Graphics", value: "Quad NVIDIA A40" }, { label: "SSD Speed", value: "7000 MB/s Read" }, { label: "Tower Type", value: "5U Rackmount Chassis" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 39, name: "Ryzen Threadripper 7000 AI", category: "workstation", img: "https://www.amd.com/content/dam/amd/en/images/products/desktops/3331750-supermicro-5014a-tt-desktops.jpg", desc: "Ryzen Threadripper 7000 (32 Cores), 256GB DDR5 RAM, 4TB Gen5 SSD, NVIDIA RTX 6000 Ada.", price: "₹4,30,000", highlights: ["Ryzen Threadripper 7000 (32 Cores)", "NVIDIA RTX 6000 Ada 48GB", "TRX50 Chipset", "256GB DDR5 RAM", "4TB SSD"], specs: [{ label: "CPU", value: "Ryzen Threadripper 7000" }, { label: "Motherboard", value: "ASUS Pro WS TRX50-SAGE WIFI" }, { label: "RAM", value: "256GB (32x8) DDR5 5200MHz ECC RDIMM" }, { label: "GPU", value: "NVIDIA RTX 6000 Ada 48GB" }, { label: "Storage", value: "4TB Gen5 NVMe SSD" }, { label: "PSU", value: "Corsair RM1200x 1200W Gold" }, { label: "Cooling", value: "Custom Watercooled Loop" }, { label: "Processor Model", value: "Storm Peak" }, { label: "Graphics", value: "NVIDIA RTX 6000 Ada" }, { label: "SSD Speed", value: "14000 MB/s Read" }, { label: "Tower Type", value: "Lian Li O11 Vision" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 40, name: "Mac Pro Equivalent Intel", category: "workstation", img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Apple_Mac_Pro_Intel_Xenon.jpg", desc: "Intel Xeon w7-2495X, 192GB RAM, 8TB SSD, NVIDIA RTX 4090 (Mac Pro Modded).", price: "₹4,75,000", highlights: ["Intel Xeon w7-2495X (24 Cores)", "NVIDIA GeForce RTX 4090 24GB (Mac Mod)", "W790 Chipset", "192GB DDR4 ECC RAM", "8TB SSD"], specs: [{ label: "CPU", value: "Intel Xeon w7-2495X" }, { label: "Motherboard", value: "ASUS ProArt W790E Sage" }, { label: "RAM", value: "192GB DDR4 3200MHz ECC RDIMM" }, { label: "GPU", value: "NVIDIA GeForce RTX 4090 24GB" }, { label: "Storage", value: "8TB Gen4 NVMe SSD" }, { label: "PSU", value: "Corsair AX1600i 1600W Titanium" }, { label: "Cooling", value: "Custom Thermal Tower" }, { label: "Processor Model", value: "Sapphire Rapids" }, { label: "Graphics", value: "GeForce RTX 4090" }, { label: "SSD Speed", value: "7400 MB/s Read" }, { label: "Tower Type", value: "Corsair 7000D Airflow" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
 
-    // ID 2 (User Provided)
-    { 
-        id: 2, 
-        name: "Performance Gaming PC", 
-        category: "gaming",
-        img: "https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg", 
-        desc: "Intel 14th Gen Core i7 14700K [20C 8 P-cores + 12 E-cores) and 28 threads,33M Cache, up to 5.60 GHz], Nvidia GeForce RTX 5060 8GB Graphics, 32GB DDR5 RAM, 1TB Gen4 NVMe SSD (~4100 Mbps), AC WiFi",
-        price: "₹1,92,148",
-        highlights: [
-            "Intel 14th Gen Core i7 14700K [20C 8 P-cores + 12 E-cores) and 28 threads,33M Cache, up to 5.60 GHz] (20-Core, 28-Thread, up to 5.6 GHz)",
-            "Nvidia GeForce RTX 5060 8GB Graphics",
-            "Z790 Chipset",
-            "32GB DDR5 RAM",
-            "1TB Gen4 NVMe SSD (~4100 Mbps)",
-            "Windows 11 Trial"
-        ],
-        specs: [
-            { label: "SKU", value: "KGPBGGPF21IN0021/AAAA" },
-            { label: "Processor Model", value: "Intel i7 14700K" },
-            { label: "Motherboard", value: "Z790 Chipset" },
-            { label: "Total RAM Slots", value: "4" },
-            { label: "Graphics", value: "Nvidia GeForce RTX 5060 8GB Graphics" },
-            { label: "Power Supply", value: "750W Power Supply" },
-            { label: "Tower Type", value: "Mid Tower" },
-            { label: "Cooling", value: "240mm ARGB Liquid Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-
-    // Intel i5 Series
-    { 
-        id: 3, 
-        name: "Intel i5-13600KF Gaming Build", 
-        category: "gaming",
-        img: "https://5.imimg.com/data5/SELLER/Default/2024/2/387712115/ZC/SR/GW/80125604/gear-g3-gaming-pc-intel-core-i5-13th-gen-13400f-rtx-4060-16gb-ram-1tb-nvme-ssd.jpg", 
-        desc: "13th Gen Intel Core i5-13600KF Unlocked, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 RAM, 1TB Gen4 SSD. Optimized for 1080p High Settings.",
-        price: "₹1,35,000",
-        highlights: [
-            "Intel Core i5-13600KF (14 Cores) - Unlocked for Overclocking",
-            "NVIDIA GeForce RTX 4060 Ti 16GB DLSS 3",
-            "Z790 Chipset Motherboard",
-            "32GB DDR5 5600MHz RAM",
-            "1TB Gen4 NVMe SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i5-13600KF" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4060 Ti 16GB" },
-            { label: "RAM", value: "32GB DDR5 5600MHz" },
-            { label: "Storage", value: "1TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 4, 
-        name: "Intel i5-13400F Entry Build", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg", 
-        desc: "12th Gen Intel Core i5-13400F, NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB NVMe SSD. Great entry level for esports.",
-        price: "₹1,65,000",
-        highlights: [
-            "Intel Core i5-13400F (10 Cores)",
-            "NVIDIA GeForce RTX 3060 12GB",
-            "B660 Chipset",
-            "16GB DDR4 RAM",
-            "512GB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i5-13400F" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3060 12GB" },
-            { label: "RAM", value: "16GB DDR4 3200MHz" },
-            { label: "Storage", value: "512GB NVMe SSD" },
-            { label: "Cooling", value: "Stock Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 5, 
-        name: "Intel i5-12600K Value Build", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/X/bxt1/M/gbxt1BUnh4jLjZ2.png", 
-        desc: "12th Gen Intel Core i5-12600K, NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB SSD. Budget friendly gaming.",
-        price: "₹1,54,990",
-        highlights: [
-            "Intel Core i5-12600K (6 Cores)",
-            "NVIDIA GeForce RTX 3060 12GB",
-            "H670 Motherboard",
-            "16GB DDR4 RAM",
-            "WiFi 6 Built-in"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i5-12600K" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3060 12GB" },
-            { label: "RAM", value: "16GB DDR4 3200MHz" },
-            { label: "Storage", value: "512GB NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-
-    // Intel i7 Series
-    { 
-        id: 6, 
-        name: "Intel i7-12700K Battlestation", 
-        category: "gaming",
-        img: "https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg", 
-        desc: "12th Gen Intel Core i7-12700K (12 Cores), NVIDIA GeForce RTX 3070 8GB, 32GB DDR4 RAM, 2TB NVMe SSD. Solid mid-range performance.",
-        price: "₹1,85,000",
-        highlights: [
-            "Intel Core i7-12700K (12 Cores)",
-            "NVIDIA GeForce RTX 3070 8GB",
-            "Z690 Chipset",
-            "32GB DDR4 RAM",
-            "RGB Case"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i7-12700K" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3070 8GB" },
-            { label: "RAM", value: "32GB DDR4 3200MHz" },
-            { label: "Storage", value: "2TB NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 7, 
-        name: "Intel i7-13700K Performance", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "13th Gen Intel Core i7-13700K (16 Cores), NVIDIA GeForce RTX 3070 Ti 8GB, 32GB DDR5 RAM, 2TB SSD. High performance multitasking.",
-        price: "₹2,15,000",
-        highlights: [
-            "Intel Core i7-13700K (16 Cores)",
-            "NVIDIA GeForce RTX 3070 Ti 8GB",
-            "Z790 Chipset",
-            "32GB DDR5 RAM",
-            "2TB Gen4 SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i7-13700K" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3070 Ti 8GB" },
-            { label: "RAM", value: "32GB DDR5 4800MHz" },
-            { label: "Storage", value: "2TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 8, 
-        name: "Intel i7-14700K RTX 4070 Build", 
-        category: "gaming",
-        img: "https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458", 
-        desc: "14th Gen Intel Core i7-14700K (20 Cores), NVIDIA GeForce RTX 4070 12GB, 32GB DDR5 RAM, 2TB Gen5 SSD. 1440p beast.",
-        price: "₹2,45,000",
-        highlights: [
-            "Intel Core i7-14700K (20 Cores)",
-            "NVIDIA GeForce RTX 4070 12GB DLSS 3",
-            "Z790 Chipset",
-            "32GB DDR5 RAM",
-            "2TB Gen5 SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i7-14700K" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4070 12GB" },
-            { label: "RAM", value: "32GB DDR5 6000MHz" },
-            { label: "Storage", value: "2TB Gen5 NVMe SSD" },
-            { label: "Cooling", value: "240mm Liquid Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 9, 
-        name: "Intel i7-14700KF OC Edition", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/61G0BM0HPRL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "Unlocked 14th Gen Intel Core i7-14700KF, NVIDIA GeForce RTX 4070 Ti 16GB, 64GB DDR5 RAM, 4TB SSD. Overclocking ready.",
-        price: "₹3,10,000",
-        highlights: [
-            "Intel Core i7-14700KF (20 Cores Unlocked)",
-            "NVIDIA GeForce RTX 4070 Ti 16GB",
-            "Z790 Chipset",
-            "64GB DDR5 RAM",
-            "4TB Gen4 SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i7-14700KF" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4070 Ti 16GB" },
-            { label: "RAM", value: "64GB DDR5 6000MHz" },
-            { label: "Storage", value: "4TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "360mm AIO Liquid Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-
-    // Intel i9 Series
-    { 
-        id: 10, 
-        name: "Intel i9-12900K RTX 3080 Ti", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/81pDvAwecpL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "12th Gen Intel Core i9-12900K (16 Cores), NVIDIA GeForce RTX 3080 Ti 12GB, 64GB DDR5 RAM, 4TB SSD. Flagship performance.",
-        price: "₹2,35,000",
-        highlights: [
-            "Intel Core i9-12900K (16 Cores)",
-            "NVIDIA GeForce RTX 3080 Ti 12GB",
-            "Z690 Chipset",
-            "64GB DDR5 RAM",
-            "4TB NVMe SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i9-12900K" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3080 Ti 12GB" },
-            { label: "RAM", value: "64GB DDR5 4800MHz" },
-            { label: "Storage", value: "4TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "360mm AIO Liquid Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 11, 
-        name: "Intel i9-13900K RTX 4080", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "13th Gen Intel Core i9-13900K (24 Cores), NVIDIA GeForce RTX 4080 16GB, 64GB DDR5 RAM, 4TB SSD. Top tier gaming.",
-        price: "₹2,80,000",
-        highlights: [
-            "Intel Core i9-13900K (24 Cores)",
-            "NVIDIA GeForce RTX 4080 16GB DLSS 3",
-            "Z790 Chipset",
-            "64GB DDR5 RAM",
-            "4TB Gen4 SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i9-13900K" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4080 16GB" },
-            { label: "RAM", value: "64GB DDR5 5600MHz" },
-            { label: "Storage", value: "4TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Custom Hardline Cooling" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 12, 
-        name: "Intel i9-14900K RTX 4090 Titan", 
-        category: "gaming",
-        img: "https://microless.com/cdn/products/e8830fb6dec828ca8e55d3e493fe40e3-hi.jpg", 
-        desc: "14th Gen Intel Core i9-14900K (24 Cores), NVIDIA GeForce RTX 4090 24GB, 64GB DDR5 RAM, 4TB SSD. The Ultimate.",
-        price: "₹3,55,000",
-        highlights: [
-            "Intel Core i9-14900K (24 Cores)",
-            "NVIDIA GeForce RTX 4090 24GB",
-            "Z790 Chipset",
-            "64GB DDR5 RAM",
-            "4TB Gen5 SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i9-14900K" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4090 24GB" },
-            { label: "RAM", value: "64GB DDR5 6000MHz" },
-            { label: "Storage", value: "4TB Gen5 NVMe SSD" },
-            { label: "Cooling", value: "Custom Hardline Loop" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 13, 
-        name: "Intel i9-14900KF RTX 4090 OC", 
-        category: "gaming",
-        img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", 
-        desc: "Unlocked 14th Gen Intel Core i9-14900KF, Dual NVIDIA RTX 4090 48GB SLI, 128GB DDR5 RAM, 8TB SSD. Extreme Overclock.",
-        price: "₹4,50,000",
-        highlights: [
-            "Intel Core i9-14900KF Unlocked",
-            "Dual NVIDIA RTX 4090 (48GB Total VRAM)",
-            "Z790 Chipset",
-            "128GB DDR5 RAM",
-            "8TB SSD RAID"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i9-14900KF" },
-            { label: "Graphics", value: "Dual NVIDIA RTX 4090 24GB" },
-            { label: "RAM", value: "128GB DDR5 6400MHz" },
-            { label: "Storage", value: "8TB RAID 0 SSD" },
-            { label: "Cooling", value: "Industrial Water Cooling" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 14, 
-        name: "Intel i9-13900KS Speed Demon", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "Special Edition Intel Core i9-13900KS (6.0 GHz), NVIDIA GeForce RTX 4090 24GB, 64GB DDR5 RAM, 4TB SSD. Fastest gaming CPU.",
-        price: "₹4,85,000",
-        highlights: [
-            "Intel Core i9-13900KS (6.0 GHz Turbo)",
-            "NVIDIA GeForce RTX 4090 24GB",
-            "Z790 Chipset",
-            "64GB DDR5 RAM",
-            "4TB Gen4 SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i9-13900KS" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4090 24GB" },
-            { label: "RAM", value: "64GB DDR5 6000MHz" },
-            { label: "Storage", value: "4TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "DeepCool Assassin III" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 15, 
-        name: "Intel i9-14900KS Dual 4090", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/81a1Ejl1y6L.jpg", 
-        desc: "Special Edition Intel Core i9-14900KS, Dual NVIDIA RTX 4090 48GB, 128GB DDR5 RAM, 8TB SSD. No compromises.",
-        price: "₹4,99,999",
-        highlights: [
-            "Intel Core i9-14900KS (6.2 GHz)",
-            "Dual NVIDIA RTX 4090 48GB",
-            "Z790 Chipset",
-            "128GB DDR5 RAM",
-            "8TB Gen5 SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i9-14900KS" },
-            { label: "Graphics", value: "Dual NVIDIA RTX 4090 24GB" },
-            { label: "RAM", value: "128GB DDR5 6400MHz" },
-            { label: "Storage", value: "8TB Gen5 NVMe SSD" },
-            { label: "Cooling", value: "Custom Liquid Loop" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-
-    // --- AMD GAMING PCS (15) ---
-
-    // Ryzen 5 Series
-    { 
-        id: 16, 
-        name: "AMD Ryzen 5 5600X RTX 3060", 
-        category: "gaming",
-        img: "https://computechstore.in/_next/image?url=https%3A%2F%2Fcdn.computechstore.in%2Fuploads%2Fwp%2F2024%2F10%2FElite_1120-1-1-Custom-2.jpg&w=2048&q=75", 
-        desc: "AMD Ryzen 5 5600X (6 Cores), NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB SSD. Budget AM4 gaming.",
-        price: "₹1,15,000",
-        highlights: [
-            "AMD Ryzen 5 5600X (6 Cores, 12 Threads)",
-            "NVIDIA GeForce RTX 3060 12GB",
-            "B550 Motherboard",
-            "16GB DDR4 RAM",
-            "512GB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 5 5600X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3060 12GB" },
-            { label: "RAM", value: "16GB DDR4 3600MHz" },
-            { label: "Storage", value: "512GB NVMe SSD" },
-            { label: "Cooling", value: "Stock Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 17, 
-        name: "AMD Ryzen 5 7500F RX 7600", 
-        category: "gaming",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWffPdTvrRsrFQ-z_5jzU7RuCKmaxFYPgqEw&s", 
-        desc: "AMD Ryzen 5 7500F, AMD Radeon RX 7600 8GB, 32GB DDR5 RAM, 1TB SSD. Entry Level AM5 All-AMD.",
-        price: "₹1,25,000",
-        highlights: [
-            "AMD Ryzen 5 7500F (6 Cores)",
-            "AMD Radeon RX 7600 8GB",
-            "A620 Motherboard",
-            "32GB DDR5 RAM",
-            "1TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 5 7500F" },
-            { label: "Graphics", value: "AMD Radeon RX 7600 8GB" },
-            { label: "RAM", value: "32GB DDR5 5200MHz" },
-            { label: "Storage", value: "1TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Stock Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 18, 
-        name: "AMD Ryzen 5 7600 RTX 4060", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/71+703kqOfL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "AMD Ryzen 5 7600, NVIDIA GeForce RTX 4060 8GB, 32GB DDR5 RAM, 1TB SSD. Value AM5 build.",
-        price: "₹1,45,000",
-        highlights: [
-            "AMD Ryzen 5 7600 (6 Cores)",
-            "NVIDIA GeForce RTX 4060 8GB",
-            "B650 Motherboard",
-            "32GB DDR5 RAM",
-            "1TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 5 7600" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4060 8GB" },
-            { label: "RAM", value: "32GB DDR5 5600MHz" },
-            { label: "Storage", value: "1TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 19, 
-        name: "AMD Ryzen 5 7600X RTX 4060 Ti", 
-        category: "gaming",
-        img: "https://microless.com/cdn/products/bcee72a2b2b2bafedce35b335be224d6-hi.jpg", 
-        desc: "AMD Ryzen 5 7600X 3D V-Cache, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 RAM, 1TB SSD. High cache gaming.",
-        price: "₹1,65,000",
-        highlights: [
-            "AMD Ryzen 5 7600X (6 Cores + 3D V-Cache)",
-            "NVIDIA GeForce RTX 4060 Ti 16GB",
-            "B650E Motherboard",
-            "32GB DDR5 RAM",
-            "1TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 5 7600X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4060 Ti 16GB" },
-            { label: "RAM", value: "32GB DDR5 6000MHz" },
-            { label: "Storage", value: "1TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 20, 
-        name: "AMD Ryzen 5 5500 GT 1030", 
-        category: "gaming",
-        img: "https://m.media-amazon.com/images/I/71BTYqWRjYL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "AMD Ryzen 5 5500, NVIDIA GeForce GT 1030 2GB, 16GB DDR4 RAM, 480GB SSD. Entry level office/gaming.",
-        price: "₹1,10,000",
-        highlights: [
-            "AMD Ryzen 5 5500 (6 Cores)",
-            "NVIDIA GeForce GT 1030 2GB",
-            "B450 Motherboard",
-            "16GB DDR4 RAM",
-            "480GB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 5 5500" },
-            { label: "Graphics", value: "NVIDIA GeForce GT 1030 2GB" },
-            { label: "RAM", value: "16GB DDR4 3200MHz" },
-            { label: "Storage", value: "480GB SATA SSD" },
-            { label: "Cooling", value: "Stock Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-
-    // Ryzen 7 Series
-    { 
-        id: 21, 
-        name: "AMD Ryzen 7 5800X3D RTX 4070", 
-        category: "gaming",
-        img: "https://cdna.pcpartpicker.com/static/forever/images/userbuild/460809.0c4ec328ca43e5e354acf0753250d7bb.512.jpg", 
-        desc: "AMD Ryzen 7 5800X3D V-Cache, NVIDIA GeForce RTX 4070 12GB, 64GB DDR5 RAM, 2TB SSD. AM5 Premium.",
-        price: "₹2,10,000",
-        highlights: [
-            "AMD Ryzen 7 5800X3D (8 Cores)",
-            "NVIDIA GeForce RTX 4070 12GB",
-            "X670E Motherboard",
-            "64GB DDR5 RAM",
-            "2TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 7 5800X3D" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4070 12GB" },
-            { label: "RAM", value: "64GB DDR5 6000MHz" },
-            { label: "Storage", value: "2TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "360mm AIO Liquid Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 22, 
-        name: "AMD Ryzen 7 7800X3D RTX 4070 Ti", 
-        category: "gaming",
-        img: "https://microless.com/cdn/products/ae16e6bc7a92084160557d9a84ab1629-hi.jpg", 
-        desc: "AMD Ryzen 7 7800X3D V-Cache, NVIDIA GeForce RTX 4070 Ti 16GB, 64GB DDR5 RAM, 4TB SSD. Top of line AM5.",
-        price: "₹2,40,000",
-        highlights: [
-            "AMD Ryzen 7 7800X3D (16 Cores)",
-            "NVIDIA GeForce RTX 4070 Ti 16GB",
-            "X670E Motherboard",
-            "64GB DDR5 RAM",
-            "4TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 7 7800X3D" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4070 Ti 16GB" },
-            { label: "RAM", value: "64GB DDR5 6000MHz" },
-            { label: "Storage", value: "4TB Gen5 NVMe SSD" },
-            { label: "Cooling", value: "360mm AIO Liquid Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 23, 
-        name: "AMD Ryzen 7 7700XT RTX 4070", 
-        category: "gaming",
-        img: "https://microless.com/cdn/products/6c3cda7f4aa70cd64d55d6acbeaeb628-hi.jpg", 
-        desc: "AMD Ryzen 7 7700XT, NVIDIA GeForce RTX 4070 12GB, 64GB DDR5 RAM, 4TB SSD. Mixed configuration.",
-        price: "₹2,25,000",
-        highlights: [
-            "AMD Ryzen 7 7700XT (8 Cores)",
-            "NVIDIA GeForce RTX 4070 12GB",
-            "X670 Motherboard",
-            "64GB DDR5 RAM",
-            "4TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 7 7700XT" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4070 12GB" },
-            { label: "RAM", value: "64GB DDR5 5200MHz" },
-            { label: "Storage", value: "4TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 24, 
-        name: "AMD Ryzen 7 5700X RTX 3080", 
-        category: "gaming",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqlNUWXMJiBYi6wKXANjElgtpcpDnQJfTXxA&s", 
-        desc: "AMD Ryzen 7 5700X, NVIDIA GeForce RTX 3080 10GB, 32GB DDR4 RAM, 2TB SSD. Last Gen AM4 High End.",
-        price: "₹1,75,000",
-        highlights: [
-            "AMD Ryzen 7 5700X (8 Cores)",
-            "NVIDIA GeForce RTX 3080 10GB",
-            "B550 Motherboard",
-            "32GB DDR4 RAM",
-            "2TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 7 5700X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3080 10GB" },
-            { label: "RAM", value: "32GB DDR4 3600MHz" },
-            { label: "Storage", value: "2TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 25, 
-        name: "AMD Ryzen 7 7800X RTX 4080", 
-        category: "gaming",
-        img: "https://assets.umart.com.au/newsite/images/202410/source_img/Gaming-PCs-Ready2Go-TitanElite-G7-Ryzen-7-7800X3D-GeForce-RTX-4080-Super-Gaming-PC-57448-16.webp", 
-        desc: "AMD Ryzen 7 7800X (16 Cores), NVIDIA GeForce RTX 4080 16GB, 64GB DDR5 RAM, 4TB SSD. Flagship AM5.",
-        price: "₹3,00,000",
-        highlights: [
-            "AMD Ryzen 7 7800X (16 Cores)",
-            "NVIDIA GeForce RTX 4080 16GB",
-            "X670E Motherboard",
-            "64GB DDR5 RAM",
-            "4TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 7 7800X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4080 16GB" },
-            { label: "RAM", value: "64GB DDR5 6000MHz" },
-            { label: "Storage", value: "4TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "360mm AIO Liquid Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-
-    // Ryzen 9 Series 
-       { 
-        id: 26, 
-        name: "AMD Ryzen 9 5900X RTX 3080 Ti", 
-        category: "gaming",
-        img: "https://gameloot.in/wp-content/uploads/2025/08/NEW.jpg", 
-        desc: "AMD Ryzen 9 5900X (12 Cores), NVIDIA GeForce RTX 3080 Ti 12GB, 64GB DDR5 RAM, 2TB SSD. AM4 Flagship.",
-        price: "₹2,65,000",
-        highlights: [
-            "AMD Ryzen 9 5900X (12 Cores)",
-            "NVIDIA GeForce RTX 3080 Ti 12GB",
-            "X570 Motherboard",
-            "64GB DDR5 RAM",
-            "2TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 9 5900X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3080 Ti 12GB" },
-            { label: "RAM", value: "64GB DDR5 3600MHz" },
-            { label: "Storage", value: "2TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Custom Air Cooling" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 27, 
-        name: "AMD Ryzen 9 6950X RTX 3090 Ti", 
-        category: "gaming",
-        img: "https://i.redd.it/6k0823y9f8z51.jpg", 
-        desc: "AMD Ryzen 9 6950X (16 Cores), NVIDIA GeForce RTX 3090 Ti 24GB, 64GB DDR5 RAM, 4TB SSD. AM4 Ultimate.",
-        price: "₹3,20,000",
-        highlights: [
-            "AMD Ryzen 9 6950X (16 Cores)",
-            "NVIDIA GeForce RTX 3090 Ti 24GB",
-            "X570 Motherboard",
-            "64GB DDR5 RAM",
-            "4TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 9 6950X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 3090 Ti 24GB" },
-            { label: "RAM", value: "64GB DDR5 3600MHz" },
-            { label: "Storage", value: "4TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Custom Loop" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 28, 
-        name: "AMD Ryzen 9 7900X RX 7900XTX", 
-        category: "gaming",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Q1nS25K0O2yTWhCLhfk7k5YOjULYFfCkMA&s", 
-        desc: "AMD Ryzen 9 7900X, Dual AMD Radeon RX 7900XTX 24GB, 64GB DDR5 RAM, 4TB SSD. Pure AMD Power.",
-        price: "₹3,50,000",
-        highlights: [
-            "AMD Ryzen 9 7900X (12 Cores)",
-            "Dual AMD Radeon RX 7900XTX 24GB",
-            "X670E Motherboard",
-            "64GB DDR5 RAM",
-            "4TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 9 7900X" },
-            { label: "Graphics", value: "Dual AMD Radeon RX 7900XTX 24GB" },
-            { label: "RAM", value: "64GB DDR5 6000MHz" },
-            { label: "Storage", value: "4TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Custom Loop" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 29, 
-        name: "AMD Ryzen 9 7950X3D RTX 4090", 
-        category: "gaming",
-        img: "https://i.redd.it/just-finished-my-first-amd-build-7950x3d-rtx-4090-v0-iy7rkl6tgpoa1.jpg?width=4032&format=pjpg&auto=webp&s=0be7d2c8b79d8e5d885dca5027c37a7d91dab270", 
-        desc: "AMD Ryzen 9 7950X3D V-Cache, NVIDIA GeForce RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD. Ultimate Creator.",
-        price: "₹4,75,000",
-        highlights: [
-            "AMD Ryzen 9 7950X3D (16 Cores)",
-            "NVIDIA GeForce RTX 4090 24GB",
-            "X670E Motherboard",
-            "128GB DDR5 RAM",
-            "8TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 9 7950X3D" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4090 24GB" },
-            { label: "RAM", value: "128GB DDR5 6000MHz" },
-            { label: "Storage", value: "8TB Gen5 NVMe SSD" },
-            { label: "Cooling", value: "Industrial Loop" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 30, 
-        name: "AMD Ryzen 9 9000X RTX 4090", 
-        category: "gaming",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSciUb1yrqCBmjnU58l0H80su46-TDBJltvxA&s", 
-        desc: "AMD Ryzen 9 9000X (Simulated Specs), NVIDIA GeForce RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD. The absolute maximum.",
-        price: "₹4,95,000",
-        highlights: [
-            "AMD Ryzen 9 9000X (Simulated 16 Cores)",
-            "NVIDIA GeForce RTX 4090 24GB",
-            "X670E Motherboard",
-            "128GB DDR5 RAM",
-            "8TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 9 9000X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4090 24GB" },
-            { label: "RAM", value: "128GB DDR5 6400MHz" },
-            { label: "Storage", value: "8TB Gen5 NVMe SSD" },
-            { label: "Cooling", value: "Industrial Water Cooling" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-
-    // --- WORKSTATIONS (10) ---
-
-    { 
-        id: 31, 
-        name: "Threadripper Pro 5995WX", 
-        category: "workstation",
-        img: "https://microless.com/cdn/products/5cf4b47f4108a229e39aef233093efc7-hi.jpg", 
-        desc: "AMD Ryzen Threadripper Pro 5995WX (64 Cores), 256GB ECC RAM, 4TB NVMe RAID, NVIDIA RTX A6000 48GB, Watercooled. Enterprise Grade.",
-        price: "₹4,99,999",
-        highlights: [
-            "AMD Threadripper Pro 5995WX (64 Cores)",
-            "NVIDIA RTX A6000 48GB",
-            "WRX90 Chipset",
-            "256GB ECC RAM",
-            "4TB SSD RAID"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Threadripper Pro 5995WX" },
-            { label: "Graphics", value: "NVIDIA RTX A6000 48GB" },
-            { label: "RAM", value: "256GB ECC DDR4" },
-            { label: "Storage", value: "4TB NVMe RAID 0" },
-            { label: "Cooling", value: "SATA Loop Cooling" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 32, 
-        name: "Threadripper 7960X Studio", 
-        category: "workstation",
-        img: "https://microless.com/cdn/products/2aad3ef6b5e9eb00ed1e7ad71324a8b2-hi.jpg", 
-        desc: "AMD Ryzen Threadripper 7960X (24 Cores), 128GB DDR5 RAM, 8TB SSD, NVIDIA RTX 4090 24GB. High Airflow Tower.",
-        price: "₹4,25,000",
-        highlights: [
-            "AMD Threadripper 7960X (24 Cores)",
-            "NVIDIA GeForce RTX 4090 24GB",
-            "TRX50 Chipset",
-            "128GB DDR5 RAM",
-            "8TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Threadripper 7960X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4090 24GB" },
-            { label: "RAM", value: "128GB DDR5 5200MHz" },
-            { label: "Storage", value: "8TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 33, 
-        name: "Intel Xeon w9-3495X Server", 
-        category: "workstation",
-        img: "https://www.hpshowroominchennai.in/upload/big/1716208092.jpg", 
-        desc: "Intel Xeon w9-3495X (56 Cores),512GB DDR5 RAM, 10TB NVMe, NVIDIA RTX 6000 Ada 48GB. Rackmount.",
-        price: "₹4,85,000",
-        highlights: [
-            "Intel Xeon w9-3495X (56 Cores)",
-            "NVIDIA RTX 6000 Ada 48GB",
-            "W790 Chipset",
-            "512GB DDR5 RAM",
-            "10TB NVMe"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Xeon w9-3495X" },
-            { label: "Graphics", value: "NVIDIA RTX 6000 Ada 48GB" },
-            { label: "RAM", value: "512GB DDR5 ECC" },
-            { label: "Storage", value: "10TB NVMe SSD" },
-            { label: "Cooling", value: "Server Airflow" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 34, 
-        name: "Intel i9-14900KS Quadro", 
-        category: "workstation",
-        img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", 
-        desc: "Special Edition Intel Core i9-14900KS, 128GB DDR5 RAM, 4TB SSD, NVIDIA Quadro RTX 5000 Ada 32GB. Silent Tower.",
-        price: "₹3,95,000",
-        highlights: [
-            "Intel Core i9-14900KS (6.2 GHz)",
-            "NVIDIA Quadro RTX 5000 Ada 32GB",
-            "Z790 Chipset",
-            "128GB DDR5 RAM",
-            "4TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i9-14900KS" },
-            { label: "Graphics", value: "NVIDIA Quadro RTX 5000 Ada 32GB" },
-            { label: "RAM", value: "128GB DDR5 6000MHz" },
-            { label: "Storage", value: "4TB Gen5 NVMe SSD" },
-            { label: "Cooling", value: "Silent Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 35, 
-        name: "Ryzen 9 7950X3D RenderBox", 
-        category: "workstation",
-        img: "https://assetsio.gnwcdn.com/ryzen-9-7950x3d.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp", 
-        desc: "AMD Ryzen 9 7950X3D, 256GB DDR5 RAM, 8TB SSD, Dual ProArt RX 7900XTX (48GB Total VRAM). Case Labs.",
-        price: "₹4,60,000",
-        highlights: [
-            "AMD Ryzen 9 7950X3D (16 Cores)",
-            "Dual AMD Radeon RX 7900XTX 48GB",
-            "X670E Motherboard",
-            "256GB DDR5 RAM",
-            "8TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD Ryzen 9 7950X3D" },
-            { label: "Graphics", value: "Dual AMD Radeon RX 7900XTX" },
-            { label: "RAM", value: "256GB DDR5 6000MHz" },
-            { label: "Storage", value: "8TB RAID 0 SSD" },
-            { label: "Cooling", value: "Case Labs Water Cooling" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 36, 
-        name: "EPYC 9004 Pro Data", 
-        category: "workstation",
-        img: "https://bizon-tech.com/media/resized/340_340_/catalog/product/cache/1/small_image/9df78eab33525d08d6e5fb8d27136e95/b/a/banner-zx6000-mobile1.jpg.webp", 
-        desc: "AMD EPYC 9004 Processor, 512GB ECC RAM, 20TB Server Storage, NVIDIA A100 80GB. 4U Chassis. AI Ready.",
-        price: "₹4,50,000",
-        highlights: [
-            "AMD EPYC 9004 (64 Cores)",
-            "NVIDIA A100 80GB",
-            "SP5 Motherboard",
-            "512GB ECC RAM",
-            "20TB Storage"
-        ],
-        specs: [
-            { label: "Processor", value: "AMD EPYC 9004" },
-            { label: "Graphics", value: "NVIDIA A100 80GB" },
-            { label: "RAM", value: "512GB DDR4 ECC" },
-            { label: "Storage", value: "20TB SAS SSD" },
-            { label: "Cooling", value: "Server Fans" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 37, 
-        name: "Intel i9-14900K Pro Edit", 
-        category: "workstation",
-        img: "https://m.media-amazon.com/images/I/71ORaFi++pL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "14th Gen Intel Core i9-14900K, 128GB DDR5 RAM, 8TB SSD, NVIDIA RTX A5000 24GB. Designed for Adobe CC.",
-        price: "₹3,50,000",
-        highlights: [
-            "Intel Core i9-14900K (24 Cores)",
-            "NVIDIA RTX A5000 24GB",
-            "Z790 Chipset",
-            "128GB DDR5 RAM",
-            "8TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Core i9-14900K" },
-            { label: "Graphics", value: "NVIDIA RTX A5000 24GB" },
-            { label: "RAM", value: "128GB DDR5 6000MHz" },
-            { label: "Storage", value: "8TB Gen4 NVMe SSD" },
-            { label: "Cooling", value: "Air Cooler" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 38, 
-        name: "Dual Threadripper Compute Node", 
-        category: "workstation",
-        img: "https://www.storagereview.com/wp-content/uploads/2026/03/StorageReview-Dell-Precision-7875-8-2.jpg", 
-        desc: "Dual AMD Threadripper Pro 5975WX, 1TB RAM, 40TB Storage, Quad NVIDIA A40 GPUs. Liquid Cooled Rack.",
-        price: "₹4,99,999",
-        highlights: [
-            "Dual AMD Threadripper Pro 5975WX (128 Cores)",
-            "Quad NVIDIA A40 96GB VRAM",
-            "WRX90 Chipset",
-            "1TB ECC RAM",
-            "40TB Storage"
-        ],
-        specs: [
-            { label: "Processor", value: "Dual AMD Threadripper Pro 5975WX" },
-            { label: "Graphics", value: "Quad NVIDIA A40 96GB" },
-            { label: "RAM", value: "1TB DDR4 ECC" },
-            { label: "Storage", value: "40TB NVMe RAID 0" },
-            { label: "Cooling", value: "Industrial Water Loop" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 39, 
-        name: "Ryzen Threadripper 7000 AI", 
-        category: "workstation",
-        img: "https://www.amd.com/content/dam/amd/en/images/products/desktops/3331750-supermicro-5014a-tt-desktops.jpg", 
-        desc: "Ryzen Threadripper 7000 (32 Cores), 256GB DDR5 RAM, 4TB Gen5 SSD, NVIDIA RTX 6000 Ada. AI Optimized.",
-        price: "₹4,30,000",
-        highlights: [
-            "Ryzen Threadripper 7000 (32 Cores)",
-            "NVIDIA RTX 6000 Ada 48GB",
-            "TRX50 Chipset",
-            "256GB DDR5 RAM",
-            "4TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Ryzen Threadripper 7000" },
-            { label: "Graphics", value: "NVIDIA RTX 6000 Ada 48GB" },
-            { label: "RAM", value: "256GB DDR5 4800MHz" },
-            { label: "Storage", value: "4TB Gen5 NVMe SSD" },
-            { label: "Cooling", value: "Water Cooling" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 40, 
-        name: "Mac Pro Equivalent Intel", 
-        category: "workstation",
-        img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Apple_Mac_Pro_Intel_Xenon.jpg", 
-        desc: "Intel Xeon w7-2495X, 192GB RAM, 8TB SSD, NVIDIA RTX 4090 (Mac Pro Modded). Industrial Design.",
-        price: "₹4,75,000",
-        highlights: [
-            "Intel Xeon w7-2495X (24 Cores)",
-            "NVIDIA GeForce RTX 4090 24GB (Mac Mod)",
-            "W790 Chipset",
-            "192GB DDR4 ECC RAM",
-            "8TB SSD"
-        ],
-        specs: [
-            { label: "Processor", value: "Intel Xeon w7-2495X" },
-            { label: "Graphics", value: "NVIDIA GeForce RTX 4090 24GB" },
-            { label: "RAM", value: "192GB DDR4 ECC" },
-            { label: "Storage", value: "8TB NVMe SSD" },
-            { label: "Cooling", value: "Thermal Tower" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-
-    // --- PC COMPONENTS (10) ---
-
-    { 
-        id: 41, 
-        name: "NVIDIA RTX 4090 Founder's Edition", 
-        category: "components",
-        img: "https://m.media-amazon.com/images/I/51A0J6nnksL._AC_UF1000,1000_QL80_.jpg", 
-        desc: "NVIDIA GeForce RTX 4090 24GB GDDR6X, Triple Fan Cooler, DLSS 3, Ray Tracing. 16K Ready. Standalone GPU.",
-        price: "₹1,65,000",
-        highlights: [
-            "NVIDIA GeForce RTX 4090 24GB",
-            "Triple Fan Cooling",
-            "DLSS 3 Technology",
-            "AV1 Enclosure",
-            "16K Output Support"
-        ],
-        specs: [
-            { label: "Model", value: "RTX 4090 FE" },
-            { label: "VRAM", value: "24GB GDDR6X" },
-            { label: "Cuda Cores", value: "16384" },
-            { label: "Memory Speed", value: "21 Gbps" },
-            { label: "Power Draw", value: "450W" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 42, 
-        name: "LG UltraGear 48\" OLED Monitor", 
-        category: "components",
-        img: "https://vishalperipherals.com/cdn/shop/files/5_25b24312-0b04-4715-a530-0886143ad4ec.jpg?v=1729772922&width=1445", 
-        desc: "48 inch OLED Gaming Monitor, 4K Resolution, 120Hz, 0.1ms Response, HDMI 2.1. Perfect for RTX 4090.",
-        price: "₹2,99,000",
-        highlights: [
-            "48 inch OLED Panel",
-            "4K Resolution (3840 x 2160)",
-            "120Hz Refresh Rate",
-            "0.03ms Response Time",
-            "HDMI 2.1 & DP 1.4"
-        ],
-        specs: [
-            { label: "Panel Type", value: "OLED" },
-            { label: "Resolution", value: "3840 x 2160 (4K)" },
-            { label: "Refresh Rate", value: "120Hz" },
-            { label: "Response Time", value: "0.03ms GtG" },
-            { label: "HDR", value: "True Black 1000" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 43, 
-        name: "ASUS ROG Crosshair X670E Extreme", 
-        category: "components",
-        img: "https://dlcdnwebimgs.asus.com/files/media/C9A82328-9130-467A-AEAC-A57B1FC2A6C4/v2/img/spec/immersion-m.jpg", 
-        desc: "E-ATX Motherboard, AMD AM5 Socket, DDR5 7200+ Support, WiFi 6E, 18+1 Power Stages. High VRM.",
-        price: "₹1,25,000",
-        highlights: [
-            "AMD AM5 Socket Ready",
-            "DDR5 7200+ OC Support",
-            "18+1 Power Stages",
-            "WiFi 6E Built-in",
-            "5G Ethernet"
-        ],
-        specs: [
-            { label: "Chipset", value: "AMD X670E" },
-            { label: "Socket", value: "AM5" },
-            { label: "Memory Slots", value: "4 DIMM" },
-            { label: "Max Memory", value: "192GB" },
-            { label: "Form Factor", value: "E-ATX" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 44, 
-        name: "Custom Hardline Watercooling Kit", 
-        category: "components",
-        img: "https://m.media-amazon.com/images/I/61TZ9cPs1cL.jpg", 
-        desc: "Complete Hardline Watercooling Kit, D5 Pump, Radiator, CPU/GPU Blocks, Clear PETG Tubing, Red Coolant.",
-        price: "₹1,15,000",
-        highlights: [
-            "D5 Dual Pump Setup",
-            "Copper CPU & GPU Blocks",
-            "360mm Radiator",
-            "PETG Clear Tubing",
-            "Red UV Coolant"
-        ],
-        specs: [
-            { label: "Pump", value: "Dual D5 PWM" },
-            { label: "Radiator", value: "360mm Copper/Brass" },
-            { label: "Blocks", value: "CPU + GPU (Copper)" },
-            { label: "Tubing", value: "PETG 13/10mm" },
-            { label: "Reservoir", value: "Cylinder Tube" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 45, 
-        name: "Samsung 990 Pro 4TB x2 RAID", 
-        category: "components",
-        img: "https://www.pcstudio.in/wp-content/uploads/2025/01/Samsung-990-Pro-4Tb-Nvme-M2-Gen-40-Internal-Ssd-1-1-1.webp", 
-        desc: "2x Samsung 990 Pro 4TB NVMe SSDs, Gen 5.0. Read Speed 12,000 MB/s. Perfect for OS + Games RAID.",
-        price: "₹1,85,000",
-        highlights: [
-            "2x 4TB Capacity (8TB Total)",
-            "Gen 5.0 PCIe 4.0 x4",
-            "Read Speed 12,000 MB/s",
-            "Write Speed 10,000 MB/s",
-            "Nickel Coating"
-        ],
-        specs: [
-            { label: "Model", value: "Samsung 990 Pro" },
-            { label: "Interface", value: "PCIe 5.0 x4" },
-            { label: "Form Factor", value: "M.2 2280" },
-            { label: "Sequential Read", value: "12,000 MB/s" },
-            { label: "NAND Flash", value: "TLC 3-bit" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 46, 
-        name: "LG 32GQ950 4K 144Hz Monitor", 
-        category: "components",
-        img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/global_ces2022_product7_02_thumbnail2.jpg", 
-        desc: "32 inch Nano-IPS Gaming Monitor, 4K 144Hz, 1ms, G-Sync Compatible. HDR 1000. Ideal for High End PC.",
-        price: "₹1,45,000",
-        highlights: [
-            "32 inch Nano-IPS Panel",
-            "4K 144Hz Refresh",
-            "1ms GtG Response",
-            "G-Sync Compatible",
-            "HDR 1000"
-        ],
-        specs: [
-            { label: "Panel Type", value: "Nano-IPS" },
-            { label: "Resolution", value: "3840 x 2160" },
-            { label: "Refresh Rate", value: "144Hz" },
-            { label: "Response Time", value: "1ms (GtG)" },
-            { label: "Color Accuracy", value: "DCI-P3 98%" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 47, 
-        name: "Keychron Q1 Pro Mechanical Keyboard", 
-        category: "components",
-        img: "https://media.mmorpg.com/images/heroes/posts/127202.jpg", 
-        desc: "75% Wireless Mechanical Keyboard, Aluminum Case, Gateron Oil King Switches, Hot-swappable, RGB. Typing Heaven.",
-        price: "₹1,10,000",
-        highlights: [
-            "75% Layout Wireless",
-            "Gateron Oil King Switches",
-            "PBT Double Shot Keycaps",
-            "Hot-swappable PCB",
-            "RGB Per-Key Lighting"
-        ],
-        specs: [
-            { label: "Layout", value: "75% ANSI" },
-            { label: "Connectivity", value: "Bluetooth 5.0 / USB-C" },
-            { label: "Battery", value: "4000mAh" },
-            { label: "Switches", value: "Gateron Oil King" },
-            { label: "Case Material", value: "6063 Aluminum" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 48, 
-        name: "Corsair RM1000x PSU Titanium", 
-        category: "components",
-        img: "https://www.bhphotovideo.com/images/fb/corsair_cp_9020271_na_rm1000x_1000w_cybenetics_gold_1859546.jpg", 
-        desc: "1000W Fully Modular Power Supply, 80 Plus Titanium Rated, ATX 3.0, 135mm Fan Zero RPM Mode. Extremely Efficient.",
-        price: "₹1,30,000",
-        highlights: [
-            "1000W Output Power",
-            "80 Plus Titanium Efficiency",
-            "Fully Modular Cables",
-            "ATX 3.0 Compliant",
-            "Zero RPM Fan Mode"
-        ],
-        specs: [
-            { label: "Wattage", value: "1000W Continuous" },
-            { label: "Efficiency", value: "80 Plus Titanium" },
-            { label: "Modular", value: "Fully Modular" },
-            { label: "Rail Type", value: "Single +12V" },
-            { label: "Fan", value: "135mm Magnetic Levitation" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 49, 
-        name: "Razer Kraken V3 Pro Cooler", 
-        category: "components",
-        img: "https://os-wordpress-media.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2021/10/26004512/Razer_Pc_Components_1.jpg", 
-        desc: "360mm LCD AIO Liquid Cooler, 2.36\" LCD Screen, RGB Infinity Mirror Plate. Compatible with Intel & AMD.",
-        price: "₹1,05,000",
-        highlights: [
-            "360mm Radiator",
-            "2.36\" LCD Status Screen",
-            "Infinity Mirror Plate Design",
-            "High Static Pressure Fans",
-            "RGB Lighting"
-        ],
-        specs: [
-            { label: "Radiator Size", value: "360mm" },
-            { label: "Socket Support", value: "Intel LGA 1700 / AM5" },
-            { label: "Fan Speed", value: "800 - 2400 RPM" },
-            { label: "Noise Level", value: "24 - 35 dBA" },
-            { label: "LCD Resolution", value: "480x480 px" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    },
-    { 
-        id: 50, 
-        name: "DAS Keyboard 4 Pro + Monitor Bundle", 
-        category: "components",
-        img: "https://cdn.mos.cms.futurecdn.net/xfpayTwmjHyeCEpwXt4Kzj-2048-80.jpg", 
-        desc: "DAS 4 Pro Custom Mechanical Keyboard + 27\" 144Hz IPS Monitor Bundle. Premium typing experience.",
-        price: "₹1,75,000",
-        highlights: [
-            "DAS 4 Pro Mechanical Keyboard",
-            "27 inch 144Hz IPS Monitor",
-            "Bundled Value Save",
-            "RGB Lighting",
-            "USB Hub"
-        ],
-        specs: [
-            { label: "Keyboard", value: "DAS 4 Pro" },
-            { label: "Monitor", value: "27 inch 144Hz IPS" },
-            { label: "Keyboard Switch", value: "Gateron Brown" },
-            { label: "Monitor Panel", value: "IPS" },
-            { label: "Cable Management", value: "Included" },
-            { label: "Transit Insurance", value: "Your Scope" },
-            { label: "Country of Origin", value: "India" },
-            { label: "Disclaimer", value: "The contents of Product does not include Monitor or any other accessories like Keyboard or Mouse. The CPU Power Cable & HDMI/VGA/DisplayPort cable are NOT INCLUDED in package to avoid damage in transit." },
-            { label: "SSD Speed", value: "Read Speed: 550MB/s, Write Speed: 480MB/s" }
-        ]
-    }
-];
+        // --- PC COMPONENTS (10) ---
+        { id: 41, name: "NVIDIA RTX 4090 Founder's Edition", category: "components", img: "https://m.media-amazon.com/images/I/51A0J6nnksL._AC_UF1000,1000_QL80_.jpg", desc: "NVIDIA GeForce RTX 4090 24GB GDDR6X, Triple Fan Cooler, DLSS 3, Ray Tracing. 16K Ready.", price: "₹1,65,000", highlights: ["NVIDIA GeForce RTX 4090 24GB", "Triple Fan Cooling", "DLSS 3 Technology", "AV1 Enclosure", "16K Output Support"], specs: [{ label: "CPU", value: "N/A (Host PC Required)" }, { label: "Motherboard", value: "PCIe Gen 4.0 x16" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "NVIDIA GeForce RTX 4090 24GB GDDR6X" }, { label: "Storage", value: "N/A" }, { label: "PSU", value: "850W Minimum Recommended" }, { label: "Cooling", value: "Active Triple Fan Heatsink" }, { label: "Processor Model", value: "AD102 GPU" }, { label: "Graphics", value: "N/A" }, { label: "SSD Speed", value: "N/A" }, { label: "Tower Type", value: "N/A (Add-in Card)" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 42, name: "LG UltraGear 48\" OLED Monitor", category: "components", img: "https://vishalperipherals.com/cdn/shop/files/5_25b24312-0b04-4715-a530-0886143ad4ec.jpg?v=1729772922&width=1445", desc: "48 inch OLED Gaming Monitor, 4K Resolution, 120Hz, 0.1ms Response, HDMI 2.1. Perfect for RTX 4090.", price: "₹2,99,000", highlights: ["48 inch OLED Panel", "4K Resolution (3840 x 2160)", "120Hz Refresh Rate", "0.03ms Response Time", "HDMI 2.1 & DP 1.4"], specs: [{ label: "CPU", value: "N/A" }, { label: "Motherboard", value: "N/A" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "N/A (Display Device)" }, { label: "Storage", value: "N/A" }, { label: "PSU", value: "100-240V AC 50/60Hz" }, { label: "Cooling", value: "Passive (Natural Convection)" }, { label: "Processor Model", value: "LG OLED Panel Controller" }, { label: "Graphics", value: "OLED (3840x2160)" }, { label: "SSD Speed", value: "N/A" }, { label: "Tower Type", value: "Tabletop / VESA Mount" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 43, name: "ASUS ROG Crosshair X670E Extreme", category: "components", img: "https://dlcdnwebimgs.asus.com/files/media/C9A82328-9130-467A-AEAC-A57B1FC2A6C4/v2/img/spec/immersion-m.jpg", desc: "E-ATX Motherboard, AMD AM5 Socket, DDR5 7200+ Support, WiFi 6E, 18+1 Power Stages.", price: "₹1,25,000", highlights: ["AMD AM5 Socket Ready", "DDR5 7200+ OC Support", "18+1 Power Stages", "WiFi 6E Built-in", "5G Ethernet"], specs: [{ label: "CPU", value: "AMD Ryzen 7000 Series / 9000 Series" }, { label: "Motherboard", value: "ASUS ROG Crosshair X670E Extreme" }, { label: "RAM", value: "DDR5 7200+ (OC) up to 192GB" }, { label: "GPU", value: "N/A" }, { label: "Storage", value: "4x M.2 (PCIe 5.0/4.0)" }, { label: "PSU", value: "24-pin + 8-pin + 4-pin" }, { label: "Cooling", value: "Water Pump Header + Fan Headers" }, { label: "Processor Model", value: "AMD AM5 Platform" }, { label: "Graphics", value: "Integrated (Optional)" }, { label: "SSD Speed", value: "PCIe 5.0 Support" }, { label: "Tower Type", value: "E-ATX Form Factor" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 44, name: "Custom Hardline Watercooling Kit", category: "components", img: "https://m.media-amazon.com/images/I/61TZ9cPs1cL.jpg", desc: "Complete Hardline Watercooling Kit, D5 Pump, Radiator, CPU/GPU Blocks, Clear PETG Tubing.", price: "₹1,15,000", highlights: ["D5 Dual Pump Setup", "Copper CPU & GPU Blocks", "360mm Radiator", "PETG Clear Tubing", "Red UV Coolant"], specs: [{ label: "CPU", value: "N/A (CPU Block Sold Separately)" }, { label: "Motherboard", value: "N/A" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "N/A (GPU Block Sold Separately)" }, { label: "Storage", value: "N/A" }, { label: "PSU", value: "24V Molex / 3-pin Fan Header" }, { label: "Cooling", value: "360mm Radiator + D5 Dual Pump" }, { label: "Processor Model", value: "N/A" }, { label: "Graphics", value: "N/A" }, { label: "SSD Speed", value: "N/A" }, { label: "Tower Type", value: "N/A (Universal Mount)" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 45, name: "Samsung 990 Pro 4TB x2 RAID", category: "components", img: "https://www.pcstudio.in/wp-content/uploads/2025/01/Samsung-990-Pro-4Tb-Nvme-M2-Gen-40-Internal-Ssd-1-1-1.webp", desc: "2x Samsung 990 Pro 4TB NVMe SSDs, Gen 5.0. Read Speed 12,000 MB/s.", price: "₹1,85,000", highlights: ["2x 4TB Capacity (8TB Total)", "Gen 5.0 PCIe 4.0 x4", "Read Speed 12,000 MB/s", "Write Speed 10,000 MB/s", "Nickel Coating"], specs: [{ label: "CPU", value: "N/A" }, { label: "Motherboard", value: "PCIe Gen 5.0 x4 / Gen 4.0 x4" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "N/A" }, { label: "Storage", value: "2x Samsung 990 Pro 4TB (RAID 0/1)" }, { label: "PSU", value: "N/A" }, { label: "Cooling", value: "Passive Heatspreader with Nickel Coating" }, { label: "Processor Model", value: "Samsung Elpis Controller" }, { label: "Graphics", value: "N/A" }, { label: "SSD Speed", value: "12,000 MB/s Read / 10,000 MB/s Write" }, { label: "Tower Type", value: "M.2 2280 Form Factor" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 46, name: "LG 32GQ950 4K 144Hz Monitor", category: "components", img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/global_ces2022_product7_02_thumbnail2.jpg", desc: "32 inch Nano-IPS Gaming Monitor, 4K 144Hz, 1ms, G-Sync Compatible.", price: "₹1,45,000", highlights: ["32 inch Nano-IPS Panel", "4K 144Hz Refresh", "1ms GtG Response", "G-Sync Compatible", "HDR 1000"], specs: [{ label: "CPU", value: "N/A" }, { label: "Motherboard", value: "N/A" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "N/A (Display Device)" }, { label: "Storage", value: "N/A" }, { label: "PSU", value: "100-240V AC 50/60Hz" }, { label: "Cooling", value: "Active (Fan + Heatsink)" }, { label: "Processor Model", value: "LG Nano-IPS Panel Controller" }, { label: "Graphics", value: "Nano-IPS (3840x2160)" }, { label: "SSD Speed", value: "N/A" }, { label: "Tower Type", value: "Tabletop / VESA Mount" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 47, name: "Keychron Q1 Pro Mechanical Keyboard", category: "components", img: "https://media.mmorpg.com/images/heroes/posts/127202.jpg", desc: "75% Wireless Mechanical Keyboard, Aluminum Case, Gateron Oil King Switches.", price: "₹1,10,000", highlights: ["75% Layout Wireless", "Gateron Oil King Switches", "PBT Double Shot Keycaps", "Hot-swappable PCB", "RGB Per-Key Lighting"], specs: [{ label: "CPU", value: "N/A (Host Device Required)" }, { label: "Motherboard", value: "N/A" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "N/A" }, { label: "Storage", value: "N/A" }, { label: "PSU", value: "4000mAh Internal Battery" }, { label: "Cooling", value: "Passive" }, { label: "Processor Model", value: "Nordic MCU" }, { label: "Graphics", value: "N/A" }, { label: "SSD Speed", value: "N/A" }, { label: "Tower Type", value: "Desktop / Tabletop" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 48, name: "Corsair RM1000x PSU Titanium", category: "components", img: "https://www.bhphotovideo.com/images/fb/corsair_cp_9020271_na_rm1000x_1000w_cybenetics_gold_1859546.jpg", desc: "1000W Fully Modular Power Supply, 80 Plus Titanium Rated, ATX 3.0.", price: "₹1,30,000", highlights: ["1000W Output Power", "80 Plus Titanium Efficiency", "Fully Modular Cables", "ATX 3.0 Compliant", "Zero RPM Fan Mode"], specs: [{ label: "CPU", value: "N/A" }, { label: "Motherboard", value: "ATX / EPS 12V (2x 4+4)" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "N/A" }, { label: "Storage", value: "N/A" }, { label: "PSU", value: "Corsair RM1000x Titanium 1000W" }, { label: "Cooling", value: "135mm Low-Noise Magnetic Levitation Fan" }, { label: "Processor Model", value: "N/A" }, { label: "Graphics", value: "N/A" }, { label: "SSD Speed", value: "N/A" }, { label: "Tower Type", value: "ATX Standard Size" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 49, name: "Razer Kraken V3 Pro Cooler", category: "components", img: "https://os-wordpress-media.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2021/10/26004512/Razer_Pc_Components_1.jpg", desc: "360mm LCD AIO Liquid Cooler, 2.36\" LCD Screen, RGB Infinity Mirror Plate.", price: "₹1,05,000", highlights: ["360mm Radiator", "2.36\" LCD Status Screen", "Infinity Mirror Plate Design", "High Static Pressure Fans", "RGB Lighting"], specs: [{ label: "CPU", value: "Intel LGA 1700 / AM5 Support" }, { label: "Motherboard", value: "N/A" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "N/A" }, { label: "Storage", value: "N/A" }, { label: "PSU", value: "3-pin Fan Header + USB 2.0" }, { label: "Cooling", value: "360mm LCD AIO Liquid Cooler" }, { label: "Processor Model", value: "N/A (Cooling Unit)" }, { label: "Graphics", value: "LCD 480x480 px" }, { label: "SSD Speed", value: "N/A" }, { label: "Tower Type", value: "Standard 120mm/140mm Mount" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] },
+        { id: 50, name: "DAS Keyboard 4 Pro + Monitor Bundle", category: "components", img: "https://cdn.mos.cms.futurecdn.net/xfpayTwmjHyeCEpwXt4Kzj-2048-80.jpg", desc: "DAS 4 Pro Custom Mechanical Keyboard + 27\" 144Hz IPS Monitor Bundle.", price: "₹1,75,000", highlights: ["DAS 4 Pro Mechanical Keyboard", "27 inch 144Hz IPS Monitor", "Bundled Value Save", "RGB Lighting", "USB Hub"], specs: [{ label: "CPU", value: "N/A" }, { label: "Motherboard", value: "N/A" }, { label: "RAM", value: "N/A" }, { label: "GPU", value: "N/A" }, { label: "Storage", value: "N/A" }, { label: "PSU", value: "Keyboard: 5V USB | Monitor: 100-240V AC" }, { label: "Cooling", value: "N/A" }, { label: "Processor Model", value: "N/A" }, { label: "Graphics", value: "Monitor: IPS Panel" }, { label: "SSD Speed", value: "N/A" }, { label: "Tower Type", value: "Tabletop / Desk" }, { label: "Brand", value: "COREX" }, { label: "Warranty", value: "1-Year (RTB) COREX Limited Warranty" }, { label: "Note", value: "Software troubleshooting and compatibility is out of scope" }] }
+    ];
 
         // --- AUTH & PROFILE ---
         async function initAuth() {
@@ -1876,7 +475,7 @@
         function handleLogout() { 
             localStorage.clear(); 
             showToast("Logging out...", "info");
-            setTimeout(() => window.location.href = 'index.html', 1000);
+            setTimeout(() => window.location.href = 'shop.html', 1000);
         }
 
         // --- TOAST SYSTEM ---
@@ -1885,11 +484,9 @@
             const toast = document.createElement('div');
             toast.className = 'toast';
             let icon = type === 'success' ? 'ri-checkbox-circle-fill' : 'ri-information-fill';
-            let color = type === 'success' ? 'var(--success)' : '#ef4444';
-            toast.style.borderLeftColor = color;
-            toast.innerHTML = `<i class="${icon}" style="color:${color}; font-size:18px;"></i> ${message}`;
+            toast.innerHTML = `<i class="${icon}"></i> ${message}`;
             container.appendChild(toast);
-            setTimeout(() => { toast.style.animation = 'fadeOut 0.5s ease forwards'; setTimeout(() => toast.remove(), 500); }, 3000);
+            setTimeout(() => { toast.style.animation = 'toastOut 0.5s ease forwards'; setTimeout(() => toast.remove(), 500); }, 3000);
         }
 
         // --- PAGE LOGIC ---
@@ -1899,11 +496,11 @@
             const product = productsData.find(p => p.id === productId);
             
             if(!product) {
-                document.querySelector('.container').innerHTML = '<h1 style="padding:100px; text-align:center;">Product not found</h1><a href="shop.html" style="display:block; text-align:center; margin-top:20px; color: var(--accent);">Go Back</a>';
+                document.querySelector('.container').innerHTML = '<div style="padding:100px; text-align:center;"><h1 class="pd-title">Product not found</h1><a href="shop.html" class="btn-back" style="font-size:16px; margin-top:20px;">Go Back</a></div>';
                 return;
             }
 
-            // --- DOM ELEMENTS (Direct IDs for Reliability) ---
+            // --- DOM ELEMENTS ---
             const imageContainer = document.getElementById('imageContainer');
             const staticImg = document.getElementById('staticProductImg');
             const zoomLayer = document.getElementById('zoom-layer');
@@ -1913,7 +510,7 @@
             
             // Zoom Settings
             let currentZoom = 2.5;
-            const lensSize = 160; // Must match CSS width
+            const lensSize = 160;
             const halfLens = lensSize / 2;
 
             // --- 1. Populate Content ---
@@ -1921,6 +518,7 @@
             magnifierImg.src = product.img;
 
             document.getElementById('detailTitle').innerText = product.name;
+            document.getElementById('pdCategory').innerText = product.category.toUpperCase();
             document.getElementById('detailPrice').innerText = product.price;
             document.getElementById('detailDesc').innerText = product.desc;
 
@@ -1930,7 +528,7 @@
                 hlList.innerHTML = product.highlights.map(item => `<li>${item}</li>`).join('');
             }
 
-            // Populate Specs (Amazon Style)
+            // Populate Specs
             const specsContainer = document.getElementById('specsContainer');
             if(product.specs) {
                 specsContainer.innerHTML = product.specs.map(spec => `
@@ -1956,24 +554,17 @@
                 recGrid.appendChild(card);
             });
 
-            // --- ZOOM LOGIC (FIXED SIZING) ---
-            
-            // IMPORTANT: Function to force the magnifier image to match the container size
-            // This prevents the "demagnifying" issue where the image is too small.
+            // --- ZOOM LOGIC ---
             const syncMagnifierSize = () => {
                 const w = imageContainer.offsetWidth;
                 const h = imageContainer.offsetHeight;
                 magnifierImg.style.width = `${w}px`;
                 magnifierImg.style.height = `${h}px`;
             };
-
-            // Initial sync and on resize
             staticImg.onload = syncMagnifierSize;
             window.addEventListener('resize', syncMagnifierSize);
-            // Small delay to ensure layout is done
             setTimeout(syncMagnifierSize, 100);
 
-            // Check for mobile/touch
             const isTouch = 'ontouchstart' in window;
             if (isTouch) {
                 cursor.style.display = 'none';
@@ -1981,7 +572,6 @@
                 return;
             }
 
-            // --- MOUSE ENTER ---
             imageContainer.addEventListener('mouseenter', () => {
                 if (window.matchMedia("(min-width:769px)").matches) {
                     zoomLayer.style.opacity = '1';
@@ -1989,51 +579,36 @@
                 }
             });
 
-            // --- MOUSE MOVE ---
             imageContainer.addEventListener('mousemove', (e) => {
                 if (window.matchMedia("(max-width: 768px)").matches) return;
-
-                //1. Get Position relative to Image Container
                 const rect = imageContainer.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-
-                // 2. Move Magnifier Glass to Cursor Position
                 const glassX = e.clientX - halfLens;
                 const glassY = e.clientY - halfLens;
                 
                 magnifier.style.left = `${glassX}px`;
                 magnifier.style.top = `${glassY}px`;
-
-                // 3. Move Custom Cursor (Already centered via CSS transform)
                 cursor.style.left = `${e.clientX}px`;
                 cursor.style.top = `${e.clientY}px`;
 
-                // 4. PAN THE IMAGE INSIDE THE GLASS
-                // Math: Move image opposite to mouse so that pixel under mouse (x,y) ends up in center of glass
-                // Formula: Translate = - (MousePos * Zoom) + (HalfGlassSize)
                 const panX = - (x * currentZoom) + halfLens;
                 const panY = - (y * currentZoom) + halfLens;
 
-                // Apply Transform
                 magnifierImg.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
             });
 
-            // --- MOUSE LEAVE ---
             imageContainer.addEventListener('mouseleave', () => {
                 if (window.matchMedia("(max-width: 768px)").matches) return;
                 zoomLayer.style.opacity = '0';
                 cursor.style.display = 'none';
             });
             
-            // --- WHEEL ZOOM ---
             imageContainer.addEventListener('wheel', (e) => {
                 if (window.matchMedia("(max-width: 768px)").matches) return;
                 e.preventDefault();
-
-                // Adjust Zoom Level
                 const delta = -Math.sign(e.deltaY) * 0.1;
-                let newScale = Math.min(Math.max(1.5, currentZoom + delta), 3.0); // Keep min 1.5x so it doesn't shrink
+                let newScale = Math.min(Math.max(1.5, currentZoom + delta), 3.0); 
                 currentZoom = newScale;
             });
         }
@@ -2066,7 +641,7 @@
         }
 
         window.onclick = function(event) {
-            if (!event.target.closest('.icon-btn')) document.getElementById('profileDropdown').classList.remove('active');
+            if (!event.target.closest('.profile-rel')) document.getElementById('profileDropdown').classList.remove('active');
         }
 
         window.onload = function() {

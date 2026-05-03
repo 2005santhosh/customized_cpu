@@ -3,316 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" type="image/png" href="../assets/images/logo.jpeg">
     <title>COREX | All Products</title>
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
     <!-- Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
         :root {
-            --bg-gradient: radial-gradient(circle at 50% -20%, #2e3244 0%, #111116 60%, #000000 100%);
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --accent: #FFD600;
-            --accent-hover: #E6C200;
-            --text-main: #FFFFFF;
-            --text-sec: #9CA3AF;
-            --font-head: 'Space Grotesk', sans-serif;
+            --ink: #0a0b0e;
+            --ink-2: #111318;
+            --ink-3: #181b22;
+            --ink-4: #1f232d;
+            --ink-5: #252a36;
+            --panel: #1c1f28;
+            --panel-2: #232733;
+            --amber: #f59e0b;
+            --amber-bright: #fbbf24;
+            --amber-dim: #92400e;
+            --amber-glow: rgba(245,158,11,0.18);
+            --amber-glow-lg: rgba(245,158,11,0.08);
+            --cyan: #22d3ee;
+            --cyan-dim: #0e7490;
+            --cyan-glow: rgba(34,211,238,0.15);
+            --red: #ef4444;
+            --white: #f1f3f9;
+            --white-dim: #8892a4;
+            --white-faint: #3d4457;
+            --border: rgba(255,255,255,0.07);
+            --border-amber: rgba(245,158,11,0.25);
+            --border-cyan: rgba(34,211,238,0.2);
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-ui: 'Barlow Condensed', sans-serif;
             --font-body: 'Inter', sans-serif;
-            --radius-md: 12px;
-            --success: #10B981;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        
-        body {
-            background: var(--bg-gradient);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-attachment: fixed;
-            display: flex;
-            flex-direction: column;
+            --font-mono: 'Space Mono', monospace;
+            --r: 6px;
+            --r-md: 10px;
+            --r-lg: 16px;
         }
 
-        /* Background Pattern */
-        .bg-pattern {
-            position: fixed; inset: 0; z-index: -1;
-            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
+        *{margin:0;padding:0;box-sizing:border-box;outline:none;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--ink);color:var(--white);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;}
+        body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.6;}
+        a{text-decoration:none;color:inherit;transition:0.2s;}ul{list-style:none;}img{display:block;max-width:100%;}button{cursor:pointer;border:none;background:none;}.hidden{display:none!important;}
+        ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--ink-2);}::-webkit-scrollbar-thumb{background:var(--amber-dim);border-radius:4px;}
+        .container{max-width:1360px;margin:0 auto;padding:0 24px;position:relative;z-index:2;width:100%;}
+
+        /* ─── NAVBAR ─── */
+        .navbar{position:sticky;top:0;z-index:100;background:rgba(10,11,14,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+        .nav-inner{display:flex;align-items:center;gap:16px;padding:14px 0;}
+        .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+        .logo-mark{width:38px;height:38px;border-radius:var(--r);background:var(--amber);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:20px;color:var(--ink);letter-spacing:0;flex-shrink:0;position:relative;overflow:hidden;}
+        .logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.25) 0%,transparent 60%);}
+        .logo-name{font-family:var(--font-display);font-size:26px;letter-spacing:2px;color:var(--white);line-height:1;}
+        .logo-name span{color:var(--amber);}
+        
+        .nav-actions{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+        .icon-btn{width:40px;height:40px;border-radius:var(--r);background:var(--ink-3);border:1px solid var(--border);color:var(--white-dim);font-size:18px;display:flex;align-items:center;justify-content:center;transition:0.2s;position:relative;}
+        .icon-btn:hover{background:var(--amber);color:var(--ink);border-color:var(--amber);}
+        .badge{position:absolute;top:-5px;right:-5px;background:var(--red);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--ink);transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.5);}
+        .badge.bump{transform:scale(1.5);}
+        .profile-rel{position:relative;}
+        .profile-dropdown{position:absolute;top:calc(100% + 10px);right:0;background:var(--panel-2);border:1px solid var(--border-amber);border-radius:var(--r-md);width:190px;padding:12px;display:none;flex-direction:column;gap:6px;box-shadow:0 16px 48px rgba(0,0,0,0.5);animation:dropIn 0.15s ease;}
+        @keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+        .profile-dropdown.active{display:flex;}
+        .profile-user{font-family:var(--font-ui);font-weight:600;font-size:14px;color:var(--white);padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+        .profile-user i{color:var(--amber);}
+        .logout-btn{background:transparent;color:var(--white-dim);padding:8px 10px;border-radius:var(--r);text-align:left;font-size:12px;font-family:var(--font-body);transition:0.2s;display:flex;align-items:center;gap:8px;}
+        .logout-btn:hover{background:#2d1515;color:#f87171;}
+        .nav-mobile{display:none;align-items:center;justify-content:space-between;padding:12px 0;}
+
+        /* ─── SECTION HEADER ─── */
+        .sec-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;color:var(--amber);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+        .sec-label::before{content:'';width:20px;height:1px;background:var(--amber);}
+        .sec-title{font-family:var(--font-display);font-size:clamp(32px,4vw,48px);letter-spacing:1px;color:var(--white);line-height:1;}
+        .sec-title span{color:var(--amber);}
+        .sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin:40px 0 32px;gap:20px;}
+
+        /* Reset Button styled as Ghost */
+        .btn-reset {
+            display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--white);font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:10px 20px;border-radius:var(--r);border:1px solid var(--border);transition:0.2s;cursor:pointer;flex-shrink:0;
         }
+        .btn-reset:hover{border-color:var(--amber);color:var(--amber);background:var(--amber-glow);}
 
-        a { text-decoration: none; color: inherit; transition: 0.2s; cursor: pointer; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        /* ─── PRODUCTS GRID ─── */
+        .products-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;padding-bottom: 40px;}
+        @media(max-width:1100px){.products-grid{grid-template-columns:repeat(3,1fr);}}
+        @media(max-width:800px){.products-grid{grid-template-columns:repeat(2,1fr);}}
+        @media(max-width:480px){.products-grid{grid-template-columns:1fr;}}
 
-        /* Navbar */
-        .navbar {
-            position: sticky; top: 0; z-index: 100; 
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(16px); 
-            border-bottom:1px solid var(--card-border); padding: 12px 0;
-        }
-
-        /* --- DESKTOP NAV (Default Visible) --- */
-        .nav-desktop { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-        }
-
-        /* --- MOBILE NAV (Default Hidden) --- */
-        .nav-mobile { 
-            display: none; /* FIX: Explicitly hide on desktop */
-        }
-
-        /* --- CORE X LOGO STYLES --- */
-/* Apply to both Desktop and Mobile Nav */
-.logo, .nav-logo {
-    display: flex !important;
-    align-items: center;
-    gap: 4px; /* Tight gap between text and icon */
-    text-decoration: none;
-    font-family: 'Space Grotesk', sans-serif; /* Using your existing font-head */
-    transition: transform 0.3s ease;
-}
-
-.logo:hover, .nav-logo:hover {
-    transform: scale(1.02);
-}
-
-/* Text Styling - Overrides yellow accent in CSS */
-.core-text {
-    color: #FFFFFF !important;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: -0.5px;
-}
-
-/* SVG Icon Styling */
-.x-icon {
-    height: 26px;
-    width: auto;
-    display: block;
-    filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3)); /* Subtle red glow */
-}
-
-/* Mobile Adjustment */
-@media (max-width: 768px) {
-    .core-text {
-        font-size: 20px;
-    }
-    .x-icon {
-        height: 22px;
-    }
-}
+        .product-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;transition:0.3s cubic-bezier(0.25,0.8,0.25,1);position:relative;}
+        .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.4);border-color:var(--border-amber);}
         
-        .badge { 
-            position: absolute; top: -5px; right: -5px; 
-            background: var(--accent); color: #000; 
-            font-size: 10px; font-weight: bold; width: 18px; height: 18px; 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            border: 2px solid #000;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .badge.bump { transform: scale(1.4); }
+        /* Image Container - Changed to object-fit: contain as requested */
+        .p-img{height:240px;background:var(--ink-3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:20px;flex-shrink:0;}
+        .p-img::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);background-size:24px 24px;}
+        .p-img img{max-width:100%;max-height:100%;object-fit:contain;position:relative;z-index:1;transition:0.4s;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.4));}
+        .product-card:hover .p-img img{transform:scale(1.05);}
+        .p-img::after{content:'';position:absolute;top:12px;right:12px;width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);animation:pulseDot 2s ease-in-out infinite;}
+        @keyframes pulseDot{0%,100%{opacity:0.5;transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
+        
+        .p-body{padding:16px;flex:1;display:flex;flex-direction:column;}
+        .p-cat{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px;}
+        .p-name{font-family:var(--font-ui);font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.3;letter-spacing:0.3px;}
+        .p-desc{font-size:11.5px;color:var(--white-faint);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:14px;flex:1;}
+        .p-price{font-family:var(--font-display);font-size:24px;letter-spacing:0.5px;color:var(--amber);margin-bottom:14px;}
+        
+        .p-actions{display:flex;gap:8px;}
+        .btn-view{flex:1;padding:9px 12px;border-radius:var(--r);background:var(--ink-4);border:1px solid var(--border);font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--white-dim);cursor:pointer;transition:0.2s;text-align:center;display:flex;align-items:center;justify-content:center;}
+        .btn-view:hover{background:var(--ink-5);border-color:var(--white-faint);color:var(--white);}
+        .btn-cart{flex:1;padding:9px 12px;border-radius:var(--r);background:var(--amber);font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--ink);cursor:pointer;transition:0.2s;display:flex;align-items:center;justify-content:center;gap:6px;}
+        .btn-cart:hover{background:var(--amber-bright);box-shadow:0 4px 16px rgba(245,158,11,0.4);}
+        .btn-cart.added{background:#064e3b;color:#6ee7b7;pointer-events:none;}
 
-        .nav-icons { display: flex; gap: 20px; align-items: center; position: relative; }
-        .icon-btn { background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; position: relative; transition: 0.2s; display: flex; align-items: center;}
-        .icon-btn:hover { color: var(--accent); transform: translateY(-2px); }
-        
-        /* Profile Dropdown */
-        .profile-dropdown { 
-            position: absolute; top: 100%; right: 0; margin-top: 15px; 
-            background: #1a1a1a; border: 1px solid var(--card-border); 
-            border-radius: 8px; width: 200px; padding: 10px; 
-            display: none; flex-direction: column; gap: 5px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 200; 
-            transform-origin: top right;
-            animation: fadeIn 0.2s ease;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        
-        .profile-dropdown.active { display: flex; }
-        .profile-user { font-weight: 600; color: #fff; padding-bottom: 10px; border-bottom: 1px solid var(--card-border); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .user-icon { color: var(--accent); }
-        .logout-btn { background: rgba(255,255,255,0.05); color: #fff; border: none; padding: 10px; border-radius: 6px; text-align: left; font-size: 13px; transition: 0.2s; display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .logout-btn:hover { background: #ef4444; color: white; }
+        /* ─── FOOTER ─── */
+        footer{margin-top:auto;background:var(--ink-2);border-top:1px solid var(--border);padding:40px 0;text-align:center;font-size:13px;color:var(--white-faint);font-family:var(--font-body);}
+        .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;}
+        .footer-logo .logo-mark{width:28px;height:28px;font-size:15px;}
+        .footer-logo span{font-family:var(--font-display);font-size:22px;letter-spacing:2px;color:var(--white);}
+        .footer-logo span span{color:var(--amber);}
 
-        /* Filter Header */
-        .filter-header { display: flex; justify-content: space-between; align-items: center; margin-top: 50px; margin-bottom: 30px; animation: slideDown 0.5s ease; }
-        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        /* ─── TOAST ─── */
+        #toast-container{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;flex-direction:column;gap:10px;}
+        .toast{background:var(--panel-2);border:1px solid var(--border-amber);color:var(--white);padding:12px 20px;border-radius:var(--r-md);box-shadow:0 12px 36px rgba(0,0,0,0.5);font-size:13px;font-weight:500;display:flex;align-items:center;gap:12px;animation:toastIn 0.3s ease;min-width:260px;}
+        @keyframes toastIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+        @keyframes toastOut{to{opacity:0;transform:translateY(8px);}}
+        .toast i{color:var(--amber);font-size:18px;}
 
-        .filter-title { font-family: var(--font-head); font-size: 36px; color: #fff; letter-spacing: -0.5px; }
-        .reset-btn { 
-            background: transparent; border: 1px solid var(--card-border); 
-            color: var(--text-sec); padding: 10px 20px; border-radius: 6px; 
-            cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .reset-btn:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.05); }
-
-        /* Products Grid */
-        .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; padding-bottom: 40px; }
-        
-        .product-card { 
-            background: var(--card-bg); border: 1px solid var(--card-border); 
-            border-radius: var(--radius-md); overflow: hidden; 
-            display: flex; flex-direction: column; 
-            transition: all 0.3s ease; 
-            opacity: 0; /* Hidden initially for animation */
-            animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-        
-        .product-card:hover { border-color: rgba(255, 255, 255, 0.3); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        
-        .p-top { height: 220px; background: #000; overflow: hidden; position: relative; }
-        .p-top img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .product-card:hover .p-top img { transform: scale(1.05); }
-        
-        .p-bottom { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-        .p-cat { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sec); margin-bottom: 6px; }
-        .p-name { font-weight: 600; font-size: 18px; margin-bottom: 8px; color: #fff; }
-        .p-desc { font-size: 13px; color: var(--text-sec); margin-bottom: 15px; line-height: 1.5; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .p-price { font-family: var(--font-head); font-size: 22px; color: var(--accent); margin-bottom: 20px; font-weight: 700; }
-        
-        .p-actions { display: grid; grid-template-columns:1fr 1.5fr; gap: 10px; }
-        .btn { padding: 10px; border-radius: 6px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
-        
-        .btn-view { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--card-border); }
-        .btn-view:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
-        
-        .btn-cart { background: #fff; color: #000; }
-        .btn-cart:hover { background: var(--accent); color: #000; }
-        
-        /* Button State: Added */
-        .btn-cart.added { background: var(--success); color: #fff; border-color: var(--success); pointer-events: none; }
-
-        /* Footer */
-        footer { margin-top: auto; border-top: 1px solid var(--card-border); background: #050505; color: var(--text-sec); padding: 30px 0; text-align: center; font-size: 14px; }
-
-        /* Toast Notification */
-        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
-        .toast {
-            background: #1a1a1a; color: #fff; padding: 12px 20px; border-radius: 8px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            font-size: 14px; font-weight: 500;
-            display: flex; align-items: center; gap: 10px;
-            animation: slideInRight 0.3s ease forwards;
-            min-width: 250px;
-        }
-        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeOut { to { opacity: 0; transform: translateY(10px); } }
-        @keyframes fadeInUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        /* --- RESPONSIVE MEDIA QUERIES --- */
-        @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
-        
-        @media (max-width: 768px) { 
-            /* Hide Desktop Nav */
-            .nav-desktop { display: none; } 
-            /* Show Mobile Nav */
-            .nav-mobile { 
-                display: flex; 
-                justify-content: space-between; 
-                align-items: center; 
-                width: 100%; 
-            }
-
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } 
-            .p-top { height: 160px; } 
-            .filter-title { font-size: 24px; } 
-            .filter-header { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .reset-btn { width: 100%; justify-content: center; }
-        }
-        
-        @media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } .p-top { height: 200px; } }
+        /* Mobile Nav */
+        @media(max-width:768px){.nav-inner{display:none;}.nav-mobile{display:flex;}.sec-header{flex-direction:column;align-items:flex-start;gap:15px;}}
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
     <div id="toast-container"></div>
 
+    <!-- ══ NAVBAR ══ -->
     <nav class="navbar">
-        <div class="container">
-            <!-- Desktop Nav -->
-            <div class="nav-desktop">
-                 <a href="./shop.html" class="logo">
-        <span class="core-text">CORE</span>
-        
-        <!-- Custom Asymmetric X Icon with Gradient -->
-        <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
-                    <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
-                </linearGradient>
-            </defs>
-            
-            <!-- Big Line (Long diagonal) -->
-            <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-            
-            <!-- Small Line (Short diagonal, offset for effect) -->
-            <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-        </svg>
-    </a>
-                <div class="nav-icons">
-                    <button class="icon-btn" onclick="toggleProfile()" aria-label="Profile">
-                        <i class="ri-user-line"></i>
-                        <div class="profile-dropdown" id="profileDropdown">
-                            <div class="profile-user"><i class="ri-user-smile-line user-icon"></i> <span id="userNameDisplay">User</span></div>
-                            <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
-                        </div>
-                    </button>
-                    <a href="cart.html" class="icon-btn" aria-label="Cart">
-                        <i class="ri-shopping-cart-line"></i>
-                        <span class="badge" id="cartBadge">0</span>
-                    </a>
-                </div>
+      <div class="container">
+        <div class="nav-inner">
+          <a href="shop.html" class="logo">
+            <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
+            <span class="logo-name">CORE<span>X</span></span>
+          </a>
+    
+          <div style="flex:1"></div> <!-- Spacer -->
+    
+          <div class="nav-actions">
+            <div class="profile-rel">
+              <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
+              <div class="profile-dropdown" id="profileDropdown">
+                <div class="profile-user"><i class="ri-cpu-line"></i><span id="userNameDisplay">Guest</span></div>
+                <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
+              </div>
             </div>
-
-            <!-- Mobile Nav -->
-            <div class="nav-mobile">
-                  <a href="./shop.html" class="nav-logo">
-        <span class="core-text">CORE</span>
-        
-        <!-- Copy of Icon with Unique Gradient ID for Mobile -->
-        <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="redGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ff3333" />
-                    <stop offset="100%" stop-color="#990000" />
-                </linearGradient>
-            </defs>
-            <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
-            <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
-        </svg>
-    </a>
-                <div class="mobile-nav-right" style="display:flex; gap:15px;">
-                    <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-line"></i></button>
-                    <a href="cart.html" class="icon-btn">
-                        <i class="ri-shopping-cart-line"></i>
-                        <span class="badge" id="cartBadgeMobile">0</span>
-                    </a>
-                </div>
-            </div>
+            <a href="cart.html" class="icon-btn" style="position:relative;">
+              <i class="ri-shopping-bag-3-line"></i>
+              <span class="badge" id="cartBadge">0</span>
+            </a>
+          </div>
         </div>
+    
+        <div class="nav-mobile">
+          <a href="shop.html" class="logo">
+            <div class="logo-mark" style="width:32px;height:32px;font-size:17px;">CX</div>
+            <span class="logo-name" style="font-size:22px;">CORE<span>X</span></span>
+          </a>
+          <div style="display:flex;gap:8px;">
+            <button class="icon-btn" style="width:38px;height:38px;" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
+            <a href="cart.html" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
+              <i class="ri-shopping-bag-3-line"></i>
+              <span class="badge" id="cartBadgeMobile">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </nav>
 
     <main class="container">
-        <div class="filter-header">
+        <div class="sec-header">
             <div>
-                <h1 class="filter-title" id="pageTitle">All Products</h1>
-                <p style="color:var(--text-sec); margin-top:5px; font-size:14px;" id="resultCount">Showing all items</p>
+                <div class="sec-label">// Catalogue</div>
+                <h1 class="sec-title" id="pageTitle">All <span>Products</span></h1>
+                <p style="color:var(--white-faint); margin-top:5px; font-size:14px; font-family:var(--font-mono);" id="resultCount">Showing all items</p>
             </div>
-            <button class="reset-btn" onclick="window.location.href='all-products.html'">
+            <button class="btn-reset" onclick="window.location.href='all-products.html'">
                 <i class="ri-refresh-line"></i> Reset Filter
             </button>
         </div>
@@ -322,438 +200,82 @@
         </div>
     </main>
 
-    <footer><p>&copy; 2026 COREX Systems. All rights reserved.</p></footer>
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
+                <span>CORE<span>X</span></span>
+            </div>
+            <p>&copy; 2026 COREX Systems. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         // --- BACKEND API URL ---
         const API_URL = "https://api.core-x.in";
 
         /* 
-           Product Data
+           Product Data (50 Items)
         */
         const productsData = [
-    // --- INTEL GAMING PCS (15) ---
+            // --- INTEL GAMING PCS (15) ---
+            { id: 1, name: "Starter Gaming PC", desc: "Intel 10th Gen Core i5 10400F, NVIDIA GeForce RTX 3060 12GB Graphics, 16GB RAM, 480GB SSD, WiFi", price: "₹1,24,777", img: "https://m.media-amazon.com/images/I/71bJ6pk+t0L._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 2, name: "Performance Gaming PC", desc: "Intel 14th Gen Core i7 14700K [20C 8 P-cores + 12 E-cores) and 28 threads, 33M Cache, up to 5.60 GHz], Nvidia GeForce RTX 4060 8GB Graphics, 32GB DDR5 RAM, 1TB Gen4 NVMe SSD (~4100 Mbps), AC WiFi", price: "₹1,92,148", img: "https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg", category: "gaming" },
+            { id: 3, name: "Intel Core i5-13400F RTX 4060 Edition", desc: "13th Gen Intel Core i5-13400F, NVIDIA GeForce RTX 4060 8GB, 16GB DDR4 RAM, 512GB NVMe SSD, Windows 11 Home", price: "₹1,35,000", img: "https://5.imimg.com/data5/SELLER/Default/2024/2/387712115/ZC/SR/GW/80125604/gear-g3-gaming-pc-intel-core-i5-13th-gen-13400f-rtx-4060-16gb-ram-1tb-nvme-ssd.jpg", category: "gaming" },
+            { id: 4, name: "Intel i5-13600KF RTX 4060 Ti Build", desc: "Unlocked 14th Gen Core i5-13600KF, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 6000MHz RAM, 1TB Samsung 980 Pro SSD, Air Cooling", price: "₹1,65,000", img: "https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 5, name: "Core Air i5 Edition", desc: "Intel Core i5-14600K, RTX 4070 Ti, Air Cooled, White Aesthetic. Great value for 1440p gaming.", price: "₹1,54,990", img: "https://m.media-amazon.com/images/X/bxt1/M/gbxt1BUnh4jLjZ2.png", category: "gaming" },
+            { id: 6, name: "Intel i7-13700K RTX 3070 Battlestation", desc: "Intel Core i7-13700K (16 Cores), NVIDIA GeForce RTX 3070 8GB, 32GB DDR5 RAM, 2TB NVMe SSD, RGB Case", price: "₹1,85,000", img: "https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg", category: "gaming" },
+            { id: 7, name: "Intel i7-14700K RTX 4070 Ultimate", desc: "20 Cores i7-14700K with RTX 4070 12GB GDDR6X, 32GB DDR5 RAM, 2TB Gen5 SSD, Liquid Cooled", price: "₹2,15,000", img: "https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 8, name: "Intel i7-14700KF RTX 4070 Ti Super", desc: "Intel Core i7-14700KF Unlocked, RTX 4070 Ti Super 16GB, 64GB DDR5 RAM, 2TB Storage, 360mm AIO", price: "₹2,45,000", img: "https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458", category: "gaming" },
+            { id: 9, name: "Intel i7-14700KS RTX 4080 Beast", desc: "Special Edition i7-14700KS (6.0 GHz Turbo), NVIDIA RTX 4080 16GB, 64GB DDR5 RAM, 4TB NVMe, Hardline Liquid Cooling", price: "₹3,10,000", img: "https://m.media-amazon.com/images/I/61G0BM0HPRL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 10, name: "Intel i7-14900K RTX 4070 Ti", desc: "Latest Gen Core i7-14900K, RTX 4070 Ti, 32GB DDR5, 2TB SSD, Premium Air Cooling Build", price: "₹2,35,000", img: "https://m.media-amazon.com/images/I/81pDvAwecpL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 11, name: "Intel i9-12900K RTX 3080 Ti", desc: "12th Gen Core i9-12900K, NVIDIA RTX 3080 Ti 12GB, 64GB DDR5 RAM, 4TB Gen4 SSD, Custom Loop", price: "₹2,80,000", img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 12, name: "Intel i9-13900K RTX 4080 Super", desc: "24 Cores i9-13900K, RTX 4080 Super 16GB, 64GB DDR5 RAM, 4TB SSD, Dark Base Pro 700 Case", price: "₹3,55,000", img: "https://microless.com/cdn/products/e8830fb6dec828ca8e55d3e493fe40e3-hi.jpg", category: "gaming" },
+            { id: 13, name: "Intel i9-13900KS RTX 4090 Flagship", desc: "World's Fastest CPU i9-13900KS, NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 4TB Gen4 SSD, Hardline Cooling", price: "₹4,50,000", img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", category: "gaming" },
+            { id: 14, name: "Titan i9-14900K RTX 4090", desc: "14th Gen Intel Core i9-14900K, NVIDIA GeForce RTX 4090 24GB, 64GB DDR5 RAM, 2TB Gen5 NVMe, Custom Hardline Loop", price: "₹4,85,000", img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 15, name: "Intel i9-14900KF OC Edition RTX 4090", desc: "Unlocked i9-14900KF for Overclocking, Dual RTX 4090 Configuration (48GB VRAM), 128GB DDR5 RAM, 8TB RAID Storage, Industrial Watercooling", price: "₹4,99,999", img: "https://m.media-amazon.com/images/I/81a1Ejl1y6L.jpg", category: "gaming" },
 
-    // i5 Series (5)
-       { 
-        id: 1, 
-        name: "Starter Gaming PC", 
-        desc: "Intel 10th Gen Core i5 10400F, NVIDIA GeForce RTX 3060 12GB Graphics, 16GB RAM, 480GB SSD, WiFi", 
-        price: "₹1,24,777", 
-        img: "https://m.media-amazon.com/images/I/71bJ6pk+t0L._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 2, 
-        name: "Performance Gaming PC", 
-        desc: "Intel 14th Gen Core i7 14700K [20C 8 P-cores + 12 E-cores) and 28 threads, 33M Cache, up to 5.60 GHz], Nvidia GeForce RTX 4060 8GB Graphics, 32GB DDR5 RAM, 1TB Gen4 NVMe SSD (~4100 Mbps), AC WiFi", 
-        price: "₹1,92,148", 
-        img: "https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 3, 
-        name: "Intel Core i5-13400F RTX 4060 Edition", 
-        desc: "13th Gen Intel Core i5-13400F, NVIDIA GeForce RTX 4060 8GB, 16GB DDR4 RAM, 512GB NVMe SSD, Windows 11 Home", 
-        price: "₹1,35,000", 
-        img: "https://5.imimg.com/data5/SELLER/Default/2024/2/387712115/ZC/SR/GW/80125604/gear-g3-gaming-pc-intel-core-i5-13th-gen-13400f-rtx-4060-16gb-ram-1tb-nvme-ssd.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 4, 
-        name: "Intel i5-13600KF RTX 4060 Ti Build", 
-        desc: "Unlocked 14th Gen Core i5-13600KF, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 6000MHz RAM, 1TB Samsung 980 Pro SSD, Air Cooling", 
-        price: "₹1,65,000", 
-        img: "https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 5, 
-        name: "Core Air i5 Edition", 
-        desc: "Intel Core i5-14600K, RTX 4070 Ti, Air Cooled, White Aesthetic. Great value for 1440p gaming.", 
-        price: "₹1,54,990", 
-        img: "https://m.media-amazon.com/images/X/bxt1/M/gbxt1BUnh4jLjZ2.png", 
-        category: "gaming" 
-    },
+            // --- AMD GAMING PCS (15) ---
+            { id: 16, name: "AMD Ryzen 5 5600X RTX 3060", desc: "AMD Ryzen 5 5600X, NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB SSD, Affordable Gaming", price: "₹1,15,000", img: "https://computechstore.in/_next/image?url=https%3A%2F%2Fcdn.computechstore.in%2Fuploads%2Fwp%2F2024%2F10%2FElite_1120-1-1-Custom-2.jpg&w=2048&q=75", category: "gaming" },
+            { id: 17, name: "AMD Ryzen 5 7500F RX 7600", desc: "AMD Ryzen 5 7500F, Radeon RX 7600 8GB, 32GB DDR5 RAM, 1TB SSD, All-AMD Build", price: "₹1,25,000", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWffPdTvrRsrFQ-z_5jzU7RuCKmaxFYPgqEw&s", category: "gaming" },
+            { id: 18, name: "AMD Ryzen 5 7600 RTX 4060", desc: "AMD Ryzen 5 7600, NVIDIA GeForce RTX 4060 8GB, 32GB DDR5 RAM, 1TB SSD, Compact Form Factor", price: "₹1,45,000", img: "https://m.media-amazon.com/images/I/71+703kqOfL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 19, name: "AMD Ryzen 5 7600X RTX 4060 Ti", desc: "AMD Ryzen 5 7600X 3D V-Cache, RTX 4060 Ti 16GB, 32GB DDR5 RAM, 1TB NVMe, High Airflow Case", price: "₹1,65,000", img: "https://microless.com/cdn/products/bcee72a2b2b2bafedce35b335be224d6-hi.jpg", category: "gaming" },
+            { id: 20, name: "AMD Ryzen 5 5500 RTX 2060 Super", desc: "AMD Ryzen 5 5500, NVIDIA RTX 2060 Super 8GB, 16GB RAM, 512GB SSD, Entry Level High Performance", price: "₹1,10,000", img: "https://m.media-amazon.com/images/I/71BTYqWRjYL._AC_UF1000,1000_QL80_.jpg", category: "gaming" },
+            { id: 21, name: "AMD Ryzen 7 5800X3D RTX 4070", desc: "AMD Ryzen 7 5800X3D V-Cache, NVIDIA GeForce RTX 4070 12GB, 64GB DDR5 RAM, 2TB SSD, Watercooled", price: "₹2,10,000", img: "https://cdna.pcpartpicker.com/static/forever/images/userbuild/460809.0c4ec328ca43e5e354acf0753250d7bb.512.jpg", category: "gaming" },
+            { id: 22, name: "AMD Ryzen 7 7800X3D RTX 4070 Ti", desc: "AMD Ryzen 7 7800X3D, RTX 4070 Ti Super 16GB, 32GB DDR5 RAM, 2TB Gen5 SSD, White Aesthetic", price: "₹2,40,000", img: "https://microless.com/cdn/products/ae16e6bc7a92084160557d9a84ab1629-hi.jpg", category: "gaming" },
+            { id: 23, name: "AMD Ryzen 7 7700XT RTX 4070", desc: "AMD Ryzen 7 7700XT, NVIDIA RTX 4070, 64GB DDR5 RAM, 4TB SSD, Mixed Configuration", price: "₹2,25,000", img: "https://microless.com/cdn/products/6c3cda7f4aa70cd64d55d6acbeaeb628-hi.jpg", category: "gaming" },
+            { id: 24, name: "AMD Ryzen 7 5700X RTX 3080", desc: "AMD Ryzen 7 5700X, NVIDIA RTX 3080 10GB, 32GB DDR4 RAM, 2TB NVMe, Air Cooler", price: "₹1,75,000", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqlNUWXMJiBYi6wKXANjElgtpcpDnQJfTXxA&s", category: "gaming" },
+            { id: 25, name: "AMD Ryzen 7 7800X3D RTX 4080", desc: "AMD Ryzen 7 7800X3D, NVIDIA RTX 4080 16GB, 64GB DDR5 RAM, 4TB SSD, 360mm Liquid Cooler", price: "₹3,00,000", img: "https://assets.umart.com.au/newsite/images/202410/source_img/Gaming-PCs-Ready2Go-TitanElite-G7-Ryzen-7-7800X3D-GeForce-RTX-4080-Super-Gaming-PC-57448-16.webp", category: "gaming" },
+            { id: 26, name: "AMD Ryzen 9 5900X RTX 3080 Ti", desc: "AMD Ryzen 9 5900X, NVIDIA RTX 3080 Ti 12GB, 64GB DDR4 RAM, 2TB SSD, High End Build", price: "₹2,65,000", img: "https://gameloot.in/wp-content/uploads/2025/08/NEW.jpg", category: "gaming" },
+            { id: 27, name: "AMD Ryzen 9 6950X RTX 3090 Ti", desc: "AMD Ryzen 9 6950X, NVIDIA RTX 3090 Ti 24GB, 64GB DDR5 RAM, 4TB SSD, Custom Loop", price: "₹3,20,000", img: "https://i.redd.it/6k0823y9f8z51.jpg", category: "gaming" },
+            { id: 28, name: "AMD Ryzen 9 7900X RX 7900XTX", desc: "AMD Ryzen 9 7900X, Radeon RX 7900XTX 24GB, 64GB DDR5 RAM, 4TB SSD, Pure AMD Build", price: "₹3,50,000", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Q1nS25K0O2yTWhCLhfk7k5YOjULYFfCkMA&s", category: "gaming" },
+            { id: 29, name: "AMD Ryzen 9 7950X3D RTX 4090", desc: "AMD Ryzen 9 7950X3D, NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD, Ultimate Creator", price: "₹4,75,000", img: "https://i.redd.it/just-finished-my-first-amd-build-7950x3d-rtx-4090-v0-iy7rkl6tgpoa1.jpg?width=4032&format=pjpg&auto=webp&s=0be7d2c8b79d8e5d885dca5027c37a7d91dab270", category: "gaming" },
+            { id: 30, name: "AMD Ryzen 9 9000X3D RTX 4090 Titan", desc: "Next Gen AMD Ryzen 9 9000X3D (Simulated), NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD, Industrial Cooling", price: "₹4,95,000", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSciUb1yrqCBmjnU58l0H80su46-TDBJltvxA&s", category: "gaming" },
 
-    // i7 Series (5)
-    { 
-        id: 6, 
-        name: "Intel i7-13700K RTX 3070 Battlestation", 
-        desc: "Intel Core i7-13700K (16 Cores), NVIDIA GeForce RTX 3070 8GB, 32GB DDR5 RAM, 2TB NVMe SSD, RGB Case", 
-        price: "₹1,85,000", 
-        img: "https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 7, 
-        name: "Intel i7-14700K RTX 4070 Ultimate", 
-        desc: "20 Cores i7-14700K with RTX 4070 12GB GDDR6X, 32GB DDR5 RAM, 2TB Gen5 SSD, Liquid Cooled", 
-        price: "₹2,15,000", 
-        img: "https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 8, 
-        name: "Intel i7-14700KF RTX 4070 Ti Super", 
-        desc: "Intel Core i7-14700KF Unlocked, RTX 4070 Ti Super 16GB, 64GB DDR5 RAM, 2TB Storage, 360mm AIO", 
-        price: "₹2,45,000", 
-        img: "https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458", 
-        category: "gaming" 
-    },
-    { 
-        id: 9, 
-        name: "Intel i7-14700KS RTX 4080 Beast", 
-        desc: "Special Edition i7-14700KS (6.0 GHz Turbo), NVIDIA RTX 4080 16GB, 64GB DDR5 RAM, 4TB NVMe, Hardline Liquid Cooling", 
-        price: "₹3,10,000", 
-        img: "https://m.media-amazon.com/images/I/61G0BM0HPRL._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 10, 
-        name: "Intel i7-14900K RTX 4070 Ti", 
-        desc: "Latest Gen Core i7-14900K, RTX 4070 Ti, 32GB DDR5, 2TB SSD, Premium Air Cooling Build", 
-        price: "₹2,35,000", 
-        img: "https://m.media-amazon.com/images/I/81pDvAwecpL._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
+            // --- WORKSTATIONS (10) ---
+            { id: 31, name: "Threadripper Pro 5995WX Ultimate", desc: "AMD Ryzen Threadripper Pro 5995WX (64 Cores), 256GB ECC RAM, 4TB NVMe RAID, NVIDIA RTX A6000 48GB, Watercooled", price: "₹4,99,999", img: "https://microless.com/cdn/products/5cf4b47f4108a229e39aef233093efc7-hi.jpg", category: "workstation" },
+            { id: 32, name: "Threadripper 7960X Studio", desc: "AMD Ryzen Threadripper 7960X (24 Cores), 128GB DDR5 RAM, 8TB SSD, NVIDIA RTX 4090 24GB, Airflow Optimized", price: "₹4,25,000", img: "https://microless.com/cdn/products/2aad3ef6b5e9eb00ed1e7ad71324a8b2-hi.jpg", category: "workstation" },
+            { id: 33, name: "Intel Xeon w9-3495X Server", desc: "Intel Xeon w9-3495X (56 Cores), 512GB DDR5 RAM, 10TB NVMe, NVIDIA RTX 6000 Ada, Rackmount Style", price: "₹4,85,000", img: "https://www.hpshowroominchennai.in/upload/big/1716208092.jpg", category: "workstation" },
+            { id: 34, name: "Intel i9-14900KS Quadro Station", desc: "Intel Core i9-14900KS, 128GB DDR5 RAM, 4TB SSD, NVIDIA Quadro RTX 5000 Ada 32GB, Silent Tower", price: "₹3,95,000", img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", category: "workstation" },
+            { id: 35, name: "Ryzen 9 7950X3D RenderBox", desc: "AMD Ryzen 9 7950X3D, 256GB DDR5 RAM, 8TB SSD, Dual ProArt RX 7900XTX (48GB Total VRAM), Case Labs Case", price: "₹4,60,000", img: "https://assetsio.gnwcdn.com/ryzen-9-7950x3d.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp", category: "workstation" },
+            { id: 36, name: "EPYC 9004 Pro Data", desc: "AMD EPYC 9004 Processor, 512GB ECC RAM, 20TB Server Storage, NVIDIA A100 GPU, 4U Chassis", price: "₹4,50,000", img: "https://bizon-tech.com/media/resized/340_340_/catalog/product/cache/1/small_image/9df78eab33525d08d6e5fb8d27136e95/b/a/banner-zx6000-mobile1.jpg.webp", category: "workstation" },
+            { id: 37, name: "Intel Core i9-14900K Pro Edit", desc: "Intel i9-14900K, 128GB DDR5 6000MHz, 8TB SSD, NVIDIA RTX A5000 24GB, Designed for Adobe CC", price: "₹3,50,000", img: "https://m.media-amazon.com/images/I/71ORaFi++pL._AC_UF1000,1000_QL80_.jpg", category: "workstation" },
+            { id: 38, name: "Dual Threadripper Compute Node", desc: "Dual AMD Threadripper Pro 5975WX, 1TB RAM, 40TB Storage, Quad NVIDIA A40 GPUs, Liquid Cooled Rack", price: "₹4,99,999", img: "https://www.storagereview.com/wp-content/uploads/2026/03/StorageReview-Dell-Precision-7875-8-2.jpg", category: "workstation" },
+            { id: 39, name: "Ryzen Threadripper 7000 Series AI", desc: "Ryzen Threadripper 7980X, 256GB DDR5 RAM, 4TB Gen5 SSD, NVIDIA RTX 6000 Ada, AI Optimized", price: "₹4,30,000", img: "https://www.amd.com/content/dam/amd/en/images/products/desktops/3331750-supermicro-5014a-tt-desktops.jpg", category: "workstation" },
+            { id: 40, name: "Mac Pro Equivalent Intel", desc: "Intel Xeon w7-2495X, 192GB RAM, 8TB SSD, NVIDIA RTX 4090 (Mac Pro Modded), Industrial Design", price: "₹4,75,000", img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Apple_Mac_Pro_Intel_Xenon.jpg", category: "workstation" },
 
-    // i9 Series (5)
-    { 
-        id: 11, 
-        name: "Intel i9-12900K RTX 3080 Ti", 
-        desc: "12th Gen Core i9-12900K, NVIDIA RTX 3080 Ti 12GB, 64GB DDR5 RAM, 4TB Gen4 SSD, Custom Loop", 
-        price: "₹2,80,000", 
-        img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 12, 
-        name: "Intel i9-13900K RTX 4080 Super", 
-        desc: "24 Cores i9-13900K, RTX 4080 Super 16GB, 64GB DDR5 RAM, 4TB SSD, Dark Base Pro 700 Case", 
-        price: "₹3,55,000", 
-        img: "https://microless.com/cdn/products/e8830fb6dec828ca8e55d3e493fe40e3-hi.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 13, 
-        name: "Intel i9-13900KS RTX 4090 Flagship", 
-        desc: "World's Fastest CPU i9-13900KS, NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 4TB Gen4 SSD, Hardline Cooling", 
-        price: "₹4,50,000", 
-        img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", 
-        category: "gaming" 
-    },
-    { 
-        id: 14, 
-        name: "Titan i9-14900K RTX 4090", 
-        desc: "14th Gen Intel Core i9-14900K, NVIDIA GeForce RTX 4090 24GB, 64GB DDR5 RAM, 2TB Gen5 NVMe, Custom Hardline Loop", 
-        price: "₹4,85,000", 
-        img: "https://m.media-amazon.com/images/I/61DLCC3t8gL._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 15, 
-        name: "Intel i9-14900KF OC Edition RTX 4090", 
-        desc: "Unlocked i9-14900KF for Overclocking, Dual RTX 4090 Configuration (48GB VRAM), 128GB DDR5 RAM, 8TB RAID Storage, Industrial Watercooling", 
-        price: "₹4,99,999", 
-        img: "https://m.media-amazon.com/images/I/81a1Ejl1y6L.jpg", 
-        category: "gaming" 
-    },
-
-    // --- AMD GAMING PCS (15) ---
-
-    // Ryzen 5 Series (5)
-    { 
-        id: 16, 
-        name: "AMD Ryzen 5 5600X RTX 3060", 
-        desc: "AMD Ryzen 5 5600X, NVIDIA GeForce RTX 3060 12GB, 16GB DDR4 RAM, 512GB SSD, Affordable Gaming", 
-        price: "₹1,15,000", 
-        img: "https://computechstore.in/_next/image?url=https%3A%2F%2Fcdn.computechstore.in%2Fuploads%2Fwp%2F2024%2F10%2FElite_1120-1-1-Custom-2.jpg&w=2048&q=75", 
-        category: "gaming" 
-    },
-    { 
-        id: 17, 
-        name: "AMD Ryzen 5 7500F RX 7600", 
-        desc: "AMD Ryzen 5 7500F, Radeon RX 7600 8GB, 32GB DDR5 RAM, 1TB SSD, All-AMD Build", 
-        price: "₹1,25,000", 
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWffPdTvrRsrFQ-z_5jzU7RuCKmaxFYPgqEw&s", 
-        category: "gaming" 
-    },
-    { 
-        id: 18, 
-        name: "AMD Ryzen 5 7600 RTX 4060", 
-        desc: "AMD Ryzen 5 7600, NVIDIA GeForce RTX 4060 8GB, 32GB DDR5 RAM, 1TB SSD, Compact Form Factor", 
-        price: "₹1,45,000", 
-        img: "https://m.media-amazon.com/images/I/71+703kqOfL._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 19, 
-        name: "AMD Ryzen 5 7600X RTX 4060 Ti", 
-        desc: "AMD Ryzen 5 7600X 3D V-Cache, RTX 4060 Ti 16GB, 32GB DDR5 RAM, 1TB NVMe, High Airflow Case", 
-        price: "₹1,65,000", 
-        img: "https://microless.com/cdn/products/bcee72a2b2b2bafedce35b335be224d6-hi.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 20, 
-        name: "AMD Ryzen 5 5500 RTX 2060 Super", 
-        desc: "AMD Ryzen 5 5500, NVIDIA RTX 2060 Super 8GB, 16GB RAM, 512GB SSD, Entry Level High Performance", 
-        price: "₹1,10,000", 
-        img: "https://m.media-amazon.com/images/I/71BTYqWRjYL._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-
-    // Ryzen 7 Series (5)
-    { 
-        id: 21, 
-        name: "AMD Ryzen 7 5800X3D RTX 4070", 
-        desc: "AMD Ryzen 7 5800X3D V-Cache, NVIDIA GeForce RTX 4070 12GB, 64GB DDR5 RAM, 2TB SSD, Watercooled", 
-        price: "₹2,10,000", 
-        img: "https://cdna.pcpartpicker.com/static/forever/images/userbuild/460809.0c4ec328ca43e5e354acf0753250d7bb.512.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 22, 
-        name: "AMD Ryzen 7 7800X3D RTX 4070 Ti", 
-        desc: "AMD Ryzen 7 7800X3D, RTX 4070 Ti Super 16GB, 32GB DDR5 RAM, 2TB Gen5 SSD, White Aesthetic", 
-        price: "₹2,40,000", 
-        img: "https://microless.com/cdn/products/ae16e6bc7a92084160557d9a84ab1629-hi.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 23, 
-        name: "AMD Ryzen 7 7700XT RTX 4070", 
-        desc: "AMD Ryzen 7 7700XT, NVIDIA RTX 4070, 64GB DDR5 RAM, 4TB SSD, Mixed Configuration", 
-        price: "₹2,25,000", 
-        img: "https://microless.com/cdn/products/6c3cda7f4aa70cd64d55d6acbeaeb628-hi.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 24, 
-        name: "AMD Ryzen 7 5700X RTX 3080", 
-        desc: "AMD Ryzen 7 5700X, NVIDIA RTX 3080 10GB, 32GB DDR4 RAM, 2TB NVMe, Air Cooler", 
-        price: "₹1,75,000", 
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqlNUWXMJiBYi6wKXANjElgtpcpDnQJfTXxA&s", 
-        category: "gaming" 
-    },
-    { 
-        id: 25, 
-        name: "AMD Ryzen 7 7800X3D RTX 4080", 
-        desc: "AMD Ryzen 7 7800X3D, NVIDIA RTX 4080 16GB, 64GB DDR5 RAM, 4TB SSD, 360mm Liquid Cooler", 
-        price: "₹3,00,000", 
-        img: "https://assets.umart.com.au/newsite/images/202410/source_img/Gaming-PCs-Ready2Go-TitanElite-G7-Ryzen-7-7800X3D-GeForce-RTX-4080-Super-Gaming-PC-57448-16.webp", 
-        category: "gaming" 
-    },
-
-    // Ryzen 9 Series (5)
-    { 
-        id: 26, 
-        name: "AMD Ryzen 9 5900X RTX 3080 Ti", 
-        desc: "AMD Ryzen 9 5900X, NVIDIA RTX 3080 Ti 12GB, 64GB DDR4 RAM, 2TB SSD, High End Build", 
-        price: "₹2,65,000", 
-        img: "https://gameloot.in/wp-content/uploads/2025/08/NEW.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 27, 
-        name: "AMD Ryzen 9 6950X RTX 3090 Ti", 
-        desc: "AMD Ryzen 9 6950X, NVIDIA RTX 3090 Ti 24GB, 64GB DDR5 RAM, 4TB SSD, Custom Loop", 
-        price: "₹3,20,000", 
-        img: "https://i.redd.it/6k0823y9f8z51.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 28, 
-        name: "AMD Ryzen 9 7900X RX 7900XTX", 
-        desc: "AMD Ryzen 9 7900X, Radeon RX 7900XTX 24GB, 64GB DDR5 RAM, 4TB SSD, Pure AMD Build", 
-        price: "₹3,50,000", 
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Q1nS25K0O2yTWhCLhfk7k5YOjULYFfCkMA&s", 
-        category: "gaming" 
-    },
-    { 
-        id: 29, 
-        name: "AMD Ryzen 9 7950X3D RTX 4090", 
-        desc: "AMD Ryzen 9 7950X3D, NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD, Ultimate Creator", 
-        price: "₹4,75,000", 
-        img: "https://i.redd.it/just-finished-my-first-amd-build-7950x3d-rtx-4090-v0-iy7rkl6tgpoa1.jpg?width=4032&format=pjpg&auto=webp&s=0be7d2c8b79d8e5d885dca5027c37a7d91dab270", 
-        category: "gaming" 
-    },
-    { 
-        id: 30, 
-        name: "AMD Ryzen 9 9000X3D RTX 4090 Titan", 
-        desc: "Next Gen AMD Ryzen 9 9000X3D (Simulated), NVIDIA RTX 4090 24GB, 128GB DDR5 RAM, 8TB SSD, Industrial Cooling", 
-        price: "₹4,95,000", 
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSciUb1yrqCBmjnU58l0H80su46-TDBJltvxA&s", 
-        category: "gaming" 
-    },
-
-    // --- WORKSTATIONS (10) ---
-
-    { 
-        id: 31, 
-        name: "Threadripper Pro 5995WX Ultimate", 
-        desc: "AMD Ryzen Threadripper Pro 5995WX (64 Cores), 256GB ECC RAM, 4TB NVMe RAID, NVIDIA RTX A6000 48GB, Watercooled", 
-        price: "₹4,99,999", 
-        img: "https://microless.com/cdn/products/5cf4b47f4108a229e39aef233093efc7-hi.jpg", 
-        category: "workstation" 
-    },
-    { 
-        id: 32, 
-        name: "Threadripper 7960X Studio", 
-        desc: "AMD Ryzen Threadripper 7960X (24 Cores), 128GB DDR5 RAM, 8TB SSD, NVIDIA RTX 4090 24GB, Airflow Optimized", 
-        price: "₹4,25,000", 
-        img: "https://microless.com/cdn/products/2aad3ef6b5e9eb00ed1e7ad71324a8b2-hi.jpg", 
-        category: "workstation" 
-    },
-    { 
-        id: 33, 
-        name: "Intel Xeon w9-3495X Server", 
-        desc: "Intel Xeon w9-3495X (56 Cores), 512GB DDR5 RAM, 10TB NVMe, NVIDIA RTX 6000 Ada, Rackmount Style", 
-        price: "₹4,85,000", 
-        img: "https://www.hpshowroominchennai.in/upload/big/1716208092.jpg", 
-        category: "workstation" 
-    },
-    { 
-        id: 34, 
-        name: "Intel i9-14900KS Quadro Station", 
-        desc: "Intel Core i9-14900KS, 128GB DDR5 RAM, 4TB SSD, NVIDIA Quadro RTX 5000 Ada 32GB, Silent Tower", 
-        price: "₹3,95,000", 
-        img: "https://elitehubs.com/cdn/shop/files/HAF500_Black_5b7bc9ca-5360-4733-bdfb-7bdcb8c484d7.png?v=1752067210&width=533", 
-        category: "workstation" 
-    },
-    { 
-        id: 35, 
-        name: "Ryzen 9 7950X3D RenderBox", 
-        desc: "AMD Ryzen 9 7950X3D, 256GB DDR5 RAM, 8TB SSD, Dual ProArt RX 7900XTX (48GB Total VRAM), Case Labs Case", 
-        price: "₹4,60,000", 
-        img: "https://assetsio.gnwcdn.com/ryzen-9-7950x3d.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp", 
-        category: "workstation" 
-    },
-    { 
-        id: 36, 
-        name: "EPYC 9004 Pro Data", 
-        desc: "AMD EPYC 9004 Processor, 512GB ECC RAM, 20TB Server Storage, NVIDIA A100 GPU, 4U Chassis", 
-        price: "₹4,50,000", 
-        img: "https://bizon-tech.com/media/resized/340_340_/catalog/product/cache/1/small_image/9df78eab33525d08d6e5fb8d27136e95/b/a/banner-zx6000-mobile1.jpg.webp", 
-        category: "workstation" 
-    },
-    { 
-        id: 37, 
-        name: "Intel Core i9-14900K Pro Edit", 
-        desc: "Intel i9-14900K, 128GB DDR5 6000MHz, 8TB SSD, NVIDIA RTX A5000 24GB, Designed for Adobe CC", 
-        price: "₹3,50,000", 
-        img: "https://m.media-amazon.com/images/I/71ORaFi++pL._AC_UF1000,1000_QL80_.jpg", 
-        category: "workstation" 
-    },
-    { 
-        id: 38, 
-        name: "Dual Threadripper Compute Node", 
-        desc: "Dual AMD Threadripper Pro 5975WX, 1TB RAM, 40TB Storage, Quad NVIDIA A40 GPUs, Liquid Cooled Rack", 
-        price: "₹4,99,999", 
-        img: "https://www.storagereview.com/wp-content/uploads/2026/03/StorageReview-Dell-Precision-7875-8-2.jpg", 
-        category: "workstation" 
-    },
-    { 
-        id: 39, 
-        name: "Ryzen Threadripper 7000 Series AI", 
-        desc: "Ryzen Threadripper 7980X, 256GB DDR5 RAM, 4TB Gen5 SSD, NVIDIA RTX 6000 Ada, AI Optimized", 
-        price: "₹4,30,000", 
-        img: "https://www.amd.com/content/dam/amd/en/images/products/desktops/3331750-supermicro-5014a-tt-desktops.jpg", 
-        category: "workstation" 
-    },
-    { 
-        id: 40, 
-        name: "Mac Pro Equivalent Intel", 
-        desc: "Intel Xeon w7-2495X, 192GB RAM, 8TB SSD, NVIDIA RTX 4090 (Mac Pro Modded), Industrial Design", 
-        price: "₹4,75,000", 
-        img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Apple_Mac_Pro_Intel_Xenon.jpg", 
-        category: "workstation" 
-    },
-
-    // --- PC COMPONENTS (10) ---
-
-    { 
-        id: 41, 
-        name: "NVIDIA RTX 4090 Founder's Edition", 
-        desc: "NVIDIA GeForce RTX 4090 24GB GDDR6X, Triple Fan Cooler, DLSS 3, Ray Tracing, 16K Ready. Standalone GPU.", 
-        price: "₹1,65,000", 
-        img: "https://m.media-amazon.com/images/I/51A0J6nnksL._AC_UF1000,1000_QL80_.jpg", 
-        category: "components" 
-    },
-    { 
-        id: 42, 
-        name: "LG UltraGear 48\" OLED Monitor", 
-        desc: "48 inch OLED Gaming Monitor, 4K Resolution, 120Hz, 0.1ms Response, HDMI 2.1, Perfect for RTX 4090", 
-        price: "₹2,99,000", 
-        img: "https://vishalperipherals.com/cdn/shop/files/5_25b24312-0b04-4715-a530-0886143ad4ec.jpg?v=1729772922&width=1445", 
-        category: "components" 
-    },
-    { 
-        id: 43, 
-        name: "ASUS ROG Crosshair X670E Extreme", 
-        desc: "E-ATX Motherboard, AMD AM5 Socket, DDR5 7200+ Support, WiFi 6E, 18+1 Power Stages", 
-        price: "₹1,25,000", 
-        img: "https://dlcdnwebimgs.asus.com/files/media/C9A82328-9130-467A-AEAC-A57B1FC2A6C4/v2/img/spec/immersion-m.jpg", 
-        category: "components" 
-    },
-    { 
-        id: 44, 
-        name: "Custom Hardline Watercooling Kit", 
-        desc: "Complete Hardline Watercooling Kit, D5 Pump, Radiator, CPU/GPU Blocks, Clear PETG Tubing, Red Coolant", 
-        price: "₹1,15,000", 
-        img: "https://m.media-amazon.com/images/I/61TZ9cPs1cL.jpg", 
-        category: "components" 
-    },
-    { 
-        id: 45, 
-        name: "Samsung 990 Pro 4TB x2 RAID", 
-        desc: "2x Samsung 990 Pro 4TB NVMe SSDs, Gen 5.0, Read Speed 12,000 MB/s, Perfect for OS + Games RAID", 
-        price: "₹1,85,000", 
-        img: "https://www.pcstudio.in/wp-content/uploads/2025/01/Samsung-990-Pro-4Tb-Nvme-M2-Gen-40-Internal-Ssd-1-1-1.webp", 
-        category: "components" 
-    },
-    { 
-        id: 46, 
-        name: "LG 32GQ950 4K 144Hz Monitor", 
-        desc: "32 inch Nano-IPS Gaming Monitor, 4K 144Hz, 1ms, G-Sync Compatible, HDR 1000, Ideal for High End PC", 
-        price: "₹1,45,000", 
-        img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/global_ces2022_product7_02_thumbnail2.jpg", 
-        category: "components" 
-    },
-    { 
-        id: 47, 
-        name: "Keychron Q1 Pro Mechanical Keyboard", 
-        desc: "75% Wireless Mechanical Keyboard, Aluminum Case, Gateron Oil King Switches, Hot-swappable, RGB", 
-        price: "₹1,10,000", 
-        img: "https://media.mmorpg.com/images/heroes/posts/127202.jpg", 
-        category: "components" 
-    },
-    { 
-        id: 48, 
-        name: "Corsair RM1000x PSU Titanium", 
-        desc: "1000W Fully Modular Power Supply, 80 Plus Titanium Rated, ATX 3.0, 135mm Fan Zero RPM Mode", 
-        price: "₹1,30,000", 
-        img: "https://www.bhphotovideo.com/images/fb/corsair_cp_9020271_na_rm1000x_1000w_cybenetics_gold_1859546.jpg", 
-        category: "components" 
-    },
-    { 
-        id: 49, 
-        name: "Razer Kraken V3 Pro Cooler", 
-        desc: "360mm LCD AIO Liquid Cooler, 2.36\" LCD Screen, RGB Infinity Mirror Plate, Compatible with Intel & AMD", 
-        price: "₹1,05,000", 
-        img: "https://os-wordpress-media.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2021/10/26004512/Razer_Pc_Components_1.jpg", 
-        category: "components" 
-    },
-    { 
-        id: 50, 
-        name: "DAS Keyboard 4 Pro + Monitor Bundle", 
-        desc: "DAS 4 Pro Custom Mechanical Keyboard + 27\" 144Hz IPS Monitor Bundle. Premium typing experience.", 
-        price: "₹1,75,000", 
-        img: "https://cdn.mos.cms.futurecdn.net/xfpayTwmjHyeCEpwXt4Kzj-2048-80.jpg", 
-        category: "components" 
-    }
-];
+            // --- PC COMPONENTS (10) ---
+            { id: 41, name: "NVIDIA RTX 4090 Founder's Edition", desc: "NVIDIA GeForce RTX 4090 24GB GDDR6X, Triple Fan Cooler, DLSS 3, Ray Tracing, 16K Ready. Standalone GPU.", price: "₹1,65,000", img: "https://m.media-amazon.com/images/I/51A0J6nnksL._AC_UF1000,1000_QL80_.jpg", category: "components" },
+            { id: 42, name: "LG UltraGear 48\" OLED Monitor", desc: "48 inch OLED Gaming Monitor, 4K Resolution, 120Hz, 0.1ms Response, HDMI 2.1, Perfect for RTX 4090", price: "₹2,99,000", img: "https://vishalperipherals.com/cdn/shop/files/5_25b24312-0b04-4715-a530-0886143ad4ec.jpg?v=1729772922&width=1445", category: "components" },
+            { id: 43, name: "ASUS ROG Crosshair X670E Extreme", desc: "E-ATX Motherboard, AMD AM5 Socket, DDR5 7200+ Support, WiFi 6E, 18+1 Power Stages", price: "₹1,25,000", img: "https://dlcdnwebimgs.asus.com/files/media/C9A82328-9130-467A-AEAC-A57B1FC2A6C4/v2/img/spec/immersion-m.jpg", category: "components" },
+            { id: 44, name: "Custom Hardline Watercooling Kit", desc: "Complete Hardline Watercooling Kit, D5 Pump, Radiator, CPU/GPU Blocks, Clear PETG Tubing, Red Coolant", price: "₹1,15,000", img: "https://m.media-amazon.com/images/I/61TZ9cPs1cL.jpg", category: "components" },
+            { id: 45, name: "Samsung 990 Pro 4TB x2 RAID", desc: "2x Samsung 990 Pro 4TB NVMe SSDs, Gen 5.0, Read Speed 12,000 MB/s, Perfect for OS + Games RAID", price: "₹1,85,000", img: "https://www.pcstudio.in/wp-content/uploads/2025/01/Samsung-990-Pro-4Tb-Nvme-M2-Gen-40-Internal-Ssd-1-1-1.webp", category: "components" },
+            { id: 46, name: "LG 32GQ950 4K 144Hz Monitor", desc: "32 inch Nano-IPS Gaming Monitor, 4K 144Hz, 1ms, G-Sync Compatible, HDR 1000, Ideal for High End PC", price: "₹1,45,000", img: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/global_ces2022_product7_02_thumbnail2.jpg", category: "components" },
+            { id: 47, name: "Keychron Q1 Pro Mechanical Keyboard", desc: "75% Wireless Mechanical Keyboard, Aluminum Case, Gateron Oil King Switches, Hot-swappable, RGB", price: "₹1,10,000", img: "https://media.mmorpg.com/images/heroes/posts/127202.jpg", category: "components" },
+            { id: 48, name: "Corsair RM1000x PSU Titanium", desc: "1000W Fully Modular Power Supply, 80 Plus Titanium Rated, ATX 3.0, 135mm Fan Zero RPM Mode", price: "₹1,30,000", img: "https://www.bhphotovideo.com/images/fb/corsair_cp_9020271_na_rm1000x_1000w_cybenetics_gold_1859546.jpg", category: "components" },
+            { id: 49, name: "Razer Kraken V3 Pro Cooler", desc: "360mm LCD AIO Liquid Cooler, 2.36\" LCD Screen, RGB Infinity Mirror Plate, Compatible with Intel & AMD", price: "₹1,05,000", img: "https://os-wordpress-media.s3.ap-south-1.amazonaws.com/blog/wp-content/uploads/2021/10/26004512/Razer_Pc_Components_1.jpg", category: "components" },
+            { id: 50, name: "DAS Keyboard 4 Pro + Monitor Bundle", desc: "DAS 4 Pro Custom Mechanical Keyboard + 27\" 144Hz IPS Monitor Bundle. Premium typing experience.", price: "₹1,75,000", img: "https://cdn.mos.cms.futurecdn.net/xfpayTwmjHyeCEpwXt4Kzj-2048-80.jpg", category: "components" }
+        ];
 
         // Logic to filter products based on URL parameters
         function initPage() {
@@ -766,15 +288,15 @@
 
             if (category === 'gaming') {
                 displayProducts = productsData.filter(p => p.category === 'gaming');
-                pageTitle.innerText = "Gaming Desktops";
+                pageTitle.innerHTML = `Gaming <span>Desktops</span>`;
             } else if (category === 'workstation') {
                 displayProducts = productsData.filter(p => p.category === 'workstation');
-                pageTitle.innerText = "Pro Workstations";
+                pageTitle.innerHTML = `Pro <span>Workstations</span>`;
             } else if (category === 'components') {
                 displayProducts = productsData.filter(p => p.category === 'components');
-                pageTitle.innerText = "PC Components";
+                pageTitle.innerHTML = `PC <span>Components</span>`;
             } else {
-                pageTitle.innerText = "All Products";
+                pageTitle.innerHTML = `All <span>Products</span>`;
             }
 
             resultCount.innerText = `Showing ${displayProducts.length} products`;
@@ -786,8 +308,8 @@
             grid.innerHTML = '';
 
             if(data.length === 0) {
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-sec);">
-                    <i class="ri-ghost-line" style="font-size: 48px; display: block; margin-bottom: 10px;"></i>
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--white-faint); font-family: var(--font-mono);">
+                    <i class="ri-ghost-line" style="font-size: 48px; display: block; margin-bottom: 10px; color: var(--amber);"></i>
                     No products found in this category.
                 </div>`;
                 return;
@@ -796,19 +318,17 @@
             data.forEach((p, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                // Staggered animation delay
-                card.style.animationDelay = `${index * 100}ms`;
                 
                 card.innerHTML = `
-                    <div class="p-top"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
-                    <div class="p-bottom">
-                        <div class="p-cat">${p.category}</div>
+                    <div class="p-img"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+                    <div class="p-body">
+                        <div class="p-cat">// ${p.category}</div>
                         <h3 class="p-name">${p.name}</h3>
                         <p class="p-desc">${p.desc}</p>
                         <div class="p-price">${p.price}</div>
                         <div class="p-actions">
-                            <a href="product-details.html?id=${p.id}" class="btn btn-view">View</a>
-                            <button class="btn btn-cart" onclick="addToCart(this, ${p.id})">
+                            <a href="product-details.html?id=${p.id}" class="btn-view">View</a>
+                            <button class="btn-cart" onclick="addToCart(this, ${p.id})">
                                 <i class="ri-shopping-cart-2-line"></i> Add
                             </button>
                         </div>
@@ -824,16 +344,14 @@
             toast.className = 'toast';
             
             let icon = type === 'success' ? 'ri-checkbox-circle-fill' : 'ri-information-fill';
-            let color = type === 'success' ? 'var(--success)' : '#ef4444';
             
-            toast.style.borderLeftColor = color;
-            toast.innerHTML = `<i class="${icon}" style="color:${color}; font-size:18px;"></i> ${message}`;
+            toast.innerHTML = `<i class="${icon}"></i> ${message}`;
             
             container.appendChild(toast);
 
             // Remove after 3 seconds
             setTimeout(() => {
-                toast.style.animation = 'fadeOut 0.5s ease forwards';
+                toast.style.animation = 'toastOut 0.5s ease forwards';
                 setTimeout(() => toast.remove(), 500);
             }, 3000);
         }
@@ -889,7 +407,7 @@
             localStorage.clear(); 
             showToast("Logging out...", "info");
             setTimeout(() => {
-                window.location.href = 'index.html'; 
+                window.location.href = 'shop.html'; 
             }, 1000);
         }
 
@@ -932,7 +450,7 @@
 
         // Close dropdown when clicking outside
         window.onclick = function(event) {
-            if (!event.target.closest('.icon-btn')) {
+            if (!event.target.closest('.profile-rel')) {
                 const dropdown = document.getElementById('profileDropdown');
                 if (dropdown) dropdown.classList.remove('active');
             }

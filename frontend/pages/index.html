@@ -37,387 +37,416 @@
 </head>
 <body>
 
-    <!-- Noise Texture -->
-    <div class="noise-overlay"></div>
+    <!-- NAV -->
+    <header>
+        <a href="./index.html" class="logo">
+            <!-- Logo SVG icon (inline, no external image needed) -->
+            <img src="../assets/images/logo.jpeg" alt="CoreX Logo" class="logo-img">
+            <span class="logo-text">CORE<span class="x-blue">X</span></span>
+        </a>
 
-    <!-- Navigation -->
-    <header id="header">
-        <div class="container nav-inner">
-           <a href="#" class="logo">
-    <span class="core-text">CORE</span>
-    
-    <!-- Custom Asymmetric X Icon with Gradient -->
-    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
-                <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
-            </linearGradient>
-        </defs>
-        
-        <!-- Big Line (Long diagonal) -->
-        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-        
-        <!-- Small Line (Short diagonal, offset for effect) -->
-        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-    </svg>
-</a>
-            <nav>
-                <ul id="nav-list">
-                    <li><a href="#hero" onclick="closeMobileMenu()">Home</a></li>
-                    <li><a href="#features" onclick="closeMobileMenu()">Why COREX</a></li>
-                    <li><a href="#blueprint" onclick="closeMobileMenu()">Anatomy</a></li>
-                    <li><a href="#gallery" onclick="closeMobileMenu()">Legends</a></li>
-                    <!-- FIXED: Removed onclick toggleMenu to prevent JS interference with navigation legacy-->
-                    <li><a href="#" onclick="goToLogin(); return false;" class="nav-login">Login</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <i class="ri-menu-4-line" id="menu-icon"></i>
-            </div>
+        <nav>
+            <ul>
+                <li><a href="#builds">Builds</a></li>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#custom">Custom PC</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-right">
+            <a href="./login.html">
+            <button class="btn-build">
+                BUILD YOURS
+                <div class="plus-icon">+</div>
+            </button>
+            </a>
+            <button class="btn-menu" id="menuToggle" aria-label="Open menu">
+                <i class="ri-menu-3-line"></i>
+            </button>
         </div>
     </header>
 
-    <main>
-         <!-- NEW: Immersive Video Section (Updated Design) -->
-        <section class="video-section">
-            <!-- Background Video (Looped, Muted, No Controls) -->
-            <!-- Using a tech-themed stock video -->
-            <video class="video-bg" autoplay muted loop playsinline poster="https://images.pexels.com/videos/852488/free-video-852488.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                <source src="../assets/images/bg.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            
-            <div class="video-overlay"></div>
-            
-            <div class="video-content reveal">
-                <!-- New Eye-catching Font Style: Heavy, Italic, Gradient, Skewed -->
-                <h2 class="video-title">FORGED FOR THE NEXT GEN</h2>
-                <p class="video-subtitle">Architecture built to redefine reality</p>
-            </div>
-        </section>
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <div class="hero-glow"></div>
-            <div class="container hero-inner">
-                <div class="hero-content reveal">
-                    <h1>BUILD YOUR<br><span class="text-accent">LEGEND</span></h1>
-                    <p>Merging precision engineering with artistic expression. We build masterpieces for creators who demand the extreme.</p>
-                    <div class="hero-actions">
-                        <a href="#blueprint" class="btn btn-primary">Explore Anatomy</a>
-                        <a href="#gallery" class="btn btn-secondary">View Builds</a>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="gif-wrapper">
-                        <img src="https://hyperpc.ae/images/product/gaming-pc/play/play-7/dc-ch560/main/black/water/hyperpc-play-7-water-black.jpg" alt="PC Building Process">
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="mobile-close" id="menuClose"><i class="ri-close-line"></i></button>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="#builds">Builds</a></li>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#custom">Custom PC</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+        </nav>
+        <a href="./login.html" class="mobile-build-btn">Start Building</a>
+    </div>
 
-        <!-- Scrolling Strap (Marquee) -->
-        <div class="scroll-strap-container">
-            <div class="scroll-strap">
-                <div class="scroll-content">
-                    CUSTOM BUILDS • HIGH PERFORMANCE • ARTISTIC EXPRESSION • COREX • BUILD YOUR DREAM PC • 
-                    CUSTOM BUILDS • HIGH PERFORMANCE • ARTISTIC EXPRESSION • COREX • BUILD YOUR DREAM PC • 
+    <!-- ══════════════════════════════════════════ -->
+    <!-- VIDEO HERO — FULL WIDTH, ABOVE EVERYTHING -->
+    <!-- ══════════════════════════════════════════ -->
+    <section class="video-hero">
+
+        <!-- Background video — replace src with your actual video file -->
+        <video
+            class="video-hero-bg"
+            autoplay muted loop playsinline
+            poster="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg"
+        >
+            <!-- Primary video source — swap path when you have a file -->
+            <source src="../assets/images/bg.mp4" type="video/mp4">
+            <!-- Fallback: if no video loads, the poster image shows -->
+        </video>
+
+        <!-- Dark overlay + grain -->
+        <div class="video-hero-overlay"></div>
+
+        <!-- Blue radial glow behind text -->
+        <div class="vh-glow"></div>
+
+        <!-- Centered content -->
+        <div class="video-hero-content">
+            <div class="vh-brand">
+                <!-- CORE in white -->
+                <span class="vh-core">CORE<span class="x-blue">X</span></span>
+
+                
+            </div>
+
+            <!-- Tagline -->
+            <p class="vh-tagline">Built for <span>Performance</span></p>
+        </div>
+
+        <!-- Scroll hint -->
+        <div class="vh-scroll-hint">
+            <span>Scroll</span>
+            <div class="vh-scroll-arrow"></div>
+        </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- ALL ORIGINAL SECTIONS BELOW — UNCHANGED   -->
+    <!-- ══════════════════════════════════════════ -->
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="top-accent">
+            <div class="top-accent-dot"></div>
+            <div class="top-accent-line"></div>
+        </div>
+
+        <!-- LEFT -->
+        <div class="hero-left">
+            <div>
+                <div class="hero-eyebrow">Next Gen. Personal.</div>
+                <h1 class="hero-title">BUILT<br>AROUND<br><span class="accent">OBSESSION.</span></h1>
+                <div class="hero-divider"></div>
+                <p class="hero-body">We don't build PCs.<br>We craft performance,<br>your way.</p>
+                <div class="hero-cta">
+                    <span class="cta-label">Start Your Build</span>
+                    <div class="cta-line"></div>
+                    <a href="./login.html" class="cta-circle">
+                        <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-socials">
+                <p>Follow Us</p>
+                <div class="social-icons">
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                    <a href="#"><i class="ri-youtube-line"></i></a>
+                    <a href="#"><i class="ri-discord-line"></i></a>
+                    <a href="#"><i class="ri-twitter-x-line"></i></a>
                 </div>
             </div>
         </div>
 
-        <!-- Features Section -->
-        <section id="features" class="features">
-            <div class="container features-inner">
-                <div class="features-text reveal">
-                    <span class="text-secondary" style="text-transform: uppercase; letter-spacing: 1px; font-size: 12px; font-weight: 600;">Why COREX</span>
-                    <h2>Engineered for<br>Immersion</h2>
-                    <p class="text-secondary">We don't just assemble parts. We curate components using rigorous thermal testing and aesthetic precision to ensure your PC is a masterpiece.</p>
-                    
-                    <div class="feature-list">
-                        <div class="feature-card">
-                            <div class="feature-icon"><i class="ri-cpu-line"></i></div>
-                            <div class="feature-info">
-                                <h3>Expert Cable Management</h3>
-                                <p>Clean, airflow-optimized routing for every build.</p>
-                            </div>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon"><i class="ri-speed-mini-line"></i></div>
-                            <div class="feature-info">
-                                <h3>Overclock Ready</h3>
-                                <p>Pre-tuned for maximum stability and speed.</p>
-                            </div>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon"><i class="ri-shield-check-line"></i></div>
-                            <div class="feature-info">
-                                <h3>3 Year Warranty</h3>
-                                <p>Comprehensive parts and labor coverage.</p>
-                            </div>
-                        </div>
-                    </div>
+        <!-- CENTER -->
+        <div class="hero-center">
+            <div class="ghost-labels">
+                <div class="ghost-label gl-cpu1">CPU <span class="arrow">→</span></div>
+                <div class="ghost-label gl-cpu2">CPU <span class="arrow">→</span></div>
+                <div class="ghost-label gl-cool">COOLING <span class="arrow">→</span></div>
+                <div class="ghost-label gl-power">POWER <span class="arrow">→</span></div>
+                <div class="ghost-label gl-design">DESIGN <span class="arrow">→</span></div>
+            </div>
+
+            <div class="diagonal-strip">
+                <div class="slice slice-1">
+                    <img src="https://media.licdn.com/dms/image/v2/D5612AQEEOympY3xiZw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1695812323914?e=2147483647&v=beta&t=RGWOvr3LpQaD8ep0AeVvk5Z4Al3WSS3Drr1yBmn7sW0" alt="GPU RTX">
+                    <div class="slice-label">GEFORCE RTX</div>
                 </div>
-                <div class="features-image reveal">
-                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=1000&auto=format&fit=crop" alt="Clean Setup">
+                <div class="slice slice-2">
+                    <img src="../assets/images/s3.png" alt="Custom Case">
+                    <div class="slice-label">COREX</div>
+                </div>
+                <div class="slice slice-3">
+                    <img src="https://png.pngtree.com/thumb_back/fw800/background/20251001/pngtree-gaming-setup-with-rgb-lighting-high-performance-pc-and-chair-image_19746411.webp" alt="Custom Case">
+                    <div class="slice-label">GEFORCE RTX</div>
+                </div>
+                <div class="diag-line diag-line-1"></div>
+                <div class="diag-line diag-line-2"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT STATS -->
+        <div class="hero-right">
+            <div class="scroll-discover">
+                <div class="scroll-line"></div>
+                <span>SCROLL TO DISCOVER</span>
+            </div>
+            <div class="stats-block">
+                <div class="stat-item">
+                    <div class="stat-number">0%</div>
+                    <div class="stat-label">Bottleneck</div>
+                </div>
+                <div class="stat-dot"></div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Custom Built</div>
                 </div>
             </div>
-        </section>
-
-       
-
-        <!-- The Blueprint (Interactive Anatomy) -->
-        <section id="blueprint" class="blueprint">
-            <div class="container blueprint-inner">
-                <!-- Visual Side -->
-                <div class="blueprint-visual reveal">
-                    <div class="tech-corner tc-tl"></div>
-                    <div class="tech-corner tc-tr"></div>
-                    <div class="tech-corner tc-bl"></div>
-                    <div class="tech-corner tc-br"></div>
-
-                    <div class="blueprint-img-container">
-                        <div class="scan-line"></div>
-                        <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1000&auto=format&fit=crop" alt="PC Internal Anatomy" class="blueprint-img">
-                        
-                        <!-- Hotspots -->
-                        <div class="hotspot hs-1" data-id="gpu" onclick="showInfo('gpu')" tabindex="0"></div>
-                        <div class="hotspot hs-2" data-id="cpu" onclick="showInfo('cpu')" tabindex="0"></div>
-                        <div class="hotspot hs-3" data-id="case" onclick="showInfo('case')" tabindex="0"></div>
-                    </div>
+            <a href="./login.html" class="see-action">
+                <div class="see-action-text">
+                    <span class="see-top">See COREX</span>
+                    <span class="see-bot">In Action</span>
                 </div>
-
-                <!-- Content Side -->
-                <div class="blueprint-content reveal">
-                    <h2>Blueprint of<br>Perfection</h2>
-                    <p class="blueprint-desc">Hover or tap on glowing nodes in the diagram to reveal how COREX customizes every inch of your system.</p>
-                    
-                    <!-- Info Box 1 -->
-                    <div id="info-gpu" class="info-box">
-                        <h3 class="info-title"><i class="ri-broadcast-line"></i> Graphics Engine</h3>
-                        <p>We source top-tier silicon for consistent overclocking headroom. Every card is tested for thermals before installation to ensure no coil whine and maximum frame rates.</p>
-                    </div>
-
-                    <!-- Info Box 2 -->
-                    <div id="info-cpu" class="info-box active">
-                        <h3 class="info-title"><i class="ri-cpu-line"></i> Core Processing</h3>
-                        <p>The heart of your build. We utilize delidded CPUs and premium thermal paste application to lower temperatures by 10-15°C compared to stock builds.</p>
-                    </div>
-
-                    <!-- Info Box 3 -->
-                    <div id="info-case" class="info-box">
-                        <h3 class="info-title"><i class="ri-layout-masonry-line"></i> Chassis & Flow</h3>
-                        <p>We modify case airflow paths with custom 3D-printed brackets. The chassis isn't just a box; it's a wind tunnel designed specifically for your component layout.</p>
-                    </div>
+                <div class="play-circle">
+                    <i class="ri-play-fill"></i>
                 </div>
-            </div>
-        </section>
+            </a>
+        </div>
+    </section>
 
-        <!-- Metrics (Stats) -->
-        <section id="metrics" class="metrics">
-            <div class="container">
-                <div class="metrics-grid">
-                    <div class="metric-item reveal">
-                        <div class="metric-number" data-target="50">0</div>
-                        <div class="metric-label">K+ Custom Builds</div>
-                    </div>
-                    <div class="metric-item reveal">
-                        <div class="metric-number" data-target="100">0</div>
-                        <div class="metric-label">% Satisfaction</div>
-                    </div>
-                    <div class="metric-item reveal">
-                        <div class="metric-number" data-target="24">0</div>
-                        <div class="metric-label">Hr Stress Test</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- FEATURES -->
+    <section class="features-section" id="builds">
+        <div class="features-inner">
+            <div class="reveal">
+                <div class="features-label">Why COREX</div>
+                <h2 class="features-h2">Engineered for<br>Immersion</h2>
+                <p class="features-body">We don't just assemble parts. We curate components using rigorous thermal testing and aesthetic precision to ensure your PC is a masterpiece.</p>
 
-        <!-- Hall of Legends (Gallery) -->
-        <section id="gallery" class="gallery">
-            <div class="container">
-                <div class="gallery-header reveal">
-                    <div class="gallery-title">
-                        <span class="text-secondary" style="text-transform: uppercase; letter-spacing: 1px; font-size: 12px; font-weight: 600;">Community</span>
-                        <h2>Hall of Legends</h2>
-                    </div>
-                </div>
-
-                <div class="gallery-grid">
-                    <div class="gallery-item tall reveal">
-                        <img src="https://www.pcgamesn.com/wp-content/sites/pcgamesn/2024/05/cyberpunk-2077-neon-gaming-pc.jpg" class="gallery-img" alt="Build 1">
-                        <div class="gallery-overlay">
-                            <div class="builder-name">CyberPunk_2077 <i class="ri-verified-badge-fill text-accent"></i></div>
-                            <div class="build-specs">RTX 4090 • Custom Loop • White Edition</div>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <div class="feat-icon"><i class="ri-cpu-line"></i></div>
+                        <div class="feat-info">
+                            <h3>Expert Cable Management</h3>
+                            <p>Clean, airflow-optimized routing for every build. Every wire placed with intent.</p>
                         </div>
                     </div>
-                    <div class="gallery-item reveal">
-                        <img src="https://i.redd.it/fc75qvps3a051.jpg" class="gallery-img" alt="Build 2">
-                        <div class="gallery-overlay">
-                            <div class="builder-name">NeonRider</div>
-                            <div class="build-specs">Ryzen 9 • O11D Evo • Yellow Accent</div>
+                    <div class="feature-card">
+                        <div class="feat-icon"><i class="ri-speed-mini-line"></i></div>
+                        <div class="feat-info">
+                            <h3>Overclock Ready</h3>
+                            <p>Pre-tuned for maximum stability and speed out of the box.</p>
                         </div>
                     </div>
-                    <div class="gallery-item reveal">
-                        <img src="https://www.stormcraftpc.com/cdn/shop/files/Stormcraft_Wizard_WI285K0CC-580W1_Core_Ultra_9_285K_GeForce_RTX_5080_Wizard_hero_Cyan.png?v=1752778391&width=1445" class="gallery-img" alt="Build 3">
-                        <div class="gallery-overlay">
-                            <div class="builder-name">TechWizard</div>
-                            <div class="build-specs">i9-14900K • Dark Base Pro 900</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item wide reveal">
-                        <img src="https://www.pcstudio.in/wp-content/uploads/2020/06/Cooler-Master-Elite-481-Wood-Micro-ATX-Mid-Tower-Cabinet-Black-3.webp" class="gallery-img" alt="Build 4">
-                        <div class="gallery-overlay">
-                            <div class="builder-name">Studio_Master</div>
-                            <div class="build-specs">Dual Xeon • 128GB RAM • Rendering Beast</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item reveal">
-                        <img src="https://gamemaxpc.com/static/upload/image/20240911/1726037753103490.jpg" class="gallery-img" alt="Build 5">
-                        <div class="gallery-overlay">
-                            <div class="builder-name">PixelArtist</div>
-                            <div class="build-specs">Mini ITX • Retro Style</div>
-                        </div>
-                    </div>
-                     <div class="gallery-item reveal">
-                        <img src="https://geekawhat.com/wp-content/uploads/2023/04/RTX-4070-Founders-Build-Feature.jpg" class="gallery-img" alt="Build 6">
-                        <div class="gallery-overlay">
-                            <div class="builder-name">GamerX</div>
-                            <div class="build-specs">RTX 4070 • Budget King</div>
+                    <div class="feature-card">
+                        <div class="feat-icon"><i class="ri-shield-check-line"></i></div>
+                        <div class="feat-info">
+                            <h3>3 Year Warranty</h3>
+                            <p>Comprehensive parts and labor coverage for peace of mind.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Testimonials -->
-        <section class="testimonials">
-            <div class="container">
-                <div class="section-header reveal">
-                    <h2>User Stories</h2>
+            <div class="features-image reveal">
+                <img src="https://www.boostboxx.com/en/media/codazon/slideshow/images/bb_slider_advanced3835_vitrum_480x750_6.jpg" alt="Custom Build">
+                <div class="feat-img-badge">
+                    <div class="b-num">24hr</div>
+                    <div class="b-lbl">Stress Tested</div>
                 </div>
-                <div class="test-grid">
-                    <div class="test-card reveal">
-                        <div class="stars">
-                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
-                        </div>
-                        <p class="test-text">"The build quality is insane. It looks like a piece of art on my desk and absolutely destroys any game I throw at it."</p>
-                        <div class="user-info">
-                            <div class="user-avatar">
-                                <img src="https://picsum.photos/seed/user1/100/100.jpg" alt="User">
-                            </div>
-                            <div>
-                                <h4>kiran</h4>
-                                <span class="text-secondary" style="font-size: 12px;">Pro Gamer</span>
-                            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS -->
+    <section class="metrics-section">
+        <video
+            class="metrics-video-bg"
+            autoplay muted loop playsinline
+            poster="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg"
+        >
+            <source src="../assets/images/bg.mp4" type="video/mp4">
+        </video>
+        <div class="metrics-overlay"></div>
+
+        <div class="metrics-inner">
+            <div class="metric-item reveal">
+                <div class="metric-num counter" data-target="2000" data-suffix="+" data-display-divisor="1000">0k+</div>
+                <div class="metric-lbl">Custom Builds</div>
+            </div>
+            <div class="metric-item reveal">
+                <div class="metric-num counter" data-target="100" data-suffix="%">0%</div>
+                <div class="metric-lbl">Satisfaction</div>
+            </div>
+            <div class="metric-item reveal">
+                <div class="metric-num counter" data-target="24" data-suffix="hr">0hr</div>
+                <div class="metric-lbl">Stress Test</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR BEAST -->
+    <section class="beast-section" id="beast">
+        <div class="beast-header reveal">
+            <div class="beast-label">Showcase</div>
+            <h2 class="beast-h2">Our <span>Beast</span></h2>
+        </div>
+
+        <div class="beast-card-wrap reveal" id="beastWrap">
+            <div class="beast-card" id="beastCard">
+                <img
+                    class="beast-img"
+                    src="../assets/images/intro.png"
+                    alt="COREX Signature Build"
+                    draggable="false"
+                >
+                <div class="beast-edge-glow" id="beastGlow"></div>
+
+                <div class="beast-badge beast-badge-tl">
+                    <span class="badge-title">Processor</span>
+                    <span class="badge-val">Intel i9-14900K</span>
+                    <span class="badge-sub">Overclocked · 6.0 GHz</span>
+                </div>
+
+                <div class="beast-badge beast-badge-br">
+                    <span class="badge-title">Graphics</span>
+                    <span class="badge-val">RTX 4090 24GB</span>
+                    <span class="badge-sub">4K Ultra · 240 FPS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="test-section">
+        <div class="test-inner">
+            <div class="test-label">User Stories</div>
+            <h2 class="test-h2">What They Say</h2>
+            <div class="test-grid">
+                <div class="test-card reveal">
+                    <div class="stars">
+                        <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                    </div>
+                    <p class="test-text">"The build quality is insane. It looks like a piece of art on my desk and absolutely destroys any game I throw at it."</p>
+                    <div class="test-user">
+                        <div class="test-avatar"><img src="https://picsum.photos/seed/user1/100/100.jpg" alt="Kiran"></div>
+                        <div>
+                            <h4>Kiran</h4>
+                            <span>Pro Gamer</span>
                         </div>
                     </div>
-                    <div class="test-card reveal">
-                        <div class="stars">
-                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
-                        </div>
-                        <p class="test-text">"Finally a company that understands cable management. The airflow is perfect for my 3D rendering workstations."</p>
-                        <div class="user-info">
-                            <div class="user-avatar">
-                                <img src="https://picsum.photos/seed/user2/100/100.jpg" alt="User">
-                            </div>
-                            <div>
-                                <h4>Swaraj</h4>
-                                <span class="text-secondary" style="font-size: 12px;">3D Artist</span>
-                            </div>
+                </div>
+                <div class="test-card reveal">
+                    <div class="stars">
+                        <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                    </div>
+                    <p class="test-text">"Finally a company that understands cable management. The airflow is perfect for my 3D rendering workstation."</p>
+                    <div class="test-user">
+                        <div class="test-avatar"><img src="https://picsum.photos/seed/user2/100/100.jpg" alt="Swaraj"></div>
+                        <div>
+                            <h4>Swaraj</h4>
+                            <span>3D Artist</span>
                         </div>
                     </div>
-                    <div class="test-card reveal">
-                        <div class="stars">
-                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i>
-                        </div>
-                        <p class="test-text">"Premium feel from unboxing to the boot up. The yellow accents are exactly what I wanted."</p>
-                        <div class="user-info">
-                            <div class="user-avatar">
-                                <img src="https://picsum.photos/seed/user3/100/100.jpg" alt="User">
-                            </div>
-                            <div>
-                                <h4>sai charan</h4>
-                                <span class="text-secondary" style="font-size: 12px;">Tech Enthusiast</span>
-                            </div>
+                </div>
+                <div class="test-card reveal">
+                    <div class="stars">
+                        <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i>
+                    </div>
+                    <p class="test-text">"Premium feel from unboxing to the boot up. The purple accents are exactly what I wanted. Zero compromises."</p>
+                    <div class="test-user">
+                        <div class="test-avatar"><img src="https://picsum.photos/seed/user3/100/100.jpg" alt="Sai Charan"></div>
+                        <div>
+                            <h4>Sai Charan</h4>
+                            <span>Tech Enthusiast</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Final CTA -->
-        <section class="final-cta">
-            <div class="container cta-content reveal">
-                <h2>YOUR LEGACY<br>STARTS HERE.</h2>
-                <!-- FIXED: Added onclick to redirect to signup.html -->
-               <button class="btn btn-glow" onclick="goToSignup()">Start Building</button>
-            </div>
-        </section>
-    </main>
+    <!-- FINAL CTA -->
+    <section class="cta-section">
+        <h2 class="cta-h2">YOUR <span>LEGACY</span><br>STARTS HERE.</h2>
+        <a href="./login.html" class="cta-btn">Start Building <i class="ri-arrow-right-line"></i></a>
+    </section>
 
-    <!-- Professional Amazon-Style Footer -->
-    <div class="footer-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        Back to top
-    </div>
+    <!-- FOOTER -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo" style="color:white;">
+                        <!-- Footer logo icon -->
+                       <img src="../assets/images/logo.jpeg" alt="CoreX Logo" class="logo-img">
+                        <span>CORE<span class="x-blue">X</span></span>
+                    </a>
+                    <p>Custom gaming PCs & workstations built for those who demand the extreme.</p>
+                </div>
                 <div class="footer-col">
                     <h3>Get to Know Us</h3>
                     <ul>
                         <li><a href="#">Careers</a></li>
                         <li><a href="#">Blog</a></li>
                         <li><a href="#">About COREX</a></li>
-                        <li><a href="#">Investor Relations</a></li>
+                        <li><a href="#">Press</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>Make Money with Us</h3>
+                    <h3>Partner</h3>
                     <ul>
-                        <li><a href="#">Sell products on COREX</a></li>
-                        <li><a href="#">Become an Affiliate</a></li>
-                        <li><a href="#">Advertise Your Products</a></li>
+                        <li><a href="#">Sell on COREX</a></li>
+                        <li><a href="#">Become Affiliate</a></li>
+                        <li><a href="#">Advertise</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>Payment Products</h3>
+                    <h3>Payment</h3>
                     <ul>
                         <li><a href="#">Business Card</a></li>
                         <li><a href="#">Shop with Points</a></li>
-                        <li><a href="#">Reload Your Balance</a></li>
+                        <li><a href="#">Reload Balance</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>Let Us Help You</h3>
+                    <h3>Help</h3>
                     <ul>
                         <li><a href="#">Your Account</a></li>
                         <li><a href="#">Your Orders</a></li>
-                        <li><a href="#">Shipping Rates & Policies</a></li>
-                        <li><a href="#">Returns & Replacements</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Support</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <!-- UPDATE: Replaced Text COREX. with Image -->
-                <div class="footer-logo">
-                    <img src="../assets/images/logo.jpeg" alt="COREX Logo">
-                </div>
-                <div class="footer-copyright">
-                    &copy; 2026-2030, COREX Custom Systems, Inc. or its affiliates
+                <span class="footer-copy">&copy; 2026–2030 COREX Custom Systems, Inc. or its affiliates</span>
+                <div class="social-icons">
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                    <a href="#"><i class="ri-youtube-line"></i></a>
+                    <a href="#"><i class="ri-discord-line"></i></a>
+                    <a href="#"><i class="ri-twitter-x-line"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Toast Notification Element -->
-    <div id="toast" class="toast">
-        <i class="ri-checkbox-circle-fill"></i>
-        <span id="toastMsg">Action Successful</span>
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <div class="wa-float">
+        <div class="wa-tooltip">Chat on WhatsApp</div>
+        <a class="wa-btn" href="https://wa.me/916300865661?text=Hi%20COREX%2C%20I%27d%20like%20to%20build%20a%20custom%20PC!" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+            <i class="ri-whatsapp-line"></i>
+        </a>
     </div>
-
     <!-- JavaScript -->
     <script src="../assets/js/index.js"></script>
 </body>

@@ -1,147 +1,123 @@
- // 1. Header Scroll Effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // 2. Scroll Reveal Animation (Intersection Observer)
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Only animate once
+/* ── SCROLL REVEAL ── */
+        const reveals = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    e.target.style.transitionDelay = (i * 0.08) + 's';
+                    e.target.classList.add('visible');
+                    io.unobserve(e.target);
                 }
             });
-        }, {
-            root: null,
-            threshold: 0.15,
-            rootMargin: "0px"
-        });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => io.observe(el));
 
-        revealElements.forEach(el => revealObserver.observe(el));
+        /* ── COUNTER ANIMATION ── */
+        function animateCounter(el) {
+            const target = +el.dataset.target;
+            const suffix = el.dataset.suffix || '';
+            const divisor = +el.dataset.displayDivisor || 1;
+            const duration = 2000;
+            const start = performance.now();
 
-        // 3. Blueprint Hotspot Interaction
-        function showInfo(id) {
-            // Remove active class from all info boxes
-            document.querySelectorAll('.info-box').forEach(box => {
-                box.classList.remove('active');
-            });
-            
-            // Remove active class from all hotspots
-            document.querySelectorAll('.hotspot').forEach(spot => {
-                spot.classList.remove('active');
-            });
+            function tick(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                const value = Math.floor(eased * target / divisor);
 
-            // Activate selected
-            const selectedBox = document.getElementById('info-' + id);
-            if (selectedBox) selectedBox.classList.add('active');
-            
-            // Activate hotspot
-            const selectedSpot = document.querySelector(`.hotspot[data-id="${id}"]`);
-            if (selectedSpot) selectedSpot.classList.add('active');
+                if (divisor > 1) {
+                    el.textContent = value + (divisor === 1000 ? 'K' : '') + suffix;
+                } else {
+                    el.textContent = value + suffix;
+                }
+
+                if (progress < 1) requestAnimationFrame(tick);
+                else {
+                    if (divisor > 1) el.textContent = (target / divisor) + (divisor === 1000 ? 'K' : '') + suffix;
+                    else el.textContent = target + suffix;
+                }
+            }
+            requestAnimationFrame(tick);
         }
 
-        // 4. Stats Counter Animation
-        const statsSection = document.getElementById('metrics');
-        let statsAnimated = false;
-
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !statsAnimated) {
-                    statsAnimated = true;
-                    const counters = document.querySelectorAll('.metric-number');
-                    counters.forEach(counter => {
-                        const target = +counter.getAttribute('data-target');
-                        const duration = 2000; // 2 seconds
-                        const increment = target / (duration / 16); // 60fps
-                        
-                        let current = 0;
-                        const updateCounter = () => {
-                            current += increment;
-                            if (current < target) {
-                                counter.innerText = Math.ceil(current);
-                                requestAnimationFrame(updateCounter);
-                            } else {
-                                counter.innerText = target;
-                            }
-                        };
-                        updateCounter();
-                    });
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    animateCounter(e.target);
+                    counterObserver.unobserve(e.target);
                 }
             });
         }, { threshold: 0.5 });
 
-        if(statsSection) statsObserver.observe(statsSection);
+        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-        // 5. Toast Notification System
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const msgEl = document.getElementById('toastMsg');
-            
-            msgEl.textContent = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+        /* ── BEAST CARD PERSPECTIVE TILT ── */
+        const beastCard = document.getElementById('beastCard');
+        const beastWrap = document.getElementById('beastWrap');
+        const beastGlow = document.getElementById('beastGlow');
+
+        if (beastCard && beastWrap) {
+            const MAX_TILT = 18;
+
+            beastWrap.addEventListener('mousemove', (e) => {
+                const rect = beastCard.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const cx = rect.width / 2;
+                const cy = rect.height / 2;
+
+                const nx = (x - cx) / cx;
+                const ny = (y - cy) / cy;
+
+                const rotY =  nx * MAX_TILT;
+                const rotX = -ny * MAX_TILT;
+
+                beastCard.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
+                beastCard.style.setProperty('--mx', (x / rect.width * 100) + '%');
+                beastCard.style.setProperty('--my', (y / rect.height * 100) + '%');
+
+                beastGlow.style.background = `radial-gradient(
+                    ellipse 80% 60% at ${x / rect.width * 100}% ${y / rect.height * 100}%,
+                    rgba(107,43,255,0.22) 0%,
+                    transparent 65%
+                )`;
+            });
+
+            beastWrap.addEventListener('mouseleave', () => {
+                beastCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+                beastGlow.style.background = 'none';
+            });
         }
 
-               // --- REDIRECT FUNCTIONS ---
-        function goToLogin() {
-            console.log("Redirecting to Login..."); // Debugging line
-            window.location.href = '../pages/login.html';
-            return false; // Prevents default anchor behavior
+        /* ── MOBILE DRAWER ── */
+        const menuToggle = document.getElementById('menuToggle');
+        const menuClose = document.getElementById('menuClose');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function openDrawer() {
+            mobileDrawer.classList.add('open');
+            mobileOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDrawer() {
+            mobileDrawer.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+            document.body.style.overflow = '';
         }
 
-        function goToSignup() {
-            console.log("Redirecting to Signup..."); // Debugging line
-            window.location.href = '../pages/signup.html';
-            return false; 
-        }
+        if (menuToggle) menuToggle.addEventListener('click', openDrawer);
+        if (menuClose) menuClose.addEventListener('click', closeDrawer);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeDrawer);
 
-        // 6. Mobile Menu Logic
-        function toggleMenu() {
-            if (window.innerWidth <= 768) {
-                const navList = document.getElementById('nav-list');
-                const menuIcon = document.getElementById('menu-icon');
-                
-                navList.classList.toggle('nav-active');
-                
-                if (navList.classList.contains('nav-active')) {
-                    menuIcon.classList.remove('ri-menu-4-line');
-                    menuIcon.classList.add('ri-close-line');
-                } else {
-                    menuIcon.classList.remove('ri-close-line');
-                    menuIcon.classList.add('ri-menu-4-line');
-                }
-            }
-        }
+        document.querySelectorAll('.mobile-nav a').forEach(a => {
+            a.addEventListener('click', closeDrawer);
+        });
 
-        // --- NEW: Helper to close mobile menu when links are clicked ---
-        function closeMobileMenu() {
-            if (window.innerWidth <= 768) {
-                const navList = document.getElementById('nav-list');
-                const menuIcon = document.getElementById('menu-icon');
-                
-                navList.classList.remove('nav-active');
-                menuIcon.classList.remove('ri-close-line');
-                menuIcon.classList.add('ri-menu-4-line');
-            }
-        }
-
-        // Reset menu on resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                const navList = document.getElementById('nav-list');
-                const menuIcon = document.getElementById('menu-icon');
-                navList.classList.remove('nav-active');
-                menuIcon.classList.remove('ri-close-line');
-                menuIcon.classList.add('ri-menu-4-line');
-            }
+        /* ── SMOOTH SCROLL ── */
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+            });
         });

@@ -3,29 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="icon" type="image/png" href="../assets/images/logo.jpeg">
+    <link rel="icon" type="image/png" href="./frontend/assets/images/logo.jpeg">
     <title>COREX | Secure Login</title>
-    <!-- Fonts & Icons -->
+    
+    <!-- COREX FONTS: Syne & DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
-        /* --- VARIABLES --- */
+        /* ── COREX THEME VARIABLES ── */
         :root {
-            --bg-primary: #050505;
-            --accent: #FFD600;
-            --accent-glow: rgba(255, 214, 0, 0.4);
-            --purple-deep: #4b0082;
-            --text-main: #FFFFFF;
-            --text-sec: #A1A1A1;
-            --border: #2A2A2A;
+            /* Imported from Index */
+            --bg-dark: #0D0D14;
+            --bg-surface: rgba(255, 255, 255, 0.03);
+            --purple: #6B2BFF;
+            --purple-light: #8B5CF6;
+            --blue: #1A6BFF;
+            --blue-glow: rgba(26, 107, 255, 0.4);
+            --white: #FFFFFF;
+            --muted: #8888A0;
+            --border: rgba(255, 255, 255, 0.08);
             --error: #ff4444;
-            --font-head: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
+            
+            /* Layout */
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
             --card-radius: 24px;
-            --card-padding: 40px;
+            --card-padding: 48px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,8 +44,8 @@
         }
 
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--white);
             font-family: var(--font-body);
             display: flex;
             align-items: center;
@@ -48,178 +56,117 @@
             padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
-        /* --- MESMERIZING BACKGROUND --- */
+        /* ── BACKGROUND EFFECTS (Matched to Index Hero) ── */
         
-        /* 1. The Ambient Orbs */
-        .ambient-bg {
-            position: fixed; inset: 0; z-index: -3;
-            overflow: hidden;
-            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
-        }
-
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(80px);
-            opacity: 0.6; animation: floatOrb 20s infinite alternate ease-in-out;
-            will-change: transform;
-        }
-
-        .orb-1 {
-            width: min(400px, 60vw); height: min(400px, 60vw);
-            background: var(--accent);
-            top: -10%; left: -10%; animation-duration: 25s;
-        }
-        .orb-2 {
-            width: min(500px, 70vw); height: min(500px, 70vw);
-            background: var(--purple-deep);
-            bottom: -20%; right: -10%; animation-duration: 30s; animation-delay: -5s;
-        }
-        .orb-3 {
-            width: min(300px, 50vw); height: min(300px, 50vw);
-            background: #222;
-            top: 40%; left: 40%; filter: blur(100px); animation-duration: 20s;
-        }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(30px, 50px) scale(1.1); }
-            100% { transform: translate(-20px, -30px) scale(0.9); }
-        }
-
-        /* 2. The Infinite Grid */
-        .perspective-grid {
-            position: absolute; bottom: -30%; left: -50%; width: 200%; height: 60%;
-            background-image: 
-                linear-gradient(var(--accent-glow) 1px, transparent 1px),
-                linear-gradient(90deg, var(--accent-glow) 1px, transparent 1px);
-            background-size: 60px 60px;
-            transform: perspective(500px) rotateX(60deg);
-            z-index: -2;
-            mask-image: linear-gradient(to bottom, transparent, black 40%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%);
-            animation: gridMove 10s linear infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(60px); }
-        }
-
-        /* 3. Noise Texture */
+        /* 1. Noise Texture */
         .noise-overlay {
-            position: fixed; inset: 0; z-index: -1;
-            pointer-events: none; opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.07;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
         }
 
-        /* --- AUTH CARD --- */
+        /* 2. Ambient Glow (Purple/Blue) */
+        .ambient-glow {
+            position: fixed; inset: 0; z-index: -1; overflow: hidden;
+            background: radial-gradient(ellipse at 50% 0%, rgba(107,43,255,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(26,107,255,0.1) 0%, transparent 40%);
+        }
+
+        /* ── AUTH CARD ── */
         .auth-container {
-            width: 100%; max-width: 420px; z-index: 10;
+            width: 100%; max-width: 440px; z-index: 10; position: relative;
         }
 
         .auth-card {
             width: 100%;
-            background: rgba(15, 15, 15, 0.65);
+            background: rgba(20, 20, 26, 0.6);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
             border-radius: var(--card-radius);
             padding: var(--card-padding);
-            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.8);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.6);
             position: relative;
             overflow: hidden;
             animation: cardEntry 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            opacity: 0; transform: translateY(40px);
+            opacity: 0; transform: translateY(30px);
         }
 
+        /* Top Border Accent */
         .auth-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--purple), transparent);
             opacity: 0.5;
-            animation: borderPulse 4s infinite ease-in-out;
         }
 
         @keyframes cardEntry {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes borderPulse {
-            0%, 100% { opacity: 0.3; width: 80%; left: 10%; }
-            50% { opacity: 0.8; width: 100%; left: 0%; }
+        /* ── LOGO (COREX STYLE) ── */
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 26px;
+            letter-spacing: -0.5px;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        .logo .x-blue { color: var(--blue); }
+        .logo:hover .x-blue { color: var(--purple-light); transition: color 0.3s; }
+
+        .subtitle { 
+            color: var(--muted); 
+            font-size: 14px; 
+            text-align: center;
+            margin-bottom: 40px; 
+            font-weight: 400;
         }
 
-        /* --- TYPOGRAPHY --- */
-       /* --- CORE X LOGO STYLES --- */
-.logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    gap: 5px; /* Spacing between text and X */
-    font-family: 'Space Grotesk', sans-serif; /* Or your preferred font */
-    font-weight: 800; /* Heavy font weight */
-    font-size: 24px;
-    text-transform: uppercase;
-}
-
-.core-text {
-    color: #ffffff; /* White color for 'CORE' */
-    letter-spacing: 1px;
-}
-
-.x-icon {
-    height: 28px; /* Adjust size of the X */
-    width: auto;
-    display: block;
-    margin-top: -0.5rem
-}
-
-/* Subtle hover effect for the whole logo */
-.logo:hover .core-text {
-    color: #ffcccc; /* Slight reddish tint on text hover */
-}
-
-.logo:hover .x-icon {
-    transform: scale(1.1); /* Slight zoom on X hover */
-    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.5)); /* Red Glow */
-    transition: all 0.3s ease;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .logo {
-        font-size: 20px;
-    }
-    .x-icon {
-        height: 24px;
-    }
-}
-        .subtitle { color: var(--text-sec); font-size: 14px; margin-bottom: 32px; }
-
-        /* --- FORMS --- */
+        /* ── FORMS ── */
         .form-group { margin-bottom: 24px; position: relative; }
+        
         label {
-            display: block; font-size: 11px; text-transform: uppercase; 
-            letter-spacing: 1px; color: var(--text-sec); margin-bottom: 8px; font-weight: 600;
+            display: block; 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            color: var(--muted); 
+            margin-bottom: 10px; 
+            font-weight: 500;
         }
+
         .input-wrapper { position: relative; }
+        
         .input-field {
-            width: 100%; padding: 16px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
+            width: 100%; 
+            padding: 16px 20px;
+            background: var(--bg-surface);
+            border: 1.5px solid var(--border);
             border-radius: 12px;
-            color: #fff; font-family: var(--font-body); font-size: 16px; /* 16px prevents iOS zoom */
-            outline: none; transition: all 0.3s ease;
+            color: var(--white); 
+            font-family: var(--font-body); 
+            font-size: 15px;
+            outline: none; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .input-field::placeholder { font-size: 14px; color: rgba(255,255,255,0.25); }
+
+        .input-field::placeholder { color: rgba(255,255,255,0.2); }
+        
         .input-field:focus {
-            border-color: var(--accent);
-            background: rgba(255,255,255,0.05);
-            box-shadow: 0 0 20px rgba(255, 214, 0, 0.1);
+            border-color: var(--purple);
+            background: rgba(107, 43, 255, 0.05);
+            box-shadow: 0 0 0 4px rgba(107, 43, 255, 0.1);
         }
+        
         .input-field.error { border-color: var(--error); }
 
         .error-text {
-            color: var(--error); font-size: 12px; margin-top: 6px;
+            color: var(--error); font-size: 12px; margin-top: 8px;
             display: flex; align-items: center; gap: 4px;
             opacity: 0; transform: translateY(-5px); transition: 0.3s;
             position: absolute;
@@ -228,166 +175,122 @@
 
         .toggle-password {
             position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-            color: var(--text-sec); cursor: pointer; transition: 0.2s;
+            color: var(--muted); cursor: pointer; transition: 0.2s;
             font-size: 18px; padding: 4px;
         }
-        .toggle-password:hover { color: #fff; }
+        .toggle-password:hover { color: var(--white); }
 
-        /* --- BUTTONS --- */
+        /* ── BUTTONS ── */
         .btn-main {
-            width: 100%; padding: 16px;
-            background: var(--accent); color: #000;
-            border: none; border-radius: 12px;
-            font-family: var(--font-head); font-weight: 700; font-size: 16px;
-            cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative; overflow: hidden;
+            width: 100%; 
+            padding: 16px;
+            background: var(--purple); 
+            color: var(--white);
+            border: none; 
+            border-radius: 50px; /* Pill shape like index */
+            font-family: var(--font-body); 
+            font-weight: 600; 
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            cursor: pointer; 
+            text-transform: uppercase; 
+            transition: all 0.3s ease;
+            position: relative; 
+            overflow: hidden;
             display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 4px 20px rgba(107, 43, 255, 0.3);
         }
+
+        /* Shine effect */
         .btn-main::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-            transition: 0.6s;
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-20deg);
+            transition: 0.5s;
         }
-        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 214, 0, 0.3); }
-        .btn-main:hover::after { left: 100%; }
+        
+        .btn-main:hover { 
+            transform: translateY(-2px); 
+            background: var(--purple-light); 
+            box-shadow: 0 8px 30px rgba(107, 43, 255, 0.5);
+        }
+        .btn-main:hover::after { left: 150%; transition: 0.7s; }
         .btn-main:active { transform: translateY(0); }
 
-        /* --- LINKS --- */
-        .form-footer { margin-top: 24px; text-align: center; font-size: 14px; color: var(--text-sec); }
-        .form-footer a { color: var(--accent); text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .form-footer a:hover { text-decoration: underline; text-shadow: 0 0 10px rgba(255,214,0,0.5); }
+        /* ── LINKS ── */
+        .form-footer { margin-top: 32px; text-align: center; font-size: 13px; color: var(--muted); }
+        .form-footer a { color: var(--white); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .form-footer a:hover { color: var(--purple); text-decoration: underline; }
 
         .forgot-link {
-            display: block; text-align: right; font-size: 12px; color: var(--text-sec);
-            margin-top: -16px; margin-bottom: 24px; text-decoration: none; transition: 0.3s;
+            display: block; text-align: right; font-size: 12px; color: var(--muted);
+            margin-top: -16px; margin-bottom: 32px; text-decoration: none; transition: 0.3s;
+            font-weight: 500;
         }
-        .forgot-link:hover { color: var(--accent); }
+        .forgot-link:hover { color: var(--blue); }
 
-        /* --- LOADER --- */
+        /* ── LOADER ── */
         .loader {
-            width: 20px; height: 20px;
-            border: 2px solid rgba(0,0,0,0.3);
-            border-top: 2px solid #000;
+            width: 18px; height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid #fff;
             border-radius: 50%;
             animation: spin 0.8s linear infinite; display: none; flex-shrink: 0;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* --- TOAST (MOBILE SAFE) --- */
+        /* ── TOAST (COREX Style) ── */
         #toast {
-            position: fixed; top: 20px;
-            top: calc(20px + env(safe-area-inset-top, 0px));
-            left: 50%; transform: translateX(-50%) translateY(-120px);
-            background: #fff; color: #000;
-            padding: 12px 24px; border-radius: 50px;
-            font-weight: 600; font-size: 14px;
-            opacity: 0; transition: 0.5s; z-index: 1000;
-            display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: fixed; top: 24px;
+            top: calc(24px + env(safe-area-inset-top, 0px));
+            left: 50%; transform: translateX(-50%) translateY(-100px);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            white-space: nowrap;
+            color: #0D0D14;
+            padding: 14px 28px; 
+            border-radius: 50px;
+            font-weight: 600; font-size: 13px;
+            opacity: 0; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            z-index: 1000;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
             max-width: calc(100vw - 40px);
-            max-width: calc(100vw - 40px - env(safe-area-inset-right, 0px) - env(safe-area-inset-left, 0px));
-            overflow: hidden; text-overflow: ellipsis;
         }
+        
+        #toast.success { border-left: 4px solid var(--purple); }
+        #toast.error { border-left: 4px solid var(--error); }
 
-        /* ============================================
-           RESPONSIVE BREAKPOINTS
-           ============================================ */
-
-        /* Small phones (below 400px) */
-        @media (max-width: 400px) {
+        /* ── RESPONSIVE ── */
+        @media (max-width: 480px) {
             :root {
                 --card-radius: 20px;
-                --card-padding: 24px 20px;
+                --card-padding: 32px 24px;
             }
-
             .logo { font-size: 24px; }
-            .subtitle { font-size: 13px; margin-bottom: 24px; }
-            .form-group { margin-bottom: 20px; }
-            .input-field { padding: 14px 12px; border-radius: 10px; }
-            .toggle-password { right: 12px; font-size: 16px; }
-            .btn-main { padding: 14px; font-size: 15px; border-radius: 10px; }
-            .form-footer { font-size: 13px; margin-top: 20px; }
-            .forgot-link { font-size: 11px; }
-
-            /* Reduce blur for performance on weak devices */
-            .orb { filter: blur(60px); opacity: 0.4; }
-            .auth-card { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+            .btn-main { padding: 14px; }
         }
 
-        /* Standard phones (400px - 480px) */
-        @media (min-width: 401px) and (max-width: 480px) {
-            :root {
-                --card-padding: 30px 24px;
-            }
-            .logo { font-size: 26px; }
-        }
-
-        /* Landscape phones (short height) */
-        @media (max-height: 600px) and (orientation: landscape) {
-            body { align-items: flex-start; padding-top: 10px; padding-bottom: 10px; }
-            :root { --card-padding: 24px; --card-radius: 16px; }
-            .logo { font-size: 22px; margin-bottom: 4px; }
-            .subtitle { font-size: 12px; margin-bottom: 16px; }
-            .form-group { margin-bottom: 14px; }
-            .input-field { padding: 12px; }
-            .forgot-link { margin-top: -10px; margin-bottom: 14px; }
-            .form-footer { margin-top: 16px; }
-            .orb { opacity: 0.3; }
-            .perspective-grid { opacity: 0.15; height: 40%; }
-        }
-
-        /* Extra tall phones (like Samsung S Ultra) */
-        @media (min-height: 800px) and (max-width: 480px) {
-            body { align-items: center; }
-        }
-
-        /* Hover disabled on touch devices */
-        @media (hover: none) and (pointer: coarse) {
-            .btn-main:hover { transform: none; box-shadow: none; }
-            .btn-main:hover::after { left: -100%; }
-            .btn-main:active { transform: scale(0.98); box-shadow: 0 10px 30px rgba(255, 214, 0, 0.3); }
-            .toggle-password:hover { color: var(--text-sec); }
-            .forgot-link:hover { color: var(--text-sec); }
-            .form-footer a:hover { text-decoration: none; text-shadow: none; }
+        @media (max-height: 700px) {
+            body { padding: 10px; align-items: flex-start; padding-top: 40px; }
+            .auth-card { margin-bottom: 40px; }
         }
     </style>
 </head>
 <body>
 
     <!-- Background Layers -->
-    <div class="ambient-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
-    <div class="perspective-grid"></div>
+    <div class="ambient-glow"></div>
     <div class="noise-overlay"></div>
 
     <div class="auth-container">
         <div class="auth-card" id="card">
+            
+            <!-- COREX LOGO -->
             <a href="./index.html" class="logo">
-    <span class="core-text">CORE</span>
-    
-    <!-- Custom Asymmetric X Icon with Gradient -->
-    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
-                <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
-            </linearGradient>
-        </defs>
-        
-        <!-- Big Line (Long diagonal) -->
-        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-        
-        <!-- Small Line (Short diagonal, offset for effect) -->
-        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-    </svg>
-</a>
-            <p class="subtitle">Access your dashboard securely.</p>
+                CORE<span class="x-blue">X</span>
+            </a>
+            
+            <p class="subtitle">Welcome back. Log in to your dashboard.</p>
 
             <form id="loginForm" novalidate>
                 <div class="form-group">
@@ -424,7 +327,7 @@
 
     <!-- Custom Toast -->
     <div id="toast">
-        <i class="ri-checkbox-circle-fill" style="color: #000; flex-shrink: 0;"></i>
+        <i class="ri-checkbox-circle-fill"></i>
         <span id="toastMsg">Success</span>
     </div>
 
@@ -453,15 +356,19 @@
             const toast = document.getElementById('toast');
             const txt = document.getElementById('toastMsg');
             const icon = toast.querySelector('i');
+            
             txt.textContent = msg;
+            toast.className = type; // success or error class for border color
+            
             icon.className = type === 'error' ? 'ri-error-warning-fill' : 'ri-checkbox-circle-fill';
-            icon.style.color = type === 'error' ? '#ff4444' : '#000';
+            icon.style.color = type === 'error' ? 'var(--error)' : 'var(--purple)';
             
             toast.style.opacity = '1';
             toast.style.transform = 'translateX(-50%) translateY(0)';
+            
             setTimeout(() => { 
                 toast.style.opacity = '0'; 
-                toast.style.transform = 'translateX(-50%) translateY(-120px)'; 
+                toast.style.transform = 'translateX(-50%) translateY(-100px)'; 
             }, 3000);
         }
 

@@ -1,971 +1,1853 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../assets/images/logo.jpeg">
-    <title>COREX | Ultimate Systems</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-
-    <style>
-        /* --- THEME VARIABLES --- */
-        :root {
-            --bg-gradient: radial-gradient(circle at 50% -20%, #2e3244 0%, #111116 60%, #000000 100%);
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --card-hover: rgba(255, 255, 255, 0.08);
-            --accent: #FFD600;
-            --accent-hover: #E6C200;
-            --text-main: #FFFFFF;
-            --text-sec: #9CA3AF;
-            --font-head: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-full: 9999px;
-            --success: #10B981;
-        }
-
-        /* --- RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        body {
-            background: var(--bg-gradient);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-attachment: fixed; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .bg-pattern {
-            position: fixed; inset: 0; z-index: -1;
-            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-        }
-
-        a { text-decoration: none; color: inherit; transition: 0.2s; cursor: pointer; }
-        ul { list-style: none; }
-        img { display: block; max-width: 100%; object-fit: cover; }
-        button { cursor: pointer; }
-
-        /* --- UTILITIES --- */
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; width: 100%; }
-        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
-        .section-title { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
-        .view-link { font-size: 14px; color: var(--accent); font-weight: 500; display: flex; align-items: center; gap: 4px; }
-        .view-link:hover { text-decoration: underline; }
-        .grid-section { margin-bottom: 60px; }
-        .hidden { display: none !important; }
-
-        /* --- CORE X LOGO STYLES --- */
-        .nav-logo {
-            font-family: var(--font-head);
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: transform 0.3s ease;
-        }
-        .nav-logo:hover { transform: scale(1.02); }
-
-        .core-text { 
-            color: #FFFFFF !important; 
-            font-weight: 700; 
-            font-size: 24px; 
-            line-height: 1; 
-            /* Hiding old yellow dot if it exists */
-            display: block; 
-        }
-        
-        /* Hide old span dot */
-        .nav-logo span:not(.core-text) { display: none; }
-
-        .x-icon {
-            height: 26px;
-            width: auto;
-            display: block;
-            filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3));
-        }
-
-        /* --- NAVBAR --- */
-        .navbar {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--card-border);
-            padding: 12px 0;
-        }
-
-        .nav-desktop { display: flex; align-items: center; justify-content: space-between; }
-
-        .nav-search {
-            flex: 1; max-width: 500px; margin: 0 40px; position: relative;
-        }
-
-        .nav-search input {
-            width: 100%; background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            padding: 10px 40px 10px 15px; border-radius: 8px; color: #fff;
-            font-family: var(--font-body); transition: 0.3s;
-        }
-
-        .nav-search input:focus { background: rgba(0, 0, 0, 0.5); border-color: var(--accent); }
-        .nav-search i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-sec); }
-
-        .nav-icons { display: flex; gap: 15px; align-items: center; position: relative; }
-        .icon-btn { background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; position: relative; transition: 0.2s; }
-        .icon-btn:hover { color: var(--accent); transform: translateY(-2px); }
-
-        .badge {
-            position: absolute; top: -5px; right: -5px;
-            background: var(--accent); color: #000; font-size: 10px; font-weight: bold;
-            width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            border: 2px solid #000;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .badge.bump { transform: scale(1.4); }
-
-        /* Profile Dropdown */
-        .profile-dropdown {
-            position: absolute; top: 100%; right: 0; margin-top: 15px;
-            background: #1a1a1a; border: 1px solid var(--card-border);
-            border-radius: 8px; width: 200px; padding: 10px;
-            display: none; flex-direction: column; gap: 5px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            z-index: 200;
-            animation: fadeIn 0.2s ease;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .profile-dropdown.active { display: flex; }
-
-        .profile-user { font-weight: 600; color: #fff; padding-bottom: 10px; border-bottom: 1px solid var(--card-border); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .user-icon { color: var(--accent); }
-
-        .logout-btn {
-            background: rgba(255, 255, 255, 0.05); color: #fff; border: none; padding: 10px;
-            border-radius: 6px; text-align: left; font-size: 13px; transition: 0.2s; display: flex; align-items: center; gap: 8px;
-        }
-        .logout-btn:hover { background: #ef4444; }
-
-        /* Mobile Nav */
-        .nav-mobile { display: none; align-items: center; justify-content: space-between; position: relative; }
-        .mobile-nav-right { display: flex; align-items: center; gap: 15px; }
-
-        .mobile-search-bar {
-            display: none;
-            position: absolute; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95); z-index: 10;
-            align-items: center; padding: 0 15px; gap: 10px;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .mobile-search-bar input {
-            flex: 1; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 12px; border-radius: 6px; color: #fff;
-        }
-
-        .close-search { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
-        .navbar.mobile-search-active .mobile-nav-icons { display: none; }
-        .navbar.mobile-search-active .mobile-search-bar { display: flex; }
-
-        /* --- HERO SECTION --- */
-        .hero { margin-top: 30px; margin-bottom: 40px; }
-
-        .hero-card {
-            width: 100%; height: 400px;
-            background: #000;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--card-border);
-            overflow: hidden; position: relative;
-        }
-
-        .slide {
-            position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease-in-out;
-            background-size: cover; background-position: center;
-        }
-
-        .slide::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
-        }
-
-        .slide.active { opacity: 1; }
-
-        .hero-content { position: absolute; bottom: 30px; left: 30px; z-index: 2; max-width: 600px; }
-
-        .hero-tag {
-            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff; padding: 4px 10px; border-radius: 4px;
-            font-weight: 600; font-size: 11px; text-transform: uppercase;
-            display: inline-block; margin-bottom: 10px; letter-spacing: 1px;
-            backdrop-filter: blur(4px);
-        }
-
-        .hero-title { font-family: var(--font-head); font-size: 32px; font-weight: 600; line-height: 1.2; margin-bottom: 5px; }
-        .hero-desc { color: #ccc; font-size: 14px; max-width: 400px; }
-
-        /* --- CIRCULAR COMPONENTS --- */
-        .circles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 50px; }
-
-        .circle-item { display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; }
-
-        .circle-img {
-            width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--card-border);
-            overflow: hidden; transition: 0.3s; background: #1a1a1a;
-        }
-
-        .circle-img img { width: 100%; height: 100%; object-fit: cover; }
-        .circle-item:hover .circle-img { border-color: var(--accent); transform: scale(1.05); }
-        .circle-name { font-size: 13px; font-weight: 500; color: var(--text-sec); }
-
-        /* --- COMING SOON & PRE-BUILTS --- */
-        .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-
-        .cat-card {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: var(--radius-md); overflow: hidden; position: relative;
-            aspect-ratio: 1 / 1; cursor: pointer; transition: 0.3s;
-        }
-
-        .cat-card img { width: 100%; height: 100%; transition: 0.5s; opacity: 0.8; }
-
-        .cat-overlay {
-            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            display: flex; align-items: flex-end; padding: 20px; z-index: 5;
-        }
-
-        .cat-name { font-family: var(--font-head); font-size: 18px; font-weight: 600; }
-
-        .cat-card:hover { border-color: var(--accent); }
-        .cat-card:hover img { transform: scale(1.1); opacity: 1; }
-
-        .overlay-wrapper img { filter: blur(6px); transform: scale(1.1); }
-        .overlay-wrapper .cat-overlay { background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4)); }
-
-        .coming-soon {
-            position: absolute; inset: 0; z-index: 10;
-            display: flex; align-items: center; justify-content: center; pointer-events: none;
-        }
-
-        .coming-soon-text {
-            font-family: var(--font-head); font-weight: 800; text-transform: uppercase;
-            font-size: 26px; color: transparent;
-            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            letter-spacing: 1px; text-shadow: 0 4px 10px rgba(0,0,0,0.8);
-        }
-
-        /* --- PROMO BANNER --- */
-        .promo-banner {
-            width: 100%; height: 200px; border-radius: var(--radius-lg); overflow: hidden;
-            margin-bottom: 50px; position: relative; border: 1px solid var(--card-border);
-        }
-
-        .promo-banner img { width: 100%; height: 100%; object-fit: cover; }
-        .promo-content {
-            position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; padding: 20px; backdrop-filter: blur(2px);
-        }
-
-        /* --- COMPONENTS --- */
-        .comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
-        .comp-card {
-            height: 180px; border-radius: var(--radius-md); overflow: hidden;
-            position: relative; cursor: pointer; border: 1px solid var(--card-border);
-        }
-
-        .comp-card img { width: 100%; height: 100%; transition: 0.3s; }
-        .comp-card:hover img { transform: scale(1.05); }
-
-        .comp-label {
-            position: absolute; bottom: 15px; left: 15px; background: rgba(0, 0, 0, 0.7);
-            padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; backdrop-filter: blur(4px);
-            z-index: 5;
-        }
-
-        /* --- ALL PRODUCTS --- */
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
-        .product-card {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column;
-            transition: 0.3s;
-        }
-
-        .product-card:hover { border-color: var(--text-sec); transform: translateY(-3px); }
-
-        .p-top { height: 200px; background: #000; overflow: hidden; position: relative; }
-        .p-top img { width: 100%; height: 100%; object-fit: cover; }
-
-        .p-bottom { padding: 15px; flex: 1; display: flex; flex-direction: column; }
-
-        .p-name { font-weight: 600; font-size: 16px; margin-bottom: 6px; line-height: 1.3; }
-        .p-desc {
-            font-size: 13px; color: var(--text-sec); line-height: 1.4;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .p-price { font-family: var(--font-head); font-size: 18px; color: var(--accent); margin-bottom: 15px; }
-
-        .p-actions { margin-top: auto; display: flex; gap: 10px; }
-
-        .btn {
-            flex: 1; padding: 8px; border-radius: 6px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s;
-        }
-
-        .btn-view { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid var(--card-border); }
-        .btn-view:hover { background: rgba(255, 255, 255, 0.1); border-color: #fff; }
-
-        .btn-cart { background: #fff; color: #000; }
-        .btn-cart:hover { background: var(--accent); color: #000; }
-
-        .btn-cart.added { background: var(--success); color: #fff; border-color: var(--success); pointer-events: none; }
-
-        /* --- STORIES --- */
-        .stories-scroller {
-            display: flex; gap: 15px; overflow-x: auto; padding-bottom: 20px;
-            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-        }
-
-        .stories-scroller::-webkit-scrollbar { height: 4px; }
-        .stories-scroller::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
-        .stories-scroller::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
-
-        .story-card {
-            width: 240px; 
-            aspect-ratio: 9 / 16;
-            border-radius: 12px; overflow: hidden;
-            position: relative; scroll-snap-align: start; border: 1px solid var(--card-border);
-            flex-shrink: 0;
-        }
-
-        .story-card video { width: 100%; height: 100%; object-fit: cover; }
-        .play-icon {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 32px; height: 32px; background: rgba(0, 0, 0, 0.6); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; pointer-events: none;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            margin-top: auto; border-top: 1px solid var(--card-border);
-            background: #050505; color: var(--text-sec); font-size: 14px;
-        }
-
-        .footer-top { padding: 60px 0 40px; }
-
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
-
-        .footer-brand h3 { font-family: var(--font-head); font-size: 24px; color: #fff; margin-bottom: 15px; }
-        .footer-brand span { color: var(--accent); }
-        .footer-brand p { line-height: 1.6; max-width: 300px; margin-bottom: 20px; }
-
-        .footer-col h4 { color: #fff; margin-bottom: 20px; font-weight: 600; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col ul li a:hover { color: var(--accent); padding-left: 5px; }
-
-        .footer-bottom {
-            border-top: 1px solid var(--card-border); padding: 20px 0;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .social-icons { display: flex; gap: 15px; }
-        .social-icons a { font-size: 18px; color: #fff; }
-        .social-icons a:hover { color: var(--accent); }
-
-        .payment-icons { display: flex; gap: 10px; align-items: center; }
-        .payment-icons i { font-size: 24px; color: #fff; opacity: 0.7; }
-
-        /* --- TOAST --- */
-        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
-
-        .toast {
-            background: #1a1a1a; color: #fff; padding: 12px 20px; border-radius: 8px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            font-size: 14px; font-weight: 500;
-            display: flex; align-items: center; gap: 10px;
-            animation: slideInRight 0.3s ease forwards;
-            min-width: 250px;
-        }
-
-        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeOut { to { opacity: 0; transform: translateY(10px); } }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
-
-        @media (max-width: 768px) {
-            .nav-desktop { display: none; }
-            .nav-mobile { display: flex; }
-            
-            .hero-title { font-size: 22px; }
-            .hero-card { height: 280px; }
-            .hero-content { bottom: 20px; left: 20px; }
-            
-            .circles-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
-            .circle-img { width: 60px; height: 60px; }
-            .circle-name { font-size: 10px; }
-            
-            .category-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-            .cat-name { font-size: 12px; }
-            
-            .comp-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .comp-card { height: 120px; }
-            
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .p-top { height: 110px; }
-            .p-bottom { padding: 10px; }
-            .p-name { font-size: 12px; margin-bottom: 4px; }
-            .p-desc { font-size: 10px; margin-bottom: 6px; }
-            .p-price { font-size: 13px; margin-bottom: 8px; }
-            .p-actions { flex-direction: column; gap: 5px; }
-            .btn { width: 100%; padding: 6px; font-size: 11px; }
-
-            .story-card { width: 170px; } 
-            .coming-soon-text { font-size: 18px; letter-spacing: 0.5px; }
-            
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-brand p { margin: 0 auto 20px; }
-            .footer-bottom { flex-direction: column; gap: 20px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COREX | Forge Your Machine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0b0e;
+  --ink-2: #111318;
+  --ink-3: #181b22;
+  --ink-4: #1f232d;
+  --ink-5: #252a36;
+  --panel: #1c1f28;
+  --panel-2: #232733;
+  --amber: #f59e0b;
+  --amber-bright: #fbbf24;
+  --amber-dim: #92400e;
+  --amber-glow: rgba(245,158,11,0.18);
+  --amber-glow-lg: rgba(245,158,11,0.08);
+  --cyan: #22d3ee;
+  --cyan-dim: #0e7490;
+  --cyan-glow: rgba(34,211,238,0.15);
+  --red: #ef4444;
+  --white: #f1f3f9;
+  --white-dim: #8892a4;
+  --white-faint: #3d4457;
+  --border: rgba(255,255,255,0.07);
+  --border-amber: rgba(245,158,11,0.25);
+  --border-cyan: rgba(34,211,238,0.2);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-ui: 'Barlow Condensed', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --r: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;outline:none;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--white);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.6;}
+a{text-decoration:none;color:inherit;}ul{list-style:none;}img{display:block;max-width:100%;object-fit:contain;}button{cursor:pointer;border:none;background:none;}.hidden{display:none!important;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--ink-2);}::-webkit-scrollbar-thumb{background:var(--amber-dim);border-radius:4px;}
+.container{max-width:1360px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+
+/* ─── NAVBAR ─── */
+.navbar{position:sticky;top:0;z-index:100;background:rgba(10,11,14,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-inner{display:flex;align-items:center;gap:16px;padding:14px 0;}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.logo-mark{width:38px;height:38px;border-radius:var(--r);background:var(--amber);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:20px;color:var(--ink);letter-spacing:0;flex-shrink:0;position:relative;overflow:hidden;}
+.logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.25) 0%,transparent 60%);}
+.logo-name{font-family:var(--font-display);font-size:26px;letter-spacing:2px;color:var(--white);line-height:1;}
+.logo-name span{color:var(--amber);}
+
+/* Centered search */
+.nav-search{flex:1;max-width:440px;position:relative;margin:0 auto;}
+.nav-search input{width:100%;background:var(--ink-3);border:1px solid var(--border);color:var(--white);font-family:var(--font-body);font-size:13px;padding:10px 40px 10px 16px;border-radius:var(--r);transition:0.25s;}
+.nav-search input::placeholder{color:var(--white-faint);}
+.nav-search input:focus{border-color:var(--amber);background:var(--ink-4);box-shadow:0 0 0 3px var(--amber-glow);}
+.nav-search i{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--white-faint);font-size:16px;pointer-events:none;}
+
+.nav-actions{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.icon-btn{width:40px;height:40px;border-radius:var(--r);background:var(--ink-3);border:1px solid var(--border);color:var(--white-dim);font-size:18px;display:flex;align-items:center;justify-content:center;transition:0.2s;position:relative;}
+.icon-btn:hover{background:var(--amber);color:var(--ink);border-color:var(--amber);}
+.badge{position:absolute;top:-5px;right:-5px;background:var(--red);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--ink);transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.5);}
+.badge.bump{transform:scale(1.5);}
+.profile-rel{position:relative;}
+.profile-dropdown{position:absolute;top:calc(100% + 10px);right:0;background:var(--panel-2);border:1px solid var(--border-amber);border-radius:var(--r-md);width:190px;padding:12px;display:none;flex-direction:column;gap:6px;box-shadow:0 16px 48px rgba(0,0,0,0.5);animation:dropIn 0.15s ease;}
+@keyframes dropIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.profile-dropdown.active{display:flex;}
+.profile-user{font-family:var(--font-ui);font-weight:600;font-size:14px;color:var(--white);padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.profile-user i{color:var(--amber);}
+.logout-btn{background:transparent;color:var(--white-dim);padding:8px 10px;border-radius:var(--r);text-align:left;font-size:12px;font-family:var(--font-body);transition:0.2s;display:flex;align-items:center;gap:8px;}
+.logout-btn:hover{background:#2d1515;color:#f87171;}
+.nav-mobile{display:none;align-items:center;justify-content:space-between;padding:12px 0;}
+
+/* ─── HERO ─── */
+.hero{margin:28px 0 70px;position:relative;z-index:2;}
+.hero-wrap{border-radius:var(--r-lg);overflow:hidden;position:relative;height:560px;border:1px solid var(--border);}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 0.9s ease;}
+.slide.active{opacity:1;}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+
+/* No text overlay on hero - only bottom left button */
+.hero-btn-wrap{position:absolute;bottom:40px;left:50px;z-index:10;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--amber);color:var(--ink);font-family:var(--font-ui);font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 30px;border-radius:var(--r);transition:0.25s;border:none;cursor:pointer;position:relative;overflow:hidden;}
+.btn-primary::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);transform:translateX(-100%);transition:transform 0.35s ease;}
+.btn-primary:hover::before{transform:translateX(100%);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,158,11,0.45);}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--white);font-family:var(--font-ui);font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:13px 24px;border-radius:var(--r);border:1px solid var(--border);transition:0.25s;cursor:pointer;}
+.btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,0.06);}
+.hero-ctrl{position:absolute;bottom:28px;right:40px;z-index:10;display:flex;align-items:center;gap:16px;}
+.slide-counter{font-family:var(--font-mono);font-size:11px;color:var(--white-dim);}
+.slide-counter span{color:var(--amber);}
+.dots{display:flex;gap:6px;}
+.dot{width:20px;height:3px;border-radius:2px;background:rgba(255,255,255,0.2);cursor:pointer;transition:0.3s;}
+.dot.active{background:var(--amber);width:36px;}
+@media(max-width:768px){.hero-wrap{height:460px;}.hero-btn-wrap{left:28px;bottom:28px;}}
+@media(max-width:480px){.hero-wrap{height:340px;}.hero-btn-wrap{left:20px;bottom:20px;}}
+
+/* ─── SECTION ─── */
+.sec-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2.5px;color:var(--amber);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.sec-label::before{content:'';width:20px;height:1px;background:var(--amber);}
+.sec-title{font-family:var(--font-display);font-size:clamp(32px,4vw,48px);letter-spacing:1px;color:var(--white);line-height:1;}
+.sec-title span{color:var(--amber);}
+.sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;gap:20px;}
+.view-all-link{font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border-amber);border-radius:var(--r);transition:0.2s;flex-shrink:0;}
+.view-all-link:hover{background:var(--amber);color:var(--ink);}
+section{margin-bottom:80px;position:relative;z-index:2;}
+
+/* ─── MARQUEE ─── */
+.marquee-section{overflow:hidden;margin-bottom:80px;position:relative;z-index:2;}
+.marquee-row{overflow:hidden;margin-bottom:2px;}
+.marquee-row:first-child{margin-bottom:14px;}
+.marquee-track{display:flex;gap:0;width:max-content;}
+.scroll-l{animation:scrollL 30s linear infinite;}
+.scroll-r{animation:scrollR 36s linear infinite;}
+@keyframes scrollL{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes scrollR{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
+.chip-item{display:flex;align-items:center;gap:10px;padding:10px 22px;border:1px solid var(--border);background:var(--ink-3);border-radius:50px;margin-right:12px;cursor:pointer;transition:0.2s;white-space:nowrap;}
+.chip-item:hover{border-color:var(--amber);color:var(--amber);background:var(--amber-glow);}
+.chip-item i{font-size:15px;color:var(--white-faint);}
+.chip-item:hover i{color:var(--amber);}
+.chip-item span{font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:0.5px;color:var(--white-dim);}
+.chip-item:hover span{color:var(--amber);}
+
+/* ─── PRE-BUILTS GRID (4 cards now, no design-your-own) ─── */
+.prebuilts-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;}
+@media(max-width:900px){.prebuilts-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.prebuilts-grid{grid-template-columns:1fr;}}
+.cat-card{position:relative;overflow:hidden;border-radius:var(--r-md);aspect-ratio:4/3;cursor:pointer;border:1px solid var(--border);transition:0.3s;}
+.cat-card img{width:100%;height:100%;object-fit:cover;transition:0.5s;}
+.cat-card:hover img{transform:scale(1.07);}
+.cat-card::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to top, rgba(10,11,14,0.92) 0%, rgba(10,11,14,0.35) 55%, transparent 100%);}
+.cat-card:hover{border-color:var(--amber);}
+.cat-card-body{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:20px;}
+.cat-card-eyebrow{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:6px;}
+.cat-card-name{font-family:var(--font-display);font-size:22px;letter-spacing:1px;color:#fff;}
+.cat-chip{display:inline-flex;align-items:center;gap:5px;margin-top:10px;background:var(--amber);color:var(--ink);font-family:var(--font-ui);font-size:11px;font-weight:700;padding:4px 10px;border-radius:50px;letter-spacing:0.8px;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:0.25s;}
+.cat-card:hover .cat-chip{opacity:1;transform:translateY(0);}
+.coming-overlay{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:rgba(10,11,14,0.5);backdrop-filter:blur(3px);}
+.coming-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;border:1px solid var(--border);padding:8px 16px;border-radius:var(--r);background:rgba(10,11,14,0.6);}
+
+/* ─── PROMO STRIP ─── */
+.promo-strip{background:var(--amber);border-radius:var(--r-lg);overflow:hidden;position:relative;padding:48px 60px;display:flex;align-items:center;justify-content:space-between;gap:30px;margin-bottom:80px;z-index:2;}
+.promo-strip::before{content:'';position:absolute;right:-60px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,0.1);pointer-events:none;}
+.promo-strip::after{content:'';position:absolute;right:100px;bottom:-120px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,0.06);pointer-events:none;}
+.promo-left h2{font-family:var(--font-display);font-size:clamp(36px,5vw,58px);letter-spacing:1.5px;color:var(--ink);line-height:0.95;margin-bottom:8px;}
+.promo-left p{font-size:16px;color:rgba(10,11,14,0.65);font-weight:400;}
+.promo-badge{background:var(--ink);color:var(--amber);font-family:var(--font-display);font-size:clamp(40px,5vw,64px);padding:18px 36px;border-radius:var(--r-md);letter-spacing:2px;z-index:1;white-space:nowrap;flex-shrink:0;}
+@media(max-width:640px){.promo-strip{flex-direction:column;padding:36px 28px;text-align:center;}.promo-strip::before,.promo-strip::after{display:none;}}
+
+/* ─── COMPONENTS GRID ─── */
+.comp-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:14px;}
+@media(max-width:900px){.comp-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.comp-grid{grid-template-columns:1fr 1fr;}}
+.comp-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;position:relative;height:200px;cursor:pointer;transition:0.3s;}
+.comp-card img{width:100%;height:100%;object-fit:cover;transition:0.4s;}
+.comp-card:hover img{transform:scale(1.06);}
+.comp-card::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to top, rgba(10,11,14,0.85) 0%, transparent 60%);}
+.comp-card:hover{border-color:var(--cyan);}
+.comp-label{position:absolute;bottom:14px;left:14px;z-index:3;font-family:var(--font-ui);font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;}
+.comp-card .coming-overlay{z-index:4;}
+
+/* ─── PRODUCTS GRID ─── */
+.products-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;}
+@media(max-width:1100px){.products-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:800px){.products-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.products-grid{grid-template-columns:1fr;}}
+.product-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;transition:0.3s cubic-bezier(0.25,0.8,0.25,1);position:relative;}
+.product-card::after{content:'';position:absolute;inset:0;border-radius:var(--r-md);border:1px solid transparent;background:linear-gradient(135deg,var(--amber),var(--cyan)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;opacity:0;transition:opacity 0.3s;pointer-events:none;}
+.product-card:hover::after{opacity:1;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.4);}
+.p-img{height:220px;background:var(--ink-3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:20px;flex-shrink:0;}
+.p-img::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);background-size:24px 24px;}
+.p-img img{max-width:100%;max-height:100%;object-fit:contain;position:relative;z-index:1;transition:0.4s;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.4));}
+.product-card:hover .p-img img{transform:scale(1.06) translateY(-4px);filter:drop-shadow(0 12px 28px rgba(0,0,0,0.5));}
+.p-img::after{content:'';position:absolute;top:12px;right:12px;width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);animation:pulseDot 2s ease-in-out infinite;}
+@keyframes pulseDot{0%,100%{opacity:0.5;transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
+.p-body{padding:16px;flex:1;display:flex;flex-direction:column;}
+.p-cat{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px;}
+.p-name{font-family:var(--font-ui);font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.3;letter-spacing:0.3px;}
+.p-desc{font-size:11.5px;color:var(--white-faint);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:14px;flex:1;}
+.p-price{font-family:var(--font-display);font-size:24px;letter-spacing:0.5px;color:var(--amber);margin-bottom:14px;}
+.p-actions{display:flex;gap:8px;}
+.btn-view{flex:1;padding:9px 12px;border-radius:var(--r);background:var(--ink-4);border:1px solid var(--border);font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--white-dim);cursor:pointer;transition:0.2s;text-align:center;display:flex;align-items:center;justify-content:center;}
+.btn-view:hover{background:var(--ink-5);border-color:var(--white-faint);color:var(--white);}
+.btn-cart{flex:1;padding:9px 12px;border-radius:var(--r);background:var(--amber);font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--ink);cursor:pointer;transition:0.2s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-cart:hover{background:var(--amber-bright);box-shadow:0 4px 16px rgba(245,158,11,0.4);}
+.btn-cart.added{background:#064e3b;color:#6ee7b7;pointer-events:none;}
+
+/* ═══════════════════════════════════════
+   PC CONFIGURATOR SECTION
+═══════════════════════════════════════ */
+#configurator-section {
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.config-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-amber);
+  min-height: 640px;
+  background: var(--ink-2);
+}
+@media(max-width:900px){.config-wrap{grid-template-columns:1fr;}}
+
+/* Left: animated visual */
+.config-visual {
+  position: relative;
+  background: #070810;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+}
+
+.config-visual canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.config-visual-img {
+  position: relative;
+  z-index: 5;
+  /* width: 85%; */
+  /* height: 100%; */
+  /* max-width: 440px; */
+  filter: drop-shadow(0 0 40px rgba(245,158,11,0.4)) drop-shadow(0 0 80px rgba(34,211,238,0.2));
+  animation: floatPC 4s ease-in-out infinite;
+  transition: filter 0.6s ease;
+}
+@keyframes floatPC {
+  0%,100%{transform:translateY(0) rotate(-1deg);}
+  50%{transform:translateY(-14px) rotate(1deg);}
+}
+
+.config-visual-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: glowPulse 3s ease-in-out infinite alternate;
+}
+.config-visual-glow.amber {
+  width: 300px; height: 300px;
+  background: rgba(245,158,11,0.2);
+  bottom: -80px; left: -60px;
+}
+.config-visual-glow.cyan {
+  width: 220px; height: 220px;
+  background: rgba(34,211,238,0.15);
+  top: -40px; right: -40px;
+  animation-delay: 1.5s;
+}
+@keyframes glowPulse{from{opacity:0.5;transform:scale(0.9);}to{opacity:1;transform:scale(1.1);}}
+
+/* Scanlines on visual */
+.config-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+}
+
+/* Spec tags floating */
+.spec-float {
+  position: absolute;
+  z-index: 8;
+  background: rgba(10,11,14,0.85);
+  border: 1px solid var(--border-amber);
+  border-radius: var(--r);
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--amber);
+  letter-spacing: 1px;
+  backdrop-filter: blur(10px);
+  transition: opacity 0.5s, transform 0.5s;
+  white-space: nowrap;
+}
+.spec-float.hidden-tag { opacity: 0; transform: translateY(10px); }
+.spec-float.sf1 { top: 20%; left: 8%; animation: sfFloat1 5s ease-in-out infinite; }
+.spec-float.sf2 { top: 14%; right: 8%; animation: sfFloat2 6s ease-in-out infinite; }
+.spec-float.sf3 { bottom: 22%; left: 6%; animation: sfFloat1 4.5s ease-in-out infinite reverse; }
+.spec-float.sf4 { bottom: 16%; right: 6%; animation: sfFloat2 5.5s ease-in-out infinite reverse; }
+@keyframes sfFloat1{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes sfFloat2{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+
+/* Right: config panel */
+.config-panel {
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink-2);
+  position: relative;
+  overflow: hidden;
+}
+.config-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245,158,11,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,158,11,0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.config-step-header {
+  margin-bottom: 28px;
+}
+.config-step-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.config-step-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: 1px;
+  color: var(--white);
+  line-height: 1.1;
+}
+.config-step-title span { color: var(--amber); }
+
+/* Progress bar */
+.config-progress {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 28px;
+}
+.config-prog-dot {
+  height: 3px;
+  flex: 1;
+  border-radius: 2px;
+  background: var(--white-faint);
+  transition: background 0.4s;
+}
+.config-prog-dot.done { background: var(--amber); }
+.config-prog-dot.active { background: var(--amber); animation: progPulse 1s ease-in-out infinite alternate; }
+@keyframes progPulse{from{opacity:0.6;}to{opacity:1;}}
+
+/* Platform selection */
+.platform-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.platform-card {
+  border: 2px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 24px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s;
+  background: var(--panel);
+  position: relative;
+  overflow: hidden;
+}
+.platform-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.platform-card.intel::before { background: linear-gradient(135deg, rgba(0,113,197,0.15), transparent); }
+.platform-card.amd::before { background: linear-gradient(135deg, rgba(237,28,36,0.15), transparent); }
+.platform-card:hover, .platform-card.selected {
+  border-color: var(--amber);
+  background: var(--amber-glow);
+}
+.platform-card:hover::before, .platform-card.selected::before { opacity: 1; }
+.platform-icon { font-size: 32px; margin-bottom: 10px; }
+.platform-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.platform-sub {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--white-faint);
+  text-transform: uppercase;
+}
+.platform-card.selected .platform-name { color: var(--amber); }
+.check-mark {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--amber);
+  color: var(--ink);
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: scale(0);
+  transition: 0.25s;
+}
+.platform-card.selected .check-mark { opacity: 1; transform: scale(1); }
+
+/* Component groups */
+.comp-group {
+  margin-bottom: 18px;
+}
+.comp-group-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--white-dim);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.comp-group-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.comp-group-label i { color: var(--amber); }
+
+.comp-select {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 11px 14px;
+  border-radius: var(--r);
+  cursor: pointer;
+  transition: 0.25s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f59e0b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.comp-select:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-glow); }
+.comp-select option { background: var(--panel-2); color: var(--white); }
+
+/* Sub-group for expandable options */
+.sub-select-wrap {
+  margin-top: 8px;
+  display: none;
+}
+.sub-select-wrap.visible { display: block; }
+
+/* Config navigation */
+.config-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+.btn-config-back {
+  padding: 12px 22px;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--white-dim);
+  font-family: var(--font-ui);
+  font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  cursor: pointer; transition: 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-config-back:hover { border-color: var(--white-dim); color: var(--white); }
+.btn-config-next {
+  flex: 1;
+  padding: 13px 22px;
+  border-radius: var(--r);
+  background: var(--amber);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  cursor: pointer; transition: 0.25s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  border: none;
+}
+.btn-config-next:hover { background: var(--amber-bright); box-shadow: 0 6px 24px rgba(245,158,11,0.4); }
+.btn-config-next:disabled { background: var(--white-faint); color: var(--ink-3); cursor: not-allowed; box-shadow: none; }
+
+/* Summary step */
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  font-size: 12px;
+}
+.summary-row-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.summary-row-val {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--white);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: right;
+  max-width: 60%;
+}
+
+.btn-confirm-order {
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--r);
+  background: linear-gradient(135deg, var(--amber), #f97316);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  cursor: pointer; transition: 0.25s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  border: none;
+  box-shadow: 0 0 30px rgba(245,158,11,0.3);
+  animation: orderGlow 2s ease-in-out infinite alternate;
+}
+@keyframes orderGlow {
+  from { box-shadow: 0 0 20px rgba(245,158,11,0.3); }
+  to { box-shadow: 0 0 50px rgba(245,158,11,0.6); }
+}
+.btn-confirm-order:hover { transform: translateY(-2px); }
+
+/* Name input for order */
+.name-input-wrap { margin-bottom: 16px; }
+.name-input-wrap label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--amber);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+.name-input-wrap input {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: var(--r);
+  transition: 0.25s;
+}
+.name-input-wrap input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-glow); }
+.name-input-wrap input::placeholder { color: var(--white-faint); }
+
+/* ─── DELIVERY SECTION with India image ─── */
+.delivery-wrap{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;display:flex;min-height:440px;position:relative;z-index:2;}
+.delivery-wrap::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,158,11,0.03) 1px, transparent 1px),linear-gradient(90deg, rgba(245,158,11,0.03) 1px, transparent 1px);background-size:44px 44px;pointer-events:none;}
+.del-content{padding:60px;flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+.del-title{font-family:var(--font-display);font-size:clamp(38px,4.5vw,58px);line-height:0.95;letter-spacing:1px;color:#fff;margin-bottom:18px;}
+.del-title em{color:var(--amber);font-style:normal;}
+.del-desc{font-size:14px;color:var(--white-faint);line-height:1.8;max-width:350px;margin-bottom:28px;}
+.del-stats{display:flex;gap:24px;}
+.del-stat-num{font-family:var(--font-display);font-size:30px;color:var(--amber);}
+.del-stat-label{font-size:11px;color:var(--white-faint);margin-top:2px;font-family:var(--font-mono);letter-spacing:1px;}
+
+/* India image section */
+.del-map{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:300px;}
+.india-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  filter: saturate(0.5) brightness(0.45);
+}
+.del-map::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to right, var(--panel) 0%, transparent 30%, transparent 70%, var(--panel) 100%);
+}
+
+/* Delivery route animation */
+.delivery-route-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+.route-path {
+  fill: none;
+  stroke: var(--amber);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 8;
+  opacity: 0.5;
+  stroke-dashoffset: 0;
+  animation: dashMove 4s linear infinite;
+}
+@keyframes dashMove { to { stroke-dashoffset: -100; } }
+
+.city-ping {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+}
+.city-ping::before {
+  content: '';
+  display: block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 12px var(--amber), 0 0 24px rgba(245,158,11,0.4);
+  animation: cityPulse 2s ease-in-out infinite;
+}
+.city-ping::after {
+  content: '';
+  display: block;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(245,158,11,0.35);
+  position: absolute;
+  top: -8px; left: -8px;
+  animation: cityRing 2s ease-out infinite;
+}
+@keyframes cityPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(0.85);opacity:0.6;}}
+@keyframes cityRing{0%{transform:scale(0.4);opacity:1;}100%{transform:scale(2.2);opacity:0;}}
+
+.travel-dot {
+  position: absolute;
+  z-index: 6;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 14px var(--cyan);
+  animation: travelAcross 6s linear infinite;
+}
+.travel-dot:nth-child(2) { animation-delay: -2s; background: var(--amber); box-shadow: 0 0 14px var(--amber); }
+.travel-dot:nth-child(3) { animation-delay: -4s; }
+@keyframes travelAcross {
+  0% { left: 20%; top: 70%; }
+  25% { left: 35%; top: 40%; }
+  50% { left: 55%; top: 30%; }
+  75% { left: 65%; top: 55%; }
+  100% { left: 80%; top: 65%; }
+}
+
+.city-label {
+  position: absolute;
+  z-index: 7;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: rgba(245,158,11,0.8);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  margin-top: 16px;
+}
+
+@media(max-width:768px){.delivery-wrap{flex-direction:column;}.del-content{padding:40px 28px;}.del-map{height:300px;}}
+
+/* ─── FOOTER ─── */
+footer{background:var(--ink-2);border-top:1px solid var(--border);position:relative;z-index:2;}
+.footer-inner{padding:64px 0 40px;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:28px;}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+.footer-brand-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.footer-brand p{font-size:13px;color:var(--white-faint);line-height:1.8;max-width:260px;margin-bottom:22px;}
+.social-links{display:flex;gap:10px;}
+.social-links a{width:36px;height:36px;border-radius:var(--r);background:var(--ink-3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--white-faint);font-size:16px;transition:0.2s;}
+.social-links a:hover{background:var(--amber-glow);border-color:var(--border-amber);color:var(--amber);}
+.footer-col h4{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:18px;}
+.footer-col ul li{margin-bottom:12px;}
+.footer-col ul li a{font-size:13px;color:var(--white-faint);transition:0.2s;}
+.footer-col ul li a:hover{color:var(--white);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+.footer-copy{font-family:var(--font-mono);font-size:10px;color:var(--white-faint);letter-spacing:0.5px;}
+.footer-pay{display:flex;gap:12px;}
+.footer-pay i{font-size:22px;color:var(--white-faint);}
+
+/* ─── TOAST ─── */
+#toast-container{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;flex-direction:column;gap:10px;}
+.toast{background:var(--panel-2);border:1px solid var(--border-amber);color:var(--white);padding:12px 20px;border-radius:var(--r-md);box-shadow:0 12px 36px rgba(0,0,0,0.5);font-size:13px;font-weight:500;display:flex;align-items:center;gap:12px;animation:toastIn 0.3s ease;min-width:260px;}
+@keyframes toastIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+@keyframes toastOut{to{opacity:0;transform:translateY(8px);}}
+.toast i{color:var(--amber);font-size:18px;}
+.search-clear-btn{font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--amber);background:var(--amber-glow);border:1px solid var(--border-amber);padding:8px 16px;border-radius:var(--r);cursor:pointer;transition:0.2s;}
+.search-clear-btn:hover{background:var(--amber);color:var(--ink);}
+#noResults{text-align:center;padding:60px;color:var(--white-faint);}
+#noResults i{font-size:44px;margin-bottom:16px;opacity:0.3;display:block;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@media(max-width:768px){.nav-inner{display:none;}.nav-mobile{display:flex;}}
+
+/* Scrollable config body */
+.config-body { flex: 1; overflow-y: auto; padding-right: 4px; }
+.config-body::-webkit-scrollbar { width: 3px; }
+.config-body::-webkit-scrollbar-thumb { background: var(--amber-dim); border-radius: 3px; }
+</style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-    <div id="toast-container"></div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <!-- Desktop Nav -->
-            <div class="nav-desktop">
-                <!-- UPDATE: CORE X Logo -->
-                <a href="shop.html" class="nav-logo">
-                    <span class="core-text">CORE</span>
-                    
-                    <!-- Custom Asymmetric X Icon with Gradient -->
-                    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#ff3333" /> <!-- Bright Red -->
-                                <stop offset="100%" stop-color="#990000" /> <!-- Dark Red -->
-                            </linearGradient>
-                        </defs>
-                        
-                        <!-- Big Line (Long diagonal) -->
-                        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-                        
-                        <!-- Small Line (Short diagonal, offset for effect) -->
-                        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradient)" stroke-width="6" stroke-linecap="round" />
-                    </svg>
-                </a>
+<div id="toast-container"></div>
 
-                <div class="nav-search">
-                    <input type="text" id="desktopSearch" placeholder="Search processors, GPUs, pre-builts..." onkeyup="handleSearch(event)">
-                    <i class="ri-search-line"></i>
-                </div>
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
+        <span class="logo-name">CORE<span>X</span></span>
+      </a>
 
-                <div class="nav-icons">
-                    <button class="icon-btn" onclick="toggleProfile()">
-                        <i class="ri-user-line"></i>
-                        <div class="profile-dropdown" id="profileDropdown">
-                            <div class="profile-user">
-                                <i class="ri-user-smile-line user-icon"></i>
-                                <span id="nameDisplay">Guest</span>
-                            </div>
-                            <button class="logout-btn" onclick="handleLogout()">
-                                <i class="ri-logout-box-r-line"></i> Logout
-                            </button>
-                        </div>
-                    </button>
-                    <a href="cart.html" class="icon-btn" style="position:relative;">
-                        <i class="ri-shopping-cart-line"></i>
-                        <span class="badge" id="cartBadge">0</span>
-                    </a>
-                </div>
-            </div>
+      <div class="nav-search">
+        <input type="text" id="desktopSearch" placeholder="Search builds, CPUs, GPUs…" onkeyup="handleSearch(event)">
+        <i class="ri-search-line"></i>
+      </div>
 
-            <!-- Mobile Nav -->
-            <div class="nav-mobile">
-                <!-- UPDATE: CORE X Logo Mobile -->
-                <a href="shop.html" class="nav-logo" style="font-size: 20px;">
-                    <span class="core-text">CORE</span>
-                    
-                    <!-- Copy of Icon with Unique Gradient ID for Mobile -->
-                    <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="redGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#ff3333" />
-                                <stop offset="100%" stop-color="#990000" />
-                            </linearGradient>
-                        </defs>
-                        <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
-                        <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientMobile)" stroke-width="6" stroke-linecap="round" />
-                    </svg>
-                </a>
-
-                <div class="mobile-search-bar">
-                    <button class="close-search" onclick="toggleMobileSearch()"><i class="ri-close-line"></i></button>
-                    <input type="text" placeholder="Search products..." onkeyup="handleMobileSearch(event)">
-                    <i class="ri-search-line" style="color: var(--text-sec); font-size: 18px;"></i>
-                </div>
-                
-                <div class="mobile-nav-icons" style="display: flex; gap: 15px; align-items: center;">
-                    <button class="icon-btn" onclick="toggleMobileSearch()"><i class="ri-search-line"></i></button>
-                    <button class="icon-btn" onclick="toggleProfile()">
-                        <i class="ri-user-line"></i>
-                    </button>
-                    <a href="cart.html" class="icon-btn" style="position:relative;">
-                        <i class="ri-shopping-cart-line"></i>
-                        <span class="badge" id="cartBadgeMobile">0</span>
-                    </a>
-                </div>
-            </div>
+      <div class="nav-actions">
+        <div class="profile-rel">
+          <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
+          <div class="profile-dropdown" id="profileDropdown">
+            <div class="profile-user"><i class="ri-cpu-line"></i><span id="nameDisplay">Guest</span></div>
+            <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
+          </div>
         </div>
-    </nav>
+        <a href="cart.html" class="icon-btn" style="position:relative;">
+          <i class="ri-shopping-bag-3-line"></i>
+          <span class="badge" id="cartBadge">0</span>
+        </a>
+      </div>
+    </div>
 
-    <main class="container">
-        <!-- SEARCH RESULTS OVERLAY -->
-        <div id="searchResults" class="hidden" style="margin-top: 20px;">
-            <div class="section-header">
-                <h2 class="section-title">Search Results</h2>
-                <button class="btn-view" onclick="clearSearch()">Clear</button>
-            </div>
-            <div class="products-grid" id="searchGrid"></div>
-            <div id="noResults" class="hidden" style="text-align: center; padding: 40px; color: var(--text-sec);">
-                <i class="ri-emotion-sad-line" style="font-size: 40px; margin-bottom: 10px;"></i>
-                <p>Sorry, we don't have that.</p>
-            </div>
+    <div class="nav-mobile">
+      <a href="#" class="logo">
+        <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
+        <span class="logo-name" style="font-size:22px;">CORE<span>X</span></span>
+      </a>
+      <div style="display:flex;gap:8px;">
+        <button class="icon-btn" style="width:38px;height:38px;" onclick="toggleMobileSearch()"><i class="ri-search-line"></i></button>
+        <button class="icon-btn" style="width:38px;height:38px;" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
+        <a href="cart.html" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
+          <i class="ri-shopping-bag-3-line"></i>
+          <span class="badge" id="cartBadgeMobile">0</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container" style="padding-top:8px;">
+
+  <div id="searchResults" class="hidden" style="margin-top:24px;">
+    <div class="sec-header">
+      <div><div class="sec-label">Results</div><h2 class="sec-title">Search</h2></div>
+      <button class="search-clear-btn" onclick="clearSearch()">Clear</button>
+    </div>
+    <div class="products-grid" id="searchGrid"></div>
+    <div id="noResults" class="hidden">
+      <i class="ri-emotion-unhappy-line"></i>
+      <p style="font-size:15px;">No products found</p>
+    </div>
+  </div>
+
+  <div id="home-view">
+
+    <!-- ══ HERO ══ -->
+    <section class="hero reveal">
+      <div class="hero-wrap" id="heroCarousel">
+
+        <div class="slide active">
+          <div class="slide-bg" style="background-image:url('../assets/images/gaming.png');"></div>
+        </div>
+        <div class="slide">
+          <div class="slide-bg" style="background-image:url('../assets/images/gaming2.png');"></div>
+        </div>
+        <div class="slide">
+          <div class="slide-bg" style="background-image:url('../assets/images/gaming3.png');"></div>
         </div>
 
-        <!-- HOME VIEW -->
-        <div id="home-view">
-            <!-- Hero -->
-            <section class="hero">
-                <div class="hero-card" id="heroCarousel">
-                    <div class="slide active" style="background-image: url('https://cdn.mos.cms.futurecdn.net/noe5ThxQScqa6pcamRQSU7.jpg');">
-                        <div class="hero-content"><span class="hero-tag">New Arrival</span><h1 class="hero-title">Titan RTX 4090 Build</h1><p class="hero-desc">Liquid Cooled • Custom RGB • Ultra Performance</p></div>
-                    </div>
-                    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1587202372775-e229f172b9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');">
-                        <div class="hero-content"><span class="hero-tag">For Creators</span><h1 class="hero-title">Workstation Series</h1><p class="hero-desc">Ryzen Threadripper • ECC RAM • 4K Rendering Ready</p></div>
-                    </div>
-                    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1555680202-c86f0e12f086?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');">
-                        <div class="hero-content"><span class="hero-tag">Clearance</span><h1 class="hero-title">Office Essentials</h1><p class="hero-desc">Compact Form Factor • Energy Efficient • Silent</p></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Circles -->
-            <section class="grid-section">
-                <div class="circles-grid">
-                    <div class="circle-item"><div class="circle-img"><img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=200&q=80" alt="GPU"></div><span class="circle-name">GPUs</span></div>
-                    <div class="circle-item"><div class="circle-img"><img src="https://images.unsplash.com/photo-1562976540-1502c2145186?w=200&q=80" alt="Processor"></div><span class="circle-name">CPUs</span></div>
-                    <div class="circle-item"><div class="circle-img"><img src="https://images.unsplash.com/photo-1562976540-1502c2145186?w=200&q=80" alt="Motherboard"></div><span class="circle-name">Motherboard</span></div>
-                    <div class="circle-item"><div class="circle-img"><img src="https://images.unsplash.com/photo-1562976540-1502c2145186?w=200&q=80" alt="RAM"></div><span class="circle-name">RAM</span></div>
-                    <div class="circle-item"><div class="circle-img"><img src="https://images.unsplash.com/photo-1617839625591-e5a789593135?w=200&q=80" alt="Storage"></div><span class="circle-name">Storage</span></div>
-                    <div class="circle-item"><div class="circle-img"><img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=200&q=80" alt="PSU"></div><span class="circle-name">PSU</span></div>
-                    <div class="circle-item"><div class="circle-img"><img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&q=80" alt="Cooling"></div><span class="circle-name">Cooling</span></div>
-                    <div class="circle-item"><div class="circle-img"><img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&q=80" alt="Case"></div><span class="circle-name">Cases</span></div>
-                </div>
-            </section>
-
-            <!-- Pre-Builts -->
-            <section class="grid-section">
-                <div class="section-header"><h2 class="section-title">Pre-Builts</h2></div>
-                <div class="category-grid">
-                    <a href="all-products.html?category=gaming" class="cat-card">
-                        <img src="https://geekawhat.com/wp-content/uploads/2024/07/FI_Cougar-FV270-RTX-4090-Build.jpg" alt="Gaming">
-                        <div class="cat-overlay"><span class="cat-name">Gaming Desktops</span></div>
-                    </a>
-                    <a href="all-products.html?category=workstation" class="cat-card">
-                        <img src="https://www.techwithmikefirst.com/wp-content/uploads/2016/10/Dell7910.jpg" alt="Workstation">
-                        <div class="cat-overlay"><span class="cat-name">Workstations</span></div>
-                    </a>
-                    <div class="cat-card overlay-wrapper"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="Server"><div class="cat-overlay"><span class="cat-name">Servers</span></div><div class="coming-soon"><span class="coming-soon-text">Coming Soon</span></div></div>
-                    <div class="cat-card overlay-wrapper"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="Home PC"><div class="cat-overlay"><span class="cat-name">Home PC</span></div><div class="coming-soon"><span class="coming-soon-text">Coming Soon</span></div></div>
-                    <div class="cat-card overlay-wrapper"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80" alt="Office PC"><div class="cat-overlay"><span class="cat-name">Office PC</span></div><div class="coming-soon"><span class="coming-soon-text">Coming Soon</span></div></div>
-                    <div class="cat-card overlay-wrapper"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80" alt="Working Desktop"><div class="cat-overlay"><span class="cat-name">Working Desktops</span></div><div class="coming-soon"><span class="coming-soon-text">Coming Soon</span></div></div>
-                </div>
-            </section>
-
-            <!-- Promo -->
-            <section class="grid-section">
-                <div class="promo-banner"><img src="https://img.freepik.com/free-psd/summer-sale-banner-discount-poster-with-3d-summer-element-composition_47987-14225.jpg" alt="Promo"><div class="promo-content"><h2 style="font-family: var(--font-head); font-size: 28px; margin-bottom: 10px;">Summer Sale Up to 40% Off</h2></div></div>
-            </section>
-
-            <!-- Components -->
-            <section class="grid-section">
-                <div class="section-header"><h2 class="section-title">Components</h2></div>
-                <div class="comp-grid">
-                    <a href="all-products.html?category=components" class="comp-card">
-                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80" alt="Components"><span class="comp-label">PC Components</span>
-                    </a>
-                    <div class="comp-card overlay-wrapper"><img src="https://cdn.mos.cms.futurecdn.net/FUYAofwatKBmPuUzXDNM83.jpg" alt="Monitors"><span class="comp-label">Monitors</span><div class="coming-soon"><span class="coming-soon-text">Coming Soon</span></div></div>
-                    <div class="comp-card overlay-wrapper"><img src="https://cdn.mos.cms.futurecdn.net/LVzLgNsezPBwZk56pEhx7A.jpg" alt="Networking Gear"><span class="comp-label">Networking Gear</span><div class="coming-soon"><span class="coming-soon-text">Coming Soon</span></div></div>
-                    <div class="comp-card overlay-wrapper"><img src="https://www.shutterstock.com/image-photo/different-modern-devices-gadgets-on-600nw-2399256463.jpg" alt="External"><span class="comp-label">External Devices</span><div class="coming-soon"><span class="coming-soon-text">Coming Soon</span></div></div>
-                </div>
-            </section>
-
-            <!-- All Products -->
-            <section class="grid-section">
-                <div class="section-header">
-                    <h2 class="section-title">All Products</h2>
-                    <a href="all-products.html" class="view-link">View All <i class="ri-arrow-right-line"></i></a>
-                </div>
-                <div class="products-grid" id="allProductsGrid"></div>
-            </section>
-
-            <!-- Stories -->
-            <section class="grid-section">
-                <div class="section-header"><h2 class="section-title">Our Stories</h2></div>
-                <div class="stories-scroller">
-                    <div class="story-card"><video poster="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&q=80" loop muted playsinline onmouseover="this.play()" onmouseout="this.pause()"><source src="https://media.w3.org/2010/05/intel/trailer.mp4" type="video/mp4"></video><div class="play-icon"><i class="ri-play-fill" style="color:white; font-size: 16px;"></i></div></div>
-                    <div class="story-card"><video poster="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80" loop muted playsinline onmouseover="this.play()" onmouseout="this.pause()"><source src="https://media.w3.org/2010/05/bunny/trailer.mp4" type="video/mp4"></video><div class="play-icon"><i class="ri-play-fill" style="color:white; font-size: 16px;"></i></div></div>
-                    <div class="story-card"><video poster="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&q=80" loop muted playsinline onmouseover="this.play()" onmouseout="this.pause()"><source src="https://media.w3.org/2010/05/intel/trailer.mp4" type="video/mp4"></video><div class="play-icon"><i class="ri-play-fill" style="color:white; font-size: 16px;"></i></div></div>
-                    <div class="story-card"><video poster="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&q=80" loop muted playsinline onmouseover="this.play()" onmouseout="this.pause()"><source src="https://media.w3.org/2010/05/bunny/trailer.mp4" type="video/mp4"></video><div class="play-icon"><i class="ri-play-fill" style="color:white; font-size: 16px;"></i></div></div>
-                    <div class="story-card"><video poster="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&q=80" loop muted playsinline onmouseover="this.play()" onmouseout="this.pause()"><source src="https://media.w3.org/2010/05/intel/trailer.mp4" type="video/mp4"></video><div class="play-icon"><i class="ri-play-fill" style="color:white; font-size: 16px;"></i></div></div>
-                </div>
-            </section>
+        <!-- Single button bottom left -->
+        <div class="hero-btn-wrap">
+          <button class="btn-primary" onclick="document.getElementById('configurator-section').scrollIntoView({behavior:'smooth'})">
+            Build Your PC <i class="ri-arrow-right-line"></i>
+          </button>
         </div>
-    </main>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container footer-top">
-            <div class="footer-grid">
-                <!-- UPDATE: CORE X Logo Footer -->
-                <div class="footer-brand">
-                    <h3 style="display:flex; align-items:center; gap:4px;">
-                        <span class="core-text" style="color:#FFFFFF; font-size:24px;">CORE</span>
-                        
-                        <!-- Copy of Icon with Unique Gradient ID for Footer -->
-                        <svg class="x-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="redGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#ff3333" />
-                                    <stop offset="100%" stop-color="#990000" />
-                                </linearGradient>
-                            </defs>
-                            <line x1="5" y1="35" x2="35" y2="5" stroke="url(#redGradientFooter)" stroke-width="6" stroke-linecap="round" />
-                            <line x1="5" y1="20" x2="25" y2="40" stroke="url(#redGradientFooter)" stroke-width="6" stroke-linecap="round" />
-                        </svg>
-                    </h3>
-                    <p>Custom PC Creations for professionals and gamers.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="ri-facebook-fill"></i></a>
-                        <a href="#"><i class="ri-twitter-x-fill"></i></a>
-                        <a href="#"><i class="ri-instagram-fill"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Shop</h4>
-                    <ul><li><a href="#">Gaming PCs</a></li><li><a href="#">Components</a></li><li><a href="#">Workstations</a></li><li><a href="#">Accessories</a></li></ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Support</h4>
-                    <ul><li><a href="#">Help Center</a></li><li><a href="#">Contact Us</a></li><li><a href="#">Order Status</a></li><li><a href="#">FAQs</a></li></ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul>
-                </div>
+        <div class="hero-ctrl">
+          <div class="slide-counter"><span id="slideNum">01</span> / 03</div>
+          <div class="dots" id="slideDots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ MARQUEE ══ -->
+    <div class="marquee-section reveal">
+      <div class="marquee-row">
+        <div class="marquee-track scroll-l">
+          <div class="chip-item"><i class="ri-cpu-line"></i><span>CPUs</span></div>
+          <div class="chip-item"><i class="ri-database-2-line"></i><span>GPUs</span></div>
+          <div class="chip-item"><i class="ri-stack-line"></i><span>Motherboards</span></div>
+          <div class="chip-item"><i class="ri-hard-drive-line"></i><span>RAM</span></div>
+          <div class="chip-item"><i class="ri-save-line"></i><span>NVMe SSDs</span></div>
+          <div class="chip-item"><i class="ri-flashlight-line"></i><span>PSU</span></div>
+          <div class="chip-item"><i class="ri-temp-cold-line"></i><span>Cooling</span></div>
+          <div class="chip-item"><i class="ri-server-line"></i><span>Cases</span></div>
+          <div class="chip-item"><i class="ri-cpu-line"></i><span>CPUs</span></div>
+          <div class="chip-item"><i class="ri-database-2-line"></i><span>GPUs</span></div>
+          <div class="chip-item"><i class="ri-stack-line"></i><span>Motherboards</span></div>
+          <div class="chip-item"><i class="ri-hard-drive-line"></i><span>RAM</span></div>
+          <div class="chip-item"><i class="ri-save-line"></i><span>NVMe SSDs</span></div>
+          <div class="chip-item"><i class="ri-flashlight-line"></i><span>PSU</span></div>
+          <div class="chip-item"><i class="ri-temp-cold-line"></i><span>Cooling</span></div>
+          <div class="chip-item"><i class="ri-server-line"></i><span>Cases</span></div>
+        </div>
+      </div>
+      <div class="marquee-row">
+        <div class="marquee-track scroll-r">
+          <div class="chip-item"><i class="ri-computer-line"></i><span>Monitors</span></div>
+          <div class="chip-item"><i class="ri-keyboard-line"></i><span>Keyboards</span></div>
+          <div class="chip-item"><i class="ri-mouse-line"></i><span>Mice</span></div>
+          <div class="chip-item"><i class="ri-headphone-line"></i><span>Audio</span></div>
+          <div class="chip-item"><i class="ri-wifi-line"></i><span>Networking</span></div>
+          <div class="chip-item"><i class="ri-gamepad-line"></i><span>Controllers</span></div>
+          <div class="chip-item"><i class="ri-camera-line"></i><span>Webcams</span></div>
+          <div class="chip-item"><i class="ri-lightbulb-line"></i><span>RGB Gear</span></div>
+          <div class="chip-item"><i class="ri-computer-line"></i><span>Monitors</span></div>
+          <div class="chip-item"><i class="ri-keyboard-line"></i><span>Keyboards</span></div>
+          <div class="chip-item"><i class="ri-mouse-line"></i><span>Mice</span></div>
+          <div class="chip-item"><i class="ri-headphone-line"></i><span>Audio</span></div>
+          <div class="chip-item"><i class="ri-wifi-line"></i><span>Networking</span></div>
+          <div class="chip-item"><i class="ri-gamepad-line"></i><span>Controllers</span></div>
+          <div class="chip-item"><i class="ri-camera-line"></i><span>Webcams</span></div>
+          <div class="chip-item"><i class="ri-lightbulb-line"></i><span>RGB Gear</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PRE-BUILTS (4 cards, no design-your-own) ══ -->
+    <section class="reveal">
+      <div class="sec-header">
+        <div>
+          <div class="sec-label">// Category</div>
+          <h2 class="sec-title">Pre-Built <span>Systems</span></h2>
+        </div>
+        <a href="all-products.html" class="view-all-link">View All <i class="ri-arrow-right-line"></i></a>
+      </div>
+      <div class="prebuilts-grid">
+        <a href="all-products.html?category=gaming" class="cat-card">
+          <img src="https://geekawhat.com/wp-content/uploads/2024/07/FI_Cougar-FV270-RTX-4090-Build.jpg" alt="Gaming">
+          <div class="cat-card-body">
+            <div class="cat-card-eyebrow">Starting ₹1,24,777</div>
+            <div class="cat-card-name">Gaming Desktops</div>
+            <div class="cat-chip">Shop Now <i class="ri-arrow-right-line"></i></div>
+          </div>
+        </a>
+        <a href="all-products.html?category=workstation" class="cat-card">
+          <img src="https://www.techwithmikefirst.com/wp-content/uploads/2016/10/Dell7910.jpg" alt="Workstation">
+          <div class="cat-card-body">
+            <div class="cat-card-eyebrow">Pro Grade</div>
+            <div class="cat-card-name">Workstations</div>
+            <div class="cat-chip">Shop Now <i class="ri-arrow-right-line"></i></div>
+          </div>
+        </a>
+        <div class="cat-card">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="Servers">
+          <div class="cat-card-body"><div class="cat-card-name">Servers</div></div>
+          <div class="coming-overlay"><span class="coming-tag">Coming Soon</span></div>
+        </div>
+        <div class="cat-card">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80" alt="Office">
+          <div class="cat-card-body"><div class="cat-card-name">Office PC</div></div>
+          <div class="coming-overlay"><span class="coming-tag">Coming Soon</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ PROMO STRIP ══ -->
+    <div class="promo-strip reveal">
+      <div class="promo-left">
+        <h2>Summer<br>Sale</h2>
+        <p>Up to 40% off on selected custom builds</p>
+      </div>
+      <div class="promo-badge">UP TO 40% OFF</div>
+    </div>
+
+    <!-- ══ COMPONENTS ══ -->
+    <section class="reveal">
+      <div class="sec-header">
+        <div>
+          <div class="sec-label">// Parts</div>
+          <h2 class="sec-title">Components &amp; <span>Peripherals</span></h2>
+        </div>
+      </div>
+      <div class="comp-grid">
+        <a href="all-products.html?category=components" class="comp-card">
+          <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80" alt="Components">
+          <span class="comp-label">PC Components</span>
+        </a>
+        <div class="comp-card">
+          <img src="https://cdn.mos.cms.futurecdn.net/FUYAofwatKBmPuUzXDNM83.jpg" alt="Monitors">
+          <span class="comp-label">Monitors</span>
+          <div class="coming-overlay"><span class="coming-tag">Coming Soon</span></div>
+        </div>
+        <div class="comp-card">
+          <img src="https://cdn.mos.cms.futurecdn.net/LVzLgNsezPBwZk56pEhx7A.jpg" alt="Networking">
+          <span class="comp-label">Networking</span>
+          <div class="coming-overlay"><span class="coming-tag">Coming Soon</span></div>
+        </div>
+        <div class="comp-card">
+          <img src="https://www.shutterstock.com/image-photo/different-modern-devices-gadgets-on-600nw-2399256463.jpg" alt="External">
+          <span class="comp-label">Peripherals</span>
+          <div class="coming-overlay"><span class="coming-tag">Coming Soon</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ALL PRODUCTS ══ -->
+    <section class="reveal">
+      <div class="sec-header">
+        <div>
+          <div class="sec-label">// Featured</div>
+          <h2 class="sec-title">All <span>Products</span></h2>
+        </div>
+        <a href="all-products.html" class="view-all-link">View All <i class="ri-arrow-right-line"></i></a>
+      </div>
+      <div class="products-grid" id="allProductsGrid"></div>
+    </section>
+
+    <!-- ══ PC CONFIGURATOR ══ -->
+    <section id="configurator-section" class="reveal">
+      <div class="sec-header">
+        <div>
+          <div class="sec-label">// Custom Build</div>
+          <h2 class="sec-title">Configure Your <span>Dream PC</span></h2>
+        </div>
+      </div>
+
+      <div class="config-wrap">
+
+        <!-- LEFT: Animated Visual -->
+        <div class="config-visual" id="configVisual">
+          <div class="config-visual-glow amber"></div>
+          <div class="config-visual-glow cyan"></div>
+
+          <!-- Particle canvas -->
+          <canvas id="particleCanvas"></canvas>
+
+          <img class="config-visual-img" id="configPcImg"
+            src="../assets/images/intro.png"
+            alt="PC Build" />
+
+          <!-- Floating spec tags -->
+          <!-- <div class="spec-float sf1" id="sfCpu">i9-14900K</div>
+          <div class="spec-float sf2" id="sfGpu">RTX 5090</div>
+          <div class="spec-float sf3" id="sfRam">DDR5 128GB</div>
+          <div class="spec-float sf4" id="sfPsu">1200W</div> -->
+        </div>
+
+        <!-- RIGHT: Config Panel -->
+        <div class="config-panel" id="configPanel">
+          <div class="config-step-header">
+            <div class="config-step-label" id="stepLabel">Step 1 of 10</div>
+            <div class="config-step-title" id="stepTitle">Choose a <span>Platform</span></div>
+          </div>
+
+          <!-- Progress -->
+          <div class="config-progress" id="configProgress"></div>
+
+          <!-- Step body -->
+          <div class="config-body" id="configBody">
+            <!-- Filled by JS -->
+          </div>
+
+          <!-- Navigation -->
+          <div class="config-nav">
+            <button class="btn-config-back" id="btnBack" onclick="configBack()" style="display:none;">
+              <i class="ri-arrow-left-line"></i> Back
+            </button>
+            <button class="btn-config-next" id="btnNext" onclick="configNext()">
+              Next <i class="ri-arrow-right-line"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ DELIVERY ══ -->
+    <section class="reveal">
+      <div class="delivery-wrap">
+        <div class="del-content">
+          <div class="sec-label">// Logistics</div>
+          <h2 class="del-title">All Over<br><em>India</em><br>Delivery</h2>
+          <p class="del-desc">From metros to the remotest corners — your dream machine arrives safely, on time, and ready to dominate.</p>
+          <div class="del-stats">
+            <div>
+              <div class="del-stat-num">28+</div>
+              <div class="del-stat-label">States Covered</div>
             </div>
-        </div>
-        <div class="container footer-bottom">
-            <div style="font-size: 12px; opacity: 0.6;">&copy; 2026 COREX Systems. All rights reserved.</div>
-            <div class="payment-icons">
-                <i class="ri-visa-line"></i>
-                <i class="ri-mastercard-line"></i>
-                <i class="ri-paypal-line"></i>
+            <div>
+              <div class="del-stat-num">3–7</div>
+              <div class="del-stat-label">Day Delivery</div>
             </div>
+            <div>
+              <div class="del-stat-num">100%</div>
+              <div class="del-stat-label">Insured Shipping</div>
+            </div>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        const API_URL = "https://api.core-x.in";
+        <div class="del-map" id="delMap">
+          <img class="india-img" src="../assets/images/india.png" alt="India Map">
 
-        const productsData = [
-            { 
-        id: 1, 
-        name: "Starter Gaming PC", 
-        desc: "Intel 10th Gen Core i5 10400F, NVIDIA GeForce RTX 3060 12GB Graphics, 16GB RAM, 480GB SSD, WiFi", 
-        price: "₹1,24,777", 
-        img: "https://m.media-amazon.com/images/I/71bJ6pk+t0L._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 2, 
-        name: "Performance Gaming PC", 
-        desc: "Intel 14th Gen Core i7 14700K [20C 8 P-cores + 12 E-cores) and 28 threads, 33M Cache, up to 5.60 GHz], Nvidia GeForce RTX 4060 8GB Graphics, 32GB DDR5 RAM, 1TB Gen4 NVMe SSD (~4100 Mbps), AC WiFi", 
-        price: "₹1,92,148", 
-        img: "https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 3, 
-        name: "Intel Core i5-13400F RTX 4060 Edition", 
-        desc: "13th Gen Intel Core i5-13400F, NVIDIA GeForce RTX 4060 8GB, 16GB DDR4 RAM, 512GB NVMe SSD, Windows 11 Home", 
-        price: "₹1,35,000", 
-        img: "https://5.imimg.com/data5/SELLER/Default/2024/2/387712115/ZC/SR/GW/80125604/gear-g3-gaming-pc-intel-core-i5-13th-gen-13400f-rtx-4060-16gb-ram-1tb-nvme-ssd.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 4, 
-        name: "Intel i5-13600KF RTX 4060 Ti Build", 
-        desc: "Unlocked 14th Gen Core i5-13600KF, NVIDIA GeForce RTX 4060 Ti 16GB, 32GB DDR5 6000MHz RAM, 1TB Samsung 980 Pro SSD, Air Cooling", 
-        price: "₹1,65,000", 
-        img: "https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 5, 
-        name: "Core Air i5 Edition", 
-        desc: "Intel Core i5-14600K, RTX 4070 Ti, Air Cooled, White Aesthetic. Great value for 1440p gaming.", 
-        price: "₹1,54,990", 
-        img: "https://m.media-amazon.com/images/X/bxt1/M/gbxt1BUnh4jLjZ2.png", 
-        category: "gaming" 
-    },
+          <!-- Overlay gradient handled by ::before -->
 
-    // i7 Series (5)
-    { 
-        id: 6, 
-        name: "Intel i7-13700K RTX 3070 Battlestation", 
-        desc: "Intel Core i7-13700K (16 Cores), NVIDIA GeForce RTX 3070 8GB, 32GB DDR5 RAM, 2TB NVMe SSD, RGB Case", 
-        price: "₹1,85,000", 
-        img: "https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 7, 
-        name: "Intel i7-14700K RTX 4070 Ultimate", 
-        desc: "20 Cores i7-14700K with RTX 4070 12GB GDDR6X, 32GB DDR5 RAM, 2TB Gen5 SSD, Liquid Cooled", 
-        price: "₹2,15,000", 
-        img: "https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg", 
-        category: "gaming" 
-    },
-    { 
-        id: 8, 
-        name: "Intel i7-14700KF RTX 4070 Ti Super", 
-        desc: "Intel Core i7-14700KF Unlocked, RTX 4070 Ti Super 16GB, 64GB DDR5 RAM, 2TB Storage, 360mm AIO", 
-        price: "₹2,45,000", 
-        img: "https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458", 
-        category: "gaming" 
+          <!-- SVG routes -->
+          <svg class="delivery-route-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path class="route-path" d="M25,75 Q35,50 45,35 Q55,20 70,28"/>
+            <path class="route-path" d="M30,60 Q45,45 60,50 Q72,55 78,68" style="animation-delay:-2s;opacity:0.35;"/>
+            <path class="route-path" d="M20,40 Q40,30 55,42 Q65,50 75,40" style="animation-delay:-4s;opacity:0.3;"/>
+          </svg>
+
+          <!-- City pings -->
+          <div class="city-ping" style="left:42%;top:28%;"></div>
+          <div class="city-ping" style="left:55%;top:55%;animation-delay:0.7s;"></div>
+          <div class="city-ping" style="left:28%;top:62%;animation-delay:1.3s;"></div>
+          <div class="city-ping" style="left:68%;top:35%;animation-delay:0.4s;"></div>
+          <div class="city-ping" style="left:48%;top:72%;animation-delay:1.8s;"></div>
+          <div class="city-ping" style="left:35%;top:42%;animation-delay:2.2s;"></div>
+
+          <!-- City labels -->
+          <!-- <div class="city-label" style="left:42%;top:20%;">Delhi</div>
+          <div class="city-label" style="left:55%;top:47%;">Hyderabad</div>
+          <div class="city-label" style="left:28%;top:54%;">Mumbai</div>
+          <div class="city-label" style="left:68%;top:27%;">Kolkata</div>
+          <div class="city-label" style="left:48%;top:64%;">Bangalore</div> -->
+
+          <!-- Traveling dots -->
+          <div class="travel-dot"></div>
+          <div class="travel-dot"></div>
+          <div class="travel-dot"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
+          <span class="logo-name" style="font-size:22px;">CORE<span>X</span></span>
+        </div>
+        <p>Custom PC creations for professionals and gamers who demand the best. Built in India, for India.</p>
+        <div class="social-links">
+          <a href="#"><i class="ri-facebook-fill"></i></a>
+          <a href="#"><i class="ri-twitter-x-fill"></i></a>
+          <a href="#"><i class="ri-instagram-fill"></i></a>
+          <a href="#"><i class="ri-youtube-fill"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Gaming PCs</a></li>
+          <li><a href="#">Workstations</a></li>
+          <li><a href="#">Components</a></li>
+          <li><a href="#">Accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Order Status</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 COREX SYSTEMS — ALL RIGHTS RESERVED</div>
+      <div class="footer-pay">
+        <i class="ri-visa-line"></i>
+        <i class="ri-mastercard-line"></i>
+        <i class="ri-paypal-line"></i>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── PRODUCTS DATA ─── */
+const productsData = [
+  {id:1,name:"Starter Gaming PC",desc:"Intel 10th Gen Core i5 10400F, NVIDIA GeForce RTX 3060 12GB, 16GB RAM, 480GB SSD, WiFi",price:"₹1,24,777",img:"https://m.media-amazon.com/images/I/71bJ6pk+t0L._AC_UF1000,1000_QL80_.jpg",category:"gaming"},
+  {id:2,name:"Performance Gaming PC",desc:"Intel 14th Gen Core i7 14700K, Nvidia GeForce RTX 4060 8GB, 32GB DDR5 RAM, 1TB Gen4 NVMe SSD",price:"₹1,92,148",img:"https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg",category:"gaming"},
+  {id:3,name:"i5-13400F + RTX 4060",desc:"13th Gen Intel Core i5-13400F, NVIDIA GeForce RTX 4060 8GB, 16GB DDR4, 512GB NVMe, Windows 11",price:"₹1,35,000",img:"https://5.imimg.com/data5/SELLER/Default/2024/2/387712115/ZC/SR/GW/80125604/gear-g3-gaming-pc-intel-core-i5-13th-gen-13400f-rtx-4060-16gb-ram-1tb-nvme-ssd.jpg",category:"gaming"},
+  {id:4,name:"i5-13600KF + RTX 4060 Ti",desc:"Unlocked Core i5-13600KF, RTX 4060 Ti 16GB, 32GB DDR5 6000MHz, 1TB Samsung 980 Pro SSD",price:"₹1,65,000",img:"https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg",category:"gaming"},
+  {id:5,name:"Core Air i5 Edition",desc:"Intel Core i5-14600K, RTX 4070 Ti, Air Cooled, White Aesthetic. Great value for 1440p gaming.",price:"₹1,54,990",img:"https://m.media-amazon.com/images/X/bxt1/M/gbxt1BUnh4jLjZ2.png",category:"gaming"},
+  {id:6,name:"i7-13700K Battlestation",desc:"Intel Core i7-13700K (16 Cores), NVIDIA GeForce RTX 3070 8GB, 32GB DDR5 RAM, 2TB NVMe SSD",price:"₹1,85,000",img:"https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg",category:"gaming"},
+  {id:7,name:"i7-14700K + RTX 4070",desc:"20 Cores i7-14700K with RTX 4070 12GB GDDR6X, 32GB DDR5, 2TB Gen5 SSD, Liquid Cooled",price:"₹2,15,000",img:"https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg",category:"gaming"},
+  {id:8,name:"i7-14700KF RTX 4070 Ti Super",desc:"Intel Core i7-14700KF Unlocked, RTX 4070 Ti Super 16GB, 64GB DDR5, 2TB Storage, 360mm AIO",price:"₹2,45,000",img:"https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458",category:"gaming"}
+];
+
+function renderProducts(data, containerId) {
+  const grid = document.getElementById(containerId);
+  if(!grid) return;
+  grid.innerHTML = '';
+  data.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="p-img"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+      <div class="p-body">
+        <div class="p-cat">// ${p.category}</div>
+        <h3 class="p-name">${p.name}</h3>
+        <p class="p-desc">${p.desc}</p>
+        <div class="p-price">${p.price}</div>
+        <div class="p-actions">
+          <a href="product-details.html?id=${p.id}" class="btn-view">Details</a>
+          <button class="btn-cart" onclick="addToCart(this, ${p.id})">
+            <i class="ri-shopping-cart-2-line"></i> Add
+          </button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+/* ─── TOAST ─── */
+function showToast(msg, type='success') {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `<i class="ri-${type==='success'?'checkbox-circle':'information'}-fill"></i>${msg}`;
+  c.appendChild(t);
+  setTimeout(() => { t.style.animation = 'toastOut 0.35s ease forwards'; setTimeout(() => t.remove(), 350); }, 3000);
+}
+
+/* ─── AUTH ─── */
+async function initAuth() {
+  const el = document.getElementById('nameDisplay');
+  if(!el) return;
+  const token = localStorage.getItem('token');
+  if(token) {
+    try {
+      const r = await fetch('https://api.core-x.in/api/auth/me', {headers:{'Authorization':`Bearer ${token}`}});
+      const d = await r.json();
+      el.innerText = r.ok && d.success ? d.user.name : 'Login';
+    } catch { el.innerText = 'Login'; }
+  } else { el.innerText = 'Login'; }
+}
+function toggleProfile() { document.getElementById('profileDropdown').classList.toggle('active'); }
+function handleLogout() { localStorage.clear(); showToast("Logging out…","info"); setTimeout(() => window.location.href='index.html', 1000); }
+window.onclick = e => { if(!e.target.closest('.profile-rel')) document.querySelectorAll('.profile-dropdown').forEach(d=>d.classList.remove('active')); };
+
+/* ─── CART ─── */
+function addToCart(btn, id) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const product = productsData.find(p => p.id === id);
+  cart.push(product);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartBadge();
+  const orig = btn.innerHTML;
+  btn.classList.add('added');
+  btn.innerHTML = `<i class="ri-check-line"></i> Added`;
+  showToast(`<b>${product.name}</b> added to cart`);
+  setTimeout(() => { btn.classList.remove('added'); btn.innerHTML = orig; }, 2200);
+}
+function updateCartBadge() {
+  const count = (JSON.parse(localStorage.getItem('cart')) || []).length;
+  ['cartBadge','cartBadgeMobile'].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerText = count;
+    el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+  });
+}
+
+/* ─── SEARCH ─── */
+function handleSearch(e) {
+  const q = e.target.value.toLowerCase();
+  const res = document.getElementById('searchResults');
+  const grid = document.getElementById('searchGrid');
+  const noRes = document.getElementById('noResults');
+  const home = document.getElementById('home-view');
+  if(q.length > 0) {
+    home.classList.add('hidden'); res.classList.remove('hidden');
+    const filtered = productsData.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+    if(filtered.length > 0) { noRes.classList.add('hidden'); grid.classList.remove('hidden'); renderProducts(filtered,'searchGrid'); }
+    else { grid.classList.add('hidden'); noRes.classList.remove('hidden'); }
+  } else clearSearch();
+}
+function clearSearch() {
+  const s = document.getElementById('desktopSearch');
+  if(s) s.value = '';
+  document.getElementById('searchResults').classList.add('hidden');
+  document.getElementById('home-view').classList.remove('hidden');
+}
+function toggleMobileSearch() {}
+
+/* ─── HERO CAROUSEL ─── */
+let currentSlide = 0;
+const getSlides = () => document.querySelectorAll('.slide');
+const getDots = () => document.querySelectorAll('.dot');
+function goToSlide(n) {
+  getSlides().forEach((s,i) => s.classList.toggle('active', i===n));
+  getDots().forEach((d,i) => d.classList.toggle('active', i===n));
+  const num = document.getElementById('slideNum');
+  if(num) num.textContent = String(n+1).padStart(2,'0');
+  currentSlide = n;
+}
+function nextSlide() { const s = getSlides(); if(s.length===0) return; goToSlide((currentSlide+1) % s.length); }
+
+/* ─── SCROLL REVEAL ─── */
+function checkReveal() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    if(el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('visible');
+  });
+}
+
+/* ═══════════════════════════════════════
+   PARTICLE CANVAS ANIMATION
+═══════════════════════════════════════ */
+function initParticles() {
+  const canvas = document.getElementById('particleCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    const parent = canvas.parentElement;
+    W = canvas.width = parent.offsetWidth;
+    H = canvas.height = parent.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for(let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+      r: Math.random() * 1.5 + 0.3,
+      alpha: Math.random() * 0.5 + 0.1,
+      color: Math.random() > 0.5 ? '#f59e0b' : '#22d3ee'
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0) p.x = W; if(p.x > W) p.x = 0;
+      if(p.y < 0) p.y = H; if(p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+    });
+    // draw connections
+    ctx.globalAlpha = 1;
+    for(let i = 0; i < particles.length; i++) {
+      for(let j = i+1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 80) {
+          ctx.beginPath();
+          ctx.strokeStyle = '#f59e0b';
+          ctx.globalAlpha = (1 - dist/80) * 0.12;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
     }
-        ];
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
 
-        function renderProducts(data, containerId) {
-            const grid = document.getElementById(containerId);
-            grid.innerHTML = '';
-            data.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <div class="p-top"><img src="${p.img}" alt="${p.name}"></div>
-                    <div class="p-bottom">
-                        <h3 class="p-name">${p.name}</h3>
-                        <p class="p-desc">${p.desc}</p>
-                        <div class="p-price">${p.price}</div>
-                        <div class="p-actions">
-                            <a href="product-details.html?id=${p.id}" class="btn btn-view">View</a>
-                            <button class="btn btn-cart" onclick="addToCart(this, ${p.id})">
-                                <i class="ri-shopping-cart-2-line"></i> Add
-                            </button>
-                        </div>
-                    </div>`;
-                grid.appendChild(card);
-            });
-        }
+/* ═══════════════════════════════════════
+   PC CONFIGURATOR LOGIC
+═══════════════════════════════════════ */
+const TOTAL_STEPS = 10;
+let configStep = 1;
+let config = {
+  platform: '', cpu: '', mobo: '', ram: '', gpu: '',
+  psu: '', pcCase: '', cooler: '', storage1: '', storage2: ''
+};
 
-        // --- TOAST SYSTEM ---
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            
-            let icon = type === 'success' ? 'ri-checkbox-circle-fill' : 'ri-information-fill';
-            let color = type === 'success' ? 'var(--success)' : '#ef4444';
-            
-            toast.style.borderLeftColor = color;
-            toast.innerHTML = `<i class="${icon}" style="color:${color}; font-size:18px;"></i> ${message}`;
-            
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.animation = 'fadeOut 0.5s ease forwards';
-                setTimeout(() => toast.remove(), 500);
-            }, 3000);
-        }
+const PC_IMAGES = {
+  default: 'https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458',
+//   intel: 'https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg',
+//   amd: 'https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg',
+//   highend: 'https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg',
+//   mid: 'https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg',
+};
 
-       // --- AUTH & PROFILE (UPDATED FOR TOKEN) ---
-        async function initAuth() {
-            const userSpan = document.getElementById('nameDisplay');
-            if (!userSpan) return;
+const stepTitles = [
+  { label:'Step 1 of 10', title:'Choose a <span>Platform</span>' },
+  { label:'Step 2 of 10', title:'Choose <span>CPU</span>' },
+  { label:'Step 3 of 10', title:'Choose <span>Motherboard</span>' },
+  { label:'Step 4 of 10', title:'Choose <span>RAM</span>' },
+  { label:'Step 5 of 10', title:'Choose <span>GPU</span>' },
+  { label:'Step 6 of 10', title:'Choose <span>Power Supply</span>' },
+  { label:'Step 7 of 10', title:'Choose <span>Case</span>' },
+  { label:'Step 8 of 10', title:'Choose <span>CPU Cooler</span>' },
+  { label:'Step 9 of 10', title:'Choose <span>Primary Storage</span>' },
+  { label:'Step 10 of 10', title:'Build <span>Summary</span>' },
+];
 
-            // 1. Retrieve Token from localStorage
-            const token = localStorage.getItem('token');
+function buildProgress(current) {
+  const prog = document.getElementById('configProgress');
+  prog.innerHTML = '';
+  for(let i = 1; i <= TOTAL_STEPS; i++) {
+    const d = document.createElement('div');
+    d.className = 'config-prog-dot' + (i < current ? ' done' : i === current ? ' active' : '');
+    prog.appendChild(d);
+  }
+}
 
-            if (token) {
-                try {
-                    // 2. Fetch Current User
-                    const response = await fetch(`${API_URL}/api/auth/me`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-                
-                    const data = await response.json();
+function updateStepUI() {
+  const idx = configStep - 1;
+  document.getElementById('stepLabel').textContent = stepTitles[idx].label;
+  document.getElementById('stepTitle').innerHTML = stepTitles[idx].title;
+  buildProgress(configStep);
+  document.getElementById('btnBack').style.display = configStep > 1 ? 'flex' : 'none';
+  const nextBtn = document.getElementById('btnNext');
+  if(configStep === TOTAL_STEPS) {
+    nextBtn.style.display = 'none';
+  } else {
+    nextBtn.style.display = 'flex';
+    nextBtn.innerHTML = configStep === 9 ? 'See Summary <i class="ri-list-check"></i>' : 'Next <i class="ri-arrow-right-line"></i>';
+  }
+}
 
-                    // DEBUG: Check your Console (F12) to see exactly what is returned
-                    console.log("Auth Response:", data);
+function updateVisual() {
+  const img = document.getElementById('configPcImg');
+  let src = PC_IMAGES.default;
+  if(config.platform === 'AMD') src = PC_IMAGES.default;
+  else if(config.platform === 'Intel') src = PC_IMAGES.default;
+  if(config.gpu && (config.gpu.includes('5090') || config.gpu.includes('5080') || config.gpu.includes('A6000'))) src = PC_IMAGES.default;
+  img.style.opacity = '0';
+  img.style.transform = 'scale(0.95)';
+  setTimeout(() => {
+    img.src = src;
+    img.style.opacity = '1';
+    img.style.transform = '';
+    img.style.transition = 'opacity 0.5s, transform 0.5s';
+  }, 300);
 
-                    if (response.ok && data.success) {
-                        // --- CRITICAL FIX HERE ---
-                        // Backend returns data.user.name, not data.name
-                        userSpan.innerText = data.user.name; 
-                        console.log("✅ Username Loaded:", data.user.name);
-                    } else {
-                        console.warn("Invalid Token or User Missing");
-                        userSpan.innerText = "Login";
-                    }
-                } catch (error) {
-                    console.error("⚠️ Connection Error:", error);
-                    userSpan.innerText = "Login";
-                }
-            } else {
-                // No token found
-                userSpan.innerText = "Login";
-            }
-        }
-        
-        function toggleProfile() {
-            const dropdown = document.getElementById('profileDropdown');
-            dropdown.classList.toggle('active');
-        }
+  // Update floating tags
+  const sfCpu = document.getElementById('sfCpu');
+  const sfGpu = document.getElementById('sfGpu');
+  const sfRam = document.getElementById('sfRam');
+  const sfPsu = document.getElementById('sfPsu');
+  if(config.cpu) sfCpu.textContent = config.cpu.split(' ').slice(0,3).join(' ');
+  if(config.gpu) sfGpu.textContent = config.gpu.split(' ').slice(0,3).join(' ');
+  if(config.ram) sfRam.textContent = config.ram.split(' ').slice(0,3).join(' ');
+  if(config.psu) sfPsu.textContent = config.psu.split(' ').slice(0,2).join(' ');
+}
 
-        function handleLogout() {
-            localStorage.clear(); // Clears token and cart
-            showToast("Logging out...", "info");
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1000);
-        }
+function getVal(id) {
+  const el = document.getElementById(id);
+  return el ? el.value : '';
+}
 
-        // --- CART LOGIC ---
-        function addToCart(btnElement, id) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const product = productsData.find(p => p.id === id);
-            cart.push(product);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartBadge();
-            
-            // Visual Feedback index.html
-            const originalText = btnElement.innerHTML;
-            btnElement.classList.add('added');
-            btnElement.innerHTML = `<i class="ri-check-line"></i> Added`;
-            
-            showToast(`Added <b>${product.name}</b> to cart`);
+function configNext() {
+  // save current step value
+  switch(configStep) {
+    case 1: {
+      const sel = document.querySelector('.platform-card.selected');
+      if(!sel) { showToast('Please select a platform', 'info'); return; }
+      config.platform = sel.dataset.platform;
+      break;
+    }
+    case 2: {
+      const sub = getVal('cpuSubSel') || getVal('cpuSel');
+      if(!sub || sub === '') { showToast('Please select a CPU', 'info'); return; }
+      config.cpu = sub;
+      break;
+    }
+    case 3: {
+      const sub = getVal('moboSubSel') || getVal('moboSel');
+      if(!sub || sub === '') { showToast('Please select a Motherboard', 'info'); return; }
+      config.mobo = sub;
+      break;
+    }
+    case 4: config.ram = getVal('ramSel'); if(!config.ram){ showToast('Please select RAM','info'); return; } break;
+    case 5: config.gpu = getVal('gpuSel'); if(!config.gpu){ showToast('Please select a GPU','info'); return; } break;
+    case 6: config.psu = getVal('psuSel'); if(!config.psu){ showToast('Please select a PSU','info'); return; } break;
+    case 7: config.pcCase = getVal('caseSel'); if(!config.pcCase){ showToast('Please select a Case','info'); return; } break;
+    case 8: config.cooler = getVal('coolerSel'); if(!config.cooler){ showToast('Please select a Cooler','info'); return; } break;
+    case 9: config.storage1 = getVal('storage1Sel'); if(!config.storage1){ showToast('Please select Primary Storage','info'); return; } break;
+  }
+  updateVisual();
+  configStep++;
+  renderStep();
+}
 
-            setTimeout(() => {
-                btnElement.classList.remove('added');
-                btnElement.innerHTML = originalText;
-            }, 2000);
-        }
+function configBack() {
+  if(configStep > 1) { configStep--; renderStep(); }
+}
 
-        function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const count = cart.length;
-            const badge1 = document.getElementById('cartBadge');
-            const badge2 = document.getElementById('cartBadgeMobile');
-            
-            if(badge1) {
-                badge1.innerText = count;
-                badge1.classList.remove('bump');
-                void badge1.offsetWidth; // trigger reflow
-                badge1.classList.add('bump');
-            }
-            if(badge2) badge2.innerText = count;
-        }
+function renderStep() {
+  updateStepUI();
+  const body = document.getElementById('configBody');
+  body.innerHTML = '';
+  switch(configStep) {
+    case 1: renderPlatformStep(body); break;
+    case 2: renderCpuStep(body); break;
+    case 3: renderMoboStep(body); break;
+    case 4: renderRamStep(body); break;
+    case 5: renderGpuStep(body); break;
+    case 6: renderPsuStep(body); break;
+    case 7: renderCaseStep(body); break;
+    case 8: renderCoolerStep(body); break;
+    case 9: renderStorage1Step(body); break;
+    case 10: renderSummaryStep(body); break;
+  }
+}
 
-        // --- SEARCH ---
-        function handleSearch(e) {
-            const query = e.target.value.toLowerCase();
-            const resultsDiv = document.getElementById('searchResults');
-            const grid = document.getElementById('searchGrid');
-            const noResults = document.getElementById('noResults');
-            const homeView = document.getElementById('home-view');
+function makeSelect(id, options, placeholder, onchange) {
+  const sel = document.createElement('select');
+  sel.className = 'comp-select';
+  sel.id = id;
+  if(onchange) sel.onchange = onchange;
+  const ph = document.createElement('option');
+  ph.value = ''; ph.textContent = placeholder; ph.disabled = true; ph.selected = true;
+  sel.appendChild(ph);
+  options.forEach(o => {
+    const opt = document.createElement('option');
+    opt.value = o; opt.textContent = o;
+    sel.appendChild(opt);
+  });
+  return sel;
+}
 
-            if(query.length > 0) {
-                homeView.classList.add('hidden');
-                resultsDiv.classList.remove('hidden');
-                const filtered = productsData.filter(p => p.name.toLowerCase().includes(query));
-                if(filtered.length > 0) {
-                    noResults.classList.add('hidden');
-                    grid.classList.remove('hidden');
-                    renderProducts(filtered, 'searchGrid');
-                } else {
-                    grid.classList.add('hidden');
-                    noResults.classList.remove('hidden');
-                }
-            } else {
-                clearSearch();
-            }
-        }
-        function handleMobileSearch(e) { handleSearch(e); }
-        function clearSearch() {
-            document.getElementById('desktopSearch').value = '';
-            document.getElementById('searchResults').classList.add('hidden');
-            document.getElementById('home-view').classList.remove('hidden');
-        }
+function makeGroup(label, icon, content) {
+  const g = document.createElement('div');
+  g.className = 'comp-group';
+  g.innerHTML = `<div class="comp-group-label"><i class="${icon}"></i>${label}</div>`;
+  g.appendChild(content);
+  return g;
+}
 
-        function toggleMobileSearch() {
-            const navbar = document.getElementById('navbar');
-            navbar.classList.toggle('mobile-search-active');
-            if(navbar.classList.contains('mobile-search-active')) navbar.querySelector('input').focus();
-        }
+/* STEP 1: Platform */
+function renderPlatformStep(body) {
+  const wrap = document.createElement('div');
+  wrap.className = 'platform-cards';
 
-        // --- GLOBAL CLICK ---
-        window.onclick = function(event) {
-            if (!event.target.closest('.icon-btn')) {
-                const dropdowns = document.getElementsByClassName("profile-dropdown");
-                for (let i = 0; i < dropdowns.length; i++) dropdowns[i].classList.remove('active');
-            }
-        }
+  ['Intel', 'AMD'].forEach(p => {
+    const card = document.createElement('div');
+    card.className = `platform-card ${p.toLowerCase()}`;
+    card.dataset.platform = p;
+    card.innerHTML = `
+      <div class="check-mark"><i class="ri-check-line"></i></div>
+      <div class="platform-icon">${p === 'Intel' ? '🔵' : '🔴'}</div>
+      <div class="platform-name">${p}</div>
+      <div class="platform-sub">${p === 'Intel' ? 'Core i3 / i5 / i7 / i9' : 'Ryzen Series'}</div>`;
+    if(config.platform === p) card.classList.add('selected');
+    card.onclick = () => {
+      document.querySelectorAll('.platform-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+    };
+    wrap.appendChild(card);
+  });
+  body.appendChild(wrap);
+}
 
-        // --- INIT ---
-        window.onload = function() {
-            initAuth(); // Fetches user from DB using Token
-            updateCartBadge();
-            renderProducts(productsData.slice(0, 8), 'allProductsGrid'); // Display 8 products
-            
-            // Carousel
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide');
-            function nextSlide() {
-                if(slides.length === 0) return;
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }
-            setInterval(nextSlide, 4000);
-        };
-    </script>
+/* STEP 2: CPU */
+function renderCpuStep(body) {
+  const series = {
+    'Core i9': ['14900 Upto 6.00GHz','14900F Upto 6.00GHz','14900K Upto 6.0GHz','14900KS Upto 6.20GHz'],
+    'Core i7': ['14700 Upto 5.4GHz','14700F Upto 5.4GHz','14700K Upto 5.6GHz','14700KF Upto 5.6GHz'],
+    'Core i5': ['14400 Upto 4.7GHz','14400F Upto 4.7GHz','14500 Upto 4.7GHz','14600K Upto 5.5GHz'],
+    'Core i3': ['14100 Upto 4.7GHz','14100F Upto 4.7GHz'],
+  };
+  const topSel = makeSelect('cpuSel', Object.keys(series), '— Select CPU Series —', () => {
+    const val = document.getElementById('cpuSel').value;
+    const sub = document.getElementById('cpuSubWrap');
+    if(val && series[val]) {
+      sub.classList.add('visible');
+      const subSel = document.getElementById('cpuSubSel');
+      subSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      series[val].forEach(m => { const o = document.createElement('option'); o.value = `Intel ${val} ${m}`; o.textContent = m; subSel.appendChild(o); });
+    }
+  });
+  body.appendChild(makeGroup('CPU Series', 'ri-cpu-line', topSel));
+
+  const subWrap = document.createElement('div');
+  subWrap.className = 'sub-select-wrap comp-group'; subWrap.id = 'cpuSubWrap';
+  const label = document.createElement('div');
+  label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-cpu-fill"></i>CPU Model';
+  const subSel = document.createElement('select');
+  subSel.className = 'comp-select'; subSel.id = 'cpuSubSel';
+  subSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+  subWrap.appendChild(label); subWrap.appendChild(subSel);
+  body.appendChild(subWrap);
+
+  // restore
+  if(config.cpu) {
+    const parts = config.cpu.split(' ');
+    const series_key = parts.slice(1,3).join(' ');
+    if(series[series_key]) {
+      document.getElementById('cpuSel').value = series_key;
+      subWrap.classList.add('visible');
+      series[series_key].forEach(m => {
+        const o = document.createElement('option');
+        o.value = `Intel ${series_key} ${m}`; o.textContent = m; subSel.appendChild(o);
+      });
+      subSel.value = config.cpu;
+    }
+  }
+}
+
+/* STEP 3: Motherboard */
+function renderMoboStep(body) {
+  const brands = {
+    'ASUS': ['Z790 E Strix Gaming WiFi DDR5','Z790 F Strix Gaming WiFi DDR5','Z790 Maximus Extreme','Z790 Maximus Hero','Z790 P Prime DDR5','Z790 Plus TUF Gaming WiFi DDR5'],
+    'MSI': ['B760 Tomahawk WiFi DDR5','B760M A Pro WiFi DDR5','B760M Bomber WiFi DDR5','MAG Z790 TOMAHAWK MAX WIFI DDR5','MAG Z790 TOMAHAWK WIFI DDR5','MPG Z790 EDGE WIFI DDR5','Z790 A Pro MAX WiFi','Z790 P Pro WiFi DDR5','Z790I EDGE WIFI DDR5'],
+  };
+  const topSel = makeSelect('moboSel', Object.keys(brands), '— Select Brand —', () => {
+    const val = document.getElementById('moboSel').value;
+    const sub = document.getElementById('moboSubWrap');
+    if(val && brands[val]) {
+      sub.classList.add('visible');
+      const subSel = document.getElementById('moboSubSel');
+      subSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      brands[val].forEach(m => { const o = document.createElement('option'); o.value = `${val} ${m}`; o.textContent = m; subSel.appendChild(o); });
+    }
+  });
+  body.appendChild(makeGroup('Brand', 'ri-stack-line', topSel));
+  const subWrap = document.createElement('div');
+  subWrap.className = 'sub-select-wrap comp-group'; subWrap.id = 'moboSubWrap';
+  subWrap.innerHTML = '<div class="comp-group-label"><i class="ri-circuit-board-line"></i>Model</div>';
+  const subSel = document.createElement('select');
+  subSel.className = 'comp-select'; subSel.id = 'moboSubSel';
+  subSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+  subWrap.appendChild(subSel); body.appendChild(subWrap);
+}
+
+/* STEP 4: RAM */
+function renderRamStep(body) {
+  const rams = [
+    'Hynix ECC RDIMM 4800MHz DDR5 512GB (64x8)','Hynix ECC RDIMM 4800MHz DDR5 256GB (64x4/32x8)',
+    'Hynix ECC RDIMM 4800MHz DDR5 128GB (64x2/32x4)','Hynix ECC RDIMM 4800MHz DDR5 64GB (32x2)',
+    'Corsair Vengeance 5200MHz DDR5 128GB','G.Skill Ripjaws S5 6000MHz DDR5 128GB',
+    'G.Skill Trident Z5 Neo RGB 6000MHz DDR5 128GB','G.Skill Trident Z5 RGB 6000MHz DDR5 128GB',
+    'Corsair Dominator Titanium 6600MHz DDR5 96GB (48x2)',
+    'Corsair Vengeance 5200MHz DDR5 64GB','G.Skill Ripjaws S5 6000MHz DDR5 64GB',
+    'G.Skill Trident Z5 Neo RGB 6000MHz DDR5 64GB','G.Skill Trident Z5 RGB 6000MHz DDR5 64GB',
+    'Corsair Vengeance 6000MHz DDR5 32GB','Corsair Vengeance RGB 6000MHz DDR5 32GB',
+    'G.Skill Ripjaws 3200MHz DDR4 32GB','G.Skill Ripjaws S5 5200MHz DDR5 32GB',
+    'G.Skill Ripjaws S5 6000MHz DDR5 32GB','G.Skill Trident Z5 Neo RGB 6000MHz DDR5 32GB',
+    'G.Skill Trident Z5 RGB 6000MHz DDR5 32GB','Corsair Vengeance 5200MHz DDR5 32GB (32x1)',
+    'G.Skill Ripjaws 3200MHz DDR4 16GB','G.Skill Ripjaws S5 5200MHz DDR5 16GB',
+    'G.Skill Ripjaws 3200MHz DDR4 8GB',
+  ];
+  const s = makeSelect('ramSel', rams, '— Select RAM —');
+  if(config.ram) s.value = config.ram;
+  body.appendChild(makeGroup('RAM', 'ri-hard-drive-2-line', s));
+}
+
+/* STEP 5: GPU */
+function renderGpuStep(body) {
+  const gpus = [
+    'NVIDIA RTX 4000 Ada 20GB','NVIDIA RTX A5000 24GB','NVIDIA RTX A6000 48GB','NVIDIA RTX 6000 Ada 48GB',
+    '5000 Pro Blackwell Workstation 48GB','6000 Pro Blackwell Workstation 96GB','Radeon AI PRO R9700 32GB',
+    'ASUS ROG Astral RTX 5090 OC 32GB','MSI Gaming Trio RTX 5090 OC 32GB',
+    'Zotac Solid RTX 5090 32GB','Zotac Solid OC RTX 5090 32GB',
+    'ASUS Astral RTX 5080 OC 16GB','GALAX 1-Click OC RTX 5080 Black 16GB','GALAX 1-Click OC RTX 5080 White 16GB',
+    'Inno3D X3 OC RTX 5080 16GB','MSI Gaming Trio RTX 5080 OC 16GB','Zotac Solid OC RTX 5080 16GB',
+    'ASUS TUF Gaming RTX 5070 Ti OC 16GB','GALAX 1-Click OC RTX 5070 Ti Black','GALAX 1-Click OC RTX 5070 Ti White',
+    'Inno3D X3 RTX 5070 Ti 16GB','MSI Ventus 3X OC RTX 5070 Ti 16GB','Zotac Amp Extreme Infinity RTX 5070 Ti 16GB',
+    'Zotac Solid Core RTX 5070 Ti 16GB','Zotac Solid OC RTX 5070 Ti 16GB',
+    'Sapphire Nitro+ RX 9070 XT 16GB','Sapphire Pulse RX 9070 XT 16GB',
+    'Sapphire Nitro+ RX 9070 16GB','Sapphire Pulse RX 9070 16GB',
+    'Inno3D Twin X2 OC RTX 5070 Black 12GB','Inno3D Twin X2 OC RTX 5070 White 12GB',
+    'MSI Gaming Trio RTX 5070 OC 12GB','MSI Shadow 2X OC RTX 5070 12GB',
+    'Zotac Solid RTX 5070 12GB','Zotac Solid OC RTX 5070 12GB',
+    'ASRock Challenger RX 7800 XT 16GB','ASUS TUF Gaming RX 7800 XT 16GB',
+    'Sapphire Nitro+ RX 7800 XT 16GB','Sapphire Pulse RX 7800 XT 16GB',
+    'Inno3D Twin X2 RTX 5060 Ti 8GB','Inno3D Twin X2 RTX 5060 Ti 16GB',
+    'MSI Ventus 2X OC RTX 5060 Ti 8GB','MSI Ventus 2X OC RTX 5060 Ti 16GB',
+    'Zotac Twin Edge RTX 5060 Ti 8GB','Zotac Twin Edge RTX 5060 Ti 16GB','Zotac Twin Edge OC RTX 5060 Ti 16GB',
+    'ASRock Challenger OC RX 9060 XT 16GB','Sapphire Pulse RX 9060 XT 8GB',
+    'Sapphire Pulse RX 9060 XT 16GB','Sapphire Pure RX 9060 XT 16GB',
+    'ASUS Dual RTX 5060 8GB','GALAX One Click OC RTX 5060 8GB',
+    'Inno3D Twin X2 RTX 5060 8GB','Zotac AMP RTX 5060 8GB','Zotac Solo RTX 5060 8GB',
+    'Inno3D Twin X2 OC RTX 3050 8GB','MSI Ventus 2X OC RTX 3050 6GB',
+    'ASUS Dual OC RTX 3060','MSI Ventus 2X RTX 3060 12GB','Zotac Twin Edge RTX 3060 12GB',
+    'Sapphire Pulse RX 6600 8GB','GT 730 ASUS 2GB 4x HDMI','Intel Arc A380 6GB',
+  ];
+  const s = makeSelect('gpuSel', gpus, '— Select GPU —');
+  if(config.gpu) s.value = config.gpu;
+  body.appendChild(makeGroup('Graphics Card', 'ri-database-2-line', s));
+}
+
+/* STEP 6: PSU */
+function renderPsuStep(body) {
+  const psus = [
+    'SuperFlower 1200W Leadex Platinum','SuperFlower 1600W Leadex 80+ Platinum','SuperFlower 2000W Leadex Platinum ATX',
+    'Corsair RM850X Gold ATX 3.1','Corsair RM1000X Gold ATX 3.1','Corsair RM1200X Gold ATX 3.1',
+    'Corsair HX1200i 80+ Platinum Modular','Corsair HX1500i 80+ Platinum Modular','Corsair AX1600i Platinum',
+    'ASUS ROG Thor2 1000W 80+ Platinum ATX 3.0','ASUS Thor 1200W 80+ Platinum',
+    'Cooler Master MWE 1050W Gold Modular ATX 3.0','Cooler Master MWE 1250W Gold Modular ATX 3.0','Cooler Master V850 SFX 80+ Gold',
+    'Deepcool PN850M',
+  ];
+  const s = makeSelect('psuSel', psus, '— Select PSU —');
+  if(config.psu) s.value = config.psu;
+  body.appendChild(makeGroup('Power Supply', 'ri-flashlight-line', s));
+}
+
+/* STEP 7: Case */
+function renderCaseStep(body) {
+  const cases = [
+    'Lian Li Lancool II Mesh Type C','Lian Li Lancool 217 ATX TG',
+    'Lian Li O11 Dynamic Evo Black','Lian Li O11 Dynamic Evo White',
+    'Lian Li O11 Dynamic Evo RGB','Lian Li O11 Dynamic Evo XL Black','Lian Li O11 Dynamic Evo XL White',
+    'Fractal Define 7 Compact','Fractal Define 7 Solid','Fractal Define 7 TG','Fractal Define 7 XL',
+    'Fractal Meshify 2 Compact','Fractal Meshify 2 Solid','Fractal Meshify 2 TG','Fractal Meshify 2 XL',
+    'Fractal North White','Fractal North Black','Fractal Pop XL Air RGB','Fractal Torrent','Fractal Torrent Compact',
+    'NZXT H5 Flow Black','NZXT H5 Flow White','NZXT H5 Flow RGB',
+    'NZXT H6 Flow RGB','NZXT H7 Elite','NZXT H7 Flow',
+    'NZXT H9 Elite Black','NZXT H9 Elite White','NZXT H9 Flow Black','NZXT H9 Flow White',
+    'Hyte Y40 Black','Hyte Y60 Black','Hyte Y70 Black',
+    'ASUS GT 502 TUF Black','ASUS ROG Hyperion GR701',
+    'Cooler Master HAF 700 EVO','Cooler Master K501L','Cooler Master MB520 Mesh ARGB',
+    'Cooler Master MB600L V2','Cooler Master S301 ARGB','Cooler Master TD500 Mesh ARGB V2',
+    'Corsair 3500X RGB','Corsair 4000D Frame RS ATX RGB','Corsair 480T',
+    'Corsair 5000T RGB','Corsair 9000D RGB Airflow',
+    'Deepcool Smarter',
+    'MSI MAG Forge 320R Airflow White','MSI MAG Forge 321R Airflow',
+  ];
+  const s = makeSelect('caseSel', cases, '— Select Case —');
+  if(config.pcCase) s.value = config.pcCase;
+  body.appendChild(makeGroup('PC Case', 'ri-server-line', s));
+}
+
+/* STEP 8: CPU Cooler */
+function renderCoolerStep(body) {
+  const coolers = [
+    'Lian Li Galahad 360 UniFans Edition White',
+    'Arctic Freezer 4U-M','Arctic Liquid Freezer II 240mm','Arctic Liquid Freezer II 360mm',
+    'Arctic Liquid Freezer II 420mm','Arctic Liquid Freezer III 420 A-RGB',
+    'NZXT Kraken 240 RGB','NZXT Kraken 240 Non-RGB','NZXT Kraken 240 LCD',
+    'NZXT Kraken 280 RGB','NZXT Kraken 360 RGB','NZXT Kraken 360 Non-RGB','NZXT Kraken 360 LCD',
+    'NZXT Kraken Elite 360 RGB','NZXT Kraken X63 White ARGB',
+    'ASUS ROG Ryujin III 360mm AIO',
+    'Deepcool AG400','Deepcool AG400 ARGB','Deepcool AG620 ARGB',
+    'Deepcool AK400','Deepcool AK500','Deepcool AK620',
+    'Deepcool AN600','Deepcool Assassin IV',
+    'Deepcool Castle 240 EX ARGB','Deepcool Castle 360 EX ARGB',
+    'Deepcool LE720 360mm AIO','Deepcool LT520 240mm',
+    'Deepcool LS520 RGB','Deepcool LS720 RGB','Deepcool Mystique 360 LCD RGB',
+    'Cooler Master Hyper H410R RGB','Cooler Master ML240L Core 240mm AIO',
+    'Cooler Master ML360L V2','Cooler Master MasterLiquid 360L Core ARGB',
+    'Corsair H100 RGB 240mm','Corsair H100i Elite LCD',
+    'Corsair H150 RGB 360mm','Corsair H150i Capellix',
+    'Corsair H170i Elite LCD',
+    'Corsair iCUE Link Titan 360mm','Corsair iCUE Link Titan 420mm',
+    'Corsair CF240','Corsair CF360',
+    'Noctua NH-D15','Noctua NH-D15 Chromax Black',
+    'Noctua NH-U14S TR4 SP3','Noctua U9S Chromax Black',
+  ];
+  const s = makeSelect('coolerSel', coolers, '— Select CPU Cooler —');
+  if(config.cooler) s.value = config.cooler;
+  body.appendChild(makeGroup('CPU Cooler', 'ri-temp-cold-line', s));
+}
+
+/* STEP 9: Storage 1 + Storage 2 */
+function renderStorage1Step(body) {
+  const stor1 = [
+    'Corsair 2TB MP700 Core Gen5 M.2 NVMe','Corsair 2TB MP700 Pro Gen5 NVMe',
+    'Samsung 1TB 9100 Pro NVMe Gen5','Samsung 2TB 9100 Pro NVMe Gen5',
+    'Samsung 1TB 990 Pro Gen4','Samsung 2TB 990 Pro Gen4','Samsung 4TB 990 Pro Gen4',
+    'WD 1TB Blue 7200 RPM HDD','WD 2TB Blue 7200 RPM HDD','WD 4TB Blue 5400 RPM HDD',
+    'WD 500GB Blue SN5100 NVMe Gen4','WD 1TB Blue SN5100 NVMe Gen4',
+    'WD 1TB SN7100 Black Gen4','WD 1TB SN850X Black Gen4',
+    'WD 2TB SN770 Black Gen4','WD 2TB SN850X Black Gen4','WD 2TB SN850X Gen4',
+    'Adata 4TB XPG Gammix S70 Blade Gen4',
+  ];
+  const s1 = makeSelect('storage1Sel', stor1, '— Select Primary Storage —');
+  if(config.storage1) s1.value = config.storage1;
+  body.appendChild(makeGroup('Primary Storage', 'ri-save-line', s1));
+
+  const stor2 = [
+    'Samsung 1TB 9100 Pro NVMe Gen5','Samsung 2TB 9100 Pro NVMe Gen5',
+    'Samsung 1TB 990 Pro Gen4','Samsung 2TB 990 Pro Gen4','Samsung 4TB 990 Pro Gen4',
+    'Corsair 2TB MP700 Pro Gen5 NVMe',
+    'WD 500GB Blue SN5100 NVMe Gen4','WD 1TB Blue SN5100 NVMe Gen4',
+    'WD 1TB SN7100 Black Gen4','WD 1TB SN850X Black Gen4',
+    'WD 2TB SN7100 Black Gen4','WD 2TB SN850X Black Gen4',
+    'WD 2TB Blue 7200 RPM HDD','WD 4TB Blue 5400 RPM HDD',
+    'Adata 4TB XPG Gammix S70 Blade Gen4',
+    'None',
+  ];
+  const s2 = makeSelect('storage2Sel', stor2, '— Select Secondary Storage (Optional) —');
+  if(config.storage2) s2.value = config.storage2;
+  body.appendChild(makeGroup('Secondary Storage (Optional)', 'ri-hard-drive-line', s2));
+
+  // Save storage2 on change
+  s2.onchange = () => { config.storage2 = s2.value; };
+}
+
+/* STEP 10: Summary */
+function renderSummaryStep(body) {
+  // Save storage2 if filled
+  const s2el = document.getElementById('storage2Sel');
+  if(s2el) config.storage2 = s2el.value;
+
+  updateVisual();
+
+  const nameWrap = document.createElement('div');
+  nameWrap.className = 'name-input-wrap';
+  nameWrap.innerHTML = `<label>Your Name (for order)</label><input type="text" id="customerName" placeholder="Enter your full name" value="${config.customerName || ''}">`;
+  body.appendChild(nameWrap);
+  document.getElementById('customerName').oninput = e => { config.customerName = e.target.value; };
+
+  const sumList = document.createElement('div');
+  sumList.className = 'summary-list';
+
+  const rows = [
+    ['Platform', config.platform],
+    ['CPU', config.cpu],
+    ['Motherboard', config.mobo],
+    ['RAM', config.ram],
+    ['GPU', config.gpu],
+    ['Power Supply', config.psu],
+    ['Case', config.pcCase],
+    ['CPU Cooler', config.cooler],
+    ['Primary Storage', config.storage1],
+    ['Secondary Storage', config.storage2 || 'None'],
+  ];
+  rows.forEach(([label, val]) => {
+    const row = document.createElement('div');
+    row.className = 'summary-row';
+    row.innerHTML = `<div><div class="summary-row-label">${label}</div></div><div class="summary-row-val">${val || '—'}</div>`;
+    sumList.appendChild(row);
+  });
+  body.appendChild(sumList);
+
+  const orderBtn = document.createElement('button');
+  orderBtn.className = 'btn-confirm-order';
+  orderBtn.innerHTML = '<i class="ri-whatsapp-line"></i> Confirm Order via WhatsApp';
+  orderBtn.onclick = confirmOrder;
+  body.appendChild(orderBtn);
+}
+
+function confirmOrder() {
+  const name = document.getElementById('customerName')?.value?.trim();
+  if(!name) { showToast('Please enter your name to place the order', 'info'); return; }
+  config.customerName = name;
+
+  const msg = `🖥️ *COREX — NEW PC BUILD ORDER*
+━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *Customer:* ${name}
+
+⚙️ *CONFIGURATION*
+━━━━━━━━━━━━━━━━━━━━━━━━
+🔷 *Platform:* ${config.platform}
+🧠 *CPU:* ${config.cpu}
+🔌 *Motherboard:* ${config.mobo}
+💾 *RAM:* ${config.ram}
+🎮 *GPU:* ${config.gpu}
+⚡ *PSU:* ${config.psu}
+📦 *Case:* ${config.pcCase}
+❄️ *CPU Cooler:* ${config.cooler}
+💿 *Primary Storage:* ${config.storage1}
+💿 *Secondary Storage:* ${config.storage2 || 'None'}
+━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Please confirm availability and pricing.`;
+
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/916300865661?text=${encoded}`, '_blank');
+  showToast('Opening WhatsApp with your build configuration!', 'success');
+}
+
+/* ─── SCROLL REVEAL ─── */
+window.onload = function() {
+  initAuth();
+  updateCartBadge();
+  renderProducts(productsData.slice(0,8), 'allProductsGrid');
+  setInterval(nextSlide, 5000);
+  checkReveal();
+  window.addEventListener('scroll', checkReveal);
+  initParticles();
+  renderStep(); // init configurator step 1
+};
+</script>
 </body>
 </html>
