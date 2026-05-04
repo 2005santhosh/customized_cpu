@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const typeTextElement = document.getElementById("typewriter");
     if(typeTextElement) {
-        const words = ["Performance", "Speed", "Gaming", "Action", "Power", "Immersion"];
+        const words = [ "Speed", "Gaming", "Action", "Power"];
         let wordIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
