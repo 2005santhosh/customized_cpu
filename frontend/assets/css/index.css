@@ -42,7 +42,7 @@ h1, h2, h3, h4, .hero-title, .vh-core, .features-h2, .beast-h2, .cta-h2, .metric
     font-family: var(--font-heading);
 }
 
-/* ─── NAVBAR (Transparent Glassmorphism) ─── */
+/* ─── NAVBAR (High-Opacity White Glass for Universal Visibility) ─── */
 header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -53,12 +53,16 @@ header {
     align-items: center;
     justify-content: space-between;
     
-    /* GLASSMORPHISM SETTINGS */
-    background: rgba(255, 255, 255, 0.15); /* Very transparent white tint */
-    backdrop-filter: blur(20px);           /* The Blur Effect */
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Glass Edge */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft Lift Shadow */
+    /* 
+       GLASSMORPHISM SETTINGS:
+       Using high opacity (0.85) to create a consistent "Light Theme" background
+       so that dark text is readable on both the dark video and light sections.
+    */
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(24px);           /* Strong Blur */
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6); /* Sharp glass edge */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05); /* Soft separation shadow */
     
     transition: all 0.3s ease;
 }
@@ -88,37 +92,47 @@ header {
 .logo-text { display: flex; align-items: center; gap: 0; }
 .logo .x-blue { color: var(--blue); }
 
-/* Desktop Nav */
+/* Desktop Nav - Updated Font Style */
 .desktop-nav ul {
     list-style: none;
     display: flex;
-    gap: 32px;
+    gap: 36px;
     align-items: center;
 }
 
 .desktop-nav ul li a {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    /* UPDATED FONT STYLE */
+    font-family: var(--font-heading); /* Space Grotesk */
+    font-weight: 700; /* Bold */
+    font-size: 14px;
+    text-transform: uppercase; /* Uppercase for tech look */
+    letter-spacing: 1px;
+    
+    /* COLORS - Dark text to contrast with white glass */
     color: var(--mid);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s;
     position: relative;
+    display: inline-block;
+}
+
+.desktop-nav ul li a:hover { 
+    color: var(--purple); 
+    transform: translateY(-2px);
 }
 
 .desktop-nav ul li a::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -6px;
     left: 0;
     width: 0%;
-    height: 2px;
+    height: 3px;
     background: var(--purple);
     transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
-.desktop-nav ul li a:hover { color: var(--purple); }
 .desktop-nav ul li a:hover::after { width: 100%; }
 
 .nav-right {
@@ -136,24 +150,23 @@ header {
     border: none;
     border-radius: 50px;
     padding: 12px 28px;
-    font-family: var(--font-body);
+    font-family: var(--font-heading); /* Space Grotesk */
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
+    transition: all 0.2s;
 }
-.btn-build:hover { background: var(--purple); transform: translateY(-2px); }
+.btn-build:hover { background: var(--purple); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(107,43,255,0.4); }
 
 /* Mobile Menu Trigger - Glass Style */
 .btn-menu {
     display: none;
     width: 44px; height: 44px;
-    /* Updated to match glass theme */
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 50%;
     cursor: pointer;
     align-items: center; justify-content: center;
@@ -164,7 +177,7 @@ header {
 .btn-menu:hover { 
     border-color: var(--purple); 
     color: var(--purple); 
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.9);
     transform: rotate(90deg);
 }
 
@@ -243,8 +256,9 @@ header {
     padding: 16px 40px;
     background: var(--purple);
     color: white;
-    font-family: var(--font-body);
-    font-weight: 600;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
     text-decoration: none;
     border-radius: 50px;
     box-shadow: 0 10px 30px rgba(107,43,255,0.3);
