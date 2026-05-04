@@ -1,45 +1,42 @@
-/* ─── TYPEWRITER EFFECT (ROBUST VERSION) ─── */
-const typeTextElement = document.getElementById("typewriter");
-const words = ["Performance", "Speed", "Gaming", "Action", "Power", "Immersion"];
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+/* ─── TYPEWRITER EFFECT ─── */
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const typeTextElement = document.getElementById("typewriter");
+    if(typeTextElement) {
+        const words = ["Performance", "Speed", "Gaming", "Action", "Power", "Immersion"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
 
-function typeWriter() {
-    const currentWord = words[wordIndex];
+        function typeWriter() {
+            const currentWord = words[wordIndex];
 
-    if (isDeleting) {
-        // Deleting text
-        typeTextElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        // Typing text
-        typeTextElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
+            if (isDeleting) {
+                typeTextElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTextElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 150;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; 
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+        typeWriter();
     }
+});
 
-    let typeSpeed = isDeleting ? 50 : 150; // Speed of typing/deleting
-
-    if (!isDeleting && charIndex === currentWord.length) {
-        // Finished typing word, pause before deleting
-        typeSpeed = 2000; 
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        // Finished deleting word, move to next
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500; // Pause before new word
-    }
-
-    setTimeout(typeWriter, typeSpeed);
-}
-
-// Initialize
-if(typeTextElement) {
-    document.addEventListener('DOMContentLoaded', typeWriter);
-}
-
-/* ─── SCROLL REVEAL ── */
+/* ─── SCROLL REVEAL ─── */
 const reveals = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
@@ -52,7 +49,7 @@ const io = new IntersectionObserver((entries) => {
 
 reveals.forEach(el => io.observe(el));
 
-/* ── COUNTER ANIMATION ── */
+/* ─── COUNTER ANIMATION ─── */
 function animateCounter(el) {
     const target = +el.dataset.target;
     const suffix = el.dataset.suffix || '';
@@ -92,7 +89,7 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-/* ── BEAST CARD PERSPECTIVE TILT ── */
+/* ─── BEAST CARD PERSPECTIVE TILT ─── */
 const beastCard = document.getElementById('beastCard');
 const beastWrap = document.getElementById('beastWrap');
 const beastGlow = document.getElementById('beastGlow');
@@ -115,7 +112,6 @@ if (beastCard && beastWrap) {
 
         beastCard.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
         
-        // Conic gradient angle update based on mouse
         beastCard.style.setProperty('--angle', `${Math.atan2(e.clientY - window.innerHeight / 2, e.clientX - window.innerWidth / 2) * 180 / Math.PI + 90}deg`);
 
         beastGlow.style.background = `radial-gradient(
@@ -131,30 +127,53 @@ if (beastCard && beastWrap) {
     });
 }
 
-/* ── MOBILE FULL MENU (Amazon-like Overlay) ── */
-const menuToggle = document.getElementById('menuToggle');
-const menuClose = document.getElementById('menuClose');
-const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+/* ─── MOBILE FULL MENU (FIXED TOGGLE) ─── */
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const menuClose = document.getElementById('menuClose');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 
-function openMenu() {
-    mobileMenuOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
+    function openMenu() {
+        mobileMenuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 
-function closeMenu() {
-    mobileMenuOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-}
+    function closeMenu() {
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
-if (menuToggle) menuToggle.addEventListener('click', openMenu);
-if (menuClose) menuClose.addEventListener('click', closeMenu);
+    // Robust Toggle Logic
+    function toggleMenu(e) {
+        e.stopPropagation(); // Stop bubbling if needed
+        if (mobileMenuOverlay.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
 
-// Close menu when a link is clicked
-document.querySelectorAll('.mm-link').forEach(link => {
-    link.addEventListener('click', closeMenu);
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+    }
+
+    if (menuClose) {
+        menuClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeMenu();
+        });
+    }
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('.mm-link').forEach(link => {
+        link.addEventListener('click', () => {
+            // Slight delay to allow user to see the click effect
+            setTimeout(closeMenu, 200);
+        });
+    });
 });
 
-/* ── SMOOTH SCROLL ── */
+/* ─── SMOOTH SCROLL ─── */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();

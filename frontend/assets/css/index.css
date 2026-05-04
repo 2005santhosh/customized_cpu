@@ -20,7 +20,7 @@
     --border: rgba(0,0,0,0.08);
     
     /* Typography */
-    --font-heading: 'Space Grotesk', sans-serif; /* Used for H1, H2 */
+    --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
 
@@ -98,14 +98,11 @@ header {
 }
 
 .desktop-nav ul li a {
-    /* SYNE FONT */
     font-family: 'Syne', sans-serif; 
     font-weight: 800;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    
-    /* Dark Text for contrast with White Glass */
     color: var(--dark);
     text-decoration: none;
     transition: color 0.2s, transform 0.2s;
@@ -147,13 +144,11 @@ header {
     border: none;
     border-radius: 50px;
     padding: 12px 28px;
-    
     font-family: 'Syne', sans-serif;
     font-size: 13px;
     font-weight: 800;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -208,6 +203,7 @@ header {
     display: flex;
     align-items: center;
     gap: 20px;
+    z-index: 100;
 }
 
 .mm-logo {
@@ -241,7 +237,7 @@ header {
 
 .mm-link {
     font-family: 'Syne', sans-serif;
-    font-size: 32px;
+    font-size: 32px; /* Desktop mobile link size */
     font-weight: 800;
     color: rgba(255,255,255,0.6);
     text-decoration: none;
@@ -306,22 +302,19 @@ header {
 }
 
 .vh-core {
-    /* CRAZY & UNIQUE STYLE */
     font-family: 'Syne', sans-serif;
-    font-style: italic; /* Adds speed vibe */
+    font-style: italic;
     font-weight: 800; 
-    font-size: clamp(80px, 16vw, 200px); /* Big */
+    font-size: clamp(80px, 16vw, 200px);
     letter-spacing: -0.04em;
     line-height: 0.9;
-    
     color: #ffffff;
-    /* Neon Glow & Shadow */
     text-shadow: 
-        2px 2px 0px rgba(0,0,0,0.2), /* Hard Shadow */
+        2px 2px 0px rgba(0,0,0,0.2),
         0 0 30px rgba(255,255,255,0.4),
-        0 0 60px rgba(26, 107, 255, 0.6), /* Blue Glow */
-        0 0 100px rgba(107, 43, 255, 0.4); /* Purple Glow */
-    transform: scale(1.02) skewX(-5deg); /* Skewed look */
+        0 0 60px rgba(26, 107, 255, 0.6),
+        0 0 100px rgba(107, 43, 255, 0.4);
+    transform: scale(1.02) skewX(-5deg);
 }
 
 .x-blue {
@@ -337,24 +330,23 @@ header {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: clamp(18px, 3vw, 26px);
-    font-style: italic; /* Match Logo */
+    font-style: italic;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.9);
     text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    display: flex; /* Keep flex */
+    display: flex; 
     align-items: center;
     justify-content: center;
-    gap: 5px; /* Gap */
+    gap: 5px;
 }
 
 #typewriter {
-    color: var(--blue-light); /* Highlight dynamic text */
+    color: var(--blue-light); 
     display: inline-block; 
     white-space: nowrap;
 }
 
-/* Blinking Cursor */
 .cursor {
     display: inline-block;
     width: 3px;
@@ -452,6 +444,7 @@ header {
 }
 .social-icons a:hover { border-color: var(--purple); color: var(--purple); background: rgba(107,43,255,0.05); }
 
+/* Center Panel */
 .hero-center { position: relative; height: 100%; min-height: 500px; }
 
 .ghost-labels {
@@ -569,9 +562,9 @@ header {
 .metric-num { font-size: 64px; color: white; letter-spacing: 2px; line-height: 1; }
 .metric-lbl { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 8px; }
 
-/* ─── BEAST SECTION (DARK THEME + BACKGROUND WORDS - FIXED) ─── */
+/* ─── BEAST SECTION (DARK THEME + BACKGROUND WORDS) ─── */
 .beast-section {
-    background: var(--dark); /* Keep it Dark */
+    background: var(--dark); 
     padding: 100px 40px;
     position: relative;
     overflow: hidden; 
@@ -580,10 +573,10 @@ header {
 .beast-bg-words {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1; /* Behind card (z-index 10) */
+    z-index: 1; 
     pointer-events: none;
     overflow: hidden;
-    opacity: 0.04; /* VERY LIGHT - Reduced from 0.15 */
+    opacity: 0.04; 
 }
 
 .word-row {
@@ -592,39 +585,30 @@ header {
     font-size: 180px; 
     white-space: nowrap;
     text-transform: uppercase;
-    
-    /* Hollow Text Effect */
     color: transparent; 
     -webkit-text-stroke: 2px var(--blue); 
-    
-    /* Crossed Angle */
     transform: rotate(-15deg);
-    
     display: flex;
     gap: 50px;
 }
 
-/* 
-   FIX: Positioning to prevent overlap 
-   Pushing them to very top, middle, and very bottom.
-*/
 .row-1 {
     position: absolute;
-    top: 0%;       /* Start at top */
+    top: 0%;       
     left: 0;
     animation: scrollLeft 25s linear infinite;
 }
 
 .row-2 {
     position: absolute;
-    top: 40%;      /* Middle */
-    right: 0; /* Start from right */
+    top: 40%;      
+    right: 0; 
     animation: scrollRight 30s linear infinite;
 }
 
 .row-3 {
     position: absolute;
-    bottom: 0%;     /* Start at bottom */
+    bottom: 0%;     
     left: 0;
     animation: scrollLeft 35s linear infinite;
 }
@@ -640,7 +624,7 @@ header {
 }
 
 .beast-header { 
-    position: relative; z-index: 10; /* Ensure header is above background words */
+    position: relative; z-index: 10; 
     text-align: center; margin-bottom: 50px; 
 }
 .beast-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
@@ -648,7 +632,7 @@ header {
 .beast-h2 span { color: var(--purple); }
 
 .beast-card-wrap { 
-    position: relative; z-index: 10; /* Card above background words */
+    position: relative; z-index: 10; 
     max-width: 900px; margin: 0 auto; perspective: 1200px; 
 }
 .beast-card {
@@ -742,11 +726,19 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ─── RESPONSIVE / MOBILE ─── */
+/* ─── RESPONSIVE / MOBILE (FIXED SIZES) ─── */
 @media (max-width: 900px) {
     header { padding: 0 20px; height: 70px; }
     .desktop-nav { display: none; }
     .btn-menu { display: flex; }
+    
+    /* FIX 1: Smaller Login Button */
+    .btn-build {
+        padding: 8px 18px !important; /* Smaller padding */
+        font-size: 11px !important;
+        letter-spacing: 0; /* Tighter spacing */
+        width: auto; /* Let it fit content */
+    }
     
     .hero {
         grid-template-columns: 1fr;
@@ -815,21 +807,27 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
     .test-grid { grid-template-columns: 1fr; }
     .test-section { padding: 60px 20px; }
     
+    /* FIX 2: Smaller Mobile Nav Links */
+    .mm-link { 
+        font-size: 24px !important; /* Reduced from 32px */
+        letter-spacing: -1px !important;
+        line-height: 1.2 !important;
+    }
+    
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    footer { padding: 40px 20px; }
+    
     /* HIDE BADGES ON MOBILE */
     .beast-badge { 
         display: none !important; 
     }
     
-    /* BEAST BACKGROUND WORDS MOBILE OPTIMIZATION */
     .beast-bg-words {
-        opacity: 0.03; /* Even lighter for mobile */
+        opacity: 0.03; 
     }
     .word-row {
-        font-size: 100px; /* Smaller on mobile */
+        font-size: 100px;
     }
-    
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    footer { padding: 40px 20px; }
     
     .vh-core { font-size: 15vw; letter-spacing: -4px; }
 }
