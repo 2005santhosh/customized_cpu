@@ -1,4 +1,45 @@
-/* ── SCROLL REVEAL ── */
+/* ─── TYPEWRITER EFFECT (ROBUST VERSION) ─── */
+const typeTextElement = document.getElementById("typewriter");
+const words = ["Performance", "Speed", "Gaming", "Action", "Power", "Immersion"];
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeWriter() {
+    const currentWord = words[wordIndex];
+
+    if (isDeleting) {
+        // Deleting text
+        typeTextElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        // Typing text
+        typeTextElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+    }
+
+    let typeSpeed = isDeleting ? 50 : 150; // Speed of typing/deleting
+
+    if (!isDeleting && charIndex === currentWord.length) {
+        // Finished typing word, pause before deleting
+        typeSpeed = 2000; 
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        // Finished deleting word, move to next
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typeSpeed = 500; // Pause before new word
+    }
+
+    setTimeout(typeWriter, typeSpeed);
+}
+
+// Initialize
+if(typeTextElement) {
+    document.addEventListener('DOMContentLoaded', typeWriter);
+}
+
+/* ─── SCROLL REVEAL ── */
 const reveals = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
@@ -108,7 +149,7 @@ function closeMenu() {
 if (menuToggle) menuToggle.addEventListener('click', openMenu);
 if (menuClose) menuClose.addEventListener('click', closeMenu);
 
-// Close menu when a link is clicked typewriter
+// Close menu when a link is clicked
 document.querySelectorAll('.mm-link').forEach(link => {
     link.addEventListener('click', closeMenu);
 });

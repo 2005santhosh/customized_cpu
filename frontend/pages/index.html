@@ -6,11 +6,11 @@
     <link rel="icon" type="image/png" href="../assets/images/logo.jpeg">
     <title>Custom Gaming PC Builders in India | COREX</title>
     <meta name="google-site-verification" content="ZSlAvxrDR67pcsNoZpaSoE4uiXuMjUC805De2zzJVDs" />
-    <!-- Fonts: Space Grotesk & Inter -->
+    <!-- Fonts: Space Grotesk, Inter & SYNE -->
     <meta name="description" content="COREX builds high-performance custom gaming PCs in India. Get customized Intel, AMD, and RTX builds for gaming and workstations.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
     <!-- Icons: RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -38,7 +38,7 @@
 
     <!-- NAV -->
     <header>
-        <a href="./index" class="logo">
+        <a href="./index.html" class="logo">
             <img src="../assets/images/logo.jpeg" alt="CoreX Logo" class="logo-img">
             <span class="logo-text">CORE<span class="x-blue">X</span></span>
         </a>
@@ -55,11 +55,9 @@
         </nav>
 
         <div class="nav-right">
-            <!-- Changed Button Text to Login -->
-            <a href="./login" class="btn-login-link">
+            <a href="./login.html" class="btn-login-link">
                 <button class="btn-build">LOGIN</button>
             </a>
-            <!-- Mobile Hamburger -->
             <button class="btn-menu" id="menuToggle" aria-label="Open menu">
                 <i class="ri-menu-4-line"></i>
             </button>
@@ -81,7 +79,7 @@
                 <a href="#support" class="mm-link">Support</a>
             </nav>
             <div class="mm-footer">
-                <a href="./login" class="mm-cta">Login to Account</a>
+                <a href="./login.html" class="mm-cta">Login to Account</a>
             </div>
         </div>
     </div>
@@ -93,7 +91,7 @@
         <video
             class="video-hero-bg"
             autoplay muted loop playsinline
-            poster="../assets/images/bg.mp4"
+            poster="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg"
         >
             <source src="../assets/images/bg.mp4" type="video/mp4">
         </video>
@@ -102,17 +100,16 @@
         <div class="vh-glow"></div>
 
         <!-- Centered content -->
-<div class="video-hero-content">
-    <div class="vh-brand">
-        <!-- CORE in white -->
-        <span class="vh-core">CORE<span class="x-blue">X</span></span>
-    </div>
+        <div class="video-hero-content">
+            <div class="vh-brand">
+                <span class="vh-core">CORE<span class="x-blue">X</span></span>
+            </div>
 
-    <!-- Tagline with Typing Effect -->
-<p class="vh-tagline">
-    Built for <span id="typewriter"></span><span class="cursor">|</span>
-</p>
-</div>
+            <!-- Tagline with Typing Effect -->
+            <p class="vh-tagline">
+                Built for <span id="typewriter"></span><span class="cursor">|</span>
+            </p>
+        </div>
 
         <div class="vh-scroll-hint">
             <span>Scroll</span>
@@ -134,8 +131,7 @@
                 <div class="hero-cta">
                     <span class="cta-label">Start Your Build</span>
                     <div class="cta-line"></div>
-                    <!-- Updated Link to login -->
-                    <a href="./login" class="cta-circle">
+                    <a href="./login.html" class="cta-circle">
                         <i class="ri-arrow-right-line"></i>
                     </a>
                 </div>
@@ -198,8 +194,7 @@
                     <div class="stat-label">Custom Built</div>
                 </div>
             </div>
-            <!-- Updated Link to login -->
-            <a href="./login" class="see-action">
+            <a href="./login.html" class="see-action">
                 <div class="see-action-text">
                     <span class="see-top">See COREX</span>
                     <span class="see-bot">In Action</span>
@@ -283,40 +278,37 @@
 
     <!-- OUR BEAST -->
     <section class="beast-section" id="beast">
-    
-    <!-- NEW: Background Floating Words Container -->
-    <div class="beast-bg-words">
-        <div class="word-row row-1">PROCESSOR GPU RAM VRM I9</div>
-        <div class="word-row row-2">4090 RAY TRACING DLSS</div>
-        <div class="word-row row-3">LIQUID COOL RGB OVERCLOCK</div>
-    </div>
+        <!-- BACKGROUND FLOATING WORDS -->
+        <div class="beast-bg-words">
+            <div class="word-row row-1">PROCESSOR GPU RAM VRM I9</div>
+            <div class="word-row row-2">4090 RAY TRACING DLSS</div>
+            <div class="word-row row-3">LIQUID COOL RGB OVERCLOCK</div>
+        </div>
 
-    <div class="beast-header reveal">
-        <div class="beast-label">Showcase</div>
-        <h2 class="beast-h2">Our <span>Beast</span></h2>
-    </div>
+        <div class="beast-header reveal">
+            <div class="beast-label">Showcase</div>
+            <h2 class="beast-h2">Our <span>Beast</span></h2>
+        </div>
 
-    <div class="beast-card-wrap reveal" id="beastWrap">
-        <!-- ... Existing Beast Card Code ... -->
-        <div class="beast-card" id="beastCard">
-            <img class="beast-img" src="../assets/images/intro.png" alt="COREX Signature Build" draggable="false">
-            <div class="beast-edge-glow" id="beastGlow"></div>
+        <div class="beast-card-wrap reveal" id="beastWrap">
+            <div class="beast-card" id="beastCard">
+                <img class="beast-img" src="../assets/images/intro.png" alt="COREX Signature Build" draggable="false">
+                <div class="beast-edge-glow" id="beastGlow"></div>
 
-            <!-- Badges will be hidden on mobile via CSS -->
-            <div class="beast-badge beast-badge-tl">
-                <span class="badge-title">Processor</span>
-                <span class="badge-val">Intel i9-14900K</span>
-                <span class="badge-sub">Overclocked · 6.0 GHz</span>
-            </div>
+                <div class="beast-badge beast-badge-tl">
+                    <span class="badge-title">Processor</span>
+                    <span class="badge-val">Intel i9-14900K</span>
+                    <span class="badge-sub">Overclocked · 6.0 GHz</span>
+                </div>
 
-            <div class="beast-badge beast-badge-br">
-                <span class="badge-title">Graphics</span>
-                <span class="badge-val">RTX 4090 24GB</span>
-                <span class="badge-sub">4K Ultra · 240 FPS</span>
+                <div class="beast-badge beast-badge-br">
+                    <span class="badge-title">Graphics</span>
+                    <span class="badge-val">RTX 4090 24GB</span>
+                    <span class="badge-sub">4K Ultra · 240 FPS</span>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- TESTIMONIALS -->
     <section class="test-section">
@@ -370,7 +362,7 @@
     <!-- FINAL CTA -->
     <section class="cta-section">
         <h2 class="cta-h2">YOUR <span>LEGACY</span><br>STARTS HERE.</h2>
-        <a href="./login" class="cta-btn">Start Building <i class="ri-arrow-right-line"></i></a>
+        <a href="./login.html" class="cta-btn">Start Building <i class="ri-arrow-right-line"></i></a>
     </section>
 
     <!-- FOOTER -->
