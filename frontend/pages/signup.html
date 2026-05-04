@@ -328,7 +328,7 @@
         <div class="auth-card" id="card">
             
             <!-- COREX LOGO -->
-            <a href="./index.html" class="logo">
+            <a href="./index" class="logo">
                 CORE<span class="x-blue">X</span>
             </a>
             
@@ -373,7 +373,7 @@
             </form>
 
             <div class="form-footer">
-                Already have an account? <a href="login.html">Sign In</a>
+                Already have an account? <a href="login">Sign In</a>
             </div>
         </div>
     </div>
@@ -502,7 +502,7 @@
 
                     if (response.ok && data.success) {
                         showToast(data.message, 'success');
-                        setTimeout(() => window.location.href = 'login.html', 1500);
+                        setTimeout(() => window.location.href = 'login', 1500);
                     } else {
                         showToast(data.message || 'Something went wrong', 'error');
                     }

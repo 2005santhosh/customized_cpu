@@ -761,7 +761,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
             <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
           </div>
         </div>
-        <a href="cart.html" class="icon-btn" style="position:relative;">
+        <a href="cart" class="icon-btn" style="position:relative;">
           <i class="ri-shopping-bag-3-line"></i>
           <span class="badge" id="cartBadge">0</span>
         </a>
@@ -776,7 +776,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
       <div style="display:flex;gap:8px;">
         <button class="icon-btn" style="width:38px;height:38px;" onclick="toggleMobileSearch()"><i class="ri-search-line"></i></button>
         <button class="icon-btn" style="width:38px;height:38px;" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
-        <a href="cart.html" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
+        <a href="cart" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
           <i class="ri-shopping-bag-3-line"></i>
           <span class="badge" id="cartBadgeMobile">0</span>
         </a>
@@ -884,10 +884,10 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
           <div class="sec-label">// Category</div>
           <h2 class="sec-title">Pre-Built <span>Systems</span></h2>
         </div>
-        <a href="all-products.html" class="view-all-link">View All <i class="ri-arrow-right-line"></i></a>
+        <a href="all-products" class="view-all-link">View All <i class="ri-arrow-right-line"></i></a>
       </div>
       <div class="prebuilts-grid">
-        <a href="all-products.html?category=gaming" class="cat-card">
+        <a href="all-products?category=gaming" class="cat-card">
           <img src="https://geekawhat.com/wp-content/uploads/2024/07/FI_Cougar-FV270-RTX-4090-Build.jpg" alt="Gaming">
           <div class="cat-card-body">
             <div class="cat-card-eyebrow">Starting ₹1,24,777</div>
@@ -895,7 +895,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
             <div class="cat-chip">Shop Now <i class="ri-arrow-right-line"></i></div>
           </div>
         </a>
-        <a href="all-products.html?category=workstation" class="cat-card">
+        <a href="all-products?category=workstation" class="cat-card">
           <img src="https://www.techwithmikefirst.com/wp-content/uploads/2016/10/Dell7910.jpg" alt="Workstation">
           <div class="cat-card-body">
             <div class="cat-card-eyebrow">Pro Grade</div>
@@ -934,7 +934,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
         </div>
       </div>
       <div class="comp-grid">
-        <a href="all-products.html?category=components" class="comp-card">
+        <a href="all-products?category=components" class="comp-card">
           <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80" alt="Components">
           <span class="comp-label">PC Components</span>
         </a>
@@ -963,7 +963,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
           <div class="sec-label">// Featured</div>
           <h2 class="sec-title">All <span>Products</span></h2>
         </div>
-        <a href="all-products.html" class="view-all-link">View All <i class="ri-arrow-right-line"></i></a>
+        <a href="all-products" class="view-all-link">View All <i class="ri-arrow-right-line"></i></a>
       </div>
       <div class="products-grid" id="allProductsGrid"></div>
     </section>
@@ -1053,7 +1053,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
         <div class="del-map" id="delMap">
           <img class="india-img" src="../assets/images/india.png" alt="India Map">
 
-          <!-- Overlay gradient handled by ::before -->
+          <!-- Overlay gradient handled by ::before  -->
 
           <!-- SVG routes -->
           <svg class="delivery-route-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -1172,7 +1172,7 @@ function renderProducts(data, containerId) {
         <p class="p-desc">${p.desc}</p>
         <div class="p-price">${p.price}</div>
         <div class="p-actions">
-          <a href="product-details.html?id=${p.id}" class="btn-view">Details</a>
+          <a href="product-details?id=${p.id}" class="btn-view">Details</a>
           <button class="btn-cart" onclick="addToCart(this, ${p.id})">
             <i class="ri-shopping-cart-2-line"></i> Add
           </button>
@@ -1206,7 +1206,7 @@ async function initAuth() {
   } else { el.innerText = 'Login'; }
 }
 function toggleProfile() { document.getElementById('profileDropdown').classList.toggle('active'); }
-function handleLogout() { localStorage.clear(); showToast("Logging out…","info"); setTimeout(() => window.location.href='index.html', 1000); }
+function handleLogout() { localStorage.clear(); showToast("Logging out…","info"); setTimeout(() => window.location.href='index', 1000); }
 window.onclick = e => { if(!e.target.closest('.profile-rel')) document.querySelectorAll('.profile-dropdown').forEach(d=>d.classList.remove('active')); };
 
 /* ─── CART ─── */
