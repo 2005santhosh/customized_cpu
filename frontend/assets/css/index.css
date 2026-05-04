@@ -295,10 +295,14 @@ header {
     pointer-events: none; z-index: 1;
 }
 
+/* ─── VIDEO HERO CONTENT ─── */
 .video-hero-content {
-    position: relative; z-index: 2;
+    position: relative;
+    z-index: 2;
     text-align: center;
-    display: flex; flex-direction: column; align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     animation: videoHeroFadeIn 1.2s cubic-bezier(0.16,1,0.3,1) both;
 }
 
@@ -307,23 +311,72 @@ header {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* 
+   COREX LOGO - "CRAZY & AWESOME" STYLE 
+   Using Syne ExtraBold + Text Shadow + Tight Spacing
+*/
+/* ─── COREX LOGO (Crazy Gaming Vibe) ─── */
 .vh-core {
-    font-weight: 800;
-    font-size: clamp(60px, 12vw, 160px);
-    letter-spacing: -2px;
+    font-family: 'Syne', sans-serif;
+    font-style: italic; /* Adds speed/energy vibe */
+    font-weight: 800; 
+    font-size: clamp(80px, 16vw, 220px); /* Even bigger */
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    
     color: #ffffff;
-    text-shadow: 0 0 60px rgba(255,255,255,0.08), 0 4px 40px rgba(0,0,0,0.6);
-    line-height: 1;
+    /* Enhanced Glow for "Crazy" look */
+    text-shadow: 
+        2px 2px 0px rgba(0,0,0,0.2), /* Hard Shadow for depth */
+        0 0 20px rgba(255,255,255,0.3),
+        0 0 60px rgba(26, 107, 255, 0.6), /* Blue Glow */
+        0 0 100px rgba(107, 43, 255, 0.4); /* Purple Glow */
+    transform: scale(1.02) skewX(-5deg); /* Slight Skew for speed */
 }
 
+.x-blue {
+    color: var(--blue);
+    text-shadow: 
+        2px 2px 0px rgba(0,0,0,0.2),
+        0 0 40px rgba(26, 107, 255, 0.8);
+}
+
+/* ─── TYPEWRITER & CURSOR ─── */
 .vh-tagline {
-    margin-top: 20px;
-    font-size: clamp(14px, 2vw, 20px);
-    font-weight: 500;
-    letter-spacing: 4px;
+    margin-top: clamp(15px, 2vw, 30px);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(18px, 3vw, 26px);
+    font-style: italic; /* Match logo */
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#typewriter {
+    color: var(--blue-light); /* Highlight dynamic text */
+    min-width: 120px; /* Prevent layout shift */
+    text-align: left;
+    display: inline-block;
+}
+
+/* Blinking Cursor */
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: var(--blue-light);
+    animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 .vh-tagline span { color: var(--blue-light); }
 
@@ -533,7 +586,70 @@ header {
 .metric-lbl { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 8px; }
 
 /* ─── BEAST SECTION ─── */
-.beast-section { padding: 100px 40px; background: var(--dark); position: relative; }
+/* ─── BEAST SECTION BACKGROUND WORDS ─── */
+.beast-section {
+    /* Ensure overflow is hidden to cut off scrolling text */
+    overflow: hidden; 
+}
+
+.beast-bg-words {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1; /* Behind card (z-index 10) */
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.15; /* Very Low Opacity */
+}
+
+.word-row {
+    font-family: 'Syne', sans-serif;
+    font-weight: 900;
+    font-size: 180px; /* Huge background text */
+    white-space: nowrap;
+    text-transform: uppercase;
+    
+    /* Hollow Text Effect */
+    color: transparent; 
+    -webkit-text-stroke: 2px var(--blue); 
+    
+    /* Crossed Angle */
+    transform: rotate(-15deg);
+    
+    display: flex;
+    gap: 50px;
+}
+
+/* Animation for continuous scrolling */
+.row-1 {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    animation: scrollLeft 25s linear infinite;
+}
+
+.row-2 {
+    position: absolute;
+    top: 40%;
+    right: 0; /* Start from right */
+    animation: scrollRight 30s linear infinite;
+}
+
+.row-3 {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    animation: scrollLeft 35s linear infinite;
+}
+
+@keyframes scrollLeft {
+    0% { transform: translateX(0) rotate(-15deg); }
+    100% { transform: translateX(-50%) rotate(-15deg); }
+}
+
+@keyframes scrollRight {
+    0% { transform: translateX(-50%) rotate(-15deg); }
+    100% { transform: translateX(0) rotate(-15deg); }
+}
 .beast-header { text-align: center; margin-bottom: 50px; }
 .beast-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
 .beast-h2 { font-size: clamp(32px, 4vw, 56px); line-height: 1; letter-spacing: -1px; color: var(--white); }
@@ -704,7 +820,18 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05); 
     
     .test-grid { grid-template-columns: 1fr; }
     .test-section { padding: 60px 20px; }
+     /* HIDE BADGES ON MOBILE TO CLEAR IMAGE */
+    .beast-badge { 
+        display: none !important; 
+    }
     
+    .beast-bg-words {
+        /* Reduce text size on mobile for performance */
+        opacity: 0.08; 
+    }
+    .word-row {
+        font-size: 100px;
+    }
     .footer-top { grid-template-columns: 1fr 1fr; }
     footer { padding: 40px 20px; }
     

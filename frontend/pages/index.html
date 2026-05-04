@@ -101,12 +101,18 @@
         <div class="video-hero-overlay"></div>
         <div class="vh-glow"></div>
 
-        <div class="video-hero-content">
-            <div class="vh-brand">
-                <span class="vh-core">CORE<span class="x-blue">X</span></span>
-            </div>
-            <p class="vh-tagline">Built for <span>Performance</span></p>
-        </div>
+        <!-- Centered content -->
+<div class="video-hero-content">
+    <div class="vh-brand">
+        <!-- CORE in white -->
+        <span class="vh-core">CORE<span class="x-blue">X</span></span>
+    </div>
+
+    <!-- Tagline with Typing Effect -->
+<p class="vh-tagline">
+    Built for <span id="typewriter"></span><span class="cursor">|</span>
+</p>
+</div>
 
         <div class="vh-scroll-hint">
             <span>Scroll</span>
@@ -277,35 +283,40 @@
 
     <!-- OUR BEAST -->
     <section class="beast-section" id="beast">
-        <div class="beast-header reveal">
-            <div class="beast-label">Showcase</div>
-            <h2 class="beast-h2">Our <span>Beast</span></h2>
-        </div>
+    
+    <!-- NEW: Background Floating Words Container -->
+    <div class="beast-bg-words">
+        <div class="word-row row-1">PROCESSOR GPU RAM VRM I9</div>
+        <div class="word-row row-2">4090 RAY TRACING DLSS</div>
+        <div class="word-row row-3">LIQUID COOL RGB OVERCLOCK</div>
+    </div>
 
-        <div class="beast-card-wrap reveal" id="beastWrap">
-            <div class="beast-card" id="beastCard">
-                <img
-                    class="beast-img"
-                    src="../assets/images/intro.png"
-                    alt="COREX Signature Build"
-                    draggable="false"
-                >
-                <div class="beast-edge-glow" id="beastGlow"></div>
+    <div class="beast-header reveal">
+        <div class="beast-label">Showcase</div>
+        <h2 class="beast-h2">Our <span>Beast</span></h2>
+    </div>
 
-                <div class="beast-badge beast-badge-tl">
-                    <span class="badge-title">Processor</span>
-                    <span class="badge-val">Intel i9-14900K</span>
-                    <span class="badge-sub">Overclocked · 6.0 GHz</span>
-                </div>
+    <div class="beast-card-wrap reveal" id="beastWrap">
+        <!-- ... Existing Beast Card Code ... -->
+        <div class="beast-card" id="beastCard">
+            <img class="beast-img" src="../assets/images/intro.png" alt="COREX Signature Build" draggable="false">
+            <div class="beast-edge-glow" id="beastGlow"></div>
 
-                <div class="beast-badge beast-badge-br">
-                    <span class="badge-title">Graphics</span>
-                    <span class="badge-val">RTX 4090 24GB</span>
-                    <span class="badge-sub">4K Ultra · 240 FPS</span>
-                </div>
+            <!-- Badges will be hidden on mobile via CSS -->
+            <div class="beast-badge beast-badge-tl">
+                <span class="badge-title">Processor</span>
+                <span class="badge-val">Intel i9-14900K</span>
+                <span class="badge-sub">Overclocked · 6.0 GHz</span>
+            </div>
+
+            <div class="beast-badge beast-badge-br">
+                <span class="badge-title">Graphics</span>
+                <span class="badge-val">RTX 4090 24GB</span>
+                <span class="badge-sub">4K Ultra · 240 FPS</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- TESTIMONIALS -->
     <section class="test-section">

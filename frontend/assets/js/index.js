@@ -108,7 +108,7 @@ function closeMenu() {
 if (menuToggle) menuToggle.addEventListener('click', openMenu);
 if (menuClose) menuClose.addEventListener('click', closeMenu);
 
-// Close menu when a link is clicked
+// Close menu when a link is clicked typewriter
 document.querySelectorAll('.mm-link').forEach(link => {
     link.addEventListener('click', closeMenu);
 });
