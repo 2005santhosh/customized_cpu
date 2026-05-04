@@ -15,37 +15,36 @@
     <!-- Icons: RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
-    <!-- Original CSS Link Preserved -->
+    <!-- CSS Link -->
     <link rel="stylesheet" href="../assets/css/index.css">
-     <!-- 4. SCHEMA.ORG (CRITICAL FOR GOOGLE BRAND SEARCH) -->
-    <!-- This code tells Google that COREX is a real Business/Organization. -->
-    <!-- The "alternateName": "Customized PC" helps capture users searching specifically for that term. -->
+
+    <!-- 4. SCHEMA.ORG (CRITICAL FOR GOOGLE BRAND SEARCH) -->
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "COREX",
-  "url": "https://core-x.in",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "IN"
-  },
-  "areaServed": "India",
-  "description": "Custom gaming PCs and workstations in India."
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "COREX",
+      "url": "https://core-x.in",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      },
+      "areaServed": "India",
+      "description": "Custom gaming PCs and workstations in India."
+    }
+    </script>
 </head>
 <body>
 
     <!-- NAV -->
     <header>
-        <a href="./index.html" class="logo">
-            <!-- Logo SVG icon (inline, no external image needed) -->
+        <a href="./index" class="logo">
             <img src="../assets/images/logo.jpeg" alt="CoreX Logo" class="logo-img">
             <span class="logo-text">CORE<span class="x-blue">X</span></span>
         </a>
 
-        <nav>
+        <!-- Desktop Nav -->
+        <nav class="desktop-nav">
             <ul>
                 <li><a href="#builds">Builds</a></li>
                 <li><a href="#components">Components</a></li>
@@ -56,88 +55,69 @@
         </nav>
 
         <div class="nav-right">
-            <a href="./login.html">
-            <button class="btn-build">
-                BUILD YOURS
-                <div class="plus-icon">+</div>
-            </button>
+            <!-- Changed Button Text to Login -->
+            <a href="./login" class="btn-login-link">
+                <button class="btn-build">LOGIN</button>
             </a>
+            <!-- Mobile Hamburger -->
             <button class="btn-menu" id="menuToggle" aria-label="Open menu">
-                <i class="ri-menu-3-line"></i>
+                <i class="ri-menu-4-line"></i>
             </button>
         </div>
     </header>
 
-    <!-- MOBILE DRAWER -->
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-    <div class="mobile-drawer" id="mobileDrawer">
-        <button class="mobile-close" id="menuClose"><i class="ri-close-line"></i></button>
-        <nav class="mobile-nav">
-            <ul>
-                <li><a href="#builds">Builds</a></li>
-                <li><a href="#components">Components</a></li>
-                <li><a href="#custom">Custom PC</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#support">Support</a></li>
-            </ul>
-        </nav>
-        <a href="./login.html" class="mobile-build-btn">Start Building</a>
+    <!-- MOBILE FULL SCREEN MENU OVERLAY -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mm-header">
+            <span class="mm-logo">CORE<span class="x-blue">X</span></span>
+            <button class="mm-close" id="menuClose"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="mm-content">
+            <nav class="mm-nav">
+                <a href="#builds" class="mm-link">Builds</a>
+                <a href="#components" class="mm-link">Components</a>
+                <a href="#custom" class="mm-link">Custom PC</a>
+                <a href="#about" class="mm-link">About</a>
+                <a href="#support" class="mm-link">Support</a>
+            </nav>
+            <div class="mm-footer">
+                <a href="./login" class="mm-cta">Login to Account</a>
+            </div>
+        </div>
     </div>
 
     <!-- ══════════════════════════════════════════ -->
-    <!-- VIDEO HERO — FULL WIDTH, ABOVE EVERYTHING -->
+    <!-- VIDEO HERO — FULL WIDTH -->
     <!-- ══════════════════════════════════════════ -->
     <section class="video-hero">
-
-        <!-- Background video — replace src with your actual video file -->
         <video
             class="video-hero-bg"
             autoplay muted loop playsinline
             poster="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg"
         >
-            <!-- Primary video source — swap path when you have a file -->
             <source src="../assets/images/bg.mp4" type="video/mp4">
-            <!-- Fallback: if no video loads, the poster image shows -->
         </video>
 
-        <!-- Dark overlay + grain -->
         <div class="video-hero-overlay"></div>
-
-        <!-- Blue radial glow behind text -->
         <div class="vh-glow"></div>
 
-        <!-- Centered content -->
         <div class="video-hero-content">
             <div class="vh-brand">
-                <!-- CORE in white -->
                 <span class="vh-core">CORE<span class="x-blue">X</span></span>
-
-                
             </div>
-
-            <!-- Tagline -->
             <p class="vh-tagline">Built for <span>Performance</span></p>
         </div>
 
-        <!-- Scroll hint -->
         <div class="vh-scroll-hint">
             <span>Scroll</span>
             <div class="vh-scroll-arrow"></div>
         </div>
-
     </section>
 
     <!-- ══════════════════════════════════════════ -->
-    <!-- ALL ORIGINAL SECTIONS BELOW — UNCHANGED   -->
+    <!-- HERO SECTION -->
     <!-- ══════════════════════════════════════════ -->
-
-    <!-- HERO -->
     <section class="hero" id="hero">
-        <div class="top-accent">
-            <div class="top-accent-dot"></div>
-            <div class="top-accent-line"></div>
-        </div>
-
         <!-- LEFT -->
         <div class="hero-left">
             <div>
@@ -148,7 +128,8 @@
                 <div class="hero-cta">
                     <span class="cta-label">Start Your Build</span>
                     <div class="cta-line"></div>
-                    <a href="./login.html" class="cta-circle">
+                    <!-- Updated Link to login.html -->
+                    <a href="./login" class="cta-circle">
                         <i class="ri-arrow-right-line"></i>
                     </a>
                 </div>
@@ -167,6 +148,7 @@
 
         <!-- CENTER -->
         <div class="hero-center">
+            <!-- Ghost Labels (Hidden on mobile for cleanliness) -->
             <div class="ghost-labels">
                 <div class="ghost-label gl-cpu1">CPU <span class="arrow">→</span></div>
                 <div class="ghost-label gl-cpu2">CPU <span class="arrow">→</span></div>
@@ -210,7 +192,8 @@
                     <div class="stat-label">Custom Built</div>
                 </div>
             </div>
-            <a href="./login.html" class="see-action">
+            <!-- Updated Link to login.html -->
+            <a href="./login" class="see-action">
                 <div class="see-action-text">
                     <span class="see-top">See COREX</span>
                     <span class="see-bot">In Action</span>
@@ -376,7 +359,7 @@
     <!-- FINAL CTA -->
     <section class="cta-section">
         <h2 class="cta-h2">YOUR <span>LEGACY</span><br>STARTS HERE.</h2>
-        <a href="./login.html" class="cta-btn">Start Building <i class="ri-arrow-right-line"></i></a>
+        <a href="./login" class="cta-btn">Start Building <i class="ri-arrow-right-line"></i></a>
     </section>
 
     <!-- FOOTER -->
@@ -385,8 +368,7 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <a href="#" class="logo" style="color:white;">
-                        <!-- Footer logo icon -->
-                       <img src="../assets/images/logo.jpeg" alt="CoreX Logo" class="logo-img">
+                        <img src="../assets/images/logo.jpeg" alt="CoreX Logo" class="logo-img">
                         <span>CORE<span class="x-blue">X</span></span>
                     </a>
                     <p>Custom gaming PCs & workstations built for those who demand the extreme.</p>
@@ -447,7 +429,8 @@
             <i class="ri-whatsapp-line"></i>
         </a>
     </div>
-    <!-- JavaScript -->
+
+    <!-- JavaScript Link -->
     <script src="../assets/js/index.js"></script>
 </body>
 </html>
