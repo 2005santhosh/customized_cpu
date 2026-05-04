@@ -19,8 +19,8 @@
     --white: #FFFFFF;
     --border: rgba(0,0,0,0.08);
     
-    /* Typography - Unified for ALL screen sizes */
-    --font-heading: 'Space Grotesk', sans-serif;
+    /* Typography */
+    --font-heading: 'Space Grotesk', sans-serif; /* Used for H1, H2 */
     --font-body: 'Inter', sans-serif;
 }
 
@@ -37,12 +37,12 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* ─── TYPOGRAPHY UTILS (Consistent Everywhere) ─── */
+/* ─── TYPOGRAPHY UTILS ─── */
 h1, h2, h3, h4, .hero-title, .vh-core, .features-h2, .beast-h2, .cta-h2, .metric-num, .logo, .beast-badge-val {
     font-family: var(--font-heading);
 }
 
-/* ─── NAVBAR (High-Opacity White Glass for Universal Visibility) ─── */
+/* ─── NAVBAR (White Glassmorphism) ─── */
 header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -53,16 +53,13 @@ header {
     align-items: center;
     justify-content: space-between;
     
-    /* 
-       GLASSMORPHISM SETTINGS:
-       Using high opacity (0.85) to create a consistent "Light Theme" background
-       so that dark text is readable on both the dark video and light sections.
-    */
-    background: rgba(255, 255, 255, 0.85); 
-    backdrop-filter: blur(24px);           /* Strong Blur */
-    -webkit-backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.6); /* Sharp glass edge */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05); /* Soft separation shadow */
+    /* 92% White Glass Background */
+    background: rgba(255, 255, 255, 0.92); 
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    
+    border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08); 
     
     transition: all 0.3s ease;
 }
@@ -76,7 +73,7 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
-    z-index: 101; /* Above mobile menu overlay */
+    z-index: 101;
 }
 
 .logo-img {
@@ -92,7 +89,7 @@ header {
 .logo-text { display: flex; align-items: center; gap: 0; }
 .logo .x-blue { color: var(--blue); }
 
-/* Desktop Nav - Updated Font Style */
+/* Desktop Nav - SYNE FONT APPLIED HERE */
 .desktop-nav ul {
     list-style: none;
     display: flex;
@@ -101,15 +98,15 @@ header {
 }
 
 .desktop-nav ul li a {
-    /* UPDATED FONT STYLE */
-    font-family: var(--font-heading); /* Space Grotesk */
-    font-weight: 700; /* Bold */
+    /* SYNE FONT - Bold & Uppercase */
+    font-family: 'Syne', sans-serif; 
+    font-weight: 800;
     font-size: 14px;
-    text-transform: uppercase; /* Uppercase for tech look */
-    letter-spacing: 1px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* Slight spacing for Syne */
     
-    /* COLORS - Dark text to contrast with white glass */
-    color: var(--mid);
+    /* Dark Text for contrast with White Glass */
+    color: var(--dark);
     text-decoration: none;
     transition: color 0.2s, transform 0.2s;
     position: relative;
@@ -150,23 +147,27 @@ header {
     border: none;
     border-radius: 50px;
     padding: 12px 28px;
-    font-family: var(--font-heading); /* Space Grotesk */
+    
+    /* SYNE FONT APPLIED TO BUTTON AS WELL */
+    font-family: 'Syne', sans-serif;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    
     cursor: pointer;
     transition: all 0.2s;
 }
 .btn-build:hover { background: var(--purple); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(107,43,255,0.4); }
 
-/* Mobile Menu Trigger - Glass Style */
+/* Mobile Menu Trigger */
 .btn-menu {
     display: none;
     width: 44px; height: 44px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0,0,0,0.05);
+    
     border-radius: 50%;
     cursor: pointer;
     align-items: center; justify-content: center;
@@ -177,11 +178,11 @@ header {
 .btn-menu:hover { 
     border-color: var(--purple); 
     color: var(--purple); 
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.8);
     transform: rotate(90deg);
 }
 
-/* ─── MOBILE FULL SCREEN MENU (Amazon Style) ─── */
+/* ─── MOBILE FULL SCREEN MENU ─── */
 .mobile-menu-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -240,10 +241,11 @@ header {
     text-align: center;
 }
 
+/* Mobile Links - SYNE FONT */
 .mm-link {
-    font-family: var(--font-heading);
+    font-family: 'Syne', sans-serif;
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 800;
     color: rgba(255,255,255,0.6);
     text-decoration: none;
     transition: color 0.3s, transform 0.3s;
@@ -256,8 +258,8 @@ header {
     padding: 16px 40px;
     background: var(--purple);
     color: white;
-    font-family: var(--font-heading);
-    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 50px;

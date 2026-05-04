@@ -196,7 +196,7 @@
     <nav class="navbar">
       <div class="container">
         <div class="nav-inner">
-          <a href="shop.html" class="logo">
+          <a href="shop" class="logo">
            <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
             <span class="logo-name">CORE<span>X</span></span>
           </a>
@@ -211,7 +211,7 @@
                 <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
               </div>
             </div>
-            <a href="cart.html" class="icon-btn" style="position:relative;">
+            <a href="cart" class="icon-btn" style="position:relative;">
               <i class="ri-shopping-bag-3-line"></i>
               <span class="badge" id="cartBadge">0</span>
             </a>
@@ -219,13 +219,13 @@
         </div>
     
         <div class="nav-mobile">
-          <a href="shop.html" class="logo">
+          <a href="shop" class="logo">
             <div class="logo-mark" style="width:32px;height:32px;font-size:17px;">CX</div>
             <span class="logo-name" style="font-size:22px;">CORE<span>X</span></span>
           </a>
           <div style="display:flex;gap:8px;">
             <button class="icon-btn" style="width:38px;height:38px;" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
-            <a href="cart.html" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
+            <a href="cart" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
               <i class="ri-shopping-bag-3-line"></i>
               <span class="badge" id="cartBadgeMobile">0</span>
             </a>
@@ -235,7 +235,7 @@
     </nav>
 
     <main class="container">
-        <a href="all-products.html" class="btn-back"><i class="ri-arrow-left-line"></i> Back to Catalog</a>
+        <a href="all-products" class="btn-back"><i class="ri-arrow-left-line"></i> Back to Catalog</a>
         
         <div class="product-detail-container">
             <!-- LEFT COLUMN: IMAGE ONLY -->
@@ -276,7 +276,7 @@
                     <button id="detailAddBtn" class="btn btn-cart btn-lg">
                         <i class="ri-shopping-cart-2-line"></i> Add to Cart
                     </button>
-                    <a href="all-products.html" class="btn btn-view">View More</a>
+                    <a href="all-products" class="btn btn-view">View More</a>
                 </div>
             </div>
         </div>
@@ -294,7 +294,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="shop.html" class="logo" style="margin-bottom: 20px; display:inline-block;">
+                    <a href="shop" class="logo" style="margin-bottom: 20px; display:inline-block;">
                         <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
                         <span class="logo-name">CORE<span>X</span></span>
                     </a>
@@ -475,7 +475,7 @@
         function handleLogout() { 
             localStorage.clear(); 
             showToast("Logging out...", "info");
-            setTimeout(() => window.location.href = 'shop.html', 1000);
+            setTimeout(() => window.location.href = 'shop', 1000);
         }
 
         // --- TOAST SYSTEM ---
@@ -496,7 +496,7 @@
             const product = productsData.find(p => p.id === productId);
             
             if(!product) {
-                document.querySelector('.container').innerHTML = '<div style="padding:100px; text-align:center;"><h1 class="pd-title">Product not found</h1><a href="shop.html" class="btn-back" style="font-size:16px; margin-top:20px;">Go Back</a></div>';
+                document.querySelector('.container').innerHTML = '<div style="padding:100px; text-align:center;"><h1 class="pd-title">Product not found</h1><a href="shop" class="btn-back" style="font-size:16px; margin-top:20px;">Go Back</a></div>';
                 return;
             }
 
@@ -550,7 +550,7 @@
             recommended.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'rec-card';
-                card.innerHTML = `<a href="product-details.html?id=${p.id}" style="text-decoration:none; color:inherit; height:100%; display:flex; flex-direction:column;"><div class="rec-top"><img src="${p.img}" alt="${p.name}"></div><div class="rec-bottom"><div class="rec-name">${p.name}</div><div class="rec-price">${p.price}</div></div></a>`;
+                card.innerHTML = `<a href="product-details?id=${p.id}" style="text-decoration:none; color:inherit; height:100%; display:flex; flex-direction:column;"><div class="rec-top"><img src="${p.img}" alt="${p.name}"></div><div class="rec-bottom"><div class="rec-name">${p.name}</div><div class="rec-price">${p.price}</div></div></a>`;
                 recGrid.appendChild(card);
             });
 

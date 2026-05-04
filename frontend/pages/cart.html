@@ -193,7 +193,7 @@
         <div class="container">
             <!-- Desktop Nav -->
             <div class="nav-desktop">
-                <a href="shop.html" class="nav-logo">
+                <a href="shop" class="nav-logo">
                     <span class="core-text">CORE</span>
                     
                     <!-- Custom Asymmetric X Icon with Gradient -->
@@ -220,7 +220,7 @@
                             <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
                         </div>
                     </button>
-                    <a href="cart.html" class="icon-btn">
+                    <a href="cart" class="icon-btn">
                         <i class="ri-shopping-cart-line"></i>
                         <span class="badge" id="cartBadge">0</span>
                     </a>
@@ -229,7 +229,7 @@
             
             <!-- Mobile Nav -->
             <div class="nav-mobile">
-                <a href="shop.html" class="nav-logo">
+                <a href="shop" class="nav-logo">
                     <span class="core-text">CORE</span>
                     
                     <!-- Copy of Icon with Unique Gradient ID for Mobile -->
@@ -246,7 +246,7 @@
                 </a>
                 <div class="mobile-nav-right">
                     <button class="icon-btn" onclick="toggleProfile()"><i class="ri-user-line"></i></button>
-                    <a href="cart.html" class="icon-btn">
+                    <a href="cart" class="icon-btn">
                         <i class="ri-shopping-cart-line"></i>
                         <span class="badge" id="cartBadgeMobile">0</span>
                     </a>
@@ -258,14 +258,14 @@
     <main class="container">
         <div class="cart-header">
             <h1>Shopping Cart</h1>
-            <a href="shop.html" class="btn btn-view" style="padding: 8px 16px;">Continue Shopping</a>
+            <a href="shop" class="btn btn-view" style="padding: 8px 16px;">Continue Shopping</a>
         </div>
 
         <!-- Empty State -->
         <div id="emptyCart" class="empty-cart-msg">
             <i class="ri-shopping-cart-line"></i>
             <p>Your cart is empty.</p>
-            <a href="shop.html" class="btn btn-cart" style="width: auto; margin-top: 20px;">Start Shopping</a>
+            <a href="shop" class="btn btn-cart" style="width: auto; margin-top: 20px;">Start Shopping</a>
         </div>
 
         <!-- Cart Items List (Desktop: Row, Mobile: Stack) -->
@@ -381,7 +381,7 @@
         function handleLogout() { 
             localStorage.clear(); 
             showToast("Logging out...", "info");
-            setTimeout(() => window.location.href = 'index.html', 1000);
+            setTimeout(() => window.location.href = 'index', 1000);
         }
 
         // --- TOAST SYSTEM ---

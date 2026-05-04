@@ -145,7 +145,7 @@
     <nav class="navbar">
       <div class="container">
         <div class="nav-inner">
-          <a href="shop.html" class="logo">
+          <a href="shop" class="logo">
             <img src="../assets/images/logo.jpeg" alt="COREX" class="logo-mark">
             <span class="logo-name">CORE<span>X</span></span>
           </a>
@@ -160,7 +160,7 @@
                 <button class="logout-btn" onclick="handleLogout()"><i class="ri-logout-box-r-line"></i> Logout</button>
               </div>
             </div>
-            <a href="cart.html" class="icon-btn" style="position:relative;">
+            <a href="cart" class="icon-btn" style="position:relative;">
               <i class="ri-shopping-bag-3-line"></i>
               <span class="badge" id="cartBadge">0</span>
             </a>
@@ -168,13 +168,13 @@
         </div>
     
         <div class="nav-mobile">
-          <a href="shop.html" class="logo">
+          <a href="shop" class="logo">
             <div class="logo-mark" style="width:32px;height:32px;font-size:17px;">CX</div>
             <span class="logo-name" style="font-size:22px;">CORE<span>X</span></span>
           </a>
           <div style="display:flex;gap:8px;">
             <button class="icon-btn" style="width:38px;height:38px;" onclick="toggleProfile()"><i class="ri-user-3-line"></i></button>
-            <a href="cart.html" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
+            <a href="cart" class="icon-btn" style="width:38px;height:38px;position:relative;display:flex;align-items:center;justify-content:center;">
               <i class="ri-shopping-bag-3-line"></i>
               <span class="badge" id="cartBadgeMobile">0</span>
             </a>
@@ -190,7 +190,7 @@
                 <h1 class="sec-title" id="pageTitle">All <span>Products</span></h1>
                 <p style="color:var(--white-faint); margin-top:5px; font-size:14px; font-family:var(--font-mono);" id="resultCount">Showing all items</p>
             </div>
-            <button class="btn-reset" onclick="window.location.href='all-products.html'">
+            <button class="btn-reset" onclick="window.location.href='all-products'">
                 <i class="ri-refresh-line"></i> Reset Filter
             </button>
         </div>
@@ -327,7 +327,7 @@
                         <p class="p-desc">${p.desc}</p>
                         <div class="p-price">${p.price}</div>
                         <div class="p-actions">
-                            <a href="product-details.html?id=${p.id}" class="btn-view">View</a>
+                            <a href="product-details?id=${p.id}" class="btn-view">View</a>
                             <button class="btn-cart" onclick="addToCart(this, ${p.id})">
                                 <i class="ri-shopping-cart-2-line"></i> Add
                             </button>
@@ -407,7 +407,7 @@
             localStorage.clear(); 
             showToast("Logging out...", "info");
             setTimeout(() => {
-                window.location.href = 'shop.html'; 
+                window.location.href = 'shop'; 
             }, 1000);
         }
 
