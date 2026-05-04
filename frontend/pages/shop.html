@@ -20,7 +20,6 @@
   --amber-bright: #fbbf24;
   --amber-dim: #92400e;
   --amber-glow: rgba(245,158,11,0.18);
-  --amber-glow-lg: rgba(245,158,11,0.08);
   --cyan: #22d3ee;
   --cyan-dim: #0e7490;
   --cyan-glow: rgba(34,211,238,0.15);
@@ -30,7 +29,6 @@
   --white-faint: #3d4457;
   --border: rgba(255,255,255,0.07);
   --border-amber: rgba(245,158,11,0.25);
-  --border-cyan: rgba(34,211,238,0.2);
   --font-display: 'Bebas Neue', sans-serif;
   --font-ui: 'Barlow Condensed', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -56,7 +54,6 @@ a{text-decoration:none;color:inherit;}ul{list-style:none;}img{display:block;max-
 .logo-name{font-family:var(--font-display);font-size:26px;letter-spacing:2px;color:var(--white);line-height:1;}
 .logo-name span{color:var(--amber);}
 
-/* Centered search */
 .nav-search{flex:1;max-width:440px;position:relative;margin:0 auto;}
 .nav-search input{width:100%;background:var(--ink-3);border:1px solid var(--border);color:var(--white);font-family:var(--font-body);font-size:13px;padding:10px 40px 10px 16px;border-radius:var(--r);transition:0.25s;}
 .nav-search input::placeholder{color:var(--white-faint);}
@@ -85,7 +82,6 @@ a{text-decoration:none;color:inherit;}ul{list-style:none;}img{display:block;max-
 .slide.active{opacity:1;}
 .slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
 
-/* No text overlay on hero - only bottom left button */
 .hero-btn-wrap{position:absolute;bottom:40px;left:50px;z-index:10;}
 .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--amber);color:var(--ink);font-family:var(--font-ui);font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 30px;border-radius:var(--r);transition:0.25s;border:none;cursor:pointer;position:relative;overflow:hidden;}
 .btn-primary::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);transform:translateX(-100%);transition:transform 0.35s ease;}
@@ -128,7 +124,7 @@ section{margin-bottom:80px;position:relative;z-index:2;}
 .chip-item span{font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:0.5px;color:var(--white-dim);}
 .chip-item:hover span{color:var(--amber);}
 
-/* ─── PRE-BUILTS GRID (4 cards now, no design-your-own) ─── */
+/* ─── PRE-BUILTS GRID ─── */
 .prebuilts-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;}
 @media(max-width:900px){.prebuilts-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:560px){.prebuilts-grid{grid-template-columns:1fr;}}
@@ -196,11 +192,7 @@ section{margin-bottom:80px;position:relative;z-index:2;}
 /* ═══════════════════════════════════════
    PC CONFIGURATOR SECTION
 ═══════════════════════════════════════ */
-#configurator-section {
-  margin-bottom: 80px;
-  position: relative;
-  z-index: 2;
-}
+#configurator-section { margin-bottom: 80px; position: relative; z-index: 2; }
 
 .config-wrap {
   display: grid;
@@ -235,12 +227,11 @@ section{margin-bottom:80px;position:relative;z-index:2;}
 .config-visual-img {
   position: relative;
   z-index: 5;
-  /* width: 85%; */
-  /* height: 100%; */
-  /* max-width: 440px; */
   filter: drop-shadow(0 0 40px rgba(245,158,11,0.4)) drop-shadow(0 0 80px rgba(34,211,238,0.2));
   animation: floatPC 4s ease-in-out infinite;
   transition: filter 0.6s ease;
+  max-height: 80%;
+  width: auto;
 }
 @keyframes floatPC {
   0%,100%{transform:translateY(0) rotate(-1deg);}
@@ -426,9 +417,7 @@ section{margin-bottom:80px;position:relative;z-index:2;}
 .platform-card.selected .check-mark { opacity: 1; transform: scale(1); }
 
 /* Component groups */
-.comp-group {
-  margin-bottom: 18px;
-}
+.comp-group { margin-bottom: 18px; }
 .comp-group-label {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -465,10 +454,7 @@ section{margin-bottom:80px;position:relative;z-index:2;}
 .comp-select option { background: var(--panel-2); color: var(--white); }
 
 /* Sub-group for expandable options */
-.sub-select-wrap {
-  margin-top: 8px;
-  display: none;
-}
+.sub-select-wrap { margin-top: 8px; display: none; }
 .sub-select-wrap.visible { display: block; }
 
 /* Config navigation */
@@ -506,12 +492,7 @@ section{margin-bottom:80px;position:relative;z-index:2;}
 .btn-config-next:disabled { background: var(--white-faint); color: var(--ink-3); cursor: not-allowed; box-shadow: none; }
 
 /* Summary step */
-.summary-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
-}
+.summary-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
 .summary-row {
   display: flex;
   justify-content: space-between;
@@ -523,23 +504,10 @@ section{margin-bottom:80px;position:relative;z-index:2;}
   border-radius: var(--r);
   font-size: 12px;
 }
-.summary-row-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  color: var(--amber);
-  text-transform: uppercase;
-  margin-bottom: 3px;
-}
-.summary-row-val {
-  font-family: var(--font-ui);
-  font-size: 13px;
-  color: var(--white);
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-align: right;
-  max-width: 60%;
-}
+.summary-row-header { display: flex; flex-direction: column; gap: 4px; }
+.summary-row-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 1.5px; color: var(--amber); text-transform: uppercase; }
+.summary-row-type { font-size: 10px; color: var(--white-dim); margin-top: 2px; }
+.summary-row-val { font-family: var(--font-ui); font-size: 13px; color: var(--white); font-weight: 600; letter-spacing: 0.3px; text-align: right; max-width: 60%; }
 
 .btn-confirm-order {
   width: 100%;
@@ -586,7 +554,7 @@ section{margin-bottom:80px;position:relative;z-index:2;}
 .name-input-wrap input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-glow); }
 .name-input-wrap input::placeholder { color: var(--white-faint); }
 
-/* ─── DELIVERY SECTION with India image ─── */
+/* ─── DELIVERY SECTION ─── */
 .delivery-wrap{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;display:flex;min-height:440px;position:relative;z-index:2;}
 .delivery-wrap::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(245,158,11,0.03) 1px, transparent 1px),linear-gradient(90deg, rgba(245,158,11,0.03) 1px, transparent 1px);background-size:44px 44px;pointer-events:none;}
 .del-content{padding:60px;flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
@@ -597,102 +565,26 @@ section{margin-bottom:80px;position:relative;z-index:2;}
 .del-stat-num{font-family:var(--font-display);font-size:30px;color:var(--amber);}
 .del-stat-label{font-size:11px;color:var(--white-faint);margin-top:2px;font-family:var(--font-mono);letter-spacing:1px;}
 
-/* India image section */
 .del-map{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:300px;}
-.india-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  inset: 0;
-  filter: saturate(0.5) brightness(0.45);
-}
-.del-map::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(to right, var(--panel) 0%, transparent 30%, transparent 70%, var(--panel) 100%);
-}
+.india-img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; filter: saturate(0.5) brightness(0.45); }
+.del-map::before { content: ''; position: absolute; inset: 0; z-index: 2; background: linear-gradient(to right, var(--panel) 0%, transparent 30%, transparent 70%, var(--panel) 100%); }
 
-/* Delivery route animation */
-.delivery-route-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-}
-.route-path {
-  fill: none;
-  stroke: var(--amber);
-  stroke-width: 1.5;
-  stroke-dasharray: 6 8;
-  opacity: 0.5;
-  stroke-dashoffset: 0;
-  animation: dashMove 4s linear infinite;
-}
+.delivery-route-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; }
+.route-path { fill: none; stroke: var(--amber); stroke-width: 1.5; stroke-dasharray: 6 8; opacity: 0.5; stroke-dashoffset: 0; animation: dashMove 4s linear infinite; }
 @keyframes dashMove { to { stroke-dashoffset: -100; } }
 
-.city-ping {
-  position: absolute;
-  z-index: 5;
-  transform: translate(-50%, -50%);
-}
-.city-ping::before {
-  content: '';
-  display: block;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--amber);
-  box-shadow: 0 0 12px var(--amber), 0 0 24px rgba(245,158,11,0.4);
-  animation: cityPulse 2s ease-in-out infinite;
-}
-.city-ping::after {
-  content: '';
-  display: block;
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(245,158,11,0.35);
-  position: absolute;
-  top: -8px; left: -8px;
-  animation: cityRing 2s ease-out infinite;
-}
+.city-ping { position: absolute; z-index: 5; transform: translate(-50%, -50%); }
+.city-ping::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 12px var(--amber), 0 0 24px rgba(245,158,11,0.4); animation: cityPulse 2s ease-in-out infinite; }
+.city-ping::after { content: ''; display: block; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid rgba(245,158,11,0.35); position: absolute; top: -8px; left: -8px; animation: cityRing 2s ease-out infinite; }
 @keyframes cityPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(0.85);opacity:0.6;}}
 @keyframes cityRing{0%{transform:scale(0.4);opacity:1;}100%{transform:scale(2.2);opacity:0;}}
 
-.travel-dot {
-  position: absolute;
-  z-index: 6;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 14px var(--cyan);
-  animation: travelAcross 6s linear infinite;
-}
+.travel-dot { position: absolute; z-index: 6; width: 10px; height: 10px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 14px var(--cyan); animation: travelAcross 6s linear infinite; }
 .travel-dot:nth-child(2) { animation-delay: -2s; background: var(--amber); box-shadow: 0 0 14px var(--amber); }
 .travel-dot:nth-child(3) { animation-delay: -4s; }
-@keyframes travelAcross {
-  0% { left: 20%; top: 70%; }
-  25% { left: 35%; top: 40%; }
-  50% { left: 55%; top: 30%; }
-  75% { left: 65%; top: 55%; }
-  100% { left: 80%; top: 65%; }
-}
+@keyframes travelAcross { 0% { left: 20%; top: 70%; } 25% { left: 35%; top: 40%; } 50% { left: 55%; top: 30%; } 75% { left: 65%; top: 55%; } 100% { left: 80%; top: 65%; } }
 
-.city-label {
-  position: absolute;
-  z-index: 7;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 1px;
-  color: rgba(245,158,11,0.8);
-  text-transform: uppercase;
-  white-space: nowrap;
-  transform: translateX(-50%);
-  margin-top: 16px;
-}
-
+.city-label { position: absolute; z-index: 7; font-family: var(--font-mono); font-size: 9px; letter-spacing: 1px; color: rgba(245,158,11,0.8); text-transform: uppercase; white-space: nowrap; transform: translateX(-50%); margin-top: 16px; }
 @media(max-width:768px){.delivery-wrap{flex-direction:column;}.del-content{padding:40px 28px;}.del-map{height:300px;}}
 
 /* ─── FOOTER ─── */
@@ -804,7 +696,6 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
     <!-- ══ HERO ══ -->
     <section class="hero reveal">
       <div class="hero-wrap" id="heroCarousel">
-
         <div class="slide active">
           <div class="slide-bg" style="background-image:url('../assets/images/gaming.png');"></div>
         </div>
@@ -815,7 +706,6 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
           <div class="slide-bg" style="background-image:url('../assets/images/gaming3.png');"></div>
         </div>
 
-        <!-- Single button bottom left -->
         <div class="hero-btn-wrap">
           <button class="btn-primary" onclick="document.getElementById('configurator-section').scrollIntoView({behavior:'smooth'})">
             Build Your PC <i class="ri-arrow-right-line"></i>
@@ -877,7 +767,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
       </div>
     </div>
 
-    <!-- ══ PRE-BUILTS (4 cards, no design-your-own) ══ -->
+    <!-- ══ PRE-BUILTS ─── -->
     <section class="reveal">
       <div class="sec-header">
         <div>
@@ -992,10 +882,10 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
             alt="PC Build" />
 
           <!-- Floating spec tags -->
-          <!-- <div class="spec-float sf1" id="sfCpu">i9-14900K</div>
-          <div class="spec-float sf2" id="sfGpu">RTX 5090</div>
-          <div class="spec-float sf3" id="sfRam">DDR5 128GB</div>
-          <div class="spec-float sf4" id="sfPsu">1200W</div> -->
+          <div class="spec-float sf1" id="sfCpu">Ryzen 7600</div>
+          <div class="spec-float sf2" id="sfGpu">RTX 4090</div>
+          <div class="spec-float sf3" id="sfRam">DDR5 32GB</div>
+          <div class="spec-float sf4" id="sfPsu">1000W</div>
         </div>
 
         <!-- RIGHT: Config Panel -->
@@ -1053,8 +943,6 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
         <div class="del-map" id="delMap">
           <img class="india-img" src="../assets/images/india.png" alt="India Map">
 
-          <!-- Overlay gradient handled by ::before  .html-->
-
           <!-- SVG routes -->
           <svg class="delivery-route-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path class="route-path" d="M25,75 Q35,50 45,35 Q55,20 70,28"/>
@@ -1069,13 +957,6 @@ footer{background:var(--ink-2);border-top:1px solid var(--border);position:relat
           <div class="city-ping" style="left:68%;top:35%;animation-delay:0.4s;"></div>
           <div class="city-ping" style="left:48%;top:72%;animation-delay:1.8s;"></div>
           <div class="city-ping" style="left:35%;top:42%;animation-delay:2.2s;"></div>
-
-          <!-- City labels -->
-          <!-- <div class="city-label" style="left:42%;top:20%;">Delhi</div>
-          <div class="city-label" style="left:55%;top:47%;">Hyderabad</div>
-          <div class="city-label" style="left:28%;top:54%;">Mumbai</div>
-          <div class="city-label" style="left:68%;top:27%;">Kolkata</div>
-          <div class="city-label" style="left:48%;top:64%;">Bangalore</div> -->
 
           <!-- Traveling dots -->
           <div class="travel-dot"></div>
@@ -1338,22 +1219,112 @@ function initParticles() {
 }
 
 /* ═══════════════════════════════════════
-   PC CONFIGURATOR LOGIC
+   FIXED CONFIGURATOR LOGIC
 ═══════════════════════════════════════ */
-const TOTAL_STEPS = 10;
-let configStep = 1;
+
+// 1. THE CONFIGURATION STATE
 let config = {
-  platform: '', cpu: '', mobo: '', ram: '', gpu: '',
-  psu: '', pcCase: '', cooler: '', storage1: '', storage2: ''
+  platform: "",
+  cpu: { type: "", model: "" },
+  motherboard: { type: "", model: "" },
+  ram: { type: "", model: "" },
+  gpu: { type: "", model: "" },
+  psu: { type: "", model: "" },
+  case: { type: "", model: "" },
+  cooler: { type: "", model: "" },
+  storage1: { type: "", model: "" },
+  storage2: { type: "", model: "" }
 };
 
-const PC_IMAGES = {
-  default: 'https://elitehubs.com/cdn/shop/files/3500X_248211ee-10ee-4305-b6bd-4344d321814a.png?v=1752067458',
-//   intel: 'https://m.media-amazon.com/images/I/619zuGzOcbL._AC_UF1000,1000_QL80_.jpg',
-//   amd: 'https://vrlatech.com/wp-content/uploads/2024/09/XPG-Invader-RTX-3070-Gaming-PC--scaled.jpg',
-//   highend: 'https://microless.com/cdn/products/c1ebe50d30d538a0c1e445dc558bf63c-hi.jpg',
-//   mid: 'https://m.media-amazon.com/images/I/81BZIv5DWML._AC_UF1000,1000_QL80_.jpg',
+// 2. COMPONENT DATABASE
+const COMPONENT_DB = {
+  cpu: {
+    AMD: {
+      "Ryzen 5": ["5500", "5600GT", "5600", "7600", "7600X", "8500G", "8600G", "9600X"],
+      "Ryzen 7": ["7700", "7700X", "8700G", "9700X", "9800X3D", "7800X3D"],
+      "Ryzen 9": ["7900X", "9900X", "9950X", "9900X3D", "9950X3D", "7950X", "7950X3D"],
+      "Threadripper": ["9960X", "9970X", "9980X"],
+      "Threadripper Pro": ["9955WX", "9965WX", "9975WX", "9985WX", "9995WX"]
+    },
+    Intel: {
+      "Core i5": ["12400", "12400F", "13400F", "14400F", "12600K", "13600K", "14600K"],
+      "Core i7": ["12700K", "13700K", "14700K", "14700KF", "14700"],
+      "Core i9": ["12900K", "13900K", "14900K", "14900KS"]
+    }
+  },
+  mobo: {
+    // Keys correspond to Sockets returned by getSocketFromCpu
+    AM4: {
+      "Entry (B450/B550)": ["MSI B550M PRO-VDH WIFI", "ASRock B450M Steel Legend", "ASUS TUF B450-PLUS GAMING"],
+      "High-End (X570)": ["ASUS ROG Strix X570-E Gaming", "MSI MEG X570 ACE", "Gigabyte X570 AORUS MASTER"]
+    },
+    AM5: {
+      "Entry (B650)": ["MSI B650M-A WiFi", "ASRock B650E Steel Legend", "Gigabyte B650M DS3H"],
+      "Mid (B650 Premium)": ["ASUS TUF Gaming B650-Plus WiFi", "MSI MAG B650 TOMAHAWK MAX WIFI", "ASUS ROG Strix B650-F Gaming"],
+      "High-End (X670/X870)": ["ASUS ROG Crosshair X670E Hero", "MSI MEG X670E ACE", "ASRock X870E Taichi"],
+      "Workstation (TRX50)": ["ASUS Pro WS TRX50-SAGE WIFI", "MSI TRX50 SERVER"]
+    },
+    LGA1700: {
+      "Entry (B660/B760)": ["MSI B760M-A WiFi", "Gigabyte B760M DS3H DDR4", "ASUS TUF Gaming B760M-Plus"],
+      "Mid (Z690/Z790 Entry)": ["ASUS ROG Strix Z790-A Gaming WiFi", "MSI PRO Z790-A WIFI"],
+      "High-End (Z790 Premium)": ["ASUS ROG MAXIMUS Z790 HERO", "MSI MEG Z790 GODLIKE", "Gigabyte Z790 AORUS MASTER"],
+      "Workstation (W790)": ["ASUS Pro WS W790E-SAGE SE", "Gigabyte W790 ACE"]
+    },
+    TRX50: {
+      "Workstation": ["ASUS Pro WS TRX50-SAGE WIFI", "MSI TRX50 SERVER"]
+    }
+  },
+  ram: {
+    DDR4: {
+      "16GB (8x2)": ["Corsair Vengeance LPX 3200MHz", "G.Skill Ripjaws V 3200MHz", "Kingston Fury Beast"],
+      "32GB (16x2)": ["Corsair Vengeance LPX 3600MHz", "G.Skill Ripjaws V 3600MHz", "TeamGroup T-Force Vulcan Z"],
+      "64GB (32x2)": ["G.Skill Ripjaws V 32GBx2 3200MHz", "Kingston Fury Renegade"]
+    },
+    DDR5: {
+      "32GB (16x2)": ["Corsair Vengeance 5200MHz", "G.Skill Ripjaws S5 5600MHz", "Kingston Fury Beast 5600MHz"],
+      "64GB (32x2)": ["G.Skill Trident Z5 RGB 6000MHz", "Corsair Dominator Titanium 6600MHz", "G.Skill Ripjaws S5 6000MHz"],
+      "96GB (48x2)": ["G.Skill Trident Z5 RGB 48GBx2", "Corsair Vengeance RGB 96GB"],
+      "128GB (32x4)": ["G.Skill Trident Z5 RGB 32GBx4 6000MHz", "TeamGroup T-Force Delta RGB 32GBx4"],
+      "Workstation ECC": ["Kingston Server Premier DDR5 ECC", "Samsung ECC DDR5 RDIMM"]
+    }
+  },
+  gpu: {
+    "Entry": ["NVIDIA RTX 3050", "AMD RX 6600", "AMD RX 7600", "Intel Arc A750"],
+    "Mid Range": ["NVIDIA RTX 4060", "NVIDIA RTX 4060 Ti 8GB", "NVIDIA RTX 4060 Ti 16GB", "AMD RX 7700 XT", "AMD RX 7800 XT"],
+    "High-End": ["NVIDIA RTX 4070", "NVIDIA RTX 4070 Ti Super", "AMD RX 7900 GRE", "AMD RX 7900 XT"],
+    "Enthusiast": ["NVIDIA RTX 4080 Super", "NVIDIA RTX 4090", "AMD RX 7900 XTX"],
+    "Workstation": ["NVIDIA RTX A4000", "NVIDIA RTX A5000", "NVIDIA RTX A6000", "NVIDIA RTX 6000 Ada"]
+  },
+  psu: {
+    "Bronze": ["Cooler Master MWE 450W", "Antec HCG 650W Bronze"],
+    "Gold": ["Corsair RM650e 2023", "Corsair RM750e 2023", "Corsair RM850e 2023", "Cooler Master MWE Gold 850W V2", "SuperFlower Leadex III 750W Gold"],
+    "Platinum": ["Corsair HX1000i", "Corsair HX1500i", "ASUS ROG Thor 1000W Platinum", "Seasonic Vertex 1000W"],
+    "Titanium": ["Corsair AX1600i", "be quiet! Straight Power T11 1200W", "SuperFlower Leadex VII 1200W Ti"]
+  },
+  case: {
+    "Budget Airflow": ["Deepcool CC560", "NZXT H510 Flow", "Cooler Master MasterBox Q300L"],
+    "Mid RGB ATX": ["Lian Li Lancool 216", "NZXT H6 Flow", "Cooler Master HAF 500", "Corsair 4000D Airflow RGB"],
+    "Premium Showcase": ["Lian Li O11 Dynamic EVO RGB", "Hyte Y60 Touch", "Fractal Design North XL", "Corsair 7000D Airflow"],
+    "Full Tower": ["Cooler Master HAF 700 EVO", "Lian Li O11 Dynamic XL", "Fractal Define 7 XL", "Corsair 9000D"]
+  },
+  cooler: {
+    "Air Cooler": ["Noctua NH-D15", "Deepcool AK620", "Be Quiet! Dark Rock Pro 5", "Thermalright Peerless Assassin 120 SE"],
+    "240mm AIO": ["NZXT Kraken 240 RGB", "Corsair H100i Elite Capellix", "Deepcool LS520 SE"],
+    "360mm AIO": ["NZXT Kraken 360 RGB", "Corsair H150i Elite Capellix", "Deepcool LT520", "Arctic Liquid Freezer III 360"],
+    "420mm AIO": ["NZXT Kraken Elite 360 RGB", "Corsair iCUE H170i Elite LCD", "Deepcool LS720", "EKWB Nucleus CR360 Lux D-RGB"],
+    "Workstation": ["Noctua NH-D15 TR4-SP3", "SilverStone IceMyst 360"]
+  },
+  storage: {
+    "Gen4 NVMe": ["Samsung 990 Pro 1TB", "WD Black SN850X 1TB", "Corsair MP600 Core", "Gigabyte Aorus Gen4 7000s"],
+    "Gen5 NVMe": ["Crucial T700 2TB", "Corsair MP700 2TB", "MSI Spatium M580 2TB", "Samsung 990 Pro 4TB"],
+    "HDD": ["WD Blue 1TB 7200RPM", "Seagate BarraCuda 2TB", "Toshiba N300 4TB"],
+    "None": ["None"]
+  }
 };
+
+// 3. STATE HELPERS
+let configStep = 1;
+const TOTAL_STEPS = 10;
 
 const stepTitles = [
   { label:'Step 1 of 10', title:'Choose a <span>Platform</span>' },
@@ -1367,6 +1338,37 @@ const stepTitles = [
   { label:'Step 9 of 10', title:'Choose <span>Primary Storage</span>' },
   { label:'Step 10 of 10', title:'Build <span>Summary</span>' },
 ];
+
+// Helper: deduce socket from CPU - FIXED LOGIC
+function getSocketFromCpu(cpuModel) {
+  if(!cpuModel) return null;
+  const m = cpuModel.toLowerCase();
+
+  // Workstation
+  if(m.includes("threadripper")) return "TRX50";
+
+  // AM5 (7000 Series, 8000G, 9000 Series)
+  // Note: 5600GT is AM4, 7600 is AM5.
+  if(m.includes("7600") || m.includes("7700") || m.includes("7800") || m.includes("7900") || m.includes("7950") ||
+     m.includes("8000") || m.includes("9000")) {
+    return "AM5";
+  }
+
+  // AM4 (5000 Series and lower)
+  if(m.includes("5500") || m.includes("5600") || m.includes("5700") || m.includes("5800") || m.includes("5900") ||
+     m.includes("3600") || m.includes("3700") || m.includes("3800") || m.includes("3900")) {
+    return "AM4";
+  }
+
+  // Intel
+  if(m.includes("124") || m.includes("125") || m.includes("134") || m.includes("135") || 
+     m.includes("144") || m.includes("145") || m.includes("126") || m.includes("136") || 
+     m.includes("146") || m.includes("127") || m.includes("137") || m.includes("147") || 
+     m.includes("129") || m.includes("139") || m.includes("149")) return "LGA1700";
+
+  // Fallback if nothing matches (should not happen with provided list)
+  return "AM5";
+}
 
 function buildProgress(current) {
   const prog = document.getElementById('configProgress');
@@ -1390,92 +1392,6 @@ function updateStepUI() {
   } else {
     nextBtn.style.display = 'flex';
     nextBtn.innerHTML = configStep === 9 ? 'See Summary <i class="ri-list-check"></i>' : 'Next <i class="ri-arrow-right-line"></i>';
-  }
-}
-
-function updateVisual() {
-  const img = document.getElementById('configPcImg');
-  let src = PC_IMAGES.default;
-  if(config.platform === 'AMD') src = PC_IMAGES.default;
-  else if(config.platform === 'Intel') src = PC_IMAGES.default;
-  if(config.gpu && (config.gpu.includes('5090') || config.gpu.includes('5080') || config.gpu.includes('A6000'))) src = PC_IMAGES.default;
-  img.style.opacity = '0';
-  img.style.transform = 'scale(0.95)';
-  setTimeout(() => {
-    img.src = src;
-    img.style.opacity = '1';
-    img.style.transform = '';
-    img.style.transition = 'opacity 0.5s, transform 0.5s';
-  }, 300);
-
-  // Update floating tags
-  const sfCpu = document.getElementById('sfCpu');
-  const sfGpu = document.getElementById('sfGpu');
-  const sfRam = document.getElementById('sfRam');
-  const sfPsu = document.getElementById('sfPsu');
-  if(config.cpu) sfCpu.textContent = config.cpu.split(' ').slice(0,3).join(' ');
-  if(config.gpu) sfGpu.textContent = config.gpu.split(' ').slice(0,3).join(' ');
-  if(config.ram) sfRam.textContent = config.ram.split(' ').slice(0,3).join(' ');
-  if(config.psu) sfPsu.textContent = config.psu.split(' ').slice(0,2).join(' ');
-}
-
-function getVal(id) {
-  const el = document.getElementById(id);
-  return el ? el.value : '';
-}
-
-function configNext() {
-  // save current step value
-  switch(configStep) {
-    case 1: {
-      const sel = document.querySelector('.platform-card.selected');
-      if(!sel) { showToast('Please select a platform', 'info'); return; }
-      config.platform = sel.dataset.platform;
-      break;
-    }
-    case 2: {
-      const sub = getVal('cpuSubSel') || getVal('cpuSel');
-      if(!sub || sub === '') { showToast('Please select a CPU', 'info'); return; }
-      config.cpu = sub;
-      break;
-    }
-    case 3: {
-      const sub = getVal('moboSubSel') || getVal('moboSel');
-      if(!sub || sub === '') { showToast('Please select a Motherboard', 'info'); return; }
-      config.mobo = sub;
-      break;
-    }
-    case 4: config.ram = getVal('ramSel'); if(!config.ram){ showToast('Please select RAM','info'); return; } break;
-    case 5: config.gpu = getVal('gpuSel'); if(!config.gpu){ showToast('Please select a GPU','info'); return; } break;
-    case 6: config.psu = getVal('psuSel'); if(!config.psu){ showToast('Please select a PSU','info'); return; } break;
-    case 7: config.pcCase = getVal('caseSel'); if(!config.pcCase){ showToast('Please select a Case','info'); return; } break;
-    case 8: config.cooler = getVal('coolerSel'); if(!config.cooler){ showToast('Please select a Cooler','info'); return; } break;
-    case 9: config.storage1 = getVal('storage1Sel'); if(!config.storage1){ showToast('Please select Primary Storage','info'); return; } break;
-  }
-  updateVisual();
-  configStep++;
-  renderStep();
-}
-
-function configBack() {
-  if(configStep > 1) { configStep--; renderStep(); }
-}
-
-function renderStep() {
-  updateStepUI();
-  const body = document.getElementById('configBody');
-  body.innerHTML = '';
-  switch(configStep) {
-    case 1: renderPlatformStep(body); break;
-    case 2: renderCpuStep(body); break;
-    case 3: renderMoboStep(body); break;
-    case 4: renderRamStep(body); break;
-    case 5: renderGpuStep(body); break;
-    case 6: renderPsuStep(body); break;
-    case 7: renderCaseStep(body); break;
-    case 8: renderCoolerStep(body); break;
-    case 9: renderStorage1Step(body); break;
-    case 10: renderSummaryStep(body); break;
   }
 }
 
@@ -1503,303 +1419,467 @@ function makeGroup(label, icon, content) {
   return g;
 }
 
-/* STEP 1: Platform */
+function configNext() {
+  // Validate & Save
+  switch(configStep) {
+    case 1:
+      if(!config.platform) { showToast('Please select a platform', 'info'); return; }
+      break;
+    case 2:
+      config.cpu.type = document.getElementById('cpuType')?.value || "";
+      config.cpu.model = document.getElementById('cpuModel')?.value || "";
+      if(!config.cpu.type || !config.cpu.model) { showToast('Please select CPU Type and Model', 'info'); return; }
+      break;
+    case 3:
+      config.motherboard.type = document.getElementById('moboType')?.value || "";
+      config.motherboard.model = document.getElementById('moboModel')?.value || "";
+      if(!config.motherboard.type || !config.motherboard.model) { showToast('Please select Mobo Type and Model', 'info'); return; }
+      break;
+    case 4:
+      config.ram.type = document.getElementById('ramType')?.value || "";
+      config.ram.model = document.getElementById('ramModel')?.value || "";
+      if(!config.ram.type || !config.ram.model) { showToast('Please select RAM Type and Model', 'info'); return; }
+      break;
+    case 5:
+      config.gpu.type = document.getElementById('gpuType')?.value || "";
+      config.gpu.model = document.getElementById('gpuModel')?.value || "";
+      if(!config.gpu.type || !config.gpu.model) { showToast('Please select GPU Type and Model', 'info'); return; }
+      break;
+    case 6:
+      config.psu.type = document.getElementById('psuType')?.value || "";
+      config.psu.model = document.getElementById('psuModel')?.value || "";
+      if(!config.psu.type || !config.psu.model) { showToast('Please select PSU Type and Model', 'info'); return; }
+      break;
+    case 7:
+      config.case.type = document.getElementById('caseType')?.value || "";
+      config.case.model = document.getElementById('caseModel')?.value || "";
+      if(!config.case.type || !config.case.model) { showToast('Please select Case Type and Model', 'info'); return; }
+      break;
+    case 8:
+      config.cooler.type = document.getElementById('coolerType')?.value || "";
+      config.cooler.model = document.getElementById('coolerModel')?.value || "";
+      if(!config.cooler.type || !config.cooler.model) { showToast('Please select Cooler Type and Model', 'info'); return; }
+      break;
+    case 9:
+      config.storage1.type = document.getElementById('storage1Type')?.value || "";
+      config.storage1.model = document.getElementById('storage1Model')?.value || "";
+      if(!config.storage1.type || !config.storage1.model) { showToast('Please select Storage Type and Model', 'info'); return; }
+      break;
+  }
+  configStep++;
+  renderStep();
+}
+
+function configBack() {
+  if(configStep > 1) { configStep--; renderStep(); }
+}
+
+/* ─── RENDER STEPS ─── */
+
+function renderStep() {
+  updateStepUI();
+  const body = document.getElementById('configBody');
+  body.innerHTML = '';
+  
+  switch(configStep) {
+    case 1: renderPlatformStep(body); break;
+    case 2: renderCpuStep(body); break;
+    case 3: renderMoboStep(body); break;
+    case 4: renderRamStep(body); break;
+    case 5: renderGpuStep(body); break;
+    case 6: renderPsuStep(body); break;
+    case 7: renderCaseStep(body); break;
+    case 8: renderCoolerStep(body); break;
+    case 9: renderStorageStep(body); break;
+    case 10: renderSummaryStep(body); break;
+  }
+}
+
+// STEP 1
 function renderPlatformStep(body) {
   const wrap = document.createElement('div');
   wrap.className = 'platform-cards';
-
   ['Intel', 'AMD'].forEach(p => {
     const card = document.createElement('div');
     card.className = `platform-card ${p.toLowerCase()}`;
-    card.dataset.platform = p;
     card.innerHTML = `
       <div class="check-mark"><i class="ri-check-line"></i></div>
       <div class="platform-icon">${p === 'Intel' ? '🔵' : '🔴'}</div>
       <div class="platform-name">${p}</div>
-      <div class="platform-sub">${p === 'Intel' ? 'Core i3 / i5 / i7 / i9' : 'Ryzen Series'}</div>`;
+      <div class="platform-sub">Select ${p} Platform</div>`;
     if(config.platform === p) card.classList.add('selected');
     card.onclick = () => {
       document.querySelectorAll('.platform-card').forEach(c => c.classList.remove('selected'));
       card.classList.add('selected');
+      config.platform = p;
     };
     wrap.appendChild(card);
   });
   body.appendChild(wrap);
 }
 
-/* STEP 2: CPU */
+// STEP 2: CPU
 function renderCpuStep(body) {
-  const series = {
-    'Core i9': ['14900 Upto 6.00GHz','14900F Upto 6.00GHz','14900K Upto 6.0GHz','14900KS Upto 6.20GHz'],
-    'Core i7': ['14700 Upto 5.4GHz','14700F Upto 5.4GHz','14700K Upto 5.6GHz','14700KF Upto 5.6GHz'],
-    'Core i5': ['14400 Upto 4.7GHz','14400F Upto 4.7GHz','14500 Upto 4.7GHz','14600K Upto 5.5GHz'],
-    'Core i3': ['14100 Upto 4.7GHz','14100F Upto 4.7GHz'],
-  };
-  const topSel = makeSelect('cpuSel', Object.keys(series), '— Select CPU Series —', () => {
-    const val = document.getElementById('cpuSel').value;
-    const sub = document.getElementById('cpuSubWrap');
-    if(val && series[val]) {
-      sub.classList.add('visible');
-      const subSel = document.getElementById('cpuSubSel');
-      subSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
-      series[val].forEach(m => { const o = document.createElement('option'); o.value = `Intel ${val} ${m}`; o.textContent = m; subSel.appendChild(o); });
-    }
-  });
-  body.appendChild(makeGroup('CPU Series', 'ri-cpu-line', topSel));
+  const platformData = COMPONENT_DB.cpu[config.platform] || {};
+  const types = Object.keys(platformData);
 
-  const subWrap = document.createElement('div');
-  subWrap.className = 'sub-select-wrap comp-group'; subWrap.id = 'cpuSubWrap';
-  const label = document.createElement('div');
-  label.className = 'comp-group-label';
-  label.innerHTML = '<i class="ri-cpu-fill"></i>CPU Model';
-  const subSel = document.createElement('select');
-  subSel.className = 'comp-select'; subSel.id = 'cpuSubSel';
-  subSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
-  subWrap.appendChild(label); subWrap.appendChild(subSel);
-  body.appendChild(subWrap);
-
-  // restore
-  if(config.cpu) {
-    const parts = config.cpu.split(' ');
-    const series_key = parts.slice(1,3).join(' ');
-    if(series[series_key]) {
-      document.getElementById('cpuSel').value = series_key;
-      subWrap.classList.add('visible');
-      series[series_key].forEach(m => {
-        const o = document.createElement('option');
-        o.value = `Intel ${series_key} ${m}`; o.textContent = m; subSel.appendChild(o);
+  const typeSel = makeSelect('cpuType', types, '— Select CPU Type —', () => {
+    const val = document.getElementById('cpuType').value;
+    const modelWrap = document.getElementById('cpuModelWrap');
+    const modelSel = document.getElementById('cpuModel');
+    if(val && platformData[val]) {
+      modelWrap.classList.add('visible');
+      modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      platformData[val].forEach(m => {
+        const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
       });
-      subSel.value = config.cpu;
-    }
-  }
-}
-
-/* STEP 3: Motherboard */
-function renderMoboStep(body) {
-  const brands = {
-    'ASUS': ['Z790 E Strix Gaming WiFi DDR5','Z790 F Strix Gaming WiFi DDR5','Z790 Maximus Extreme','Z790 Maximus Hero','Z790 P Prime DDR5','Z790 Plus TUF Gaming WiFi DDR5'],
-    'MSI': ['B760 Tomahawk WiFi DDR5','B760M A Pro WiFi DDR5','B760M Bomber WiFi DDR5','MAG Z790 TOMAHAWK MAX WIFI DDR5','MAG Z790 TOMAHAWK WIFI DDR5','MPG Z790 EDGE WIFI DDR5','Z790 A Pro MAX WiFi','Z790 P Pro WiFi DDR5','Z790I EDGE WIFI DDR5'],
-  };
-  const topSel = makeSelect('moboSel', Object.keys(brands), '— Select Brand —', () => {
-    const val = document.getElementById('moboSel').value;
-    const sub = document.getElementById('moboSubWrap');
-    if(val && brands[val]) {
-      sub.classList.add('visible');
-      const subSel = document.getElementById('moboSubSel');
-      subSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
-      brands[val].forEach(m => { const o = document.createElement('option'); o.value = `${val} ${m}`; o.textContent = m; subSel.appendChild(o); });
     }
   });
-  body.appendChild(makeGroup('Brand', 'ri-stack-line', topSel));
-  const subWrap = document.createElement('div');
-  subWrap.className = 'sub-select-wrap comp-group'; subWrap.id = 'moboSubWrap';
-  subWrap.innerHTML = '<div class="comp-group-label"><i class="ri-circuit-board-line"></i>Model</div>';
-  const subSel = document.createElement('select');
-  subSel.className = 'comp-select'; subSel.id = 'moboSubSel';
-  subSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
-  subWrap.appendChild(subSel); body.appendChild(subWrap);
+  if(config.cpu.type) typeSel.value = config.cpu.type;
+  body.appendChild(makeGroup('CPU Type', 'ri-cpu-line', typeSel));
+
+  const modelWrap = document.createElement('div');
+  modelWrap.className = 'sub-select-wrap comp-group'; modelWrap.id = 'cpuModelWrap';
+  const label = document.createElement('div'); label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-cpu-fill"></i>CPU Model';
+  const modelSel = document.createElement('select'); modelSel.className = 'comp-select'; modelSel.id = 'cpuModel';
+  modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+  
+  // Restore model
+  if(config.cpu.type && config.cpu.model && platformData[config.cpu.type]?.includes(config.cpu.model)) {
+    modelWrap.classList.add('visible');
+    platformData[config.cpu.type].forEach(m => {
+      const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+    });
+    modelSel.value = config.cpu.model;
+  }
+  
+  modelWrap.appendChild(label); modelWrap.appendChild(modelSel); body.appendChild(modelWrap);
 }
 
-/* STEP 4: RAM */
+// STEP 3: Motherboard
+function renderMoboStep(body) {
+  const socket = getSocketFromCpu(config.cpu.model);
+  // Debug: Ensure socket is valid
+  if(!socket || !COMPONENT_DB.mobo[socket]) {
+    // If something fails, default to AM5 for safety or alert
+    console.warn("Socket detection failed for:", config.cpu.model, "Falling back.");
+    // Attempt to recover logic could go here, but we trust the fixed function now.
+  }
+
+  const socketData = COMPONENT_DB.mobo[socket] || {};
+  const categories = Object.keys(socketData);
+
+  const typeSel = makeSelect('moboType', categories, '— Select Mobo Category —', () => {
+    const val = document.getElementById('moboType').value;
+    const modelWrap = document.getElementById('moboModelWrap');
+    const modelSel = document.getElementById('moboModel');
+    if(val && socketData[val]) {
+      modelWrap.classList.add('visible');
+      modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      socketData[val].forEach(m => {
+        const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+      });
+    }
+  });
+  if(config.motherboard.type) typeSel.value = config.motherboard.type;
+  body.appendChild(makeGroup('Mobo Category', 'ri-stack-line', typeSel));
+
+  const modelWrap = document.createElement('div');
+  modelWrap.className = 'sub-select-wrap comp-group'; modelWrap.id = 'moboModelWrap';
+  const label = document.createElement('div'); label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-circuit-board-line"></i>Mobo Model';
+  const modelSel = document.createElement('select'); modelSel.className = 'comp-select'; modelSel.id = 'moboModel';
+  modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+
+  if(config.motherboard.type && config.motherboard.model && socketData[config.motherboard.type]?.includes(config.motherboard.model)) {
+    modelWrap.classList.add('visible');
+    socketData[config.motherboard.type].forEach(m => {
+      const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+    });
+    modelSel.value = config.motherboard.model;
+  }
+
+  modelWrap.appendChild(label); modelWrap.appendChild(modelSel); body.appendChild(modelWrap);
+}
+
+// STEP 4: RAM
 function renderRamStep(body) {
-  const rams = [
-    'Hynix ECC RDIMM 4800MHz DDR5 512GB (64x8)','Hynix ECC RDIMM 4800MHz DDR5 256GB (64x4/32x8)',
-    'Hynix ECC RDIMM 4800MHz DDR5 128GB (64x2/32x4)','Hynix ECC RDIMM 4800MHz DDR5 64GB (32x2)',
-    'Corsair Vengeance 5200MHz DDR5 128GB','G.Skill Ripjaws S5 6000MHz DDR5 128GB',
-    'G.Skill Trident Z5 Neo RGB 6000MHz DDR5 128GB','G.Skill Trident Z5 RGB 6000MHz DDR5 128GB',
-    'Corsair Dominator Titanium 6600MHz DDR5 96GB (48x2)',
-    'Corsair Vengeance 5200MHz DDR5 64GB','G.Skill Ripjaws S5 6000MHz DDR5 64GB',
-    'G.Skill Trident Z5 Neo RGB 6000MHz DDR5 64GB','G.Skill Trident Z5 RGB 6000MHz DDR5 64GB',
-    'Corsair Vengeance 6000MHz DDR5 32GB','Corsair Vengeance RGB 6000MHz DDR5 32GB',
-    'G.Skill Ripjaws 3200MHz DDR4 32GB','G.Skill Ripjaws S5 5200MHz DDR5 32GB',
-    'G.Skill Ripjaws S5 6000MHz DDR5 32GB','G.Skill Trident Z5 Neo RGB 6000MHz DDR5 32GB',
-    'G.Skill Trident Z5 RGB 6000MHz DDR5 32GB','Corsair Vengeance 5200MHz DDR5 32GB (32x1)',
-    'G.Skill Ripjaws 3200MHz DDR4 16GB','G.Skill Ripjaws S5 5200MHz DDR5 16GB',
-    'G.Skill Ripjaws 3200MHz DDR4 8GB',
-  ];
-  const s = makeSelect('ramSel', rams, '— Select RAM —');
-  if(config.ram) s.value = config.ram;
-  body.appendChild(makeGroup('RAM', 'ri-hard-drive-2-line', s));
+  // Filter logic
+  let ramData = {};
+  const socket = getSocketFromCpu(config.cpu.model);
+
+  if(socket === 'AM4') {
+    ramData = COMPONENT_DB.ram.DDR4;
+  } else if (socket === 'AM5' || socket === 'TRX50') {
+    ramData = COMPONENT_DB.ram.DDR5;
+  } else if (socket === 'LGA1700') {
+    // Combine DDR4 and DDR5 for Intel
+    ramData = {
+      ...COMPONENT_DB.ram.DDR4,
+      ...COMPONENT_DB.ram.DDR5
+    };
+  }
+
+  const types = Object.keys(ramData);
+
+  const typeSel = makeSelect('ramType', types, '— Select RAM Kit —', () => {
+    const val = document.getElementById('ramType').value;
+    const modelWrap = document.getElementById('ramModelWrap');
+    const modelSel = document.getElementById('ramModel');
+    if(val && ramData[val]) {
+      modelWrap.classList.add('visible');
+      modelSel.innerHTML = '<option value="" disabled selected>— Select Specific Model —</option>';
+      ramData[val].forEach(m => {
+        const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+      });
+    }
+  });
+  if(config.ram.type) typeSel.value = config.ram.type;
+  body.appendChild(makeGroup('RAM Kit', 'ri-hard-drive-2-line', typeSel));
+
+  const modelWrap = document.createElement('div');
+  modelWrap.className = 'sub-select-wrap comp-group'; modelWrap.id = 'ramModelWrap';
+  const label = document.createElement('div'); label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-sd-card-line"></i>RAM Model';
+  const modelSel = document.createElement('select'); modelSel.className = 'comp-select'; modelSel.id = 'ramModel';
+  modelSel.innerHTML = '<option value="" disabled selected>— Select Specific Model —</option>';
+
+  if(config.ram.type && config.ram.model && ramData[config.ram.type]?.includes(config.ram.model)) {
+    modelWrap.classList.add('visible');
+    ramData[config.ram.type].forEach(m => {
+      const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+    });
+    modelSel.value = config.ram.model;
+  }
+
+  modelWrap.appendChild(label); modelWrap.appendChild(modelSel); body.appendChild(modelWrap);
 }
 
-/* STEP 5: GPU */
+// STEP 5: GPU
 function renderGpuStep(body) {
-  const gpus = [
-    'NVIDIA RTX 4000 Ada 20GB','NVIDIA RTX A5000 24GB','NVIDIA RTX A6000 48GB','NVIDIA RTX 6000 Ada 48GB',
-    '5000 Pro Blackwell Workstation 48GB','6000 Pro Blackwell Workstation 96GB','Radeon AI PRO R9700 32GB',
-    'ASUS ROG Astral RTX 5090 OC 32GB','MSI Gaming Trio RTX 5090 OC 32GB',
-    'Zotac Solid RTX 5090 32GB','Zotac Solid OC RTX 5090 32GB',
-    'ASUS Astral RTX 5080 OC 16GB','GALAX 1-Click OC RTX 5080 Black 16GB','GALAX 1-Click OC RTX 5080 White 16GB',
-    'Inno3D X3 OC RTX 5080 16GB','MSI Gaming Trio RTX 5080 OC 16GB','Zotac Solid OC RTX 5080 16GB',
-    'ASUS TUF Gaming RTX 5070 Ti OC 16GB','GALAX 1-Click OC RTX 5070 Ti Black','GALAX 1-Click OC RTX 5070 Ti White',
-    'Inno3D X3 RTX 5070 Ti 16GB','MSI Ventus 3X OC RTX 5070 Ti 16GB','Zotac Amp Extreme Infinity RTX 5070 Ti 16GB',
-    'Zotac Solid Core RTX 5070 Ti 16GB','Zotac Solid OC RTX 5070 Ti 16GB',
-    'Sapphire Nitro+ RX 9070 XT 16GB','Sapphire Pulse RX 9070 XT 16GB',
-    'Sapphire Nitro+ RX 9070 16GB','Sapphire Pulse RX 9070 16GB',
-    'Inno3D Twin X2 OC RTX 5070 Black 12GB','Inno3D Twin X2 OC RTX 5070 White 12GB',
-    'MSI Gaming Trio RTX 5070 OC 12GB','MSI Shadow 2X OC RTX 5070 12GB',
-    'Zotac Solid RTX 5070 12GB','Zotac Solid OC RTX 5070 12GB',
-    'ASRock Challenger RX 7800 XT 16GB','ASUS TUF Gaming RX 7800 XT 16GB',
-    'Sapphire Nitro+ RX 7800 XT 16GB','Sapphire Pulse RX 7800 XT 16GB',
-    'Inno3D Twin X2 RTX 5060 Ti 8GB','Inno3D Twin X2 RTX 5060 Ti 16GB',
-    'MSI Ventus 2X OC RTX 5060 Ti 8GB','MSI Ventus 2X OC RTX 5060 Ti 16GB',
-    'Zotac Twin Edge RTX 5060 Ti 8GB','Zotac Twin Edge RTX 5060 Ti 16GB','Zotac Twin Edge OC RTX 5060 Ti 16GB',
-    'ASRock Challenger OC RX 9060 XT 16GB','Sapphire Pulse RX 9060 XT 8GB',
-    'Sapphire Pulse RX 9060 XT 16GB','Sapphire Pure RX 9060 XT 16GB',
-    'ASUS Dual RTX 5060 8GB','GALAX One Click OC RTX 5060 8GB',
-    'Inno3D Twin X2 RTX 5060 8GB','Zotac AMP RTX 5060 8GB','Zotac Solo RTX 5060 8GB',
-    'Inno3D Twin X2 OC RTX 3050 8GB','MSI Ventus 2X OC RTX 3050 6GB',
-    'ASUS Dual OC RTX 3060','MSI Ventus 2X RTX 3060 12GB','Zotac Twin Edge RTX 3060 12GB',
-    'Sapphire Pulse RX 6600 8GB','GT 730 ASUS 2GB 4x HDMI','Intel Arc A380 6GB',
-  ];
-  const s = makeSelect('gpuSel', gpus, '— Select GPU —');
-  if(config.gpu) s.value = config.gpu;
-  body.appendChild(makeGroup('Graphics Card', 'ri-database-2-line', s));
+  const types = Object.keys(COMPONENT_DB.gpu);
+  const typeSel = makeSelect('gpuType', types, '— Select GPU Tier —', () => {
+    const val = document.getElementById('gpuType').value;
+    const modelWrap = document.getElementById('gpuModelWrap');
+    const modelSel = document.getElementById('gpuModel');
+    if(val && COMPONENT_DB.gpu[val]) {
+      modelWrap.classList.add('visible');
+      modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      COMPONENT_DB.gpu[val].forEach(m => {
+        const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+      });
+    }
+  });
+  if(config.gpu.type) typeSel.value = config.gpu.type;
+  body.appendChild(makeGroup('GPU Tier', 'ri-database-2-line', typeSel));
+
+  const modelWrap = document.createElement('div');
+  modelWrap.className = 'sub-select-wrap comp-group'; modelWrap.id = 'gpuModelWrap';
+  const label = document.createElement('div'); label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-gamepad-line"></i>GPU Model';
+  const modelSel = document.createElement('select'); modelSel.className = 'comp-select'; modelSel.id = 'gpuModel';
+  modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+
+  if(config.gpu.type && config.gpu.model && COMPONENT_DB.gpu[config.gpu.type]?.includes(config.gpu.model)) {
+    modelWrap.classList.add('visible');
+    COMPONENT_DB.gpu[config.gpu.type].forEach(m => {
+      const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+    });
+    modelSel.value = config.gpu.model;
+  }
+
+  modelWrap.appendChild(label); modelWrap.appendChild(modelSel); body.appendChild(modelWrap);
 }
 
-/* STEP 6: PSU */
+// STEP 6: PSU
 function renderPsuStep(body) {
-  const psus = [
-    'SuperFlower 1200W Leadex Platinum','SuperFlower 1600W Leadex 80+ Platinum','SuperFlower 2000W Leadex Platinum ATX',
-    'Corsair RM850X Gold ATX 3.1','Corsair RM1000X Gold ATX 3.1','Corsair RM1200X Gold ATX 3.1',
-    'Corsair HX1200i 80+ Platinum Modular','Corsair HX1500i 80+ Platinum Modular','Corsair AX1600i Platinum',
-    'ASUS ROG Thor2 1000W 80+ Platinum ATX 3.0','ASUS Thor 1200W 80+ Platinum',
-    'Cooler Master MWE 1050W Gold Modular ATX 3.0','Cooler Master MWE 1250W Gold Modular ATX 3.0','Cooler Master V850 SFX 80+ Gold',
-    'Deepcool PN850M',
-  ];
-  const s = makeSelect('psuSel', psus, '— Select PSU —');
-  if(config.psu) s.value = config.psu;
-  body.appendChild(makeGroup('Power Supply', 'ri-flashlight-line', s));
+  const types = Object.keys(COMPONENT_DB.psu);
+  const typeSel = makeSelect('psuType', types, '— Select Efficiency —', () => {
+    const val = document.getElementById('psuType').value;
+    const modelWrap = document.getElementById('psuModelWrap');
+    const modelSel = document.getElementById('psuModel');
+    if(val && COMPONENT_DB.psu[val]) {
+      modelWrap.classList.add('visible');
+      modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      COMPONENT_DB.psu[val].forEach(m => {
+        const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+      });
+    }
+  });
+  if(config.psu.type) typeSel.value = config.psu.type;
+  body.appendChild(makeGroup('PSU Efficiency', 'ri-flashlight-line', typeSel));
+
+  const modelWrap = document.createElement('div');
+  modelWrap.className = 'sub-select-wrap comp-group'; modelWrap.id = 'psuModelWrap';
+  const label = document.createElement('div'); label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-battery-charge-line"></i>PSU Model';
+  const modelSel = document.createElement('select'); modelSel.className = 'comp-select'; modelSel.id = 'psuModel';
+  modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+
+  if(config.psu.type && config.psu.model && COMPONENT_DB.psu[config.psu.type]?.includes(config.psu.model)) {
+    modelWrap.classList.add('visible');
+    COMPONENT_DB.psu[config.psu.type].forEach(m => {
+      const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+    });
+    modelSel.value = config.psu.model;
+  }
+
+  modelWrap.appendChild(label); modelWrap.appendChild(modelSel); body.appendChild(modelWrap);
 }
 
-/* STEP 7: Case */
+// STEP 7: CASE
 function renderCaseStep(body) {
-  const cases = [
-    'Lian Li Lancool II Mesh Type C','Lian Li Lancool 217 ATX TG',
-    'Lian Li O11 Dynamic Evo Black','Lian Li O11 Dynamic Evo White',
-    'Lian Li O11 Dynamic Evo RGB','Lian Li O11 Dynamic Evo XL Black','Lian Li O11 Dynamic Evo XL White',
-    'Fractal Define 7 Compact','Fractal Define 7 Solid','Fractal Define 7 TG','Fractal Define 7 XL',
-    'Fractal Meshify 2 Compact','Fractal Meshify 2 Solid','Fractal Meshify 2 TG','Fractal Meshify 2 XL',
-    'Fractal North White','Fractal North Black','Fractal Pop XL Air RGB','Fractal Torrent','Fractal Torrent Compact',
-    'NZXT H5 Flow Black','NZXT H5 Flow White','NZXT H5 Flow RGB',
-    'NZXT H6 Flow RGB','NZXT H7 Elite','NZXT H7 Flow',
-    'NZXT H9 Elite Black','NZXT H9 Elite White','NZXT H9 Flow Black','NZXT H9 Flow White',
-    'Hyte Y40 Black','Hyte Y60 Black','Hyte Y70 Black',
-    'ASUS GT 502 TUF Black','ASUS ROG Hyperion GR701',
-    'Cooler Master HAF 700 EVO','Cooler Master K501L','Cooler Master MB520 Mesh ARGB',
-    'Cooler Master MB600L V2','Cooler Master S301 ARGB','Cooler Master TD500 Mesh ARGB V2',
-    'Corsair 3500X RGB','Corsair 4000D Frame RS ATX RGB','Corsair 480T',
-    'Corsair 5000T RGB','Corsair 9000D RGB Airflow',
-    'Deepcool Smarter',
-    'MSI MAG Forge 320R Airflow White','MSI MAG Forge 321R Airflow',
-  ];
-  const s = makeSelect('caseSel', cases, '— Select Case —');
-  if(config.pcCase) s.value = config.pcCase;
-  body.appendChild(makeGroup('PC Case', 'ri-server-line', s));
+  const types = Object.keys(COMPONENT_DB.case);
+  const typeSel = makeSelect('caseType', types, '— Select Case Type —', () => {
+    const val = document.getElementById('caseType').value;
+    const modelWrap = document.getElementById('caseModelWrap');
+    const modelSel = document.getElementById('caseModel');
+    if(val && COMPONENT_DB.case[val]) {
+      modelWrap.classList.add('visible');
+      modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      COMPONENT_DB.case[val].forEach(m => {
+        const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+      });
+    }
+  });
+  if(config.case.type) typeSel.value = config.case.type;
+  body.appendChild(makeGroup('Case Type', 'ri-server-line', typeSel));
+
+  const modelWrap = document.createElement('div');
+  modelWrap.className = 'sub-select-wrap comp-group'; modelWrap.id = 'caseModelWrap';
+  const label = document.createElement('div'); label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-computer-line"></i>Case Model';
+  const modelSel = document.createElement('select'); modelSel.className = 'comp-select'; modelSel.id = 'caseModel';
+  modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+
+  if(config.case.type && config.case.model && COMPONENT_DB.case[config.case.type]?.includes(config.case.model)) {
+    modelWrap.classList.add('visible');
+    COMPONENT_DB.case[config.case.type].forEach(m => {
+      const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+    });
+    modelSel.value = config.case.model;
+  }
+
+  modelWrap.appendChild(label); modelWrap.appendChild(modelSel); body.appendChild(modelWrap);
 }
 
-/* STEP 8: CPU Cooler */
+// STEP 8: COOLER
 function renderCoolerStep(body) {
-  const coolers = [
-    'Lian Li Galahad 360 UniFans Edition White',
-    'Arctic Freezer 4U-M','Arctic Liquid Freezer II 240mm','Arctic Liquid Freezer II 360mm',
-    'Arctic Liquid Freezer II 420mm','Arctic Liquid Freezer III 420 A-RGB',
-    'NZXT Kraken 240 RGB','NZXT Kraken 240 Non-RGB','NZXT Kraken 240 LCD',
-    'NZXT Kraken 280 RGB','NZXT Kraken 360 RGB','NZXT Kraken 360 Non-RGB','NZXT Kraken 360 LCD',
-    'NZXT Kraken Elite 360 RGB','NZXT Kraken X63 White ARGB',
-    'ASUS ROG Ryujin III 360mm AIO',
-    'Deepcool AG400','Deepcool AG400 ARGB','Deepcool AG620 ARGB',
-    'Deepcool AK400','Deepcool AK500','Deepcool AK620',
-    'Deepcool AN600','Deepcool Assassin IV',
-    'Deepcool Castle 240 EX ARGB','Deepcool Castle 360 EX ARGB',
-    'Deepcool LE720 360mm AIO','Deepcool LT520 240mm',
-    'Deepcool LS520 RGB','Deepcool LS720 RGB','Deepcool Mystique 360 LCD RGB',
-    'Cooler Master Hyper H410R RGB','Cooler Master ML240L Core 240mm AIO',
-    'Cooler Master ML360L V2','Cooler Master MasterLiquid 360L Core ARGB',
-    'Corsair H100 RGB 240mm','Corsair H100i Elite LCD',
-    'Corsair H150 RGB 360mm','Corsair H150i Capellix',
-    'Corsair H170i Elite LCD',
-    'Corsair iCUE Link Titan 360mm','Corsair iCUE Link Titan 420mm',
-    'Corsair CF240','Corsair CF360',
-    'Noctua NH-D15','Noctua NH-D15 Chromax Black',
-    'Noctua NH-U14S TR4 SP3','Noctua U9S Chromax Black',
-  ];
-  const s = makeSelect('coolerSel', coolers, '— Select CPU Cooler —');
-  if(config.cooler) s.value = config.cooler;
-  body.appendChild(makeGroup('CPU Cooler', 'ri-temp-cold-line', s));
+  const types = Object.keys(COMPONENT_DB.cooler);
+  const typeSel = makeSelect('coolerType', types, '— Select Cooling Type —', () => {
+    const val = document.getElementById('coolerType').value;
+    const modelWrap = document.getElementById('coolerModelWrap');
+    const modelSel = document.getElementById('coolerModel');
+    if(val && COMPONENT_DB.cooler[val]) {
+      modelWrap.classList.add('visible');
+      modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      COMPONENT_DB.cooler[val].forEach(m => {
+        const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+      });
+    }
+  });
+  if(config.cooler.type) typeSel.value = config.cooler.type;
+  body.appendChild(makeGroup('Cooler Type', 'ri-temp-cold-line', typeSel));
+
+  const modelWrap = document.createElement('div');
+  modelWrap.className = 'sub-select-wrap comp-group'; modelWrap.id = 'coolerModelWrap';
+  const label = document.createElement('div'); label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-fan-line"></i>Cooler Model';
+  const modelSel = document.createElement('select'); modelSel.className = 'comp-select'; modelSel.id = 'coolerModel';
+  modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+
+  if(config.cooler.type && config.cooler.model && COMPONENT_DB.cooler[config.cooler.type]?.includes(config.cooler.model)) {
+    modelWrap.classList.add('visible');
+    COMPONENT_DB.cooler[config.cooler.type].forEach(m => {
+      const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+    });
+    modelSel.value = config.cooler.model;
+  }
+
+  modelWrap.appendChild(label); modelWrap.appendChild(modelSel); body.appendChild(modelWrap);
 }
 
-/* STEP 9: Storage 1 + Storage 2 */
-function renderStorage1Step(body) {
-  const stor1 = [
-    'Corsair 2TB MP700 Core Gen5 M.2 NVMe','Corsair 2TB MP700 Pro Gen5 NVMe',
-    'Samsung 1TB 9100 Pro NVMe Gen5','Samsung 2TB 9100 Pro NVMe Gen5',
-    'Samsung 1TB 990 Pro Gen4','Samsung 2TB 990 Pro Gen4','Samsung 4TB 990 Pro Gen4',
-    'WD 1TB Blue 7200 RPM HDD','WD 2TB Blue 7200 RPM HDD','WD 4TB Blue 5400 RPM HDD',
-    'WD 500GB Blue SN5100 NVMe Gen4','WD 1TB Blue SN5100 NVMe Gen4',
-    'WD 1TB SN7100 Black Gen4','WD 1TB SN850X Black Gen4',
-    'WD 2TB SN770 Black Gen4','WD 2TB SN850X Black Gen4','WD 2TB SN850X Gen4',
-    'Adata 4TB XPG Gammix S70 Blade Gen4',
-  ];
-  const s1 = makeSelect('storage1Sel', stor1, '— Select Primary Storage —');
-  if(config.storage1) s1.value = config.storage1;
-  body.appendChild(makeGroup('Primary Storage', 'ri-save-line', s1));
+// STEP 9: STORAGE
+function renderStorageStep(body) {
+  // Primary Storage
+  const types = Object.keys(COMPONENT_DB.storage);
+  const typeSel = makeSelect('storage1Type', types, '— Select Storage Type —', () => {
+    const val = document.getElementById('storage1Type').value;
+    const modelWrap = document.getElementById('storage1ModelWrap');
+    const modelSel = document.getElementById('storage1Model');
+    if(val && COMPONENT_DB.storage[val]) {
+      modelWrap.classList.add('visible');
+      modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
+      COMPONENT_DB.storage[val].forEach(m => {
+        const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+      });
+    }
+  });
+  if(config.storage1.type) typeSel.value = config.storage1.type;
+  body.appendChild(makeGroup('Primary Storage Type', 'ri-save-line', typeSel));
 
-  const stor2 = [
-    'Samsung 1TB 9100 Pro NVMe Gen5','Samsung 2TB 9100 Pro NVMe Gen5',
-    'Samsung 1TB 990 Pro Gen4','Samsung 2TB 990 Pro Gen4','Samsung 4TB 990 Pro Gen4',
-    'Corsair 2TB MP700 Pro Gen5 NVMe',
-    'WD 500GB Blue SN5100 NVMe Gen4','WD 1TB Blue SN5100 NVMe Gen4',
-    'WD 1TB SN7100 Black Gen4','WD 1TB SN850X Black Gen4',
-    'WD 2TB SN7100 Black Gen4','WD 2TB SN850X Black Gen4',
-    'WD 2TB Blue 7200 RPM HDD','WD 4TB Blue 5400 RPM HDD',
-    'Adata 4TB XPG Gammix S70 Blade Gen4',
-    'None',
-  ];
-  const s2 = makeSelect('storage2Sel', stor2, '— Select Secondary Storage (Optional) —');
-  if(config.storage2) s2.value = config.storage2;
-  body.appendChild(makeGroup('Secondary Storage (Optional)', 'ri-hard-drive-line', s2));
+  const modelWrap = document.createElement('div');
+  modelWrap.className = 'sub-select-wrap comp-group'; modelWrap.id = 'storage1ModelWrap';
+  const label = document.createElement('div'); label.className = 'comp-group-label';
+  label.innerHTML = '<i class="ri-hard-drive-2-line"></i>Storage Model';
+  const modelSel = document.createElement('select'); modelSel.className = 'comp-select'; modelSel.id = 'storage1Model';
+  modelSel.innerHTML = '<option value="" disabled selected>— Select Model —</option>';
 
-  // Save storage2 on change
-  s2.onchange = () => { config.storage2 = s2.value; };
+  if(config.storage1.type && config.storage1.model && COMPONENT_DB.storage[config.storage1.type]?.includes(config.storage1.model)) {
+    modelWrap.classList.add('visible');
+    COMPONENT_DB.storage[config.storage1.type].forEach(m => {
+      const o = document.createElement('option'); o.value = m; o.textContent = m; modelSel.appendChild(o);
+    });
+    modelSel.value = config.storage1.model;
+  }
+  modelWrap.appendChild(label); modelWrap.appendChild(modelSel); body.appendChild(modelWrap);
 }
 
-/* STEP 10: Summary */
+// STEP 10: SUMMARY
 function renderSummaryStep(body) {
-  // Save storage2 if filled
-  const s2el = document.getElementById('storage2Sel');
-  if(s2el) config.storage2 = s2el.value;
-
-  updateVisual();
-
+  // Name Input
   const nameWrap = document.createElement('div');
   nameWrap.className = 'name-input-wrap';
   nameWrap.innerHTML = `<label>Your Name (for order)</label><input type="text" id="customerName" placeholder="Enter your full name" value="${config.customerName || ''}">`;
   body.appendChild(nameWrap);
   document.getElementById('customerName').oninput = e => { config.customerName = e.target.value; };
 
-  const sumList = document.createElement('div');
-  sumList.className = 'summary-list';
+  const list = document.createElement('div');
+  list.className = 'summary-list';
 
-  const rows = [
-    ['Platform', config.platform],
-    ['CPU', config.cpu],
-    ['Motherboard', config.mobo],
-    ['RAM', config.ram],
-    ['GPU', config.gpu],
-    ['Power Supply', config.psu],
-    ['Case', config.pcCase],
-    ['CPU Cooler', config.cooler],
-    ['Primary Storage', config.storage1],
-    ['Secondary Storage', config.storage2 || 'None'],
+  const steps = [
+    { label: "Platform", val: config.platform },
+    { label: "CPU", type: config.cpu.type, model: config.cpu.model },
+    { label: "Motherboard", type: config.motherboard.type, model: config.motherboard.model },
+    { label: "RAM", type: config.ram.type, model: config.ram.model },
+    { label: "Graphics Card", type: config.gpu.type, model: config.gpu.model },
+    { label: "Power Supply", type: config.psu.type, model: config.psu.model },
+    { label: "Case", type: config.case.type, model: config.case.model },
+    { label: "CPU Cooler", type: config.cooler.type, model: config.cooler.model },
+    { label: "Primary Storage", type: config.storage1.type, model: config.storage1.model },
   ];
-  rows.forEach(([label, val]) => {
+
+  steps.forEach(s => {
     const row = document.createElement('div');
     row.className = 'summary-row';
-    row.innerHTML = `<div><div class="summary-row-label">${label}</div></div><div class="summary-row-val">${val || '—'}</div>`;
-    sumList.appendChild(row);
+    
+    let html = '';
+    if(s.label === "Platform") {
+      html = `<div><div class="summary-row-label">${s.label}</div></div><div class="summary-row-val">${s.val}</div>`;
+    } else {
+      html = `
+        <div class="summary-row-header">
+          <div class="summary-row-label">${s.label}</div>
+          <div class="summary-row-type">${s.type}</div>
+        </div>
+        <div class="summary-row-val">${s.model}</div>
+      `;
+    }
+    row.innerHTML = html;
+    list.appendChild(row);
   });
-  body.appendChild(sumList);
+  body.appendChild(list);
 
   const orderBtn = document.createElement('button');
   orderBtn.className = 'btn-confirm-order';
@@ -1810,9 +1890,10 @@ function renderSummaryStep(body) {
 
 function confirmOrder() {
   const name = document.getElementById('customerName')?.value?.trim();
-  if(!name) { showToast('Please enter your name to place the order', 'info'); return; }
+  if(!name) { showToast('Please enter your name', 'info'); return; }
   config.customerName = name;
 
+  // Format message for WhatsApp
   const msg = `🖥️ *COREX — NEW PC BUILD ORDER*
 ━━━━━━━━━━━━━━━━━━━━━━━━
 👤 *Customer:* ${name}
@@ -1820,21 +1901,20 @@ function confirmOrder() {
 ⚙️ *CONFIGURATION*
 ━━━━━━━━━━━━━━━━━━━━━━━━
 🔷 *Platform:* ${config.platform}
-🧠 *CPU:* ${config.cpu}
-🔌 *Motherboard:* ${config.mobo}
-💾 *RAM:* ${config.ram}
-🎮 *GPU:* ${config.gpu}
-⚡ *PSU:* ${config.psu}
-📦 *Case:* ${config.pcCase}
-❄️ *CPU Cooler:* ${config.cooler}
-💿 *Primary Storage:* ${config.storage1}
-💿 *Secondary Storage:* ${config.storage2 || 'None'}
+🧠 *CPU:* ${config.cpu.type} - ${config.cpu.model}
+🔌 *Motherboard:* ${config.motherboard.type} - ${config.motherboard.model}
+💾 *RAM:* ${config.ram.type} - ${config.ram.model}
+🎮 *GPU:* ${config.gpu.type} - ${config.gpu.model}
+⚡ *PSU:* ${config.psu.type} - ${config.psu.model}
+📦 *Case:* ${config.case.type} - ${config.case.model}
+❄️ *Cooler:* ${config.cooler.type} - ${config.cooler.model}
+💿 *Storage:* ${config.storage1.type} - ${config.storage1.model}
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ Please confirm availability and pricing.`;
 
   const encoded = encodeURIComponent(msg);
   window.open(`https://wa.me/916300865661?text=${encoded}`, '_blank');
-  showToast('Opening WhatsApp with your build configuration!', 'success');
+  showToast('Opening WhatsApp with your configuration!', 'success');
 }
 
 /* ─── SCROLL REVEAL ─── */
